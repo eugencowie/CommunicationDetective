@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "233819667374",
+    "firebase_url": "https://communication-detective.firebaseio.com",
+    "project_id": "communication-detective",
+    "storage_bucket": "communication-detective.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:233819667374:android:e559b92ada871654",
+        "android_client_info": {
+          "package_name": "com.notyetinteractive.communicationdetective"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "233819667374-dlvjdtb0h5m5il2s2r7r5jrutt5m0b96.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFyABNpqFM15TV9dfjjbJlf9T-d8LtvMs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
