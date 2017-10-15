@@ -4,18 +4,22 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public enum RoomState { Lobby, InGame, Finished }
+public enum RoomState { Lobby, InRoom, Voting, Finished }
 
-public class NetworkController : MonoBehaviour
+public enum RoomError { None, Unknown, TooFewPlayers, TooManyPlayers }
+
+public class NetworkController
 {
     private Database m_database;
     private string m_playerId;
 
-    private void Start()
+    public NetworkController()
     {
         m_database = new Database();
         m_playerId = GetPlayerId();
     }
+
+    #region Listeners
 
     private void SubscribeToRoomPlayers(string room, Action<string> valueChanged)
     {
@@ -37,6 +41,8 @@ public class NetworkController : MonoBehaviour
     {
         m_database.DeregisterListener(path, listener);
     }
+
+    #endregion
 
     #region Async methods
 
@@ -158,6 +164,48 @@ public class NetworkController : MonoBehaviour
                     }
                 });
             });
+        });
+    }
+
+    public void CanStartGame(string room, Action<RoomError> returnError)
+    {
+        int requiredPlayers = 2;
+        string roomKey = "rooms/" + room;
+        string roomPlayersKey = roomKey + "/players";
+
+        m_database.PullAsync(roomPlayersKey, roomPlayersValue => {
+            List<string> roomPlayers = roomPlayersValue.Split(',').ToList();
+            roomPlayers.RemoveAll(s => string.IsNullOrEmpty(s));
+            if (roomPlayers.Count < requiredPlayers) returnError(RoomError.TooFewPlayers);
+            else if (roomPlayers.Count > requiredPlayers) returnError(RoomError.TooManyPlayers);
+            else returnError(RoomError.None);
+        });
+    }
+
+    public void SetRoomState(string room, RoomState state)
+    {
+        string roomKey = "rooms/" + room;
+        string roomStateKey = roomKey + "/state";
+        string roomStateValue = ((int)state).ToString();
+
+        m_database.PushAsync(roomStateKey, roomStateValue);
+    }
+
+    public void GetPlayerRoomNrAsync(string room, Action<int> returnRoomNr)
+    {
+        string roomKey = "rooms/" + room;
+        string roomPlayersKey = roomKey + "/players";
+
+        m_database.PullAsync(roomPlayersKey, roomPlayersValue => {
+            List<string> roomPlayers = roomPlayersValue.Split(',').ToList();
+            roomPlayers.RemoveAll(s => string.IsNullOrEmpty(s));
+            int roomNr = -1;
+            for (int i = 0; i < roomPlayers.Count; i++) {
+                if (roomPlayers[i] == m_playerId) {
+                    roomNr = i+1;
+                }
+            }
+            returnRoomNr(roomNr);
         });
     }
 
