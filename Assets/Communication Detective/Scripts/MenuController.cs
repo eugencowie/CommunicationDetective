@@ -70,19 +70,22 @@ public class MenuController : MonoBehaviour
     /// </summary>
     public void SubmitButtonPressed()
     {
-        SwitchPanel(WaitPanel);
+        if (!string.IsNullOrEmpty(CodeField.text))
+        {
+            SwitchPanel(WaitPanel);
 
-        NetworkController.JoinRoomAsync(CodeField.text.ToUpper(), success => {
-            if (!success) {
-                CodeField.text = "";
-                SwitchPanel(JoinPanel);
-            } else {
-                CodeLabel.text = CodeField.text.ToUpper();
-                RegisterOnPlayersChanged(CodeLabel.text);
-                RegisterOnRoomStateChanged(CodeLabel.text);
-                SwitchPanel(LobbyPanel);
-            }
-        });
+            NetworkController.JoinRoomAsync(CodeField.text.ToUpper(), success => {
+                if (!success) {
+                    CodeField.text = "";
+                    SwitchPanel(JoinPanel);
+                } else {
+                    CodeLabel.text = CodeField.text.ToUpper();
+                    RegisterOnPlayersChanged(CodeLabel.text);
+                    RegisterOnRoomStateChanged(CodeLabel.text);
+                    SwitchPanel(LobbyPanel);
+                }
+            });
+        }
     }
 
     /// <summary>
