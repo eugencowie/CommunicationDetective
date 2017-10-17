@@ -6,6 +6,6 @@
 
 ## Contributing
 
-* [Setting up GitHub](https://imgur.com/a/zajPc)
+* [Setting up GitHub](https://imgur.com/a/l1BIn)
 * [Working with GitHub](https://imgur.com/a/BNnF8)
 * [Importing assets into Unity](https://docs.unity3d.com/Manual/ImportingAssets.html)
