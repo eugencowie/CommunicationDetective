@@ -5,15 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class RoomController : MonoBehaviour
 {
-    private NetworkController NetworkController;
+    private Network NetworkController;
 
     private string m_roomCode;
 
     private void Start()
     {
-        NetworkController = new NetworkController();
+        NetworkController = new Network();
 
-        NetworkController.GetPlayerRoomAsync(room => {
+        NetworkController.GetPlayerLobby(room => {
             if (!string.IsNullOrEmpty(room)) m_roomCode = room;
             else SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
         });
@@ -24,7 +24,7 @@ public class RoomController : MonoBehaviour
     /// </summary>
     public void LeaveButtonPressed()
     {
-        NetworkController.LeaveRoomAsync(m_roomCode, success => {
+        NetworkController.LeaveLobby(m_roomCode, success => {
             if (success) SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
         });
     }
