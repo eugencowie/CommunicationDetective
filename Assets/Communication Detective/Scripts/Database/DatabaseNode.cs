@@ -30,4 +30,28 @@ public abstract class DatabaseNode
     {
         Database.Delete(Key, returnSuccess);
     }
+
+    protected void PullEntries(params DatabaseEntry[] entries)
+    {
+        foreach (var entry in entries)
+        {
+            entry.Pull();
+        }
+    }
+
+    protected void PushEntries(params DatabaseEntry[] entries)
+    {
+        foreach (var entry in entries)
+        {
+            entry.Push();
+        }
+    }
+
+    protected void DeleteEntries(params DatabaseEntry[] entries)
+    {
+        foreach (var entry in entries)
+        {
+            entry.Delete();
+        }
+    }
 }

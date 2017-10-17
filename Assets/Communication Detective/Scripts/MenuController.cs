@@ -77,7 +77,7 @@ public class MenuController : MonoBehaviour
         {
             SwitchPanel(WaitPanel);
 
-            NetworkController.JoinRoomAsync(CodeField.text.ToUpper(), success => {
+            NetworkController.JoinLobby(CodeField.text.ToUpper(), success => {
                 if (!success) {
                     CodeField.text = "";
                     SwitchPanel(JoinPanel);
@@ -98,13 +98,13 @@ public class MenuController : MonoBehaviour
     {
         SwitchPanel(WaitPanel);
 
-        NetworkController.CreateCodeAsync(code => {
+        NetworkController.CreateLobbyCode(code => {
             if (string.IsNullOrEmpty(code)) SwitchPanel(StartPanel);
             else {
-                NetworkController.CreateRoomAsync(code, createSuccess => {
+                NetworkController.CreateLobby(code, createSuccess => {
                     if (!createSuccess) SwitchPanel(StartPanel);
                     else {
-                        NetworkController.JoinRoomAsync(code, joinSuccess => {
+                        NetworkController.JoinLobby(code, joinSuccess => {
                             if (!joinSuccess) SwitchPanel(StartPanel);
                             else {
                                 CodeLabel.text = code;
@@ -133,7 +133,7 @@ public class MenuController : MonoBehaviour
                 else StatusLabel.text = "unknown error";
                 SwitchPanel(LobbyPanel);
             }
-            else NetworkController.SetRoomState(CodeLabel.text, LobbyState.InGame);
+            else NetworkController.SetLobbyState(CodeLabel.text, LobbyState.InGame);
         });
     }
 
@@ -144,7 +144,7 @@ public class MenuController : MonoBehaviour
     {
         SwitchPanel(WaitPanel);
 
-        NetworkController.LeaveRoomAsync(CodeLabel.text, success => {
+        NetworkController.LeaveLobby(CodeLabel.text, success => {
             if (success) {
                 DeregisterOnRoomStateChanged(CodeLabel.text);
                 DeregisterOnPlayersChanged(CodeLabel.text);
@@ -219,7 +219,7 @@ public class MenuController : MonoBehaviour
                 LobbyState state = (LobbyState)statusNr;
                 if (state == LobbyState.InGame)
                 {
-                    NetworkController.GetPlayerRoomNrAsync(CodeLabel.text, roomNr => {
+                    NetworkController.AssignPlayerScenes(CodeLabel.text, roomNr => {
                         if (roomNr >= 1 && roomNr <= 4) {
                             string room = "Room" + roomNr.ToString();
                             StatusLabel.text = "joined game, your room = " + room;

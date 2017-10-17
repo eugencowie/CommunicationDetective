@@ -23,92 +23,97 @@ public class Network
 
     #region Async methods
 
+    /// <summary>
+    /// If the player is listed as being in a lobby and that lobby does exist, returns the lobby
+    /// code. Otherwise, returns null.
+    /// </summary>
     public void GetPlayerLobby(Action<string> returnLobby)
     {
         Database.ValidateAction(ref returnLobby);
-
-        // If player key exists and player's room exists, return the room code. Otherwise, if the
-        // player key does not exists (or it exists, but the player's room does not exists) then
-        // return null.
+        
+        // If 'players/{0}/lobby' exists and 'lobbies/{1}' exists, return lobby code.
         m_player.Lobby.Pull(success => {
-            if (!success) returnLobby(null);
-            else {
+            if (success) {
                 m_lobby = new Lobby(m_database, m_player.Lobby.Value);
                 m_lobby.Exists(exists => {
                     if (exists) returnLobby(m_lobby.Id);
-                    else m_player.Delete(_ => {
-                        returnLobby(null);
-                    });
+                    else m_player.Delete(_ => returnLobby(null));
                 });
             }
+            else returnLobby(null);
         });
     }
 
-    public void JoinRoomAsync(string code, Action<bool> returnSuccess)
+    /// <summary>
+    /// If lobby exists, updates player entry to new lobby and adds player to lobby.
+    /// </summary>
+    public void JoinLobby(string code, Action<bool> returnSuccess=null)
     {
         Database.ValidateAction(ref returnSuccess);
 
-        // If room exists, push the room code to the player key, pull the room's list of players,
-        // add the player to the room's list of players and push the room's new list of players.
-        m_player.Lobby.Value = code;
-        m_player.Lobby.Push(success => {
-            m_lobby = new Lobby(m_database, m_player.Lobby.Value);
+        // If 'lobbies/{0}' exists, push 'players/{1}/lobby', get 'lobbies/{0}/players', add
+        // player to list and push 'lobbies/{0}/players' back up.
+        m_lobby = new Lobby(m_database, code);
+        m_lobby.Exists(exists => {
+            if (exists) {
+                m_player.Lobby.Value = code;
+                m_player.Lobby.Push(playerSuccess => {
+                    if (playerSuccess) {
+                        m_lobby.Players.Pull(lobbySuccess => {
+                            if (lobbySuccess) {
+                                List<string> players = m_lobby.Players.Value.Split(',').ToList();
+                                if (!players.Contains(m_player.Id)) {
+                                    players.Add(m_player.Id);
+                                    players.RemoveAll(s => string.IsNullOrEmpty(s));
+                                    m_lobby.Players.Value = string.Join(",", players.ToArray());
+                                    m_lobby.Players.Push(roomPlayersSuccess => {
+                                        if (roomPlayersSuccess) returnSuccess(true);
+                                        else returnSuccess(false);
+                                    });
+                                }
+                            }
+                            else returnSuccess(false);
+                        });
+                    }
+                    else returnSuccess(false);
+                });
+            }
+            else returnSuccess(false);
         });
+    }
 
+    /// <summary>
+    /// Creates a lobby on the server.
+    /// </summary>
+    public void CreateLobby(string code, Action<bool> returnSuccess=null)
+    {
+        Database.ValidateAction(ref returnSuccess);
 
+        m_lobby = new Lobby(m_database, code);
 
-        string roomKey = "lobbies/" + code;
-        string playerKey = string.Format("players/{0}/room", m_playerId);
-        string roomPlayersKey = roomKey + "/players";
+        m_lobby.CreatedTime.Value = DateTimeOffset.UtcNow.ToString("o");
+        m_lobby.State.Value = ((int)LobbyState.Lobby).ToString();
 
-        // If room exists, push the room code to the player key, pull the room's list of players,
-        // add the player to the room's list of players and push the room's new list of players.
-        m_database.ExistsAsync(playerKey, playerExists => {
-            if (playerExists) returnSuccess(false);
-            else m_database.ExistsAsync(roomKey, roomExists => {
-                if (!roomExists) returnSuccess(false);
-                else m_database.PushAsync(playerKey, code, playerSuccess => {
-                    m_database.PullAsync(roomPlayersKey, roomPlayersValue => {
-                        List<string> roomPlayers = roomPlayersValue.Split(',').ToList();
-                        if (!roomPlayers.Contains(m_playerId)) {
-                            roomPlayers.Add(m_playerId);
-                            roomPlayers.RemoveAll(s => string.IsNullOrEmpty(s));
-                            roomPlayersValue = string.Join(",", roomPlayers.ToArray());
-                            m_database.PushAsync(roomPlayersKey, roomPlayersValue, roomPlayersSuccess => {
-                                returnSuccess(playerSuccess && roomPlayersSuccess);
-                            });
-                        }
-                    });
+        m_lobby.CreatedTime.Push(success1 => {
+            m_lobby.Players.Push(success2 => {
+                m_lobby.State.Push(success3 => {
+                    returnSuccess(success1 && success2 && success3);
                 });
             });
         });
     }
 
-    public void CreateRoomAsync(string code, Action<bool> returnSuccess)
+    /// <summary>
+    /// Attempts to generate a lobby code which is not in use. If all codes generated are in
+    /// use, returns null.
+    /// </summary>
+    public void CreateLobbyCode(Action<string> returnCode)
     {
-        string createdKey = string.Format("lobbies/{0}/created-time", code);
-        string stateKey = string.Format("lobbies/{0}/state", code);
-        string playersKey = string.Format("lobbies/{0}/players", code);
+        Database.ValidateAction(ref returnCode);
 
-        string createdValue = DateTimeOffset.UtcNow.ToString("o");
-        string stateValue = ((int)LobbyState.Lobby).ToString();
-        string playersValue = "";
-
-        // Push the three room values to the database.
-        m_database.Push(createdKey, createdValue, createdSuccess => {
-            m_database.Push(stateKey, stateValue, stateSuccess => {
-                m_database.Push(playersKey, playersValue, playersSuccess => {
-                    returnSuccess(createdSuccess && stateSuccess && playersSuccess);
-                });
-            });
-        });
-    }
-
-    public void CreateCodeAsync(Action<string> returnCode)
-    {
         // Three attempts to find a unique room code.
         string[] codes = { GenerateRandomCode(), GenerateRandomCode(), GenerateRandomCode() };
-        List<string> keys = codes.Select(c => "lobbies/" + c).ToList();
+        List<string> keys = codes.Select(c => new Lobby(m_database, c).Key).ToList();
 
         // If the generated room code already exists, try again (up to three tries).
         m_database.Exists(keys[0], exists0 => {
@@ -123,64 +128,109 @@ public class Network
         });
     }
 
-    public void LeaveRoomAsync(string code, Action<bool> returnSuccess)
+    /// <summary>
+    /// Deletes the player entry and removes the player from the lobby. If no players are left in the
+    /// lobby, deletes the lobby.
+    /// </summary>
+    public void LeaveLobby(string code, Action<bool> returnSuccess=null)
     {
-        string playerKey = string.Format("players/{0}/room", m_playerId);
+        Database.ValidateAction(ref returnSuccess);
+
+        // Delete 'players/{0}', pull 'lobbies/{1}/players', remove the player from list and push
+        // 'lobbies/{1}/players' back up (unless there are no players left, then delete the lobby).
+        m_player.Delete(success1 => {
+            if (success1) {
+                m_lobby = new Lobby(m_database, code); // TODO
+                m_lobby.Players.Pull(success2 => {
+                    if (success2) {
+                        List<string> layers = m_lobby.Players.Value.Split(',').ToList();
+                        layers.Remove(m_player.Id);
+                        layers.RemoveAll(s => string.IsNullOrEmpty(s));
+                        if (layers.Count > 0) {
+                            m_lobby.Players.Value = string.Join(",", layers.ToArray());
+                            m_lobby.Players.Push(returnSuccess);
+                        } else {
+                            m_lobby.Delete(returnSuccess);
+                        }
+                    }
+                    else returnSuccess(false);
+                });
+            }
+            else returnSuccess(false);
+        });
+    }
+
+    /// <summary>
+    /// Checks if the lobby has the required number of players.
+    /// </summary>
+    public void CanStartGame(string code, int requiredPlayers, Action<LobbyError> returnError)
+    {
+        Database.ValidateAction(ref returnError);
+
+        m_lobby = new Lobby(m_database, code); // TODO
+        m_lobby.Players.Pull(success => {
+            if (success) {
+                List<string> players = m_lobby.Players.Value.Split(',').ToList();
+                players.RemoveAll(s => string.IsNullOrEmpty(s));
+                if (players.Count < requiredPlayers) returnError(LobbyError.TooFewPlayers);
+                else if (players.Count > requiredPlayers) returnError(LobbyError.TooManyPlayers);
+                else returnError(LobbyError.None);
+            }
+            else returnError(LobbyError.Unknown);
+        });
+    }
+
+    /// <summary>
+    /// Pushes a new lobby state to the server.
+    /// </summary>
+    public void SetLobbyState(string code, LobbyState state, Action<bool> returnSuccess=null)
+    {
+        Database.ValidateAction(ref returnSuccess);
+
+        m_lobby = new Lobby(m_database, code); // TODO
+        m_lobby.State.Value = ((int)state).ToString();
+        m_lobby.State.Push(returnSuccess);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public void AssignPlayerScenes(string code, Action<int> returnScene)
+    {
+        Database.ValidateAction(ref returnScene);
+
+        m_lobby = new Lobby(m_database, code); // TODO
+        m_lobby.Players.Pull(success => {
+            if (success) {
+                List<string> players = m_lobby.Players.Value.Split(',').ToList();
+                players.RemoveAll(s => string.IsNullOrEmpty(s));
+                players = players.OrderBy(_ => UnityEngine.Random.value).ToList();
+                int ourScene = -1;
+                for (int i = 0; i < players.Count; i++) {
+                    Player player = new Player(m_database, players[i]);
+                    if (player.Id == m_player.Id) {
+                        ourScene = (i+1);
+                    }
+                    player.Scene.Value = (i+1).ToString();
+                    player.Scene.Push();
+                }
+                returnScene(ourScene);
+            }
+            else returnScene(-1);
+        });
+    }
+
+    /*
+    /// <summary>
+    /// 
+    /// </summary>
+    public void GetPlayerScene(string code, Action<string> returnScene)
+    {
+        Database.ValidateAction(ref returnScene);
+
+        m_lobby = new Lobby(m_database, code); // TODO
 
         string roomKey = "lobbies/" + code;
-        string roomPlayersKey = roomKey + "/players";
-
-        // Delete the player key, if room exists then pull the room's list of players, remove the
-        // player from the room's list of players and push the room's new list of players (unless
-        // there are player left, in which case delete the room).
-        m_database.DeleteAsync(playerKey, playerSuccess => {
-            m_database.ExistsAsync(roomKey, roomExists => {
-                if (!roomExists) returnSuccess(true);
-                else m_database.PullAsync(roomPlayersKey, roomPlayersValue => {
-                    List<string> roomPlayers = roomPlayersValue.Split(',').ToList();
-                    roomPlayers.Remove(m_playerId);
-                    roomPlayers.RemoveAll(s => string.IsNullOrEmpty(s));
-                    if (roomPlayers.Count > 0) {
-                        roomPlayersValue = string.Join(",", roomPlayers.ToArray());
-                        m_database.PushAsync(roomPlayersKey, roomPlayersValue, roomPlayersSuccess => {
-                            returnSuccess(playerSuccess && roomPlayersSuccess);
-                        });
-                    } else {
-                        m_database.Delete(roomKey, roomSuccess => {
-                            returnSuccess(playerSuccess && roomSuccess);
-                        });
-                    }
-                });
-            });
-        });
-    }
-
-    public void CanStartGame(string room, int requiredPlayers, Action<LobbyError> returnError)
-    {
-        string roomKey = "lobbies/" + room;
-        string roomPlayersKey = roomKey + "/players";
-
-        m_database.Pull(roomPlayersKey, roomPlayersValue => {
-            List<string> roomPlayers = roomPlayersValue.Split(',').ToList();
-            roomPlayers.RemoveAll(s => string.IsNullOrEmpty(s));
-            if (roomPlayers.Count < requiredPlayers) returnError(LobbyError.TooFewPlayers);
-            else if (roomPlayers.Count > requiredPlayers) returnError(LobbyError.TooManyPlayers);
-            else returnError(LobbyError.None);
-        });
-    }
-
-    public void SetRoomState(string room, LobbyState state)
-    {
-        string roomKey = "lobbies/" + room;
-        string roomStateKey = roomKey + "/state";
-        string roomStateValue = ((int)state).ToString();
-
-        m_database.Push(roomStateKey, roomStateValue);
-    }
-
-    public void GetPlayerRoomNrAsync(string room, Action<int> returnRoomNr)
-    {
-        string roomKey = "lobbies/" + room;
         string roomPlayersKey = roomKey + "/players";
 
         m_database.PullAsync(roomPlayersKey, roomPlayersValue => {
@@ -195,6 +245,7 @@ public class Network
             returnRoomNr(roomNr);
         });
     }
+    */
 
     #endregion
 

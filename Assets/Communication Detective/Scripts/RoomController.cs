@@ -24,7 +24,7 @@ public class RoomController : MonoBehaviour
     /// </summary>
     public void LeaveButtonPressed()
     {
-        NetworkController.LeaveRoomAsync(m_roomCode, success => {
+        NetworkController.LeaveLobby(m_roomCode, success => {
             if (success) SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
         });
     }

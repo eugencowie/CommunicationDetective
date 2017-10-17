@@ -42,7 +42,8 @@ public class Database
         ValidateAction(ref returnResult);
 
         m_root.Child(path).GetValueAsync().ContinueWith(t => {
-            returnResult(t.Result.Value.ToString());
+            if (t.Result.Exists) returnResult(t.Result.Value.ToString());
+            else returnResult(null);
         });
     }
     
@@ -80,7 +81,7 @@ public class Database
     
     public static void ValidateAction<T>(ref Action<T> action)
     {
-        action = action ?? (_ => { });
+        action = action ?? (_ => {});
     }
     
     /// <summary>

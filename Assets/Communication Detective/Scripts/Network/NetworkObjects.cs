@@ -11,6 +11,10 @@
         Lobby = new DatabaseEntry(Database, Key + "/lobby");
         Scene = new DatabaseEntry(Database, Key + "/scene");
     }
+
+    public void PullEntries() { PullEntries(Lobby, Scene); }
+    public void PushEntries() { PushEntries(Lobby, Scene); }
+    public void DeleteEntries() { DeleteEntries(Lobby, Scene); }
 }
 
 public class Lobby : DatabaseNode
@@ -28,4 +32,8 @@ public class Lobby : DatabaseNode
         Players = new DatabaseEntry(Database, Key + "/players");
         State = new DatabaseEntry(Database, Key + "/state");
     }
+
+    public void PullEntries() { PullEntries(CreatedTime, Players, State); }
+    public void PushEntries() { PushEntries(CreatedTime, Players, State); }
+    public void DeleteEntries() { DeleteEntries(CreatedTime, Players, State); }
 }

@@ -36,12 +36,12 @@ public class DatabaseEntry
     {
         Database.ValidateAction(ref returnSuccess);
 
-        Exists(exists => {
-            if (!exists) returnSuccess(false);
-            else m_database.Pull(Key, result => {
+        m_database.Pull(Key, result => {
+            if (result != null) {
                 Value = result;
                 returnSuccess(true);
-            });
+            }
+            else returnSuccess(false);
         });
     }
     
@@ -52,6 +52,6 @@ public class DatabaseEntry
     
     public void Delete(Action<bool> returnSuccess=null)
     {
-        m_database.Push(Key, null, returnSuccess);
+        m_database.Delete(Key, returnSuccess);
     }
 }
