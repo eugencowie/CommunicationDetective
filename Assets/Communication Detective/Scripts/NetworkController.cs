@@ -4,26 +4,83 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public enum RoomState { Lobby, InRoom, Voting, Finished }
+public enum LobbyState { Lobby, InGame, Voting, Finished }
 
-public enum RoomError { None, Unknown, TooFewPlayers, TooManyPlayers }
+public enum LobbyError { None, Unknown, TooFewPlayers, TooManyPlayers }
+
+public class DatabaseKey
+{
+    protected readonly Database Database;
+
+    public readonly string Key;
+
+    public DatabaseKey(Database database, string key)
+    {
+        Database = database;
+        Key = key;
+    }
+    
+    public void KeyExistsAsync(Action<bool> returnExists)
+    {
+        Database.ExistsAsync(Key, returnExists);
+    }
+
+    public void KeyDeleteAsync(Action<bool> returnSuccess=null)
+    {
+        Database.DeleteAsync(Key, returnSuccess);
+    }
+}
+
+public class Player : DatabaseKey
+{
+    public readonly string Id;
+    public readonly DatabaseEntry Lobby;
+    public readonly DatabaseEntry Scene;
+
+    public Player(Database database, string id)
+        : base(database, "players/" + id)
+    {
+        Id = id;
+        Lobby = new DatabaseEntry(Database, Key + "/lobby");
+        Scene = new DatabaseEntry(Database, Key + "/scene");
+    }
+}
+
+public class Lobby : DatabaseKey
+{
+    public readonly string Id;
+    public readonly DatabaseEntry CreatedTime;
+    public readonly DatabaseEntry Players;
+    public readonly DatabaseEntry State;
+
+    public Lobby(Database database, string id)
+        : base(database, "lobbies/" + id)
+    {
+        Id = id;
+        CreatedTime = new DatabaseEntry(Database, Key + "/created-time");
+        Players = new DatabaseEntry(Database, Key + "/players");
+        State = new DatabaseEntry(Database, Key + "/state");
+    }
+}
 
 public class NetworkController
 {
     private Database m_database;
-    private string m_playerId;
+    private Player m_player;
+    private Lobby m_lobby;
 
     public NetworkController()
     {
         m_database = new Database();
-        m_playerId = GetPlayerId();
+        m_player = new Player(m_database, GetPlayerId());
+        m_lobby = null;
     }
 
     #region Listeners
 
     private void SubscribeToRoomPlayers(string room, Action<string> valueChanged)
     {
-        string roomPlayersKey = string.Format("rooms/{0}/players", room);
+        string roomPlayersKey = string.Format("lobbies/{0}/players", room);
 
         m_database.RegisterListener(roomPlayersKey, (sender, args) => {
             if (args.DatabaseError == null) {
@@ -46,31 +103,41 @@ public class NetworkController
 
     #region Async methods
 
-    public void GetPlayerRoomAsync(Action<string> returnRoom)
+    public void GetPlayerLobbyAsync(Action<string> returnLobby)
     {
-        string playerKey = "players/" + m_playerId;
+        if (returnLobby == null) returnLobby = (_ => { });
 
         // If player key exists and player's room exists, return the room code. Otherwise, if the
         // player key does not exists (or it exists, but the player's room does not exists) then
         // return null.
-        m_database.ExistsAsync(playerKey, playerExists => {
-            if (!playerExists) returnRoom(null);
-            else m_database.PullAsync(playerKey, playerValue => {
-                string roomKey = "rooms/" + playerValue;
-                m_database.ExistsAsync(roomKey, roomExists => {
-                    if (roomExists) returnRoom(playerValue);
-                    else m_database.DeleteAsync(playerKey, playerSucess => {
-                        returnRoom(null);
+        m_player.Lobby.PullAsync(success => {
+            if (!success) returnLobby(null);
+            else {
+                m_lobby = new Lobby(m_database, m_player.Lobby.Value);
+                m_lobby.KeyExistsAsync(exists => {
+                    if (exists) returnLobby(m_lobby.Id);
+                    else m_player.KeyDeleteAsync(_ => {
+                        returnLobby(null);
                     });
                 });
-            });
+            }
         });
     }
 
     public void JoinRoomAsync(string code, Action<bool> returnSuccess)
     {
-        string roomKey = "rooms/" + code;
-        string playerKey = "players/" + m_playerId;
+        if (returnSuccess == null) returnSuccess = (_ => { });
+
+        // If room exists, push the room code to the player key, pull the room's list of players,
+        // add the player to the room's list of players and push the room's new list of players.
+        m_player.Lobby.PushAsync(success => {
+
+        });
+
+
+
+        string roomKey = "lobbies/" + code;
+        string playerKey = string.Format("players/{0}/room", m_playerId);
         string roomPlayersKey = roomKey + "/players";
 
         // If room exists, push the room code to the player key, pull the room's list of players,
@@ -98,12 +165,12 @@ public class NetworkController
 
     public void CreateRoomAsync(string code, Action<bool> returnSuccess)
     {
-        string createdKey = string.Format("rooms/{0}/created-time", code);
-        string stateKey = string.Format("rooms/{0}/state", code);
-        string playersKey = string.Format("rooms/{0}/players", code);
+        string createdKey = string.Format("lobbies/{0}/created-time", code);
+        string stateKey = string.Format("lobbies/{0}/state", code);
+        string playersKey = string.Format("lobbies/{0}/players", code);
 
         string createdValue = DateTimeOffset.UtcNow.ToString("o");
-        string stateValue = ((int)RoomState.Lobby).ToString();
+        string stateValue = ((int)LobbyState.Lobby).ToString();
         string playersValue = "";
 
         // Push the three room values to the database.
@@ -120,7 +187,7 @@ public class NetworkController
     {
         // Three attempts to find a unique room code.
         string[] codes = { GenerateRandomCode(), GenerateRandomCode(), GenerateRandomCode() };
-        List<string> keys = codes.Select(c => "rooms/" + c).ToList();
+        List<string> keys = codes.Select(c => "lobbies/" + c).ToList();
 
         // If the generated room code already exists, try again (up to three tries).
         m_database.ExistsAsync(keys[0], exists0 => {
@@ -137,9 +204,9 @@ public class NetworkController
 
     public void LeaveRoomAsync(string code, Action<bool> returnSuccess)
     {
-        string playerKey = "players/" + m_playerId;
+        string playerKey = string.Format("players/{0}/room", m_playerId);
 
-        string roomKey = "rooms/" + code;
+        string roomKey = "lobbies/" + code;
         string roomPlayersKey = roomKey + "/players";
 
         // Delete the player key, if room exists then pull the room's list of players, remove the
@@ -167,23 +234,23 @@ public class NetworkController
         });
     }
 
-    public void CanStartGame(string room, int requiredPlayers, Action<RoomError> returnError)
+    public void CanStartGame(string room, int requiredPlayers, Action<LobbyError> returnError)
     {
-        string roomKey = "rooms/" + room;
+        string roomKey = "lobbies/" + room;
         string roomPlayersKey = roomKey + "/players";
 
         m_database.PullAsync(roomPlayersKey, roomPlayersValue => {
             List<string> roomPlayers = roomPlayersValue.Split(',').ToList();
             roomPlayers.RemoveAll(s => string.IsNullOrEmpty(s));
-            if (roomPlayers.Count < requiredPlayers) returnError(RoomError.TooFewPlayers);
-            else if (roomPlayers.Count > requiredPlayers) returnError(RoomError.TooManyPlayers);
-            else returnError(RoomError.None);
+            if (roomPlayers.Count < requiredPlayers) returnError(LobbyError.TooFewPlayers);
+            else if (roomPlayers.Count > requiredPlayers) returnError(LobbyError.TooManyPlayers);
+            else returnError(LobbyError.None);
         });
     }
 
-    public void SetRoomState(string room, RoomState state)
+    public void SetRoomState(string room, LobbyState state)
     {
-        string roomKey = "rooms/" + room;
+        string roomKey = "lobbies/" + room;
         string roomStateKey = roomKey + "/state";
         string roomStateValue = ((int)state).ToString();
 
@@ -192,7 +259,7 @@ public class NetworkController
 
     public void GetPlayerRoomNrAsync(string room, Action<int> returnRoomNr)
     {
-        string roomKey = "rooms/" + room;
+        string roomKey = "lobbies/" + room;
         string roomPlayersKey = roomKey + "/players";
 
         m_database.PullAsync(roomPlayersKey, roomPlayersValue => {

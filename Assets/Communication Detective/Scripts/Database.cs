@@ -15,39 +15,55 @@ public class Database
     }
 
     /// <summary>
-    /// Pushes data to the database. This is an asynchronous operation.
-    /// </summary>
-    public void PushAsync(string path, string data)
-    {
-        m_root.Child(path).SetValueAsync(data);
-    }
-
-    /// <summary>
     /// Pushes data to the database. This is an asynchronous operation which will call the
     /// specified action on completion.
     /// </summary>
-    public void PushAsync(string path, string data, Action<bool> returnSuccess)
+    public void PushAsync(string path, string data, Action<bool> returnSuccess=null)
     {
+        if (returnSuccess == null) returnSuccess = (_ => { });
+
         m_root.Child(path).SetValueAsync(data).ContinueWith(t => {
             returnSuccess(t.IsCompleted);
         });
     }
 
     /// <summary>
-    /// Deletes data from the database. This is an asynchronous operation.
+    /// Pushes data to the database. This is an asynchronous operation which will call the
+    /// specified action on completion.
     /// </summary>
-    public void DeleteAsync(string path)
+    public void PushAsync(string path, string data, Action returnError=null, Action returnSuccess=null)
     {
-        PushAsync(path, null);
+        if (returnError == null) returnError = () => { };
+        if (returnSuccess == null) returnSuccess = () => { };
+
+        PushAsync(path, data, success => {
+            if (success) returnSuccess();
+            else returnError();
+        });
     }
 
     /// <summary>
     /// Deletes data from the database. This is an asynchronous operation which will call
     /// the specified action on completion.
     /// </summary>
-    public void DeleteAsync(string path, Action<bool> returnSuccess)
+    public void DeleteAsync(string path, Action<bool> returnSuccess=null)
     {
         PushAsync(path, null, returnSuccess);
+    }
+
+    /// <summary>
+    /// Deletes data from the database. This is an asynchronous operation which will call
+    /// the specified action on completion.
+    /// </summary>
+    public void DeleteAsync(string path, Action returnError=null, Action returnSuccess=null)
+    {
+        if (returnError == null) returnError = () => { };
+        if (returnSuccess == null) returnSuccess = () => { };
+
+        DeleteAsync(path, success => {
+            if (success) returnSuccess();
+            else returnError();
+        });
     }
 
     /// <summary>
@@ -56,8 +72,25 @@ public class Database
     /// </summary>
     public void PullAsync(string path, Action<string> returnResult)
     {
+        if (returnResult == null) returnResult = (_ => { });
+
         m_root.Child(path).GetValueAsync().ContinueWith(t => {
             returnResult(t.Result.Value.ToString());
+        });
+    }
+
+    /// <summary>
+    /// Pulls data from the database. This is an asynchronous operation which will call the
+    /// specified action on completion.
+    /// </summary>
+    public void PullAsync(string path, Action returnError=null, Action<string> returnSuccess=null)
+    {
+        if (returnError == null) returnError = () => { };
+        if (returnSuccess == null) returnSuccess = (_) => { };
+
+        PullAsync(path, result => {
+            if (result != null) returnSuccess(result);
+            else returnError();
         });
     }
 
@@ -67,6 +100,8 @@ public class Database
     /// </summary>
     public void ExistsAsync(string path, Action<bool> returnExists)
     {
+        if (returnExists == null) returnExists = (_ => { });
+
         m_root.Child(path).GetValueAsync().ContinueWith(t => {
             returnExists(t.Result.Exists);
         });

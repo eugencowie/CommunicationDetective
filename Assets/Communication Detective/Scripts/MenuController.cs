@@ -49,7 +49,7 @@ public class MenuController : MonoBehaviour
 
         SwitchPanel(WaitPanel);
 
-        NetworkController.GetPlayerRoomAsync(room => {
+        NetworkController.GetPlayerLobbyAsync(room => {
             if (string.IsNullOrEmpty(room)) SwitchPanel(StartPanel);
             else {
                 CodeLabel.text = room;
@@ -127,13 +127,13 @@ public class MenuController : MonoBehaviour
         SwitchPanel(WaitPanel);
 
         NetworkController.CanStartGame(CodeLabel.text, RequiredPlayers, error => {
-            if (error != RoomError.None) {
-                if (error == RoomError.TooFewPlayers) StatusLabel.text = "too few players, requires " + RequiredPlayers;
-                else if (error == RoomError.TooManyPlayers) StatusLabel.text = "too many players, requires " + RequiredPlayers;
+            if (error != LobbyError.None) {
+                if (error == LobbyError.TooFewPlayers) StatusLabel.text = "too few players, requires " + RequiredPlayers;
+                else if (error == LobbyError.TooManyPlayers) StatusLabel.text = "too many players, requires " + RequiredPlayers;
                 else StatusLabel.text = "unknown error";
                 SwitchPanel(LobbyPanel);
             }
-            else NetworkController.SetRoomState(CodeLabel.text, RoomState.InRoom);
+            else NetworkController.SetRoomState(CodeLabel.text, LobbyState.InGame);
         });
     }
 
@@ -174,14 +174,14 @@ public class MenuController : MonoBehaviour
 
     private void RegisterOnPlayersChanged(string room)
     {
-        string roomPlayersKey = string.Format("rooms/{0}/players", room);
+        string roomPlayersKey = string.Format("lobbies/{0}/players", room);
 
         NetworkController.RegisterListener(roomPlayersKey, OnPlayersChanged);
     }
 
     private void DeregisterOnPlayersChanged(string room)
     {
-        string roomPlayersKey = string.Format("rooms/{0}/players", room);
+        string roomPlayersKey = string.Format("lobbies/{0}/players", room);
 
         NetworkController.DeregisterListener(roomPlayersKey, OnPlayersChanged);
     }
@@ -196,14 +196,14 @@ public class MenuController : MonoBehaviour
 
     private void RegisterOnRoomStateChanged(string room)
     {
-        string roomStateKey = string.Format("rooms/{0}/state", room);
+        string roomStateKey = string.Format("lobbies/{0}/state", room);
 
         NetworkController.RegisterListener(roomStateKey, OnRoomStateChanged);
     }
 
     private void DeregisterOnRoomStateChanged(string room)
     {
-        string roomStateKey = string.Format("rooms/{0}/state", room);
+        string roomStateKey = string.Format("lobbies/{0}/state", room);
 
         NetworkController.DeregisterListener(roomStateKey, OnRoomStateChanged);
     }
@@ -216,8 +216,8 @@ public class MenuController : MonoBehaviour
             int statusNr = -1;
             if (int.TryParse(statusStr, out statusNr))
             {
-                RoomState state = (RoomState)statusNr;
-                if (state == RoomState.InRoom)
+                LobbyState state = (LobbyState)statusNr;
+                if (state == LobbyState.InGame)
                 {
                     NetworkController.GetPlayerRoomNrAsync(CodeLabel.text, roomNr => {
                         if (roomNr >= 1 && roomNr <= 4) {

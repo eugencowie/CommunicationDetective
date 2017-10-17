@@ -13,7 +13,7 @@ public class RoomController : MonoBehaviour
     {
         NetworkController = new NetworkController();
 
-        NetworkController.GetPlayerRoomAsync(room => {
+        NetworkController.GetPlayerLobbyAsync(room => {
             if (!string.IsNullOrEmpty(room)) m_roomCode = room;
             else SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
         });
