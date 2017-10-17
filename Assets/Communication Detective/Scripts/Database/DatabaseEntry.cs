@@ -26,12 +26,12 @@ public class DatabaseEntry
         Key = key;
         Value = "";
     }
-    
+
     public void Exists(Action<bool> returnExists)
     {
         m_database.Exists(Key, returnExists);
     }
-    
+
     public void Pull(Action<bool> returnSuccess=null)
     {
         Database.ValidateAction(ref returnSuccess);
@@ -44,12 +44,12 @@ public class DatabaseEntry
             else returnSuccess(false);
         });
     }
-    
+
     public void Push(Action<bool> returnSuccess=null)
     {
         m_database.Push(Key, Value, returnSuccess);
     }
-    
+
     public void Delete(Action<bool> returnSuccess=null)
     {
         m_database.Delete(Key, returnSuccess);

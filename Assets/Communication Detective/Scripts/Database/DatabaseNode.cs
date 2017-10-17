@@ -9,7 +9,7 @@ public abstract class DatabaseNode
     /// Reference to the database.
     /// </summary>
     protected readonly Database Database;
-    
+
     /// <summary>
     /// The full path to the node in the database.
     /// </summary>
@@ -25,7 +25,7 @@ public abstract class DatabaseNode
     {
         Database.Exists(Key, returnExists);
     }
-    
+
     public void Delete(Action<bool> returnSuccess=null)
     {
         Database.Delete(Key, returnSuccess);

@@ -19,7 +19,7 @@ public class Database
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://communication-detective.firebaseio.com");
         m_root = FirebaseDatabase.DefaultInstance.RootReference;
     }
-    
+
     /// <summary>
     /// Checks if data exists in the database. This is an asynchronous operation which will call
     /// the specified action on completion.
@@ -32,7 +32,7 @@ public class Database
             returnExists(t.Result.Exists);
         });
     }
-    
+
     /// <summary>
     /// Pulls data from the database. This is an asynchronous operation which will call the
     /// specified action on completion.
@@ -46,7 +46,7 @@ public class Database
             else returnResult(null);
         });
     }
-    
+
     /// <summary>
     /// Pushes data to the database. This is an asynchronous operation which will call the
     /// specified action on completion.
@@ -59,7 +59,7 @@ public class Database
             returnSuccess(t.IsCompleted);
         });
     }
-    
+
     /// <summary>
     /// Deletes data from the database. This is an asynchronous operation which will call
     /// the specified action on completion.
@@ -68,7 +68,7 @@ public class Database
     {
         Push(path, null, returnSuccess);
     }
-    
+
     public void RegisterListener(string path, EventHandler<ValueChangedEventArgs> listener)
     {
         FirebaseDatabase.DefaultInstance.GetReference(path).ValueChanged += listener;
@@ -78,12 +78,12 @@ public class Database
     {
         FirebaseDatabase.DefaultInstance.GetReference(path).ValueChanged -= listener;
     }
-    
+
     public static void ValidateAction<T>(ref Action<T> action)
     {
         action = action ?? (_ => {});
     }
-    
+
     /// <summary>
     /// Tests to check if the database is working properly.
     /// </summary>

@@ -30,7 +30,7 @@ public class Network
     public void GetPlayerLobby(Action<string> returnLobby)
     {
         Database.ValidateAction(ref returnLobby);
-        
+
         // If 'players/{0}/lobby' exists and 'lobbies/{1}' exists, return lobby code.
         m_player.Lobby.Pull(success => {
             if (success) {
@@ -193,7 +193,7 @@ public class Network
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public void AssignPlayerScenes(string code, Action<int> returnScene)
     {
@@ -222,7 +222,7 @@ public class Network
 
     /*
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public void GetPlayerScene(string code, Action<string> returnScene)
     {
