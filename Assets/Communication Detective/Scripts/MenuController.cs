@@ -38,6 +38,8 @@ public class MenuController : MonoBehaviour
     public GameObject LobbyPanel;
     public GameObject WaitPanel;
 
+    public int RequiredPlayers = 2;
+
     private NetworkController NetworkController;
 
     private void Start()
@@ -123,10 +125,10 @@ public class MenuController : MonoBehaviour
     {
         SwitchPanel(WaitPanel);
 
-        NetworkController.CanStartGame(CodeLabel.text, error => {
+        NetworkController.CanStartGame(CodeLabel.text, RequiredPlayers, error => {
             if (error != RoomError.None) {
-                if (error == RoomError.TooFewPlayers) StatusLabel.text = "too few players, requires 2";
-                else if (error == RoomError.TooManyPlayers) StatusLabel.text = "too many players, requires 2";
+                if (error == RoomError.TooFewPlayers) StatusLabel.text = "too few players, requires " + RequiredPlayers;
+                else if (error == RoomError.TooManyPlayers) StatusLabel.text = "too many players, requires " + RequiredPlayers;
                 else StatusLabel.text = "unknown error";
                 SwitchPanel(LobbyPanel);
             }

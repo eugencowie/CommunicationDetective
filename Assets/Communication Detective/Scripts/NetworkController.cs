@@ -167,9 +167,8 @@ public class NetworkController
         });
     }
 
-    public void CanStartGame(string room, Action<RoomError> returnError)
+    public void CanStartGame(string room, int requiredPlayers, Action<RoomError> returnError)
     {
-        int requiredPlayers = 2;
         string roomKey = "rooms/" + room;
         string roomPlayersKey = roomKey + "/players";
 
