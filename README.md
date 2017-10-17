@@ -6,5 +6,5 @@
 
 ## Contributing
 
-* [Setting up GitHub](https://imgur.com/a/Hy6EI)
+* [Setting up GitHub](https://imgur.com/a/zajPc)
 * [Working with GitHub](https://imgur.com/a/BNnF8)
