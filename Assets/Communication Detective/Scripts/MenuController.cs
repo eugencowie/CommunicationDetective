@@ -49,7 +49,7 @@ public class MenuController : MonoBehaviour
 
         SwitchPanel(WaitPanel);
 
-        NetworkController.GetPlayerLobbyAsync(room => {
+        NetworkController.GetPlayerLobby(room => {
             if (string.IsNullOrEmpty(room)) SwitchPanel(StartPanel);
             else {
                 CodeLabel.text = room;
