@@ -26,23 +26,12 @@ public class DatabaseEntry
         Key = key;
         Value = "";
     }
-
-    #region Exists
-
+    
     public void Exists(Action<bool> returnExists)
     {
         m_database.Exists(Key, returnExists);
     }
-
-    public void Exists(Action onExists, Action onNotExists=null)
-    {
-        m_database.Exists(Key, onExists, onNotExists);
-    }
-
-    #endregion
-
-    #region Pull
-
+    
     public void Pull(Action<bool> returnSuccess=null)
     {
         Database.ValidateAction(ref returnSuccess);
@@ -55,45 +44,14 @@ public class DatabaseEntry
             });
         });
     }
-
-    public void Pull(Action onSuccess, Action onFailure = null)
-    {
-        Database.ValidateAction(ref onSuccess);
-        Database.ValidateAction(ref onFailure);
-
-        Pull(success => {
-            if (success) onSuccess();
-            else onFailure();
-        });
-    }
-
-    #endregion
-
-    #region Push
-
+    
     public void Push(Action<bool> returnSuccess=null)
     {
         m_database.Push(Key, Value, returnSuccess);
     }
-
-    public void Push(Action onSuccess, Action onFailure=null)
-    {
-        m_database.Push(Key, Value, onSuccess, onFailure);
-    }
-
-    #endregion
-
-    #region Delete
-
+    
     public void Delete(Action<bool> returnSuccess=null)
     {
         m_database.Push(Key, null, returnSuccess);
     }
-
-    public void Delete(Action onSuccess, Action onFailure=null)
-    {
-        m_database.Push(Key, null, onSuccess, onFailure);
-    }
-
-    #endregion
 }

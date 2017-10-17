@@ -41,11 +41,11 @@ public class MenuController : MonoBehaviour
     [Range(1,20)]
     public int RequiredPlayers = 4;
 
-    private NetworkController NetworkController;
+    private Network NetworkController;
 
     private void Start()
     {
-        NetworkController = new NetworkController();
+        NetworkController = new Network();
 
         SwitchPanel(WaitPanel);
 

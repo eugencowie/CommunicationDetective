@@ -8,13 +8,13 @@ public enum LobbyState { Lobby, InGame, Voting, Finished }
 
 public enum LobbyError { None, Unknown, TooFewPlayers, TooManyPlayers }
 
-public class NetworkController
+public class Network
 {
     private Database m_database;
     private Player m_player;
     private Lobby m_lobby;
 
-    public NetworkController()
+    public Network()
     {
         m_database = new Database();
         m_player = new Player(m_database, GetPlayerId());
@@ -31,25 +31,28 @@ public class NetworkController
         // player key does not exists (or it exists, but the player's room does not exists) then
         // return null.
         m_player.Lobby.Pull(success => {
-            if (success) {
+            if (!success) returnLobby(null);
+            else {
                 m_lobby = new Lobby(m_database, m_player.Lobby.Value);
                 m_lobby.Exists(exists => {
                     if (exists) returnLobby(m_lobby.Id);
-                    else m_player.Delete(_ => returnLobby(null));
+                    else m_player.Delete(_ => {
+                        returnLobby(null);
+                    });
                 });
             }
-            else returnLobby(null);
         });
     }
 
     public void JoinRoomAsync(string code, Action<bool> returnSuccess)
     {
-        if (returnSuccess == null) returnSuccess = (_ => { });
+        Database.ValidateAction(ref returnSuccess);
 
         // If room exists, push the room code to the player key, pull the room's list of players,
         // add the player to the room's list of players and push the room's new list of players.
+        m_player.Lobby.Value = code;
         m_player.Lobby.Push(success => {
-
+            m_lobby = new Lobby(m_database, m_player.Lobby.Value);
         });
 
 

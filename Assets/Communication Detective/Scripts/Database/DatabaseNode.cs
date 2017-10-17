@@ -21,31 +21,13 @@ public abstract class DatabaseNode
         Key = key;
     }
 
-    #region Exists
-
     public void Exists(Action<bool> returnExists)
     {
         Database.Exists(Key, returnExists);
     }
-
-    public void Exists(Action onExists, Action onNotExists=null)
-    {
-        Database.Exists(Key, onExists, onNotExists);
-    }
-
-    #endregion
-
-    #region Delete
-
+    
     public void Delete(Action<bool> returnSuccess=null)
     {
         Database.Delete(Key, returnSuccess);
     }
-
-    public void Delete(Action onSuccess, Action onFailure=null)
-    {
-        Database.Delete(Key, onSuccess, onFailure);
-    }
-
-    #endregion
 }

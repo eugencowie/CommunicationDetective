@@ -19,9 +19,7 @@ public class Database
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://communication-detective.firebaseio.com");
         m_root = FirebaseDatabase.DefaultInstance.RootReference;
     }
-
-    #region Exists
-
+    
     /// <summary>
     /// Checks if data exists in the database. This is an asynchronous operation which will call
     /// the specified action on completion.
@@ -34,26 +32,7 @@ public class Database
             returnExists(t.Result.Exists);
         });
     }
-
-    /// <summary>
-    /// Checks if data exists in the database. This is an asynchronous operation which will call
-    /// the specified action on completion.
-    /// </summary>
-    public void Exists(string path, Action onExists, Action onNotExists=null)
-    {
-        ValidateAction(ref onExists);
-        ValidateAction(ref onNotExists);
-
-        Exists(path, exists => {
-            if (exists) onExists();
-            else onNotExists();
-        });
-    }
-
-    #endregion
-
-    #region Pull
-
+    
     /// <summary>
     /// Pulls data from the database. This is an asynchronous operation which will call the
     /// specified action on completion.
@@ -66,11 +45,7 @@ public class Database
             returnResult(t.Result.Value.ToString());
         });
     }
-
-    #endregion
-
-    #region Push
-
+    
     /// <summary>
     /// Pushes data to the database. This is an asynchronous operation which will call the
     /// specified action on completion.
@@ -83,26 +58,7 @@ public class Database
             returnSuccess(t.IsCompleted);
         });
     }
-
-    /// <summary>
-    /// Pushes data to the database. This is an asynchronous operation which will call the
-    /// specified action on completion.
-    /// </summary>
-    public void Push(string path, string data, Action onSuccess, Action onFailure=null)
-    {
-        ValidateAction(ref onSuccess);
-        ValidateAction(ref onFailure);
-
-        Push(path, data, success => {
-            if (success) onSuccess();
-            else onFailure();
-        });
-    }
-
-    #endregion
-
-    #region Delete
-
+    
     /// <summary>
     /// Deletes data from the database. This is an asynchronous operation which will call
     /// the specified action on completion.
@@ -111,26 +67,7 @@ public class Database
     {
         Push(path, null, returnSuccess);
     }
-
-    /// <summary>
-    /// Deletes data from the database. This is an asynchronous operation which will call
-    /// the specified action on completion.
-    /// </summary>
-    public void Delete(string path, Action onSuccess, Action onFailure=null)
-    {
-        ValidateAction(ref onSuccess);
-        ValidateAction(ref onFailure);
-
-        Delete(path, success => {
-            if (success) onSuccess();
-            else onFailure();
-        });
-    }
-
-    #endregion
-
-    #region RegisterListener
-
+    
     public void RegisterListener(string path, EventHandler<ValueChangedEventArgs> listener)
     {
         FirebaseDatabase.DefaultInstance.GetReference(path).ValueChanged += listener;
@@ -140,25 +77,12 @@ public class Database
     {
         FirebaseDatabase.DefaultInstance.GetReference(path).ValueChanged -= listener;
     }
-
-    #endregion
-
-    #region ValidateAction
-
-    public static void ValidateAction(ref Action action)
-    {
-        action = action ?? (() => { });
-    }
-
+    
     public static void ValidateAction<T>(ref Action<T> action)
     {
         action = action ?? (_ => { });
     }
-
-    #endregion
-
-    #region RunTests
-
+    
     /// <summary>
     /// Tests to check if the database is working properly.
     /// </summary>
@@ -183,6 +107,4 @@ public class Database
             });
         });
     }
-
-    #endregion
 }
