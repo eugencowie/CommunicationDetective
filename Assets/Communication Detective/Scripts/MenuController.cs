@@ -37,8 +37,9 @@ public class MenuController : MonoBehaviour
     public GameObject JoinPanel;
     public GameObject LobbyPanel;
     public GameObject WaitPanel;
-
-    public int RequiredPlayers = 2;
+    
+    [Range(1,20)]
+    public int RequiredPlayers = 4;
 
     private NetworkController NetworkController;
 
