@@ -45,6 +45,25 @@ public class Network
     }
 
     /// <summary>
+    /// If the player is listed as being in a lobby and that lobby does exist, returns the lobby
+    /// code. Otherwise, returns null.
+    /// </summary>
+    public void GetPlayerScene(Action<int> returnScene)
+    {
+        Database.ValidateAction(ref returnScene);
+
+        // If 'players/{0}/scene' exists, return it.
+        m_player.Scene.Pull(success => {
+            if (success) {
+                int scene;
+                if (int.TryParse(m_player.Scene.Value, out scene)) returnScene(scene);
+                else returnScene(0);
+            }
+            else returnScene(0);
+        });
+    }
+
+    /// <summary>
     /// If lobby exists, updates player entry to new lobby and adds player to lobby.
     /// </summary>
     public void JoinLobby(string code, Action<bool> returnSuccess=null)
