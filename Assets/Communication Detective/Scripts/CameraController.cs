@@ -9,34 +9,49 @@ public class CameraController : MonoBehaviour
     public Vector2 direction;
     public bool directionChosen;
 
-    private Camera m_Camera;
-    public float m_DampTime = 0.2f; 
-    private Vector3 m_MoveVelocity;
-    private Vector3 m_DesiredPosition;
 
+    public float turnSpeed = 4.0f;      // Speed of camera turning when mouse moves in along an axis
+    public float panSpeed = 4.0f;       // Speed of the camera when being panned
+    public float zoomSpeed = 4.0f;      // Speed of the camera going back and forth
 
-    private void Awake()
-    {
-        m_Camera = GetComponentInChildren<Camera>();
-    }
+    private Vector3 mouseOrigin;    // Position of cursor when mouse dragging starts
+    private bool isPanning;     // Is the camera being panned?
+    private bool isRotating;    // Is the camera being rotated?
 
-    private void FixedUpdate()
-    {
-        Move();
-    }
-
-    private void Move()
-    {
-        transform.position = Vector3.SmoothDamp(transform.position, m_DesiredPosition, ref m_MoveVelocity, m_DampTime);
-    }
+    //private void Move()
+    //{
+    //    transform.position = Vector3.SmoothDamp(transform.position, m_DesiredPosition, ref m_MoveVelocity, m_DampTime);
+    //}
 
     void Update()
     {
 
         if(Input.GetMouseButtonDown(0))
         {
-            //startPos =  
+            mouseOrigin = Input.mousePosition;
+            isRotating = true;
         }
+
+        if (!Input.GetMouseButton(0)) isRotating = false;
+
+        if (isRotating)
+        {
+            Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - mouseOrigin);
+            float movement = pos.x * turnSpeed;
+            if (transform.rotation.eulerAngles.y > 20 - movement && transform.rotation.eulerAngles.y < 255 - movement)
+            {
+                transform.RotateAround(transform.position, Vector3.up, movement);
+            }
+        }
+
+        // Move the camera on it's XY plane
+        if (isPanning)
+		{
+	        	Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - mouseOrigin);
+
+	        	Vector3 move = new Vector3(pos.x * panSpeed, panSpeed, 0);
+	        	transform.Translate(move, Space.Self);
+		}
 
         // Track a single touch as a direction control.
         if (Input.touchCount > 0 )
