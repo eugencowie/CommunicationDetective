@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public float speedH = 0.10f;
+    public float speedH = 1f;
     public Vector2 startPos;
     public Vector2 direction;
     public bool directionChosen;
 
+    public int LeftContraint;
+    public int RightContraint;
 
-    public float turnSpeed = 4.0f;      // Speed of camera turning when mouse moves in along an axis
+
+    public const float turnSpeed = 1.0f;      // Speed of camera turning when mouse moves in along an axis
     public float panSpeed = 4.0f;       // Speed of the camera when being panned
     public float zoomSpeed = 4.0f;      // Speed of the camera going back and forth
 
     private Vector3 mouseOrigin;    // Position of cursor when mouse dragging starts
-    private bool isPanning;     // Is the camera being panned?
     private bool isRotating;    // Is the camera being rotated?
 
     //private void Move()
@@ -37,21 +39,13 @@ public class CameraController : MonoBehaviour
         if (isRotating)
         {
             Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - mouseOrigin);
-            float movement = pos.x * turnSpeed;
-            if (transform.rotation.eulerAngles.y > 20 - movement && transform.rotation.eulerAngles.y < 255 - movement)
+            float movement = pos.normalized.x * turnSpeed * -1;
+            if (transform.rotation.eulerAngles.y > LeftContraint - movement && transform.rotation.eulerAngles.y < RightContraint - movement)
             {
+                Debug.Log("Movement = " + movement);
                 transform.RotateAround(transform.position, Vector3.up, movement);
             }
         }
-
-        // Move the camera on it's XY plane
-        if (isPanning)
-		{
-	        	Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - mouseOrigin);
-
-	        	Vector3 move = new Vector3(pos.x * panSpeed, panSpeed, 0);
-	        	transform.Translate(move, Space.Self);
-		}
 
         // Track a single touch as a direction control.
         if (Input.touchCount > 0 )
