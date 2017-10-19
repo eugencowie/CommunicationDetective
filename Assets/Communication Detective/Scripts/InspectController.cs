@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 public class InspectController : MonoBehaviour
@@ -12,6 +11,8 @@ public class InspectController : MonoBehaviour
 
     private Vector3 mouseOrigin;    // Position of cursor when mouse dragging starts
     private bool isRotating;    // Is the camera being rotated?
+
+    public Action OnInspectEnded;
 
     // Update is called once per frame
     void Update()
@@ -51,6 +52,7 @@ public class InspectController : MonoBehaviour
         // If swipe has small distance it is probably a tap.
         if (touchDistance.magnitude < 5)
         {
+            if (OnInspectEnded != null) OnInspectEnded();
             Camera.main.GetComponent<CameraController>().enabled = true;
             Destroy(gameObject);
         }

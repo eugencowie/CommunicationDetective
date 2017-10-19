@@ -57,9 +57,18 @@ public class ObjectController : MonoBehaviour
                     newObject.transform.SetPositionAndRotation(Camera.main.transform.position, Camera.main.transform.rotation);
                     newObject.transform.Translate(new Vector3(0, 0, 1), Space.Self);
                     newObject.transform.rotation = oldRotation;
-                    newObject.AddComponent<InspectController>();
+                    newObject.AddComponent<InspectController>().OnInspectEnded = () => {
+                        foreach (var obj in FindObjectsOfType<ObjectController>())
+                        {
+                            obj.enabled = true;
+                        }
+                    };
                     newObject.GetComponent<ObjectController>().enabled = false;
                     Camera.main.GetComponent<CameraController>().enabled = false;
+                    foreach (var obj in FindObjectsOfType<ObjectController>())
+                    {
+                        obj.enabled = false;
+                    }
                 }
             }
         }
