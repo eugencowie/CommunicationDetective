@@ -4,38 +4,47 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public float speedH = 0.10f;
+    public float speedH = 1f;
     public Vector2 startPos;
     public Vector2 direction;
     public bool directionChosen;
 
-    private Camera m_Camera;
-    public float m_DampTime = 0.2f; 
-    private Vector3 m_MoveVelocity;
-    private Vector3 m_DesiredPosition;
+    public int LeftContraint;
+    public int RightContraint;
 
 
-    private void Awake()
-    {
-        m_Camera = GetComponentInChildren<Camera>();
-    }
+    public const float turnSpeed = 1.0f;      // Speed of camera turning when mouse moves in along an axis
+    public float panSpeed = 4.0f;       // Speed of the camera when being panned
+    public float zoomSpeed = 4.0f;      // Speed of the camera going back and forth
 
-    private void FixedUpdate()
-    {
-        Move();
-    }
+    private Vector3 mouseOrigin;    // Position of cursor when mouse dragging starts
+    private bool isRotating;    // Is the camera being rotated?
 
-    private void Move()
-    {
-        transform.position = Vector3.SmoothDamp(transform.position, m_DesiredPosition, ref m_MoveVelocity, m_DampTime);
-    }
+    //private void Move()
+    //{
+    //    transform.position = Vector3.SmoothDamp(transform.position, m_DesiredPosition, ref m_MoveVelocity, m_DampTime);
+    //}
 
     void Update()
     {
 
         if(Input.GetMouseButtonDown(0))
         {
-            //startPos =  
+            mouseOrigin = Input.mousePosition;
+            isRotating = true;
+        }
+
+        if (!Input.GetMouseButton(0)) isRotating = false;
+
+        if (isRotating)
+        {
+            Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - mouseOrigin);
+            float movement = pos.normalized.x * turnSpeed * -1;
+            if (transform.rotation.eulerAngles.y > LeftContraint - movement && transform.rotation.eulerAngles.y < RightContraint - movement)
+            {
+                Debug.Log("Movement = " + movement);
+                transform.RotateAround(transform.position, Vector3.up, movement);
+            }
         }
 
         // Track a single touch as a direction control.
