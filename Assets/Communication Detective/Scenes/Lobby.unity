@@ -1977,7 +1977,7 @@ MonoBehaviour:
   JoinPanel: {fileID: 347748323}
   LobbyPanel: {fileID: 1679027406}
   WaitPanel: {fileID: 1406699222}
-  RequiredPlayers: 4
+  RequiredPlayers: 1
 --- !u!1 &1850594729
 GameObject:
   m_ObjectHideFlags: 0

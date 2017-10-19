@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public float speedH = 1f;
-    public Vector2 startPos;
-    public Vector2 direction;
-    public bool directionChosen;
+    //public float speedH = 1f;
+    //public Vector2 startPos;
+    //public Vector2 direction;
+    //public bool directionChosen;
 
     public int LeftContraint;
     public int RightContraint;
 
 
-    public const float turnSpeed = 1.0f;      // Speed of camera turning when mouse moves in along an axis
-    public float panSpeed = 4.0f;       // Speed of the camera when being panned
-    public float zoomSpeed = 4.0f;      // Speed of the camera going back and forth
+    public const float turnSpeed = 4.0f;      // Speed of camera turning when mouse moves in along an axis
+    //public float panSpeed = 4.0f;       // Speed of the camera when being panned
+    //public float zoomSpeed = 4.0f;      // Speed of the camera going back and forth
 
     private Vector3 mouseOrigin;    // Position of cursor when mouse dragging starts
     private bool isRotating;    // Is the camera being rotated?
@@ -42,13 +42,12 @@ public class CameraController : MonoBehaviour
             float movement = pos.normalized.x * turnSpeed * -1;
             if (transform.rotation.eulerAngles.y > LeftContraint - movement && transform.rotation.eulerAngles.y < RightContraint - movement)
             {
-                Debug.Log("Movement = " + movement);
                 transform.RotateAround(transform.position, Vector3.up, movement);
             }
         }
 
         // Track a single touch as a direction control.
-        if (Input.touchCount > 0 )
+        /*if (Input.touchCount > 0 )
         {
             Touch touch = Input.GetTouch(0);
 
@@ -77,6 +76,6 @@ public class CameraController : MonoBehaviour
         if (directionChosen)
         {
             Debug.Log("Direction Chosed");
-        }
+        }*/
     }
 }
