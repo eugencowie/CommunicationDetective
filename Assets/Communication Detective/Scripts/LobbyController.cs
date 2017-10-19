@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MenuController : MonoBehaviour
+public class LobbyController : MonoBehaviour
 {
     [Tooltip("GameObject with a Text component to display the generated room code")]
     public GameObject CodeLabelObject;
@@ -133,7 +133,9 @@ public class MenuController : MonoBehaviour
                 else StatusLabel.text = "unknown error";
                 SwitchPanel(LobbyPanel);
             }
-            else NetworkController.SetLobbyState(CodeLabel.text, LobbyState.InGame);
+            else NetworkController.AssignPlayerScenes(CodeLabel.text, _ => {
+                NetworkController.SetLobbyState(CodeLabel.text, LobbyState.InGame);
+            }); 
         });
     }
 
@@ -219,15 +221,14 @@ public class MenuController : MonoBehaviour
                 LobbyState state = (LobbyState)statusNr;
                 if (state == LobbyState.InGame)
                 {
-                    NetworkController.AssignPlayerScenes(CodeLabel.text, roomNr => {
-                        if (roomNr >= 1 && roomNr <= 4) {
-                            string room = "Room" + roomNr.ToString();
-                            StatusLabel.text = "joined game, your room = " + room;
+                    NetworkController.GetPlayerScene(scene => {
+                        if (scene >= 1 && scene <= 4) {
+                            StatusLabel.text = "joined game, your scene = " + scene;
                             DeregisterOnRoomStateChanged(CodeLabel.text);
                             DeregisterOnPlayersChanged(CodeLabel.text);
-                            SceneManager.LoadScene("Communication Detective/Scenes/" + room);
+                            SceneManager.LoadScene(scene);
                         }
-                        else StatusLabel.text = "invalid room number";
+                        else StatusLabel.text = "error: invalid room number";
                     });
                 }
             }

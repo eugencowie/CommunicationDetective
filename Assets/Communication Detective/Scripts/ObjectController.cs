@@ -2,14 +2,12 @@
 
 public class ObjectController : MonoBehaviour
 {
-    public GameObject Camera;
-
     private Vector2 m_touchStartPos;
     private Vector2 m_touchEndPos;
 
     private void Update()
     {
-        for (int i = 0; i < Input.touchCount; i++)
+        /*for (int i = 0; i < Input.touchCount; i++)
         {
             Touch touch = Input.GetTouch(i);
 
@@ -24,7 +22,7 @@ public class ObjectController : MonoBehaviour
                     OnTouchEnded();
                     break;
             }
-        }
+        }*/
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -45,14 +43,32 @@ public class ObjectController : MonoBehaviour
         if (touchDistance.magnitude < 5)
         {
             RaycastHit hit = new RaycastHit();
-            Ray ray = Camera.GetComponent<Camera>().ScreenPointToRay(m_touchStartPos);
+            Ray ray = Camera.main.ScreenPointToRay(m_touchStartPos);
 
+            Debug.Log("1");
             if (Physics.Raycast(ray, out hit))
             {
+                Debug.Log("2");
                 if (hit.collider == GetComponent<Collider>())
                 {
+                    Debug.Log("3");
                     GameObject newObject = Instantiate(gameObject);
-                    //newObject.transform
+                    Quaternion oldRotation = newObject.transform.rotation;
+                    newObject.transform.SetPositionAndRotation(Camera.main.transform.position, Camera.main.transform.rotation);
+                    newObject.transform.Translate(new Vector3(0, 0, 1), Space.Self);
+                    newObject.transform.rotation = oldRotation;
+                    newObject.AddComponent<InspectController>().OnInspectEnded = () => {
+                        foreach (var obj in FindObjectsOfType<ObjectController>())
+                        {
+                            obj.enabled = true;
+                        }
+                    };
+                    newObject.GetComponent<ObjectController>().enabled = false;
+                    Camera.main.GetComponent<CameraController>().enabled = false;
+                    foreach (var obj in FindObjectsOfType<ObjectController>())
+                    {
+                        obj.enabled = false;
+                    }
                 }
             }
         }

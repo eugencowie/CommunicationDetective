@@ -14,6 +14,9 @@ public class Database
     /// </summary>
     private DatabaseReference m_root;
 
+    /// <summary>
+    /// Initialises the database.
+    /// </summary>
     public Database()
     {
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://communication-detective.firebaseio.com");
@@ -69,16 +72,26 @@ public class Database
         Push(path, null, returnSuccess);
     }
 
+    /// <summary>
+    /// Register a handler for value changed events.
+    /// </summary>
     public void RegisterListener(string path, EventHandler<ValueChangedEventArgs> listener)
     {
         FirebaseDatabase.DefaultInstance.GetReference(path).ValueChanged += listener;
     }
 
+    /// <summary>
+    /// Deregister a handler for value changed events.
+    /// </summary>
     public void DeregisterListener(string path, EventHandler<ValueChangedEventArgs> listener)
     {
         FirebaseDatabase.DefaultInstance.GetReference(path).ValueChanged -= listener;
     }
 
+    /// <summary>
+    /// If the specified action is null, replaces it with an empty dummy action. An action
+    /// which has been validated can be invoked without risking a NullReferenceException.
+    /// </summary>
     public static void ValidateAction<T>(ref Action<T> action)
     {
         action = action ?? (_ => {});
@@ -89,20 +102,26 @@ public class Database
     /// </summary>
     public static void RunTests()
     {
-        Database database = new Database();
-
-        database.Exists("test/does/not/exist", exists => {
+        Database db = new Database();
+        
+        db.Exists("test/does/not/exist", exists => {
             Debug.Assert(exists == false);
         });
 
-        database.Push("test/data/key", "value", success => {
+        db.Push("test/data/key", "value", success => {
             Debug.Assert(success == true);
-            database.Exists("test/data", exists => {
+            db.Exists("test/data", exists => {
                 Debug.Assert(exists == true);
-                database.Exists("test/data/key", keyExists => {
+                db.Exists("test/data/key", keyExists => {
                     Debug.Assert(keyExists == true);
-                    database.Pull("test/data/key", result => {
+                    db.Pull("test/data/key", result => {
                         Debug.Assert(result == "value");
+                        db.Delete("test", deleted => {
+                            Debug.Assert(deleted == true);
+                            db.Exists("test", testExists => {
+                                Debug.Assert(testExists == false);
+                            });
+                        });
                     });
                 });
             });

@@ -1,16 +1,60 @@
 fileFormatVersion: 2
-guid: de2d0589a22f1544982a263b2141bc21
-timeCreated: 1508233024
+guid: 0e84cfacc840da548bc763c24d4be35a
+timeCreated: 1508413219
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
+    100000: Box001
+    100002: Cylinder001
+    100004: Cylinder002
+    100006: //RootNode
+    100008: Line001
+    100010: Line002
+    100012: Line003
+    100014: Line004
+    100016: Object001
+    400000: Box001
+    400002: Cylinder001
+    400004: Cylinder002
+    400006: //RootNode
+    400008: Line001
+    400010: Line002
+    400012: Line003
+    400014: Line004
+    400016: Object001
+    2300000: Box001
+    2300002: Cylinder001
+    2300004: Cylinder002
+    2300006: Line001
+    2300008: Line002
+    2300010: Line003
+    2300012: Line004
+    2300014: Object001
+    3300000: Box001
+    3300002: Cylinder001
+    3300004: Cylinder002
+    3300006: Line001
+    3300008: Line002
+    3300010: Line003
+    3300012: Line004
+    3300014: Object001
     4300000: Box001
-    6400000: //RootNode
+    4300002: Cylinder001
+    4300004: Line003
+    4300006: Line002
+    4300008: Object001
+    4300010: Cylinder002
+    4300012: Line004
+    4300014: Line001
+    6400000: Box001
+    6400002: Cylinder001
+    6400004: Cylinder002
+    6400006: Line001
+    6400008: Line002
+    6400010: Line003
+    6400012: Line004
+    6400014: Object001
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -39,9 +83,9 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.02
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
