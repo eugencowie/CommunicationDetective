@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MenuController : MonoBehaviour
+public class LobbyController : MonoBehaviour
 {
     [Tooltip("GameObject with a Text component to display the generated room code")]
     public GameObject CodeLabelObject;
