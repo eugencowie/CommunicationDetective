@@ -51,8 +51,8 @@ public class ObjectController : MonoBehaviour
             {
                 if (hit.collider == GetComponent<Collider>())
                 {
-                    // TODO: do something
-                    gameObject.SetActive(false);
+                    GameObject newObject = Instantiate(gameObject);
+                    //newObject.transform
                 }
             }
         }
