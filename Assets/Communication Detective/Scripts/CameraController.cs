@@ -13,7 +13,7 @@ public class CameraController : MonoBehaviour
     public int RightContraint;
 
 
-    public const float turnSpeed = 4.0f;      // Speed of camera turning when mouse moves in along an axis
+    public const float turnSpeed = 60.0f;      // Speed of camera turning when mouse moves in along an axis
     //public float panSpeed = 4.0f;       // Speed of the camera when being panned
     //public float zoomSpeed = 4.0f;      // Speed of the camera going back and forth
 
@@ -42,7 +42,7 @@ public class CameraController : MonoBehaviour
             float movement = pos.normalized.x * turnSpeed * -1;
             if (transform.rotation.eulerAngles.y > LeftContraint - movement && transform.rotation.eulerAngles.y < RightContraint - movement)
             {
-                transform.RotateAround(transform.position, Vector3.up, movement);
+                transform.RotateAround(transform.position, Vector3.up, movement * Time.deltaTime);
             }
         }
 
