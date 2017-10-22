@@ -29,7 +29,7 @@ public class Network
     /// </summary>
     public void GetPlayerLobby(Action<string> returnLobby)
     {
-        Database.ValidateAction(ref returnLobby);
+        Database.ValidateAction(ref returnLobby, "GetPlayerLobby");
 
         // If 'players/{0}/lobby' exists and 'lobbies/{1}' exists, return lobby code.
         m_player.Lobby.Pull(success => {
@@ -50,7 +50,7 @@ public class Network
     /// </summary>
     public void GetPlayerScene(Action<int> returnScene)
     {
-        Database.ValidateAction(ref returnScene);
+        Database.ValidateAction(ref returnScene, "GetPlayerScene");
 
         // If 'players/{0}/scene' exists, return it.
         m_player.Scene.Pull(success => {
@@ -68,7 +68,7 @@ public class Network
     /// </summary>
     public void JoinLobby(string code, Action<bool> returnSuccess=null)
     {
-        Database.ValidateAction(ref returnSuccess);
+        Database.ValidateAction(ref returnSuccess, string.Format("JoinLobby({0})", code));
 
         // If 'lobbies/{0}' exists, push 'players/{1}/lobby', get 'lobbies/{0}/players', add
         // player to list and push 'lobbies/{0}/players' back up.
@@ -106,7 +106,7 @@ public class Network
     /// </summary>
     public void CreateLobby(string code, Action<bool> returnSuccess=null)
     {
-        Database.ValidateAction(ref returnSuccess);
+        Database.ValidateAction(ref returnSuccess, string.Format("CreateLobby({0})", code));
 
         m_lobby = new Lobby(m_database, code);
 
@@ -128,7 +128,7 @@ public class Network
     /// </summary>
     public void CreateLobbyCode(Action<string> returnCode)
     {
-        Database.ValidateAction(ref returnCode);
+        Database.ValidateAction(ref returnCode, "CreateLobbyCode");
 
         // Three attempts to find a unique room code.
         string[] codes = { GenerateRandomCode(), GenerateRandomCode(), GenerateRandomCode() };
@@ -153,7 +153,7 @@ public class Network
     /// </summary>
     public void LeaveLobby(string code, Action<bool> returnSuccess=null)
     {
-        Database.ValidateAction(ref returnSuccess);
+        Database.ValidateAction(ref returnSuccess, string.Format("LeaveLobby({0})", code));
 
         // Delete 'players/{0}', pull 'lobbies/{1}/players', remove the player from list and push
         // 'lobbies/{1}/players' back up (unless there are no players left, then delete the lobby).
@@ -162,15 +162,15 @@ public class Network
                 m_lobby = new Lobby(m_database, code); // TODO
                 m_lobby.Players.Pull(success2 => {
                     if (success2) {
-                        List<string> layers = m_lobby.Players.Value.Split(',').ToList();
-                        layers.Remove(m_player.Id);
-                        layers.RemoveAll(s => string.IsNullOrEmpty(s));
-                        if (layers.Count > 0) {
-                            m_lobby.Players.Value = string.Join(",", layers.ToArray());
-                            m_lobby.Players.Push(returnSuccess);
-                        } else {
+                        //List<string> layers = m_lobby.Players.Value.Split(',').ToList();
+                        //layers.Remove(m_player.Id);
+                        //layers.RemoveAll(s => string.IsNullOrEmpty(s));
+                        //if (layers.Count > 0) {
+                        //    m_lobby.Players.Value = string.Join(",", layers.ToArray());
+                        //    m_lobby.Players.Push(returnSuccess);
+                        //} else {
                             m_lobby.Delete(returnSuccess);
-                        }
+                        //}
                     }
                     else returnSuccess(false);
                 });
@@ -184,7 +184,7 @@ public class Network
     /// </summary>
     public void CanStartGame(string code, int requiredPlayers, Action<LobbyError> returnError)
     {
-        Database.ValidateAction(ref returnError);
+        Database.ValidateAction(ref returnError, string.Format("CanStartGame({0}, {1})", code, requiredPlayers));
 
         m_lobby = new Lobby(m_database, code); // TODO
         m_lobby.Players.Pull(success => {
@@ -204,7 +204,7 @@ public class Network
     /// </summary>
     public void SetLobbyState(string code, LobbyState state, Action<bool> returnSuccess=null)
     {
-        Database.ValidateAction(ref returnSuccess);
+        Database.ValidateAction(ref returnSuccess, string.Format("SetLobbyState({0}, {1})", code, state));
 
         m_lobby = new Lobby(m_database, code); // TODO
         m_lobby.State.Value = ((int)state).ToString();
@@ -216,7 +216,7 @@ public class Network
     /// </summary>
     public void AssignPlayerScenes(string code, Action<int> returnScene)
     {
-        Database.ValidateAction(ref returnScene);
+        Database.ValidateAction(ref returnScene, string.Format("AssignPlayerScenes({0})", code));
 
         m_lobby = new Lobby(m_database, code); // TODO
         m_lobby.Players.Pull(success => {
@@ -239,47 +239,9 @@ public class Network
         });
     }
 
-    /*
-    /// <summary>
-    ///
-    /// </summary>
-    public void GetPlayerScene(string code, Action<string> returnScene)
-    {
-        Database.ValidateAction(ref returnScene);
-
-        m_lobby = new Lobby(m_database, code); // TODO
-
-        string roomKey = "lobbies/" + code;
-        string roomPlayersKey = roomKey + "/players";
-
-        m_database.PullAsync(roomPlayersKey, roomPlayersValue => {
-            List<string> roomPlayers = roomPlayersValue.Split(',').ToList();
-            roomPlayers.RemoveAll(s => string.IsNullOrEmpty(s));
-            int roomNr = -1;
-            for (int i = 0; i < roomPlayers.Count; i++) {
-                if (roomPlayers[i] == m_playerId) {
-                    roomNr = i+1;
-                }
-            }
-            returnRoomNr(roomNr);
-        });
-    }
-    */
-
     #endregion
 
     #region Listeners
-
-    private void SubscribeToRoomPlayers(string room, Action<string> valueChanged)
-    {
-        string roomPlayersKey = string.Format("lobbies/{0}/players", room);
-
-        m_database.RegisterListener(roomPlayersKey, (sender, args) => {
-            if (args.DatabaseError == null) {
-                valueChanged(args.Snapshot.Value.ToString());
-            }
-        });
-    }
 
     public void RegisterListener(string path, EventHandler<ValueChangedEventArgs> listener)
     {

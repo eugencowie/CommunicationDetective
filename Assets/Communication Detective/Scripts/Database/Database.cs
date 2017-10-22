@@ -92,9 +92,21 @@ public class Database
     /// If the specified action is null, replaces it with an empty dummy action. An action
     /// which has been validated can be invoked without risking a NullReferenceException.
     /// </summary>
-    public static void ValidateAction<T>(ref Action<T> action)
+    public static void ValidateAction<T>(ref Action<T> action, string name="")
     {
-        action = action ?? (_ => {});
+        action = ValidateAction(action, name);
+    }
+
+    /// <summary>
+    /// If the specified action is null, replaces it with an empty dummy action. An action
+    /// which has been validated can be invoked without risking a NullReferenceException.
+    /// </summary>
+    public static Action<T> ValidateAction<T>(Action<T> action, string name="")
+    {
+        return (arg => {
+            if (!string.IsNullOrEmpty(name)) Debug.Log(name + " -> " + arg);
+            if (action != null) action(arg);
+        });
     }
 
     /// <summary>
