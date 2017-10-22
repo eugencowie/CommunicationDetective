@@ -29,11 +29,9 @@ public class InspectController : MonoBehaviour
             Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - mouseOrigin);
             Vector3 movement = pos.normalized * turnSpeed * -1;
             transform.RotateAround(transform.position, Vector3.up, movement.x * Time.deltaTime);
-            transform.RotateAround(transform.position, Vector3.right, movement.y * Time.deltaTime);
+            transform.RotateAround(transform.position, Vector3.forward, movement.y * Time.deltaTime);
         }
         
-
-
         if (Input.GetMouseButtonDown(0))
         {
             m_touchStartPos = Input.mousePosition;
