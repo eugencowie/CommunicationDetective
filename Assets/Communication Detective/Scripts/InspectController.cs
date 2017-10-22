@@ -7,7 +7,7 @@ public class InspectController : MonoBehaviour
     private Vector2 m_touchStartPos;
     private Vector2 m_touchEndPos;
 
-    public const float turnSpeed = 60.0f;      // Speed of camera turning when mouse moves in along an axis
+    public const float turnSpeed = 120.0f;      // Speed of camera turning when mouse moves in along an axis
 
     private Vector3 mouseOrigin;    // Position of cursor when mouse dragging starts
     private bool isRotating;    // Is the camera being rotated?
