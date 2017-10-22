@@ -162,15 +162,15 @@ public class Network
                 m_lobby = new Lobby(m_database, code); // TODO
                 m_lobby.Players.Pull(success2 => {
                     if (success2) {
-                        List<string> layers = m_lobby.Players.Value.Split(',').ToList();
-                        layers.Remove(m_player.Id);
-                        layers.RemoveAll(s => string.IsNullOrEmpty(s));
-                        if (layers.Count > 0) {
-                            m_lobby.Players.Value = string.Join(",", layers.ToArray());
-                            m_lobby.Players.Push(returnSuccess);
-                        } else {
+                        //List<string> layers = m_lobby.Players.Value.Split(',').ToList();
+                        //layers.Remove(m_player.Id);
+                        //layers.RemoveAll(s => string.IsNullOrEmpty(s));
+                        //if (layers.Count > 0) {
+                        //    m_lobby.Players.Value = string.Join(",", layers.ToArray());
+                        //    m_lobby.Players.Push(returnSuccess);
+                        //} else {
                             m_lobby.Delete(returnSuccess);
-                        }
+                        //}
                     }
                     else returnSuccess(false);
                 });
