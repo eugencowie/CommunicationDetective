@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 84f9fd9610d9a5f478ad84e0c6d45095
-timeCreated: 1508238422
-licenseType: Pro
+timeCreated: 1508688571
+licenseType: Free
 ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
@@ -240,6 +240,43 @@ ModelImporter:
     100464: Right Eye
     100466: Shirt
     100468: trousers
+    100470: CATRigLArm22
+    100472: CATRigLArm23
+    100474: CATRigLArmDigit11
+    100476: CATRigLArmDigit12
+    100478: CATRigLArmDigit13
+    100480: CATRigLArmDigit21
+    100482: CATRigLArmDigit22
+    100484: CATRigLArmDigit23
+    100486: CATRigLArmDigit31
+    100488: CATRigLArmDigit32
+    100490: CATRigLArmDigit33
+    100492: CATRigLArmDigit41
+    100494: CATRigLArmDigit42
+    100496: CATRigLArmDigit43
+    100498: CATRigLArmDigit51
+    100500: CATRigLArmDigit52
+    100502: CATRigLArmDigit53
+    100504: CATRigLArmPalm
+    100506: CATRigRArm22
+    100508: CATRigRArm23
+    100510: CATRigRArmDigit11
+    100512: CATRigRArmDigit12
+    100514: CATRigRArmDigit13
+    100516: CATRigRArmDigit21
+    100518: CATRigRArmDigit22
+    100520: CATRigRArmDigit23
+    100522: CATRigRArmDigit31
+    100524: CATRigRArmDigit32
+    100526: CATRigRArmDigit33
+    100528: CATRigRArmDigit41
+    100530: CATRigRArmDigit42
+    100532: CATRigRArmDigit43
+    100534: CATRigRArmDigit51
+    100536: CATRigRArmDigit52
+    100538: CATRigRArmDigit53
+    100540: CATRigRArmPalm
+    100542: CATRigSpine
     400000: CATRigChest
     400002: CATRigChest001
     400004: CATRigChest001Gizmo
@@ -475,6 +512,43 @@ ModelImporter:
     400464: Right Eye
     400466: Shirt
     400468: trousers
+    400470: CATRigLArm22
+    400472: CATRigLArm23
+    400474: CATRigLArmDigit11
+    400476: CATRigLArmDigit12
+    400478: CATRigLArmDigit13
+    400480: CATRigLArmDigit21
+    400482: CATRigLArmDigit22
+    400484: CATRigLArmDigit23
+    400486: CATRigLArmDigit31
+    400488: CATRigLArmDigit32
+    400490: CATRigLArmDigit33
+    400492: CATRigLArmDigit41
+    400494: CATRigLArmDigit42
+    400496: CATRigLArmDigit43
+    400498: CATRigLArmDigit51
+    400500: CATRigLArmDigit52
+    400502: CATRigLArmDigit53
+    400504: CATRigLArmPalm
+    400506: CATRigRArm22
+    400508: CATRigRArm23
+    400510: CATRigRArmDigit11
+    400512: CATRigRArmDigit12
+    400514: CATRigRArmDigit13
+    400516: CATRigRArmDigit21
+    400518: CATRigRArmDigit22
+    400520: CATRigRArmDigit23
+    400522: CATRigRArmDigit31
+    400524: CATRigRArmDigit32
+    400526: CATRigRArmDigit33
+    400528: CATRigRArmDigit41
+    400530: CATRigRArmDigit42
+    400532: CATRigRArmDigit43
+    400534: CATRigRArmDigit51
+    400536: CATRigRArmDigit52
+    400538: CATRigRArmDigit53
+    400540: CATRigRArmPalm
+    400542: CATRigSpine
     2300000: Hair
     2300002: Hair Strands
     2300004: Hair Strands001
