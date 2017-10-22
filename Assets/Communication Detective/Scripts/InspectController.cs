@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class InspectController : MonoBehaviour
 {
-
     private Vector2 m_touchStartPos;
     private Vector2 m_touchEndPos;
 
@@ -28,8 +27,9 @@ public class InspectController : MonoBehaviour
         if (isRotating)
         {
             Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - mouseOrigin);
-            float movement = pos.normalized.x * turnSpeed * -1;
-            transform.RotateAround(transform.position, Vector3.up, movement * Time.deltaTime);
+            Vector3 movement = pos.normalized * turnSpeed * -1;
+            transform.RotateAround(transform.position, Vector3.up, movement.x * Time.deltaTime);
+            transform.RotateAround(transform.position, Vector3.right, movement.y * Time.deltaTime);
         }
         
 
