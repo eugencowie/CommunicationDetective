@@ -29,7 +29,7 @@ public class Network
     /// </summary>
     public void GetPlayerLobby(Action<string> returnLobby)
     {
-        Database.ValidateAction(ref returnLobby);
+        Database.ValidateAction(ref returnLobby, "GetPlayerLobby");
 
         // If 'players/{0}/lobby' exists and 'lobbies/{1}' exists, return lobby code.
         m_player.Lobby.Pull(success => {
@@ -50,7 +50,7 @@ public class Network
     /// </summary>
     public void GetPlayerScene(Action<int> returnScene)
     {
-        Database.ValidateAction(ref returnScene);
+        Database.ValidateAction(ref returnScene, "GetPlayerScene");
 
         // If 'players/{0}/scene' exists, return it.
         m_player.Scene.Pull(success => {
@@ -68,7 +68,7 @@ public class Network
     /// </summary>
     public void JoinLobby(string code, Action<bool> returnSuccess=null)
     {
-        Database.ValidateAction(ref returnSuccess);
+        Database.ValidateAction(ref returnSuccess, string.Format("JoinLobby({0})", code));
 
         // If 'lobbies/{0}' exists, push 'players/{1}/lobby', get 'lobbies/{0}/players', add
         // player to list and push 'lobbies/{0}/players' back up.
@@ -106,7 +106,7 @@ public class Network
     /// </summary>
     public void CreateLobby(string code, Action<bool> returnSuccess=null)
     {
-        Database.ValidateAction(ref returnSuccess);
+        Database.ValidateAction(ref returnSuccess, string.Format("CreateLobby({0})", code));
 
         m_lobby = new Lobby(m_database, code);
 
@@ -128,7 +128,7 @@ public class Network
     /// </summary>
     public void CreateLobbyCode(Action<string> returnCode)
     {
-        Database.ValidateAction(ref returnCode);
+        Database.ValidateAction(ref returnCode, "CreateLobbyCode");
 
         // Three attempts to find a unique room code.
         string[] codes = { GenerateRandomCode(), GenerateRandomCode(), GenerateRandomCode() };
@@ -153,7 +153,7 @@ public class Network
     /// </summary>
     public void LeaveLobby(string code, Action<bool> returnSuccess=null)
     {
-        Database.ValidateAction(ref returnSuccess);
+        Database.ValidateAction(ref returnSuccess, string.Format("LeaveLobby({0})", code));
 
         // Delete 'players/{0}', pull 'lobbies/{1}/players', remove the player from list and push
         // 'lobbies/{1}/players' back up (unless there are no players left, then delete the lobby).
@@ -184,7 +184,7 @@ public class Network
     /// </summary>
     public void CanStartGame(string code, int requiredPlayers, Action<LobbyError> returnError)
     {
-        Database.ValidateAction(ref returnError);
+        Database.ValidateAction(ref returnError, string.Format("CanStartGame({0}, {1})", code, requiredPlayers));
 
         m_lobby = new Lobby(m_database, code); // TODO
         m_lobby.Players.Pull(success => {
@@ -204,7 +204,7 @@ public class Network
     /// </summary>
     public void SetLobbyState(string code, LobbyState state, Action<bool> returnSuccess=null)
     {
-        Database.ValidateAction(ref returnSuccess);
+        Database.ValidateAction(ref returnSuccess, string.Format("SetLobbyState({0}, {1})", code, state));
 
         m_lobby = new Lobby(m_database, code); // TODO
         m_lobby.State.Value = ((int)state).ToString();
@@ -216,7 +216,7 @@ public class Network
     /// </summary>
     public void AssignPlayerScenes(string code, Action<int> returnScene)
     {
-        Database.ValidateAction(ref returnScene);
+        Database.ValidateAction(ref returnScene, string.Format("AssignPlayerScenes({0})", code));
 
         m_lobby = new Lobby(m_database, code); // TODO
         m_lobby.Players.Pull(success => {
