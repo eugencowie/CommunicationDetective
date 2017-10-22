@@ -239,47 +239,9 @@ public class Network
         });
     }
 
-    /*
-    /// <summary>
-    ///
-    /// </summary>
-    public void GetPlayerScene(string code, Action<string> returnScene)
-    {
-        Database.ValidateAction(ref returnScene);
-
-        m_lobby = new Lobby(m_database, code); // TODO
-
-        string roomKey = "lobbies/" + code;
-        string roomPlayersKey = roomKey + "/players";
-
-        m_database.PullAsync(roomPlayersKey, roomPlayersValue => {
-            List<string> roomPlayers = roomPlayersValue.Split(',').ToList();
-            roomPlayers.RemoveAll(s => string.IsNullOrEmpty(s));
-            int roomNr = -1;
-            for (int i = 0; i < roomPlayers.Count; i++) {
-                if (roomPlayers[i] == m_playerId) {
-                    roomNr = i+1;
-                }
-            }
-            returnRoomNr(roomNr);
-        });
-    }
-    */
-
     #endregion
 
     #region Listeners
-
-    private void SubscribeToRoomPlayers(string room, Action<string> valueChanged)
-    {
-        string roomPlayersKey = string.Format("lobbies/{0}/players", room);
-
-        m_database.RegisterListener(roomPlayersKey, (sender, args) => {
-            if (args.DatabaseError == null) {
-                valueChanged(args.Snapshot.Value.ToString());
-            }
-        });
-    }
 
     public void RegisterListener(string path, EventHandler<ValueChangedEventArgs> listener)
     {

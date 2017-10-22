@@ -222,8 +222,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b6440a8790d4de49b6d3bc9c9663559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LeftContraint: 20
-  RightContraint: 255
+  LeftConstraint: 20
+  RightConstraint: 255
 --- !u!20 &325749740
 Camera:
   m_ObjectHideFlags: 0

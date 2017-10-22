@@ -38,23 +38,23 @@ public class LobbyController : MonoBehaviour
     public GameObject LobbyPanel;
     public GameObject WaitPanel;
 
-    [Range(1,20)]
+    [Range(1,4)]
     public int RequiredPlayers = 4;
 
-    private Network NetworkController;
+    private Network Network;
 
     private void Start()
     {
-        NetworkController = new Network();
+        Network = new Network();
 
         SwitchPanel(WaitPanel);
 
-        NetworkController.GetPlayerLobby(room => {
+        Network.GetPlayerLobby(room => {
             if (string.IsNullOrEmpty(room)) SwitchPanel(StartPanel);
             else {
                 CodeLabel.text = room;
                 RegisterOnPlayersChanged(room);
-                RegisterOnRoomStateChanged(room);
+                RegisterOnLobbyStateChanged(room);
                 SwitchPanel(LobbyPanel);
             }
         });
@@ -77,14 +77,14 @@ public class LobbyController : MonoBehaviour
         {
             SwitchPanel(WaitPanel);
 
-            NetworkController.JoinLobby(CodeField.text.ToUpper(), success => {
+            Network.JoinLobby(CodeField.text.ToUpper(), success => {
                 if (!success) {
                     CodeField.text = "";
                     SwitchPanel(JoinPanel);
                 } else {
                     CodeLabel.text = CodeField.text.ToUpper();
                     RegisterOnPlayersChanged(CodeLabel.text);
-                    RegisterOnRoomStateChanged(CodeLabel.text);
+                    RegisterOnLobbyStateChanged(CodeLabel.text);
                     SwitchPanel(LobbyPanel);
                 }
             });
@@ -98,18 +98,18 @@ public class LobbyController : MonoBehaviour
     {
         SwitchPanel(WaitPanel);
 
-        NetworkController.CreateLobbyCode(code => {
+        Network.CreateLobbyCode(code => {
             if (string.IsNullOrEmpty(code)) SwitchPanel(StartPanel);
             else {
-                NetworkController.CreateLobby(code, createSuccess => {
+                Network.CreateLobby(code, createSuccess => {
                     if (!createSuccess) SwitchPanel(StartPanel);
                     else {
-                        NetworkController.JoinLobby(code, joinSuccess => {
+                        Network.JoinLobby(code, joinSuccess => {
                             if (!joinSuccess) SwitchPanel(StartPanel);
                             else {
                                 CodeLabel.text = code;
                                 RegisterOnPlayersChanged(code);
-                                RegisterOnRoomStateChanged(code);
+                                RegisterOnLobbyStateChanged(code);
                                 SwitchPanel(LobbyPanel);
                             }
                         });
@@ -126,15 +126,15 @@ public class LobbyController : MonoBehaviour
     {
         SwitchPanel(WaitPanel);
 
-        NetworkController.CanStartGame(CodeLabel.text, RequiredPlayers, error => {
+        Network.CanStartGame(CodeLabel.text, RequiredPlayers, error => {
             if (error != LobbyError.None) {
                 if (error == LobbyError.TooFewPlayers) StatusLabel.text = "too few players, requires " + RequiredPlayers;
                 else if (error == LobbyError.TooManyPlayers) StatusLabel.text = "too many players, requires " + RequiredPlayers;
                 else StatusLabel.text = "unknown error";
                 SwitchPanel(LobbyPanel);
             }
-            else NetworkController.AssignPlayerScenes(CodeLabel.text, _ => {
-                NetworkController.SetLobbyState(CodeLabel.text, LobbyState.InGame);
+            else Network.AssignPlayerScenes(CodeLabel.text, _ => {
+                Network.SetLobbyState(CodeLabel.text, LobbyState.InGame);
             }); 
         });
     }
@@ -146,9 +146,9 @@ public class LobbyController : MonoBehaviour
     {
         SwitchPanel(WaitPanel);
 
-        NetworkController.LeaveLobby(CodeLabel.text, success => {
+        Network.LeaveLobby(CodeLabel.text, success => {
             if (success) {
-                DeregisterOnRoomStateChanged(CodeLabel.text);
+                DeregisterOnLobbyStateChanged(CodeLabel.text);
                 DeregisterOnPlayersChanged(CodeLabel.text);
                 CodeLabel.text = "_____";
                 SwitchPanel(StartPanel);
@@ -174,18 +174,16 @@ public class LobbyController : MonoBehaviour
         panel.SetActive(true);
     }
 
-    private void RegisterOnPlayersChanged(string room)
+    private void RegisterOnPlayersChanged(string lobby)
     {
-        string roomPlayersKey = string.Format("lobbies/{0}/players", room);
-
-        NetworkController.RegisterListener(roomPlayersKey, OnPlayersChanged);
+        string roomPlayersKey = string.Format("lobbies/{0}/players", lobby);
+        Network.RegisterListener(roomPlayersKey, OnPlayersChanged);
     }
 
-    private void DeregisterOnPlayersChanged(string room)
+    private void DeregisterOnPlayersChanged(string lobby)
     {
-        string roomPlayersKey = string.Format("lobbies/{0}/players", room);
-
-        NetworkController.DeregisterListener(roomPlayersKey, OnPlayersChanged);
+        string roomPlayersKey = string.Format("lobbies/{0}/players", lobby);
+        Network.DeregisterListener(roomPlayersKey, OnPlayersChanged);
     }
 
     private void OnPlayersChanged(object sender, ValueChangedEventArgs args)
@@ -196,21 +194,19 @@ public class LobbyController : MonoBehaviour
         }
     }
 
-    private void RegisterOnRoomStateChanged(string room)
+    private void RegisterOnLobbyStateChanged(string lobby)
     {
-        string roomStateKey = string.Format("lobbies/{0}/state", room);
-
-        NetworkController.RegisterListener(roomStateKey, OnRoomStateChanged);
+        string roomStateKey = string.Format("lobbies/{0}/state", lobby);
+        Network.RegisterListener(roomStateKey, OnLobbyStateChanged);
     }
 
-    private void DeregisterOnRoomStateChanged(string room)
+    private void DeregisterOnLobbyStateChanged(string lobby)
     {
-        string roomStateKey = string.Format("lobbies/{0}/state", room);
-
-        NetworkController.DeregisterListener(roomStateKey, OnRoomStateChanged);
+        string roomStateKey = string.Format("lobbies/{0}/state", lobby);
+        Network.DeregisterListener(roomStateKey, OnLobbyStateChanged);
     }
 
-    private void OnRoomStateChanged(object sender, ValueChangedEventArgs args)
+    private void OnLobbyStateChanged(object sender, ValueChangedEventArgs args)
     {
         if (args.Snapshot.Exists)
         {
@@ -221,14 +217,12 @@ public class LobbyController : MonoBehaviour
                 LobbyState state = (LobbyState)statusNr;
                 if (state == LobbyState.InGame)
                 {
-                    NetworkController.GetPlayerScene(scene => {
+                    Network.GetPlayerScene(scene => {
                         if (scene >= 1 && scene <= 4) {
-                            StatusLabel.text = "joined game, your scene = " + scene;
-                            DeregisterOnRoomStateChanged(CodeLabel.text);
+                            DeregisterOnLobbyStateChanged(CodeLabel.text);
                             DeregisterOnPlayersChanged(CodeLabel.text);
                             SceneManager.LoadScene(scene);
                         }
-                        else StatusLabel.text = "error: invalid room number";
                     });
                 }
             }
