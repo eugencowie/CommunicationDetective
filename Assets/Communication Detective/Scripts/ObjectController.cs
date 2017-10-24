@@ -2,8 +2,8 @@
 
 public class ObjectController : MonoBehaviour
 {
-    [Range(0.2f, 2.0f)]
-    public float InspectDistance = 0.25f;
+    public float InspectDistance = 0.025f;
+    public float InspectScale = 0.1f;
 
     private Vector2 m_touchStartPos;
     private Vector2 m_touchEndPos;
@@ -40,10 +40,13 @@ public class ObjectController : MonoBehaviour
                     Quaternion oldRotation = newObject.transform.rotation;
                     newObject.transform.SetPositionAndRotation(Camera.main.transform.position, Camera.main.transform.rotation);
                     newObject.transform.Translate(new Vector3(0, 0, InspectDistance), Space.Self);
+                    newObject.transform.localScale *= InspectScale;
                     newObject.transform.rotation = oldRotation;
                     newObject.AddComponent<InspectController>().OnInspectEnded = () => {
                         foreach (var obj in FindObjectsOfType<ObjectController>()) {
                             obj.enabled = true;
+                        } foreach (Transform child in Camera.main.transform) {
+                            if (child.tag == "BlurPlane") child.gameObject.SetActive(false);
                         }
                     };
                     newObject.GetComponent<ObjectController>().enabled = false;
@@ -52,6 +55,11 @@ public class ObjectController : MonoBehaviour
                     foreach (var obj in FindObjectsOfType<ObjectController>())
                     {
                         obj.enabled = false;
+                    }
+                    foreach (Transform child in Camera.main.transform)
+                    {
+                        if (child.tag == "BlurPlane")
+                            child.gameObject.SetActive(true);
                     }
                 }
             }
