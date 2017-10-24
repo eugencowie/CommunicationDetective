@@ -12,6 +12,3 @@
 *.meta linguist-generated
 *.prefab linguist-generated
 *.unity linguist-generated
-
-# Git LFS
-Assets/Communication[[:space:]]Detective/Art/Defendant/Room/Room.FBX filter=lfs diff=lfs merge=lfs -text
