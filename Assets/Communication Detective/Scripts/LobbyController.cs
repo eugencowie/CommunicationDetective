@@ -92,6 +92,14 @@ public class LobbyController : MonoBehaviour
     }
 
     /// <summary>
+    /// Called when the join button in the start panel is pressed.
+    /// </summary>
+    public void BackButtonPressed()
+    {
+        SwitchPanel(StartPanel);
+    }
+
+    /// <summary>
     /// Called when the create button in the start panel is pressed.
     /// </summary>
     public void CreateButtonPressed()
