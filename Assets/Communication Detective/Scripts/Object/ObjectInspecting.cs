@@ -1,15 +1,18 @@
 ﻿using System;
 using UnityEngine;
 
-public class InspectController : MonoBehaviour
+public class ObjectInspecting : MonoBehaviour
 {
+    public float InspectDistance = 0.1f;
+    public float InspectScale = 0.3f;
+
     private Vector2 m_touchStartPos;
     private Vector2 m_touchEndPos;
 
-    public const float turnSpeed = 120.0f;      // Speed of camera turning when mouse moves in along an axis
+    public const float turnSpeed = 120.0f;
 
-    private Vector3 mouseOrigin;    // Position of cursor when mouse dragging starts
-    private bool isRotating;    // Is the camera being rotated?
+    private Vector3 mouseOrigin;
+    private bool isRotating;
 
     public Action OnInspectEnded;
 
@@ -36,7 +39,8 @@ public class InspectController : MonoBehaviour
         {
             m_touchStartPos = Input.mousePosition;
         }
-        else if (Input.GetMouseButtonUp(0))
+
+        if (!Input.GetMouseButton(0))
         {
             m_touchEndPos = Input.mousePosition;
             OnTouchEnded();
@@ -48,11 +52,9 @@ public class InspectController : MonoBehaviour
         Vector2 touchDistance = m_touchEndPos - m_touchStartPos;
 
         // If swipe has small distance it is probably a tap.
-        if (touchDistance.magnitude < 5)
+        if (touchDistance.magnitude < 20)
         {
             if (OnInspectEnded != null) OnInspectEnded();
-            Camera.main.GetComponent<CameraController>().enabled = true;
-            Destroy(gameObject);
         }
     }
 }
