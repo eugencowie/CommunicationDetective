@@ -24,7 +24,8 @@ public class CameraTap : MonoBehaviour
         {
             m_touchStartPos = Input.mousePosition;
         }
-        else if (Input.GetMouseButtonUp(0))
+
+        if (!Input.GetMouseButton(0))
         {
             m_touchEndPos = Input.mousePosition;
             TouchEnded();

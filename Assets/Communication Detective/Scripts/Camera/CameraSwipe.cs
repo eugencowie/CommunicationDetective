@@ -24,7 +24,8 @@ public class CameraSwipe : MonoBehaviour
             m_touchOrigin = Input.mousePosition;
             m_isRotating = true;
         }
-        else if (Input.GetMouseButtonUp(0))
+
+        if (!Input.GetMouseButton(0))
         {
             m_isRotating = false;
         }
