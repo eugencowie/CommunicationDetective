@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ObjectInspecting : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class ObjectInspecting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             mouseOrigin = Input.mousePosition;
             isRotating = true;
@@ -35,7 +36,7 @@ public class ObjectInspecting : MonoBehaviour
             transform.RotateAround(transform.position, Vector3.forward, movement.y * Time.deltaTime);
         }
         
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             m_touchStartPos = Input.mousePosition;
         }

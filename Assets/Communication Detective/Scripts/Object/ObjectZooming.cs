@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ObjectZooming : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class ObjectZooming : MonoBehaviour
     
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             m_touchStartPos = Input.mousePosition;
         }
