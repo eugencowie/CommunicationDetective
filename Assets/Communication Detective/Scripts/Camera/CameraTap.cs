@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 [RequireComponent(typeof(Camera)), RequireComponent(typeof(CameraSwipe))]
 public class CameraTap : MonoBehaviour
 {
-    [SerializeField] private GameObject BlurPlane;
-    [SerializeField] private GameObject StartCamera;
-    [SerializeField] private GameObject InventoryController;
+    [SerializeField] private GameObject BlurPlane = null;
+    [SerializeField] private GameObject StartCamera = null;
+    [SerializeField] private GameObject InventoryController = null;
 
     private InventoryController Inventory
     {
@@ -59,14 +60,17 @@ public class CameraTap : MonoBehaviour
         RaycastHit hit = new RaycastHit();
         if (Physics.Raycast(ray, out hit))
         {
-            ObjectInspectable inspectable = hit.collider.gameObject.GetComponent<ObjectInspectable>();
-            ObjectZoomable zoomable = hit.collider.gameObject.GetComponent<ObjectZoomable>();
+            // If hit object has hints, we can add them to the inventory
+            ObjectHint[] hints = hit.collider.gameObject.GetComponents<ObjectHint>();
+            if (hints.Length > 0)
+            {
+                Inventory.AddItems(hints);
+            }
 
             // If hit object has the inspectable component, we can inspect it
+            ObjectInspectable inspectable = hit.collider.gameObject.GetComponent<ObjectInspectable>();
             if (inspectable != null)
             {
-                Inventory.AddItems(inspectable.gameObject.name, inspectable.Hints);
-
                 GameObject newObject = Instantiate(inspectable.gameObject);
 
                 newObject.transform.parent = m_camera.transform;
@@ -83,11 +87,10 @@ public class CameraTap : MonoBehaviour
                 enabled = m_cameraRotation.enabled = false;
             }
 
-            // Otherwise, if hit object has the zoomable component, we can zoom in on it
-            else if (zoomable != null)
+            // If hit object has the zoomable component, we can zoom in on it
+            ObjectZoomable zoomable = hit.collider.gameObject.GetComponent<ObjectZoomable>();
+            if (zoomable != null)
             {
-                Inventory.AddItems(zoomable.gameObject.name, zoomable.Hints);
-
                 CameraMovement movement = m_camera.gameObject.AddComponent<CameraMovement>();
 
                 movement.Target = zoomable.TargetCamera;

@@ -3,36 +3,22 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoryItem
-{
-    public string Name;
-    public List<string> Hints;
-
-    public InventoryItem(string name, List<string> hints)
-    {
-        Name = name;
-        Hints = hints;
-    }
-}
-
 public class InventoryController : MonoBehaviour
 {
     [SerializeField] private List<GameObject> ItemButtons = new List<GameObject>();
 
-    private List<InventoryItem> m_items = new List<InventoryItem>();
+    private List<ObjectHint> m_items = new List<ObjectHint>();
 
-    public void AddItems(string name, List<string> hints)
+    public void AddItems(params ObjectHint[] items)
     {
-        if (!m_items.Any(i => i.Name == name))
+        foreach (var item in items)
         {
-            m_items.Add(new InventoryItem(name, hints));
-
-            foreach (string hint in hints)
+            if (!m_items.Any(i => i.Name == item.Name))
             {
-                Debug.Log(name + ": " + hint);
+                Debug.Log(item.Name + ": " + item.Hint);
+                m_items.Add(item);
+                UpdateButtons();
             }
-
-            UpdateButtons();
         }
     }
 
