@@ -91,6 +91,9 @@ public class CameraTap : MonoBehaviour
             ObjectZoomable zoomable = hit.collider.gameObject.GetComponent<ObjectZoomable>();
             if (zoomable != null)
             {
+                // Reset start camera direction
+                StartCamera.transform.rotation = transform.rotation;
+
                 CameraMovement movement = m_camera.gameObject.AddComponent<CameraMovement>();
 
                 movement.Target = zoomable.TargetCamera;
