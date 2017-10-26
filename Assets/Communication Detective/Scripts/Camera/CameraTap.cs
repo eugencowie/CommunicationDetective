@@ -5,6 +5,12 @@ public class CameraTap : MonoBehaviour
 {
     [SerializeField] private GameObject BlurPlane;
     [SerializeField] private GameObject StartCamera;
+    [SerializeField] private GameObject InventoryController;
+
+    private InventoryController Inventory
+    {
+        get { return InventoryController.GetComponent<InventoryController>(); }
+    }
 
     private Vector2 m_touchStartPos;
     private Vector2 m_touchEndPos;
@@ -59,6 +65,8 @@ public class CameraTap : MonoBehaviour
             // If hit object has the inspectable component, we can inspect it
             if (inspectable != null)
             {
+                Inventory.AddItems(inspectable.gameObject.name, inspectable.Hints);
+
                 GameObject newObject = Instantiate(inspectable.gameObject);
 
                 newObject.transform.parent = m_camera.transform;
@@ -78,6 +86,8 @@ public class CameraTap : MonoBehaviour
             // Otherwise, if hit object has the zoomable component, we can zoom in on it
             else if (zoomable != null)
             {
+                Inventory.AddItems(zoomable.gameObject.name, zoomable.Hints);
+
                 CameraMovement movement = m_camera.gameObject.AddComponent<CameraMovement>();
 
                 movement.Target = zoomable.TargetCamera;
