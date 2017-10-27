@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -12,9 +11,9 @@ public class CameraTap : MonoBehaviour
     [SerializeField] private GameObject HintPanel = null;
     [SerializeField] private GameObject HintText = null;
 
-    private InventoryController Inventory
+    private Inventory Inventory
     {
-        get { return InventoryController.GetComponent<InventoryController>(); }
+        get { return InventoryController.GetComponent<Inventory>(); }
     }
 
     private Vector2 m_touchStartPos;
