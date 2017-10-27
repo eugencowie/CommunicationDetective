@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Camera)), RequireComponent(typeof(CameraSwipe))]
 public class CameraTap : MonoBehaviour
@@ -8,6 +9,8 @@ public class CameraTap : MonoBehaviour
     [SerializeField] private GameObject BlurPlane = null;
     [SerializeField] private GameObject StartCamera = null;
     [SerializeField] private GameObject InventoryController = null;
+    [SerializeField] private GameObject HintPanel = null;
+    [SerializeField] private GameObject HintText = null;
 
     private InventoryController Inventory
     {
@@ -68,6 +71,13 @@ public class CameraTap : MonoBehaviour
                 Inventory.AddItems(hints);
             }
 
+            Text text = HintText.GetComponent<Text>();
+            text.text = "";
+            foreach (var hint in hints)
+            {
+                text.text += string.Format("{0}: {1}\n", hint.Name, hint.Hint);
+            }
+
             // If hit object has the inspectable component, we can inspect it
             ObjectInspectable inspectable = hit.collider.gameObject.GetComponent<ObjectInspectable>();
             if (inspectable != null)
@@ -79,11 +89,13 @@ public class CameraTap : MonoBehaviour
                 newObject.transform.localScale *= inspectable.InspectScale;
 
                 newObject.AddComponent<ObjectInspecting>().OnInspectEnded = () => {
+                    HintPanel.SetActive(false);
                     BlurPlane.SetActive(false);
                     enabled = m_cameraRotation.enabled = true;
                     Destroy(newObject);
                 };
 
+                if (hints.Length > 0) HintPanel.SetActive(true);
                 BlurPlane.SetActive(true);
                 enabled = m_cameraRotation.enabled = false;
             }
@@ -102,8 +114,10 @@ public class CameraTap : MonoBehaviour
                 movement.RotationSpeed = zoomable.CameraRotationSpeed;
 
                 movement.OnMoveEnded = () => {
+                    if (hints.Length > 0) HintPanel.SetActive(true);
                     ObjectZooming zooming = zoomable.gameObject.AddComponent<ObjectZooming>();
                     zooming.OnZoomEnded = () => {
+                        HintPanel.SetActive(false);
                         movement.Target = StartCamera;
                         movement.OnMoveEnded = () => {
                             enabled = m_cameraRotation.enabled = true;
