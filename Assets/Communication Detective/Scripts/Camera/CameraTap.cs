@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class CameraTap : MonoBehaviour
 {
     [SerializeField] private GameObject BlurPlane = null;
-    [SerializeField] private GameObject StartCamera = null;
     [SerializeField] private GameObject InventoryController = null;
     [SerializeField] private GameObject HintPanel = null;
     [SerializeField] private GameObject HintText = null;
@@ -103,8 +102,9 @@ public class CameraTap : MonoBehaviour
             ObjectZoomable zoomable = hit.collider.gameObject.GetComponent<ObjectZoomable>();
             if (zoomable != null)
             {
-                // Reset start camera direction
-                StartCamera.transform.rotation = transform.rotation;
+            	// Create clone of this camera in its current location
+                GameObject StartCamera = Instantiate(gameObject);
+                StartCamera.SetActive(false);
 
                 CameraMovement movement = m_camera.gameObject.AddComponent<CameraMovement>();
 
@@ -120,6 +120,7 @@ public class CameraTap : MonoBehaviour
                         movement.Target = StartCamera;
                         movement.OnMoveEnded = () => {
                             enabled = m_cameraRotation.enabled = true;
+                            Destroy(StartCamera);
                             Destroy(movement);
                         };
                         Destroy(zooming);
