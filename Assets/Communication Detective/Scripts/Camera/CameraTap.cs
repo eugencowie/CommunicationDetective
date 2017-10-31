@@ -63,11 +63,19 @@ public class CameraTap : MonoBehaviour
         RaycastHit hit = new RaycastHit();
         if (Physics.Raycast(ray, out hit))
         {
+            TapObject(hit.collider.gameObject);
+        }
+    }
+
+    private void TapObject(GameObject tappedObject)
+    {
+        if (isActiveAndEnabled)
+        {
             // If hit object has hints, we can add them to the inventory
-            ObjectHint[] hints = hit.collider.gameObject.GetComponents<ObjectHint>();
+            ObjectHint[] hints = tappedObject.GetComponents<ObjectHint>();
             if (hints.Length > 0)
             {
-                Inventory.AddItems(hit.collider.gameObject, hints);
+                AddHints(tappedObject, hints);
             }
 
             Text text = HintText.GetComponent<Text>();
@@ -78,60 +86,81 @@ public class CameraTap : MonoBehaviour
             }
 
             // If hit object has the inspectable component, we can inspect it
-            ObjectInspectable inspectable = hit.collider.gameObject.GetComponent<ObjectInspectable>();
+            ObjectInspectable inspectable = tappedObject.GetComponent<ObjectInspectable>();
             if (inspectable != null)
             {
-                GameObject newObject = Instantiate(inspectable.gameObject);
-
-                newObject.transform.parent = m_camera.transform;
-                newObject.transform.localPosition = new Vector3(0, 0, inspectable.InspectDistance);
-                newObject.transform.localScale *= inspectable.InspectScale;
-
-                newObject.AddComponent<ObjectInspecting>().OnInspectEnded = () => {
-                    HintPanel.SetActive(false);
-                    BlurPlane.SetActive(false);
-                    if (Spotlight != null) Spotlight.SetActive(false);
-                    enabled = m_cameraRotation.enabled = true;
-                    Destroy(newObject);
-                };
-
-                if (hints.Length > 0) HintPanel.SetActive(true);
-                if (Spotlight != null) Spotlight.SetActive(true);
-                BlurPlane.SetActive(true);
-                enabled = m_cameraRotation.enabled = false;
+                InspectObject(inspectable, hints);
             }
 
             // If hit object has the zoomable component, we can zoom in on it
-            ObjectZoomable zoomable = hit.collider.gameObject.GetComponent<ObjectZoomable>();
+            ObjectZoomable zoomable = tappedObject.GetComponent<ObjectZoomable>();
             if (zoomable != null)
             {
-            	// Create clone of this camera in its current location
-                GameObject StartCamera = Instantiate(gameObject);
-                StartCamera.SetActive(false);
-
-                CameraMovement movement = m_camera.gameObject.AddComponent<CameraMovement>();
-
-                movement.Target = zoomable.TargetCamera;
-                movement.MovementSpeed = zoomable.CameraMoveSpeed;
-                movement.RotationSpeed = zoomable.CameraRotationSpeed;
-
-                movement.OnMoveEnded = () => {
-                    if (hints.Length > 0) HintPanel.SetActive(true);
-                    ObjectZooming zooming = zoomable.gameObject.AddComponent<ObjectZooming>();
-                    zooming.OnZoomEnded = () => {
-                        HintPanel.SetActive(false);
-                        movement.Target = StartCamera;
-                        movement.OnMoveEnded = () => {
-                            enabled = m_cameraRotation.enabled = true;
-                            Destroy(StartCamera);
-                            Destroy(movement);
-                        };
-                        Destroy(zooming);
-                    };
-                };
-
-                enabled = m_cameraRotation.enabled = false;
+                ZoomToObject(zoomable, hints);
             }
+        }
+    }
+
+    private void AddHints(GameObject tappedObject, ObjectHint[] hints)
+    {
+        Inventory.AddItems(() => TapObject(tappedObject), hints);
+    }
+
+    private void InspectObject(ObjectInspectable inspectable, ObjectHint[] hints)
+    {
+        if (inspectable != null)
+        {
+            GameObject newObject = Instantiate(inspectable.gameObject);
+
+            newObject.transform.parent = m_camera.transform;
+            newObject.transform.localPosition = new Vector3(0, 0, inspectable.InspectDistance);
+            newObject.transform.localScale *= inspectable.InspectScale;
+
+            newObject.AddComponent<ObjectInspecting>().OnInspectEnded = () => {
+                HintPanel.SetActive(false);
+                BlurPlane.SetActive(false);
+                if (Spotlight != null) Spotlight.SetActive(false);
+                enabled = m_cameraRotation.enabled = true;
+                Destroy(newObject);
+            };
+
+            if (hints.Length > 0) HintPanel.SetActive(true);
+            if (Spotlight != null) Spotlight.SetActive(true);
+            BlurPlane.SetActive(true);
+            enabled = m_cameraRotation.enabled = false;
+        }
+    }
+
+    private void ZoomToObject(ObjectZoomable zoomable, ObjectHint[] hints)
+    {
+        if (zoomable != null)
+        {
+            // Create clone of this camera in its current location
+            GameObject StartCamera = Instantiate(gameObject);
+            StartCamera.SetActive(false);
+
+            CameraMovement movement = m_camera.gameObject.AddComponent<CameraMovement>();
+
+            movement.Target = zoomable.TargetCamera;
+            movement.MovementSpeed = zoomable.CameraMoveSpeed;
+            movement.RotationSpeed = zoomable.CameraRotationSpeed;
+
+            movement.OnMoveEnded = () => {
+                if (hints.Length > 0) HintPanel.SetActive(true);
+                ObjectZooming zooming = zoomable.gameObject.AddComponent<ObjectZooming>();
+                zooming.OnZoomEnded = () => {
+                    HintPanel.SetActive(false);
+                    movement.Target = StartCamera;
+                    movement.OnMoveEnded = () => {
+                        enabled = m_cameraRotation.enabled = true;
+                        Destroy(StartCamera);
+                        Destroy(movement);
+                    };
+                    Destroy(zooming);
+                };
+            };
+
+            enabled = m_cameraRotation.enabled = false;
         }
     }
 }

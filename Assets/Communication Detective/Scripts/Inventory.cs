@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -43,7 +45,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void AddItem(GameObject gameObject, ObjectHint item)
+    public void AddItem(UnityAction itemAction, ObjectHint item)
     {
         if (!m_buttons.Any(b => b.name == item.Name))
         {
@@ -52,7 +54,7 @@ public class Inventory : MonoBehaviour
             newButton.name = item.Name;
 
             // Set click method
-            newButton.GetComponent<Button>().onClick.AddListener(() => ItemButtonPressed(gameObject));
+            newButton.GetComponent<Button>().onClick.AddListener(itemAction);
 
             // Set initial transform
             newButton.transform.SetParent(ButtonContainer.transform);
@@ -82,17 +84,12 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void AddItems(GameObject gameObject, params ObjectHint[] items)
+    public void AddItems(UnityAction itemAction, ObjectHint[] items)
     {
         foreach (var item in items)
         {
-            AddItem(gameObject, item);
+            AddItem(itemAction, item);
         }
-    }
-
-    public void ItemButtonPressed(GameObject itemObject)
-    {
-        Debug.Log("Button pressed: " + itemObject.name);
     }
 
     public void ScrollUpButtonPressed()
