@@ -45,6 +45,8 @@ public class LobbyController : MonoBehaviour
 
     private void Start()
     {
+        StaticInventory.Hints.Clear();
+
         Network = new OnlineManager();
 
         SwitchPanel(WaitPanel);
