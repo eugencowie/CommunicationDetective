@@ -1,10 +1,10 @@
 * text=auto
 
 # Unity files
-*.meta -text -merge=unityamlmerge
-*.unity -text -merge=unityamlmerge
-*.asset -text -merge=unityamlmerge
-*.prefab -text -merge=unityamlmerge
+*.meta -text -merge=unityyamlmerge
+*.unity -text -merge=unityyamlmerge
+*.asset -text -merge=unityyamlmerge
+*.prefab -text -merge=unityyamlmerge
 
 # Collapse Unity-generated files on GitHub
 *.asset linguist-generated
