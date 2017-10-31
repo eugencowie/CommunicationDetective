@@ -43,7 +43,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void AddItem(ObjectHint item)
+    public void AddItem(GameObject gameObject, ObjectHint item)
     {
         if (!m_buttons.Any(b => b.name == item.Name))
         {
@@ -52,7 +52,7 @@ public class Inventory : MonoBehaviour
             newButton.name = item.Name;
 
             // Set click method
-            newButton.GetComponent<Button>().onClick.AddListener(() => ItemButtonPressed(newButton));
+            newButton.GetComponent<Button>().onClick.AddListener(() => ItemButtonPressed(gameObject));
 
             // Set initial transform
             newButton.transform.SetParent(ButtonContainer.transform);
@@ -82,11 +82,11 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void AddItems(params ObjectHint[] items)
+    public void AddItems(GameObject gameObject, params ObjectHint[] items)
     {
         foreach (var item in items)
         {
-            AddItem(item);
+            AddItem(gameObject, item);
         }
     }
 

@@ -67,7 +67,7 @@ public class CameraTap : MonoBehaviour
             ObjectHint[] hints = hit.collider.gameObject.GetComponents<ObjectHint>();
             if (hints.Length > 0)
             {
-                Inventory.AddItems(hints);
+                Inventory.AddItems(hit.collider.gameObject, hints);
             }
 
             Text text = HintText.GetComponent<Text>();
