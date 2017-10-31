@@ -9,6 +9,7 @@ public class CameraTap : MonoBehaviour
     [SerializeField] private GameObject InventoryController = null;
     [SerializeField] private GameObject HintPanel = null;
     [SerializeField] private GameObject HintText = null;
+    [SerializeField] private GameObject Spotlight = null;
 
     private Inventory Inventory
     {
@@ -89,11 +90,13 @@ public class CameraTap : MonoBehaviour
                 newObject.AddComponent<ObjectInspecting>().OnInspectEnded = () => {
                     HintPanel.SetActive(false);
                     BlurPlane.SetActive(false);
+                    if (Spotlight != null) Spotlight.SetActive(false);
                     enabled = m_cameraRotation.enabled = true;
                     Destroy(newObject);
                 };
 
                 if (hints.Length > 0) HintPanel.SetActive(true);
+                if (Spotlight != null) Spotlight.SetActive(true);
                 BlurPlane.SetActive(true);
                 enabled = m_cameraRotation.enabled = false;
             }

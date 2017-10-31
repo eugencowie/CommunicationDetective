@@ -51,6 +51,9 @@ public class Inventory : MonoBehaviour
             GameObject newButton = Instantiate(Button);
             newButton.name = item.Name;
 
+            // Set click method
+            newButton.GetComponent<Button>().onClick.AddListener(() => ItemButtonPressed(newButton));
+
             // Set initial transform
             newButton.transform.SetParent(ButtonContainer.transform);
             newButton.transform.localPosition = Button.transform.localPosition;
@@ -85,6 +88,11 @@ public class Inventory : MonoBehaviour
         {
             AddItem(item);
         }
+    }
+
+    public void ItemButtonPressed(GameObject itemObject)
+    {
+        Debug.Log("Button pressed: " + itemObject.name);
     }
 
     public void ScrollUpButtonPressed()
