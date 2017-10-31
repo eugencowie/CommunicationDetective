@@ -3,6 +3,11 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+public static class StaticInventory
+{
+    public static List<ObjectHintData> Hints = new List<ObjectHintData>();
+}
+
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private GameObject Button = null;
@@ -11,10 +16,31 @@ public class Inventory : MonoBehaviour
     
     private const int m_spacing = 280;
 
-    public void AddItem(ObjectHint item)
+    private void Start()
+    {
+        foreach (var button in m_buttons)
+        {
+            Destroy(button);
+        }
+
+        m_buttons.Clear();
+        
+        foreach (var item in StaticInventory.Hints)
+        {
+            AddItem(item);
+        }
+    }
+
+    public void AddItem(ObjectHintData item)
     {
         if (!m_buttons.Any(b => b.name == item.Name))
         {
+            // Add item to static inventory
+            if (!StaticInventory.Hints.Any(h => h.Name == item.Name))
+            {
+                StaticInventory.Hints.Add(new ObjectHintData(item.Name, item.Hint));
+            }
+
             // Create new button
             GameObject newButton = Instantiate(Button);
             newButton.name = item.Name;
@@ -43,7 +69,12 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void AddItems(params ObjectHint[] items)
+    public void AddItem(ObjectHint hint)
+    {
+        AddItem(new ObjectHintData(hint.Name, hint.Hint));
+    }
+
+    public void AddItems(ObjectHint[] items)
     {
         foreach (var item in items)
         {
