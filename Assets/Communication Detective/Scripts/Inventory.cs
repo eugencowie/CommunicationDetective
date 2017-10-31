@@ -1,10 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+
+public static class StaticInventory
+{
+    public static List<ObjectHintData> Hints = new List<ObjectHintData>();
+}
 
 public class Inventory : MonoBehaviour
 {
@@ -18,6 +22,21 @@ public class Inventory : MonoBehaviour
 
     private Vector3 m_touchOrigin;
     private bool m_isSwiping;
+
+    private void Start()
+    {
+        foreach (var button in m_buttons)
+        {
+            Destroy(button);
+        }
+
+        m_buttons.Clear();
+        
+        foreach (var item in StaticInventory.Hints)
+        {
+            AddItem(null, item);
+        }
+    }
 
     private void Update()
     {
@@ -37,24 +56,33 @@ public class Inventory : MonoBehaviour
             Vector3 screenPos = Camera.main.ScreenToViewportPoint(Input.mousePosition - m_touchOrigin);
 
             float movement = screenPos.normalized.y * m_scrollSpeed * Time.deltaTime;
-            
+
             if (Mathf.Abs(movement) > 20)
             {
                 Scroll(movement);
             }
         }
     }
-
-    public void AddItem(UnityAction itemAction, ObjectHint item)
+    
+    public void AddItem(UnityAction itemAction, ObjectHintData item)
     {
         if (!m_buttons.Any(b => b.name == item.Name))
         {
+            // Add item to static inventory
+            if (!StaticInventory.Hints.Any(h => h.Name == item.Name))
+            {
+                StaticInventory.Hints.Add(new ObjectHintData(item.Name, item.Hint));
+            }
+
             // Create new button
             GameObject newButton = Instantiate(Button);
             newButton.name = item.Name;
 
             // Set click method
-            newButton.GetComponent<Button>().onClick.AddListener(itemAction);
+            if (itemAction != null)
+            {
+                newButton.GetComponent<Button>().onClick.AddListener(itemAction);
+            }
 
             // Set initial transform
             newButton.transform.SetParent(ButtonContainer.transform);
@@ -83,12 +111,12 @@ public class Inventory : MonoBehaviour
             ScrollTo(maxScrollAmount);
         }
     }
-
+    
     public void AddItems(UnityAction itemAction, ObjectHint[] items)
     {
         foreach (var item in items)
         {
-            AddItem(itemAction, item);
+            AddItem(itemAction, new ObjectHintData(item.Name, item.Hint));
         }
     }
 
