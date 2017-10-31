@@ -7,7 +7,7 @@ using UnityEngine;
 /// <summary>
 /// Provides direct low-level access to the Firebase database.
 /// </summary>
-public class Database
+public class OnlineDatabase
 {
     /// <summary>
     /// Reference to the Firebase database root node.
@@ -17,7 +17,7 @@ public class Database
     /// <summary>
     /// Initialises the database.
     /// </summary>
-    public Database()
+    public OnlineDatabase()
     {
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://communication-detective.firebaseio.com");
         m_root = FirebaseDatabase.DefaultInstance.RootReference;
@@ -114,7 +114,7 @@ public class Database
     /// </summary>
     public static void RunTests()
     {
-        Database db = new Database();
+        OnlineDatabase db = new OnlineDatabase();
         
         db.Exists("test/does/not/exist", exists => {
             Debug.Assert(exists == false);

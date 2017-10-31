@@ -41,11 +41,11 @@ public class LobbyController : MonoBehaviour
     [Range(1,4)]
     public int RequiredPlayers = 4;
 
-    private Network Network;
+    private OnlineManager Network;
 
     private void Start()
     {
-        Network = new Network();
+        Network = new OnlineManager();
 
         SwitchPanel(WaitPanel);
 
