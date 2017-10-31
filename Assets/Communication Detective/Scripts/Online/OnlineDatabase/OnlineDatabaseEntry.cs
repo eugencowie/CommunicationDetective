@@ -3,12 +3,12 @@
 /// <summary>
 /// Represents a key-value pair in the database.
 /// </summary>
-public class DatabaseEntry
+public class OnlineDatabaseEntry
 {
     /// <summary>
     /// Reference to the database.
     /// </summary>
-    private readonly Database m_database;
+    private readonly OnlineDatabase m_database;
 
     /// <summary>
     /// The full path to the key in the database.
@@ -23,7 +23,7 @@ public class DatabaseEntry
     /// <summary>
     /// Initialises the database entry.
     /// </summary>
-    public DatabaseEntry(Database database, string key)
+    public OnlineDatabaseEntry(OnlineDatabase database, string key)
     {
         m_database = database;
         Key = key;
@@ -45,7 +45,7 @@ public class DatabaseEntry
     /// </summary>
     public void Pull(Action<bool> returnSuccess=null)
     {
-        Database.ValidateAction(ref returnSuccess);
+        OnlineDatabase.ValidateAction(ref returnSuccess);
 
         m_database.Pull(Key, result => {
             if (result != null) {

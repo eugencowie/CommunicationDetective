@@ -4,12 +4,12 @@ using System.Collections.Generic;
 /// <summary>
 /// Represents a node in the database which contains a collection of database entries.
 /// </summary>
-public abstract class DatabaseNode
+public abstract class OnlineDatabaseNode
 {
     /// <summary>
     /// Reference to the database.
     /// </summary>
-    protected readonly Database Database;
+    protected readonly OnlineDatabase Database;
 
     /// <summary>
     /// The full path to the node in the database.
@@ -19,7 +19,7 @@ public abstract class DatabaseNode
     /// <summary>
     /// Initialises the database node.
     /// </summary>
-    public DatabaseNode(Database database, string key)
+    public OnlineDatabaseNode(OnlineDatabase database, string key)
     {
         Database = database;
         Key = key;
@@ -28,7 +28,7 @@ public abstract class DatabaseNode
     /// <summary>
     /// An enumerable collection of database entries.
     /// </summary>
-    protected abstract IEnumerable<DatabaseEntry> Entries { get; }
+    protected abstract IEnumerable<OnlineDatabaseEntry> Entries { get; }
 
     /// <summary>
     /// Checks if the key exists in the database. This is an asynchronous operation which will call

@@ -5,13 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class RoomController : MonoBehaviour
 {
-    private Network NetworkController;
+    private OnlineManager NetworkController;
 
     private string m_roomCode;
 
     private void Start()
     {
-        NetworkController = new Network();
+        NetworkController = new OnlineManager();
 
         NetworkController.GetPlayerLobby(room => {
             if (!string.IsNullOrEmpty(room)) m_roomCode = room;
