@@ -28,4 +28,9 @@ public class RoomController : MonoBehaviour
             if (success) SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
         });
     }
+
+    public void DatabaseButtonPressed()
+    {
+        SceneManager.LoadScene("Communication Detective/Scenes/Database");
+    }
 }
