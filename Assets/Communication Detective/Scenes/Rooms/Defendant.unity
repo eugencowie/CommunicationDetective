@@ -688,8 +688,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.071, y: 0.14300004, z: 0.0070500015}
-  m_Center: {x: 0, y: 0, z: 0.0035250008}
+  m_Size: {x: 0.3386292, y: 0.3529903, z: 0.17000258}
+  m_Center: {x: -0.025746247, y: 0.011772391, z: 0.08500132}
 --- !u!4 &250529822 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: ec5ef463ac20ffb4e808be3a223a36a0, type: 3}
@@ -3159,8 +3159,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.054999996, y: 0.022, z: 0.088}
-  m_Center: {x: 0, y: 0, z: 0.044}
+  m_Size: {x: 0.29153347, y: 0.10264332, z: 0.34298995}
+  m_Center: {x: -0.058308788, y: 0.04032167, z: 0.09157142}
 --- !u!114 &1309097262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3684,6 +3684,25 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1683015419}
   m_Mesh: {fileID: 4300014, guid: a174018bb3ace7a408c28414c0091b12, type: 3}
+--- !u!1001 &1729846964
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1856969743927884, guid: dc26f056f492a8b44b9525b72dda3044, type: 2}
+      propertyPath: m_Name
+      value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 224382924449657762, guid: dc26f056f492a8b44b9525b72dda3044,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: dc26f056f492a8b44b9525b72dda3044, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1734474007
 Prefab:
   m_ObjectHideFlags: 0
