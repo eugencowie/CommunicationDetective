@@ -19,7 +19,7 @@ public class OnlineDatabase
     /// </summary>
     public OnlineDatabase()
     {
-        FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://communication-detective.firebaseio.com");
+        FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://fourensics-game.firebaseio.com");
         m_root = FirebaseDatabase.DefaultInstance.RootReference;
     }
 

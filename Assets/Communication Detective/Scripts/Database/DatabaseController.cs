@@ -48,4 +48,24 @@ public class DatabaseController : MonoBehaviour, IBeginDragHandler, IDragHandler
     {
         SceneManager.LoadScene(m_scene);
     }
+
+    public void Player1ButtonPressed()
+    {
+
+    }
+
+    public void Player2ButtonPressed()
+    {
+
+    }
+
+    public void Player3ButtonPressed()
+    {
+
+    }
+
+    public void Player4ButtonPressed()
+    {
+
+    }
 }
