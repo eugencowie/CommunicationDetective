@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-  <string name="firebase_database_url" translatable="false">https://communication-detective.firebaseio.com</string>
-  <string name="gcm_defaultSenderId" translatable="false">233819667374</string>
-  <string name="google_storage_bucket" translatable="false">communication-detective.appspot.com</string>
-  <string name="project_id" translatable="false">communication-detective</string>
-  <string name="google_api_key" translatable="false">AIzaSyAFyABNpqFM15TV9dfjjbJlf9T-d8LtvMs</string>
-  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAFyABNpqFM15TV9dfjjbJlf9T-d8LtvMs</string>
-  <string name="google_app_id" translatable="false">1:233819667374:android:e559b92ada871654</string>
-  <string name="default_web_client_id" translatable="false">233819667374-dlvjdtb0h5m5il2s2r7r5jrutt5m0b96.apps.googleusercontent.com</string>
+  <string name="firebase_database_url" translatable="false">https://fourensics-game.firebaseio.com</string>
+  <string name="gcm_defaultSenderId" translatable="false">1004772486452</string>
+  <string name="google_storage_bucket" translatable="false">fourensics-game.appspot.com</string>
+  <string name="project_id" translatable="false">fourensics-game</string>
+  <string name="google_api_key" translatable="false">AIzaSyDNOTpiQHyFs25XKsvx3U_bIAv0gBWRwNM</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDNOTpiQHyFs25XKsvx3U_bIAv0gBWRwNM</string>
+  <string name="google_app_id" translatable="false">1:1004772486452:android:561e819f6065f372</string>
+  <string name="default_web_client_id" translatable="false">1004772486452-ovsl6s2ti05pch5pfp5q34ik7h0bivok.apps.googleusercontent.com</string>
 </resources>

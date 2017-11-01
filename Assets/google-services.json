@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "233819667374",
-    "firebase_url": "https://communication-detective.firebaseio.com",
-    "project_id": "communication-detective",
-    "storage_bucket": "communication-detective.appspot.com"
+    "project_number": "1004772486452",
+    "firebase_url": "https://fourensics-game.firebaseio.com",
+    "project_id": "fourensics-game",
+    "storage_bucket": "fourensics-game.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:233819667374:android:e559b92ada871654",
+        "mobilesdk_app_id": "1:1004772486452:android:561e819f6065f372",
         "android_client_info": {
-          "package_name": "com.notyetinteractive.communicationdetective"
+          "package_name": "com.notyetinteractive.fourensics"
         }
       },
       "oauth_client": [
         {
-          "client_id": "233819667374-dlvjdtb0h5m5il2s2r7r5jrutt5m0b96.apps.googleusercontent.com",
+          "client_id": "1004772486452-ovsl6s2ti05pch5pfp5q34ik7h0bivok.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAFyABNpqFM15TV9dfjjbJlf9T-d8LtvMs"
+          "current_key": "AIzaSyDNOTpiQHyFs25XKsvx3U_bIAv0gBWRwNM"
         }
       ],
       "services": {
