@@ -5,42 +5,40 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     public GameObject Target;
-
-    public float MovementSpeed = 3f;
-    public float RotationSpeed = 0.05f;
-
+    public float Duration = 1f;
     public Action OnMoveEnded;
 
-    private Camera m_camera;
+    private Vector3 m_startPosition, m_endPosition;
+    private Quaternion m_startRotation, m_endRotation;
+    private float m_elapsedTime;
+
+    public void Reset()
+    {
+        m_startPosition = transform.position;
+        m_endPosition = Target.transform.position;
+
+        m_startRotation = transform.rotation;
+        m_endRotation = Target.transform.rotation;
+
+        m_elapsedTime = 0;
+    }
 
     private void Start()
     {
-        m_camera = GetComponent<Camera>();
+        Reset();
     }
 
     private void Update()
     {
-        Vector3 currentPosition = m_camera.transform.position;
-        Quaternion currentRotation = m_camera.transform.rotation;
+        m_elapsedTime += Time.deltaTime;
 
-        Vector3 distance = Target.transform.position - currentPosition;
-        if (distance.magnitude > 0.1f)
+        if (m_elapsedTime <= Duration)
         {
-            m_camera.transform.position += (distance.normalized * Time.deltaTime * MovementSpeed);
+            float t = m_elapsedTime / Duration;
+            transform.position = Vector3.Lerp(m_startPosition, m_endPosition, t);
+            transform.rotation = Quaternion.Lerp(m_startRotation, m_endRotation, t);
         }
-
-        Vector3 rotationDistanceAxis;
-        float rotationDistanceAngle;
-
-        Quaternion rotationDistance = Quaternion.Inverse(currentRotation) * Target.transform.rotation;
-        rotationDistance.ToAngleAxis(out rotationDistanceAngle, out rotationDistanceAxis);
-        if (rotationDistanceAngle > 1)
-        {
-            m_camera.transform.Rotate(rotationDistanceAxis, rotationDistanceAngle * RotationSpeed);
-        }
-
-        // if finished moving and rotating
-        if (!(distance.magnitude > 0.1f) && !(rotationDistanceAngle > 1))
+        else
         {
             if (OnMoveEnded != null) OnMoveEnded();
         }

@@ -20,12 +20,12 @@ public class CameraTap : MonoBehaviour
     private Vector2 m_touchEndPos;
 
     private Camera m_camera;
-    private CameraSwipe m_cameraRotation;
+    private CameraSwipe m_cameraSwipe;
 
     private void Start()
     {
         m_camera = GetComponent<Camera>();
-        m_cameraRotation = GetComponent<CameraSwipe>();
+        m_cameraSwipe = GetComponent<CameraSwipe>();
     }
 
     private void Update()
@@ -120,14 +120,14 @@ public class CameraTap : MonoBehaviour
                 HintPanel.SetActive(false);
                 BlurPlane.SetActive(false);
                 if (Spotlight != null) Spotlight.SetActive(false);
-                enabled = m_cameraRotation.enabled = true;
+                enabled = m_cameraSwipe.enabled = true;
                 Destroy(newObject);
             };
 
             if (hints.Length > 0) HintPanel.SetActive(true);
             if (Spotlight != null) Spotlight.SetActive(true);
             BlurPlane.SetActive(true);
-            enabled = m_cameraRotation.enabled = false;
+            enabled = m_cameraSwipe.enabled = false;
         }
     }
 
@@ -135,32 +135,62 @@ public class CameraTap : MonoBehaviour
     {
         if (zoomable != null)
         {
-            // Create clone of this camera in its current location
+            // Create an inactive clone of this camera in its current location
             GameObject StartCamera = Instantiate(gameObject);
             StartCamera.SetActive(false);
 
-            CameraMovement movement = m_camera.gameObject.AddComponent<CameraMovement>();
+            // Add a camera movement component
+            CameraMovement movement = gameObject.AddComponent<CameraMovement>();
 
+            // Set camera movement parameters
             movement.Target = zoomable.TargetCamera;
-            movement.MovementSpeed = zoomable.CameraMoveSpeed;
-            movement.RotationSpeed = zoomable.CameraRotationSpeed;
+            movement.Duration = zoomable.Duration;
 
-            movement.OnMoveEnded = () => {
-                if (hints.Length > 0) HintPanel.SetActive(true);
-                ObjectZooming zooming = zoomable.gameObject.AddComponent<ObjectZooming>();
-                zooming.OnZoomEnded = () => {
-                    HintPanel.SetActive(false);
-                    movement.Target = StartCamera;
-                    movement.OnMoveEnded = () => {
-                        enabled = m_cameraRotation.enabled = true;
-                        Destroy(StartCamera);
-                        Destroy(movement);
-                    };
-                    Destroy(zooming);
-                };
-            };
+            // Set what happens when the camera movement ends
+            movement.OnMoveEnded = () => CameraMovementEnded(zoomable, hints, StartCamera, movement);
 
-            enabled = m_cameraRotation.enabled = false;
+            // Disable this component and disable the camera swipe component
+            enabled = m_cameraSwipe.enabled = false;
         }
+    }
+
+    private void CameraMovementEnded(ObjectZoomable zoomable, ObjectHint[] hints, GameObject StartCamera, CameraMovement movement)
+    {
+        // Show hint panel if there are hints
+        if (hints.Length > 0) HintPanel.SetActive(true);
+
+        // Add a object zooming component to the target game object
+        ObjectZooming zooming = zoomable.gameObject.AddComponent<ObjectZooming>();
+
+        // Set what happens when the zoom is ended by the player
+        zooming.OnZoomEnded = () => ObjectZoomEnded(StartCamera, movement, zooming);
+
+        // Disable the movement component
+        movement.enabled = false;
+    }
+
+    private void ObjectZoomEnded(GameObject StartCamera, CameraMovement movement, ObjectZooming zooming)
+    {
+        // Hide the hint panel
+        HintPanel.SetActive(false);
+
+        // Set the camera movement target to the original position
+        movement.Target = StartCamera;
+
+        // Set what happens when the camera movement ends
+        movement.OnMoveEnded = () => {
+            // Re-enable this component and the camera swipe component
+            enabled = m_cameraSwipe.enabled = true;
+            // Destroy the clone and the camera movement component
+            Destroy(StartCamera);
+            Destroy(movement);
+        };
+
+        // Re-enable and restart the camera movement controller to take us home
+        movement.enabled = true;
+        movement.Reset();
+
+        // Our job here is done, delete the zooming component
+        Destroy(zooming);
     }
 }

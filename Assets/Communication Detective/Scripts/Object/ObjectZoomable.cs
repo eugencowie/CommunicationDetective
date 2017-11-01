@@ -3,6 +3,5 @@
 public class ObjectZoomable : MonoBehaviour
 {
     public GameObject TargetCamera;
-    public float CameraMoveSpeed = 3f;
-    public float CameraRotationSpeed = 0.0555f;
+    public float Duration = 1f;
 }
