@@ -3,8 +3,10 @@ using System.Collections;
 using UnityEngine.EventSystems;
 
 public class Slot : MonoBehaviour, IDropHandler {
-	public GameObject item {
-		get {
+	public GameObject item
+    {
+		get
+        {
 			if(transform.childCount>0){
 				return transform.GetChild (0).gameObject;
 			}
@@ -15,10 +17,12 @@ public class Slot : MonoBehaviour, IDropHandler {
 	#region IDropHandler implementation
 	public void OnDrop (PointerEventData eventData)
 	{
-		if(!item){
-			DragHandler.itemBeingDragged.transform.SetParent (transform);
+		if(!item)
+        {
+            GameObject newObject = Instantiate(DragHandler.itemBeingDragged, DragHandler.itemBeingDragged.transform.parent);
+            newObject.transform.SetParent (transform);
 			ExecuteEvents.ExecuteHierarchy<IHasChanged>(gameObject,null,(x,y) => x.HasChanged ());
-            DragHandler.itemBeingDragged.GetComponent<DragHandler>().enabled = false;
+            newObject.GetComponent<DragHandler>().enabled = false;
 
         }
 	}

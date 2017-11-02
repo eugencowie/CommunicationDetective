@@ -25,11 +25,12 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     
     public void OnEndDrag(PointerEventData eventData)
     {
-        itemBeingDragged = null;
-        GetComponent<CanvasGroup>().blocksRaycasts = true;
+        Destroy(itemBeingDragged);
+        itemBeingDragged.GetComponent<CanvasGroup>().blocksRaycasts = true;
         if (itemBeingDragged.transform.parent == startParent)
         {
             itemBeingDragged.transform.position = startPosition;
         }
+        itemBeingDragged = null;
     }
 }
