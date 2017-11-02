@@ -12,24 +12,24 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        itemBeingDragged = gameObject;
-        startPosition = transform.position;
-        startParent = transform.parent;
-        GetComponent<CanvasGroup>().blocksRaycasts = false;
+        itemBeingDragged = Instantiate(gameObject, gameObject.transform.parent);
+        startPosition = itemBeingDragged.transform.position;
+        startParent = itemBeingDragged.transform.parent;
+        itemBeingDragged.GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
     
     public void OnDrag(PointerEventData eventData)
     {
-        transform.position = eventData.position;
+        itemBeingDragged.transform.position = eventData.position;
     }
     
     public void OnEndDrag(PointerEventData eventData)
     {
         itemBeingDragged = null;
         GetComponent<CanvasGroup>().blocksRaycasts = true;
-        if (transform.parent == startParent)
+        if (itemBeingDragged.transform.parent == startParent)
         {
-            transform.position = startPosition;
+            itemBeingDragged.transform.position = startPosition;
         }
     }
 }
