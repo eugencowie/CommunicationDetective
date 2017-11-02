@@ -1,15 +1,26 @@
-﻿using UnityEngine;
-using UnityEngine.EventSystems;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class DatabaseController : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+[Serializable]
+public class Data
 {
+    [SerializeField] public GameObject PlayerButton;
+    [SerializeField] public GameObject CluePanel;
+}
+
+
+
+public class DatabaseController : MonoBehaviour
+{
+    [SerializeField] private Data[] Data;
+
     private OnlineManager NetworkController;
     private int m_scene;
-
-    public static GameObject itemBeingDragged;
-    Vector3 startPosition;
-    Transform startParent;
 
     private void Start()
     {
@@ -19,29 +30,14 @@ public class DatabaseController : MonoBehaviour, IBeginDragHandler, IDragHandler
             if (scene > 0) m_scene = scene;
             else SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
         });
-    }
 
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        itemBeingDragged = gameObject;
-        startPosition = transform.position;
-        startParent = transform.parent;
-        //GetComponent<CanvasGroup>().blocksRaycasts = false;
-    }
-    
-    public void OnDrag(PointerEventData eventData)
-    {
-        transform.position = eventData.position;
-    }
-    
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        itemBeingDragged = null;
-        //GetComponent<CanvasGroup>().blocksRaycasts = true;
-        if (transform.parent == startParent)
+        for (int i = 0; i < Data.Length; i++)
         {
-            transform.position = startPosition;
+            Data data = Data[i];
+            data.PlayerButton.GetComponent<Button>().onClick.AddListener(() => PlayerButtonPressed(data));
         }
+
+        PlayerButtonPressed(Data[0]);
     }
 
     public void ReturnButtonPressed()
@@ -49,23 +45,22 @@ public class DatabaseController : MonoBehaviour, IBeginDragHandler, IDragHandler
         SceneManager.LoadScene(m_scene);
     }
 
-    public void Player1ButtonPressed()
+    private void PlayerButtonPressed(Data data)
     {
+        foreach (var button in Data.Select(d => d.PlayerButton))
+        {
+            ColorBlock colours = button.GetComponent<Button>().colors;
+            colours.normalColor = colours.highlightedColor = Color.white;
+            button.GetComponent<Button>().colors = colours;
+        }
+        ColorBlock colours2 = data.PlayerButton.GetComponent<Button>().colors;
+        colours2.normalColor = colours2.highlightedColor = Color.green;
+        data.PlayerButton.GetComponent<Button>().colors = colours2;
 
-    }
-
-    public void Player2ButtonPressed()
-    {
-
-    }
-
-    public void Player3ButtonPressed()
-    {
-
-    }
-
-    public void Player4ButtonPressed()
-    {
-
+        foreach (var cluePanel in Data.Select(d => d.CluePanel))
+        {
+            cluePanel.SetActive(false);
+        }
+        data.CluePanel.SetActive(true);
     }
 }
