@@ -11,9 +11,8 @@ public class Data
 {
     [SerializeField] public GameObject PlayerButton;
     [SerializeField] public GameObject CluePanel;
+    [SerializeField] public List<GameObject> Slots;
 }
-
-
 
 public class DatabaseController : MonoBehaviour
 {
