@@ -18,6 +18,7 @@ public class CameraTap : MonoBehaviour
 
     private Vector2 m_touchStartPos;
     private Vector2 m_touchEndPos;
+    private bool m_isTapping;
 
     private Camera m_camera;
     private CameraSwipe m_cameraSwipe;
@@ -33,10 +34,12 @@ public class CameraTap : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             m_touchStartPos = Input.mousePosition;
+            m_isTapping = true;
         }
 
-        if (!Input.GetMouseButton(0))
+        if (!Input.GetMouseButton(0) && m_isTapping)
         {
+            m_isTapping = false;
             m_touchEndPos = Input.mousePosition;
             TouchEnded();
         }
