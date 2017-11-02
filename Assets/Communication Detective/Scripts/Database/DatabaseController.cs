@@ -1,21 +1,23 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 [Serializable]
 public class Data
 {
-    public GameObject PlayerButton;
-    public GameObject CluePanel;
-    public GameObject[] ClueButtons;
-    public GameObject[] ClueLabels;
+    [SerializeField] public GameObject PlayerButton;
+    [SerializeField] public GameObject CluePanel;
+    [SerializeField] public GameObject[] ClueButtons;
+    [SerializeField] public GameObject[] ClueLabels;
 }
 
 public class DatabaseController : MonoBehaviour
 {
-    [SerializeField] private GameObject[] Data;
+    [SerializeField] private Data[] Data;
 
     private OnlineManager NetworkController;
     private int m_scene;
@@ -29,11 +31,11 @@ public class DatabaseController : MonoBehaviour
             else SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
         });
 
-        /*for (int i = 0; i < PlayerButtons.Length; i++)
+        for (int i = 0; i < Data.Length; i++)
         {
-            int tmp = i;
-            PlayerButtons[i].GetComponent<Button>().onClick.AddListener(() => PlayerButtonPressed(tmp));
-        }*/
+            Data data = Data[i];
+            data.PlayerButton.GetComponent<Button>().onClick.AddListener(() => PlayerButtonPressed(data));
+        }
     }
 
     public void ReturnButtonPressed()
@@ -41,18 +43,18 @@ public class DatabaseController : MonoBehaviour
         SceneManager.LoadScene(m_scene);
     }
 
-    private void PlayerButtonPressed(int buttonIndex)
+    private void PlayerButtonPressed(Data data)
     {
-        /*foreach (var button in PlayerButtons)
+        foreach (var button in Data.Select(d => d.PlayerButton))
         {
             button.SetActive(true);
         }
-        PlayerButtons[buttonIndex].SetActive(false);
+        data.PlayerButton.SetActive(false);
 
-        foreach (var cluePanel in PlayerClues)
+        foreach (var cluePanel in Data.Select(d => d.CluePanel))
         {
             cluePanel.SetActive(false);
         }
-        PlayerClues[buttonIndex].SetActive(true);*/
+        data.CluePanel.SetActive(true);
     }
 }
