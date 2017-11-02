@@ -1,4 +1,4 @@
-![Fourensics](https://github.com/eugencowie/CommunicationDetective/raw/master/Assets/Communication%20Detective/Art/Logo.png)
+![Fourensics](https://github.com/eugencowie/CommunicationDetective/raw/master/Assets/Communication%20Detective/Art/LogoWide.png)
 
 ## Download
 
