@@ -39,7 +39,7 @@ public class FancyInventory : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && EventSystem.current.IsPointerOverGameObject())
+        /*if (Input.GetMouseButtonDown(0) && EventSystem.current.IsPointerOverGameObject())
         {
             m_touchOrigin = Input.mousePosition;
             m_isSwiping = true;
@@ -60,7 +60,7 @@ public class FancyInventory : MonoBehaviour
             {
                 Scroll(movement);
             }
-        }
+        }*/
     }
 
     public void AddItem(UnityAction itemAction, ObjectHintData item)

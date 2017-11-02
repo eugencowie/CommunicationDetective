@@ -11,8 +11,6 @@ public class Data
 {
     [SerializeField] public GameObject PlayerButton;
     [SerializeField] public GameObject CluePanel;
-    [SerializeField] public GameObject[] ClueButtons;
-    [SerializeField] public GameObject[] ClueLabels;
 }
 
 public class DatabaseController : MonoBehaviour
@@ -36,6 +34,8 @@ public class DatabaseController : MonoBehaviour
             Data data = Data[i];
             data.PlayerButton.GetComponent<Button>().onClick.AddListener(() => PlayerButtonPressed(data));
         }
+
+        PlayerButtonPressed(Data[0]);
     }
 
     public void ReturnButtonPressed()
@@ -47,9 +47,13 @@ public class DatabaseController : MonoBehaviour
     {
         foreach (var button in Data.Select(d => d.PlayerButton))
         {
-            button.SetActive(true);
+            ColorBlock colours = button.GetComponent<Button>().colors;
+            colours.normalColor = colours.highlightedColor = Color.white;
+            button.GetComponent<Button>().colors = colours;
         }
-        data.PlayerButton.SetActive(false);
+        ColorBlock colours2 = data.PlayerButton.GetComponent<Button>().colors;
+        colours2.normalColor = colours2.highlightedColor = Color.green;
+        data.PlayerButton.GetComponent<Button>().colors = colours2;
 
         foreach (var cluePanel in Data.Select(d => d.CluePanel))
         {
