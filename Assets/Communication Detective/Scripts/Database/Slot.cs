@@ -15,10 +15,10 @@ public class Slot : MonoBehaviour, IDropHandler {
 	#region IDropHandler implementation
 	public void OnDrop (PointerEventData eventData)
 	{
-		//if(!item){
-		//	DatabaseController.itemBeingDragged.transform.SetParent (transform);
-		//	ExecuteEvents.ExecuteHierarchy<IHasChanged>(gameObject,null,(x,y) => x.HasChanged ());
-		//}
+		if(!item){
+			DragHandler.itemBeingDragged.transform.SetParent (transform);
+			ExecuteEvents.ExecuteHierarchy<IHasChanged>(gameObject,null,(x,y) => x.HasChanged ());
+		}
 	}
 	#endregion
 }
