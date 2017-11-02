@@ -1,7 +1,7 @@
 fileFormatVersion: 2
-guid: 81a1e50b9b2481b42a01dd19c831ecca
-timeCreated: 1509449547
-licenseType: Pro
+guid: fa659bb9eb7df2b428226f5752a566ef
+timeCreated: 1508882634
+licenseType: Free
 ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
@@ -22,6 +22,9 @@ ModelImporter:
     4300000: Back rest
     4300002: Furniture Leg002
     4300004: Furniture Leg003
+    6400000: Back rest
+    6400002: Furniture Leg002
+    6400004: Furniture Leg003
     9500000: //RootNode
   materials:
     importMaterials: 1
