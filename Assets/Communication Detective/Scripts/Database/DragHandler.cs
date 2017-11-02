@@ -10,27 +10,41 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     Vector3 startPosition;
     Transform startParent;
 
+    private void Start()
+    {
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
-        itemBeingDragged = Instantiate(gameObject, gameObject.transform.parent);
-        startPosition = itemBeingDragged.transform.position;
-        startParent = itemBeingDragged.transform.parent;
-        itemBeingDragged.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        if (enabled)
+        {
+            itemBeingDragged = Instantiate(gameObject, gameObject.transform.parent);
+            itemBeingDragged.name = gameObject.name;
+            startPosition = itemBeingDragged.transform.position;
+            startParent = itemBeingDragged.transform.parent;
+            //itemBeingDragged.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        }
     }
     
     public void OnDrag(PointerEventData eventData)
     {
-        itemBeingDragged.transform.position = eventData.position;
+        if (enabled)
+        {
+            itemBeingDragged.transform.position = eventData.position;
+        }
     }
     
     public void OnEndDrag(PointerEventData eventData)
     {
-        Destroy(itemBeingDragged);
-        itemBeingDragged.GetComponent<CanvasGroup>().blocksRaycasts = true;
-        if (itemBeingDragged.transform.parent == startParent)
+        if (enabled)
         {
-            itemBeingDragged.transform.position = startPosition;
+            Destroy(itemBeingDragged);
+            //itemBeingDragged.GetComponent<CanvasGroup>().blocksRaycasts = true;
+            if (itemBeingDragged.transform.parent == startParent)
+            {
+                itemBeingDragged.transform.position = startPosition;
+            }
+            itemBeingDragged = null;
         }
-        itemBeingDragged = null;
     }
 }
