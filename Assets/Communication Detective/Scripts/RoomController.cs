@@ -31,6 +31,6 @@ public class RoomController : MonoBehaviour
 
     public void DatabaseButtonPressed()
     {
-        SceneManager.LoadScene("Communication Detective/Scenes/FancyDatabase");
+        SceneManager.LoadScene("Communication Detective/Scenes/Database");
     }
 }

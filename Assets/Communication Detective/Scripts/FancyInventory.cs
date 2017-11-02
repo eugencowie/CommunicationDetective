@@ -77,6 +77,10 @@ public class FancyInventory : MonoBehaviour
             GameObject newSlot = Instantiate(SlotTemplate);
             newSlot.name = item.Name;
 
+            // Set initial transform
+            newSlot.transform.SetParent(transform);
+            newSlot.transform.localScale = Vector3.one;
+
             // Set click method
             foreach (Transform t in newSlot.transform)
             {
@@ -91,8 +95,6 @@ public class FancyInventory : MonoBehaviour
                 }
             }
             
-            // Set initial transform
-            newSlot.transform.SetParent(transform);
 
             // Set button text
             foreach (Transform t in newSlot.transform)
