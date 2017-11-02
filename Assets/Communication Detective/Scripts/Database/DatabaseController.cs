@@ -13,6 +13,8 @@ public class Data
     [SerializeField] public GameObject CluePanel;
 }
 
+
+
 public class DatabaseController : MonoBehaviour
 {
     [SerializeField] private Data[] Data;
