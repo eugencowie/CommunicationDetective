@@ -62,4 +62,9 @@ public class DatabaseController : MonoBehaviour
         }
         data.CluePanel.SetActive(true);
     }
+
+    public void UploadItem(int slot, ObjectHintData hint)
+    {
+        NetworkController.UploadDatabaseItem(slot, hint);
+    }
 }

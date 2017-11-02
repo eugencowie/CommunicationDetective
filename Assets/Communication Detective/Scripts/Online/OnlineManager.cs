@@ -241,6 +241,17 @@ public class OnlineManager
 
     #endregion
 
+    #region Async database methods
+
+    public void UploadDatabaseItem(int slot, ObjectHintData hint)
+    {
+        m_player.Clues.Clues[slot-1].Name.Value = hint.Name;
+        m_player.Clues.Clues[slot-1].Hint.Value = hint.Hint;
+        m_player.Clues.Clues[slot-1].PushEntries();
+    }
+
+    #endregion
+
     #region Listeners
 
     public void RegisterListener(string path, EventHandler<ValueChangedEventArgs> listener)
