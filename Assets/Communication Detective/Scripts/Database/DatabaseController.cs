@@ -1,19 +1,24 @@
-﻿using UnityEngine;
-using UnityEngine.EventSystems;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
-public class DatabaseController : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+[Serializable]
+public class Data
 {
-    [SerializeField] private GameObject[] PlayerButtons;
-    [SerializeField] private GameObject[] PlayerClues;
+    public GameObject PlayerButton;
+    public GameObject CluePanel;
+    public GameObject[] ClueButtons;
+    public GameObject[] ClueLabels;
+}
+
+public class DatabaseController : MonoBehaviour
+{
+    [SerializeField] private GameObject[] Data;
 
     private OnlineManager NetworkController;
     private int m_scene;
-
-    //public static GameObject itemBeingDragged;
-    //Vector3 startPosition;
-    //Transform startParent;
 
     private void Start()
     {
@@ -24,34 +29,11 @@ public class DatabaseController : MonoBehaviour, IBeginDragHandler, IDragHandler
             else SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
         });
 
-        for (int i = 0; i < PlayerButtons.Length; i++)
+        /*for (int i = 0; i < PlayerButtons.Length; i++)
         {
             int tmp = i;
             PlayerButtons[i].GetComponent<Button>().onClick.AddListener(() => PlayerButtonPressed(tmp));
-        }
-    }
-
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        //itemBeingDragged = gameObject;
-        //startPosition = transform.position;
-        //startParent = transform.parent;
-        //GetComponent<CanvasGroup>().blocksRaycasts = false;
-    }
-    
-    public void OnDrag(PointerEventData eventData)
-    {
-        //transform.position = eventData.position;
-    }
-    
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        //itemBeingDragged = null;
-        //GetComponent<CanvasGroup>().blocksRaycasts = true;
-        //if (transform.parent == startParent)
-        //{
-        //    transform.position = startPosition;
-        //}
+        }*/
     }
 
     public void ReturnButtonPressed()
@@ -61,7 +43,7 @@ public class DatabaseController : MonoBehaviour, IBeginDragHandler, IDragHandler
 
     private void PlayerButtonPressed(int buttonIndex)
     {
-        foreach (var button in PlayerButtons)
+        /*foreach (var button in PlayerButtons)
         {
             button.SetActive(true);
         }
@@ -71,6 +53,6 @@ public class DatabaseController : MonoBehaviour, IBeginDragHandler, IDragHandler
         {
             cluePanel.SetActive(false);
         }
-        PlayerClues[buttonIndex].SetActive(true);
+        PlayerClues[buttonIndex].SetActive(true);*/
     }
 }
