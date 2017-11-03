@@ -17,6 +17,7 @@ public class Data
 public class DatabaseController : MonoBehaviour
 {
     [SerializeField] private Data[] Data;
+    [SerializeField] private GameObject ButtonTemplate;
 
     private OnlineManager NetworkController;
     private string m_lobby;
@@ -80,8 +81,25 @@ public class DatabaseController : MonoBehaviour
         {
             int tmp = i;
             NetworkController.DownloadClues(m_lobby, tmp, player => {
-                int tmp2 = tmp + 1;
-                Debug.Log(string.Format("Got player {0} clues, count = {1}", tmp2, player.Clues.Clues.Length));
+                for (int j = 0; j < player.Clues.Clues.Length; j++) {
+                    int tmp2 = j;
+                    var clue = player.Clues.Clues[tmp2];
+                    if (!string.IsNullOrEmpty(clue.Name.Value)) {
+                        var slot = Data[tmp].Slots[tmp2];
+                        foreach (Transform t in slot.transform) Destroy(t.gameObject);
+                        var newObj = Instantiate(ButtonTemplate, slot.transform);
+                        newObj.SetActive(true);
+                        newObj.name = clue.Name.Value;
+                        newObj.transform.SetParent(slot.transform);
+                        foreach (Transform t in newObj.transform) {
+                                if (t.gameObject.GetComponent<Text>() != null) {
+                                    t.gameObject.GetComponent<Text>().text = clue.Name.Value;
+                                }
+                        }
+                        newObj.GetComponent<DragHandler>().enabled = false;
+                        slot.GetComponent<Slot>().Text.GetComponent<Text>().text = clue.Hint.Value;
+                    }
+                }
             });
         }
     }

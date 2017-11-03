@@ -53,7 +53,7 @@ public abstract class OnlineDatabaseNode
     /// </summary>
     public void PullEntries(Action<bool> returnSuccess=null)
     {
-        OnlineDatabase.ValidateAction(ref returnSuccess, string.Format("[{0}].PullEntries()", Key));
+        OnlineDatabase.ValidateAction(ref returnSuccess);
 
         Action<bool> returnHandler = ReturnHandler(Entries.Length, returnSuccess);
 
@@ -69,7 +69,7 @@ public abstract class OnlineDatabaseNode
     /// </summary>
     public void PushEntries(Action<bool> returnSuccess=null)
     {
-        OnlineDatabase.ValidateAction(ref returnSuccess, string.Format("[{0}].PushEntries()", Key));
+        OnlineDatabase.ValidateAction(ref returnSuccess);
 
         Action<bool> returnHandler = ReturnHandler(Entries.Length, returnSuccess);
 
@@ -85,7 +85,7 @@ public abstract class OnlineDatabaseNode
     /// </summary>
     public void DeleteEntries(Action<bool> returnSuccess=null)
     {
-        OnlineDatabase.ValidateAction(ref returnSuccess, string.Format("[{0}].DeleteEntries()", Key));
+        OnlineDatabase.ValidateAction(ref returnSuccess);
 
         Action<bool> returnHandler = ReturnHandler(Entries.Length, returnSuccess);
 
