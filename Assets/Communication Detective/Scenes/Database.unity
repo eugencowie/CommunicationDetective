@@ -1404,7 +1404,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 4.007202, y: 0}
+  m_AnchoredPosition: {x: 4.007324, y: 0}
   m_SizeDelta: {x: 300, y: 789.2755}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &785971221
@@ -1629,6 +1629,7 @@ MonoBehaviour:
     - {fileID: 951822739}
     - {fileID: 644801528}
     - {fileID: 412858663}
+  ButtonTemplate: {fileID: 2144606993}
 --- !u!1 &934558686 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1636112668735474, guid: efbd59ba03a8e7f47aec5d853eec8f0a,
@@ -3298,7 +3299,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 33.32988, y: 0}
+  m_AnchoredPosition: {x: 33.33008, y: 0}
   m_SizeDelta: {x: 400, y: 780}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1588348442
