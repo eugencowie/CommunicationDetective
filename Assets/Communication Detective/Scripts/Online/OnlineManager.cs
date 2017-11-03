@@ -259,6 +259,8 @@ public class OnlineManager
             if (success) {
                 List<string> players = m_lobby.Players.Value.Split(',').ToList();
                 players.RemoveAll(s => string.IsNullOrEmpty(s));
+                players.Remove(m_player.Id);
+                players.Insert(0, m_player.Id);
                 if (playerNb < players.Count) {
                     Player player = new Player(m_database, players[playerNb]);
                     player.Clues.PullEntries(pullSuccess => {
