@@ -84,21 +84,24 @@ public class DatabaseController : MonoBehaviour
                 for (int j = 0; j < player.Clues.Clues.Length; j++) {
                     int tmp2 = j;
                     var clue = player.Clues.Clues[tmp2];
-                    if (!string.IsNullOrEmpty(clue.Name.Value)) {
-                        var slot = Data[tmp].Slots[tmp2];
-                        foreach (Transform t in slot.transform) Destroy(t.gameObject);
-                        var newObj = Instantiate(ButtonTemplate, ButtonTemplate.transform.parent);
-                        newObj.SetActive(true);
-                        newObj.name = clue.Name.Value;
-                        newObj.transform.SetParent(slot.transform);
-                        foreach (Transform t in newObj.transform) {
+                    clue.PullEntries(_ => {
+                        if (!string.IsNullOrEmpty(clue.Name.Value)) {
+                            Debug.Log(string.Format("Player {0}, slot {1}: {2}", tmp, tmp2, clue.Name.Value));
+                            var slot = Data[tmp].Slots[tmp2];
+                            foreach (Transform t in slot.transform) if (t.gameObject.name == clue.Name.Value) Destroy(t.gameObject);
+                            var newObj = Instantiate(ButtonTemplate, ButtonTemplate.transform.parent);
+                            newObj.SetActive(true);
+                            newObj.name = clue.Name.Value;
+                            newObj.transform.SetParent(slot.transform);
+                            foreach (Transform t in newObj.transform) {
                                 if (t.gameObject.GetComponent<Text>() != null) {
                                     t.gameObject.GetComponent<Text>().text = clue.Name.Value;
                                 }
+                            }
+                            newObj.GetComponent<DragHandler>().enabled = false;
+                            slot.GetComponent<Slot>().Text.GetComponent<Text>().text = clue.Hint.Value;
                         }
-                        newObj.GetComponent<DragHandler>().enabled = false;
-                        slot.GetComponent<Slot>().Text.GetComponent<Text>().text = clue.Hint.Value;
-                    }
+                    });
                 }
             });
         }
