@@ -87,7 +87,7 @@ public class DatabaseController : MonoBehaviour
                     if (!string.IsNullOrEmpty(clue.Name.Value)) {
                         var slot = Data[tmp].Slots[tmp2];
                         foreach (Transform t in slot.transform) Destroy(t.gameObject);
-                        var newObj = Instantiate(ButtonTemplate, slot.transform);
+                        var newObj = Instantiate(ButtonTemplate, ButtonTemplate.transform.parent);
                         newObj.SetActive(true);
                         newObj.name = clue.Name.Value;
                         newObj.transform.SetParent(slot.transform);
