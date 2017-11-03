@@ -28,7 +28,7 @@ public abstract class OnlineDatabaseNode
     /// <summary>
     /// An enumerable collection of database entries.
     /// </summary>
-    protected abstract IEnumerable<OnlineDatabaseEntry> Entries { get; }
+    protected abstract OnlineDatabaseEntry[] Entries { get; }
 
     /// <summary>
     /// Checks if the key exists in the database. This is an asynchronous operation which will call
@@ -52,11 +52,13 @@ public abstract class OnlineDatabaseNode
     /// Pulls all entries from the database. This is an asynchronous operation which will call
     /// the specified action on completion.
     /// </summary>
-    public void PullEntries()
+    public void PullEntries(Action<bool> returnSuccess=null)
     {
+        OnlineDatabase.ValidateAction(ref returnSuccess, string.Format("[{0}].PullEntries()", Key));
+
         foreach (var entry in Entries)
         {
-            entry.Pull();
+            entry.Pull(ReturnHandler(Entries.Length, returnSuccess));
         }
     }
 
@@ -64,11 +66,13 @@ public abstract class OnlineDatabaseNode
     /// Pushes all entries to the database. This is an asynchronous operation which will call
     /// the specified action on completion.
     /// </summary>
-    public void PushEntries()
+    public void PushEntries(Action<bool> returnSuccess=null)
     {
+        OnlineDatabase.ValidateAction(ref returnSuccess, string.Format("[{0}].PushEntries()", Key));
+
         foreach (var entry in Entries)
         {
-            entry.Push();
+            entry.Push(ReturnHandler(Entries.Length, returnSuccess));
         }
     }
 
@@ -76,11 +80,24 @@ public abstract class OnlineDatabaseNode
     /// Deletes all entries from the database. This is an asynchronous operation which will call
     /// the specified action on completion.
     /// </summary>
-    public void DeleteEntries()
+    public void DeleteEntries(Action<bool> returnSuccess=null)
     {
+        OnlineDatabase.ValidateAction(ref returnSuccess, string.Format("[{0}].DeleteEntries()", Key));
+
         foreach (var entry in Entries)
         {
-            entry.Delete();
+            entry.Delete(ReturnHandler(Entries.Length, returnSuccess));
         }
+    }
+
+    private Action<bool> ReturnHandler(int count, Action<bool> returnSuccess)
+    {
+        int progress = 0;
+        bool total = true;
+        return success => {
+            progress++;
+            if (!success) total = false;
+            if (progress >= count) returnSuccess(total);
+        };
     }
 }

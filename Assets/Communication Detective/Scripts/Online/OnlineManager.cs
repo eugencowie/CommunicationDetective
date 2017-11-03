@@ -250,6 +250,28 @@ public class OnlineManager
         m_player.Clues.Clues[slot-1].PushEntries();
     }
 
+    public void DownloadClues(string code, int playerNb, Action<Player> returnPlayer)
+    {
+        OnlineDatabase.ValidateAction(ref returnPlayer);
+
+        m_lobby = new Lobby(m_database, code); // TODO
+        m_lobby.Players.Pull(success => {
+            if (success) {
+                List<string> players = m_lobby.Players.Value.Split(',').ToList();
+                players.RemoveAll(s => string.IsNullOrEmpty(s));
+                if (players.Count > playerNb - 1) {
+                    Player player = new Player(m_database, players[playerNb - 1]);
+                    player.Clues.PullEntries(pullSuccess => {
+                        if (success) returnPlayer(player);
+                        else returnPlayer(null);
+                    });
+                }
+                else returnPlayer(null);
+            }
+            else returnPlayer(null);
+        });
+    }
+
     #endregion
 
     #region Listeners

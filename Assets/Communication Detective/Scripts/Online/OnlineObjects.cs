@@ -26,7 +26,7 @@ public class Player : OnlineDatabaseNode
     /// <summary>
     /// An enumerable collection of database entries.
     /// </summary>
-    protected override IEnumerable<OnlineDatabaseEntry> Entries
+    protected override OnlineDatabaseEntry[] Entries
     {
         get { return new OnlineDatabaseEntry[] { Lobby, Scene }; }
     }
@@ -58,7 +58,7 @@ public class Lobby : OnlineDatabaseNode
     /// <summary>
     /// An enumerable collection of database entries.
     /// </summary>
-    protected override IEnumerable<OnlineDatabaseEntry> Entries
+    protected override OnlineDatabaseEntry[] Entries
     {
         get { return new OnlineDatabaseEntry[] { CreatedTime, Players, State }; }
     }
@@ -90,7 +90,7 @@ public class PlayerClues : OnlineDatabaseNode
     /// <summary>
     /// An enumerable collection of database entries.
     /// </summary>
-    protected override IEnumerable<OnlineDatabaseEntry> Entries
+    protected override OnlineDatabaseEntry[] Entries
     {
         get { return new OnlineDatabaseEntry[] { }; }
     }
@@ -114,7 +114,7 @@ public class PlayerClue : OnlineDatabaseNode
     /// <summary>
     /// An enumerable collection of database entries.
     /// </summary>
-    protected override IEnumerable<OnlineDatabaseEntry> Entries
+    protected override OnlineDatabaseEntry[] Entries
     {
         get { return new OnlineDatabaseEntry[] { Name, Hint }; }
     }

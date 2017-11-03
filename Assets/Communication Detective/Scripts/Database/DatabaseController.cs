@@ -19,11 +19,17 @@ public class DatabaseController : MonoBehaviour
     [SerializeField] private Data[] Data;
 
     private OnlineManager NetworkController;
+    private string m_lobby;
     private int m_scene;
 
     private void Start()
     {
         NetworkController = new OnlineManager();
+
+        NetworkController.GetPlayerLobby(lobby => {
+            if (!string.IsNullOrEmpty(lobby)) { m_lobby = lobby; DownloadItems(); }
+            else SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
+        });
 
         NetworkController.GetPlayerScene(scene => {
             if (scene > 0) m_scene = scene;
@@ -66,5 +72,15 @@ public class DatabaseController : MonoBehaviour
     public void UploadItem(int slot, ObjectHintData hint)
     {
         NetworkController.UploadDatabaseItem(slot, hint);
+    }
+
+    private void DownloadItems()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            NetworkController.DownloadClues(m_lobby, i + 1, player => {
+                Debug.Log(string.Format("Got player {0} clues, count = {1}", i+1, player.Clues.Clues.Length));
+            });
+        }
     }
 }
