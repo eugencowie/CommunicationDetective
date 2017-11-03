@@ -159,7 +159,7 @@ public class OnlineManager
         // 'lobbies/{1}/players' back up (unless there are no players left, then delete the lobby).
         m_player.Delete(success1 => {
             if (success1) {
-                m_lobby = new Lobby(m_database, code); // TODO
+                //m_lobby = new Lobby(m_database, code); // TODO
                 m_lobby.Players.Pull(success2 => {
                     if (success2) {
                         //List<string> layers = m_lobby.Players.Value.Split(',').ToList();
@@ -186,7 +186,7 @@ public class OnlineManager
     {
         OnlineDatabase.ValidateAction(ref returnError, string.Format("CanStartGame({0}, {1})", code, requiredPlayers));
 
-        m_lobby = new Lobby(m_database, code); // TODO
+        //m_lobby = new Lobby(m_database, code); // TODO
         m_lobby.Players.Pull(success => {
             if (success) {
                 List<string> players = m_lobby.Players.Value.Split(',').ToList();
@@ -206,7 +206,7 @@ public class OnlineManager
     {
         OnlineDatabase.ValidateAction(ref returnSuccess, string.Format("SetLobbyState({0}, {1})", code, state));
 
-        m_lobby = new Lobby(m_database, code); // TODO
+        //m_lobby = new Lobby(m_database, code); // TODO
         m_lobby.State.Value = ((int)state).ToString();
         m_lobby.State.Push(returnSuccess);
     }
@@ -218,7 +218,7 @@ public class OnlineManager
     {
         OnlineDatabase.ValidateAction(ref returnScene, string.Format("AssignPlayerScenes({0})", code));
 
-        m_lobby = new Lobby(m_database, code); // TODO
+        //m_lobby = new Lobby(m_database, code); // TODO
         m_lobby.Players.Pull(success => {
             if (success) {
                 List<string> players = m_lobby.Players.Value.Split(',').ToList();
@@ -254,13 +254,13 @@ public class OnlineManager
     {
         OnlineDatabase.ValidateAction(ref returnPlayer);
 
-        m_lobby = new Lobby(m_database, code); // TODO
+        //m_lobby = new Lobby(m_database, code); // TODO
         m_lobby.Players.Pull(success => {
             if (success) {
                 List<string> players = m_lobby.Players.Value.Split(',').ToList();
                 players.RemoveAll(s => string.IsNullOrEmpty(s));
-                if (players.Count > playerNb - 1) {
-                    Player player = new Player(m_database, players[playerNb - 1]);
+                if (playerNb < players.Count) {
+                    Player player = new Player(m_database, players[playerNb]);
                     player.Clues.PullEntries(pullSuccess => {
                         if (success) returnPlayer(player);
                         else returnPlayer(null);

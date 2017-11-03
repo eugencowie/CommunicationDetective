@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>
 /// Represents a node in the database which contains a collection of database entries.
@@ -26,7 +27,7 @@ public class Player : OnlineDatabaseNode
     /// <summary>
     /// An enumerable collection of database entries.
     /// </summary>
-    protected override OnlineDatabaseEntry[] Entries
+    public override OnlineDatabaseEntry[] Entries
     {
         get { return new OnlineDatabaseEntry[] { Lobby, Scene }; }
     }
@@ -58,7 +59,7 @@ public class Lobby : OnlineDatabaseNode
     /// <summary>
     /// An enumerable collection of database entries.
     /// </summary>
-    protected override OnlineDatabaseEntry[] Entries
+    public override OnlineDatabaseEntry[] Entries
     {
         get { return new OnlineDatabaseEntry[] { CreatedTime, Players, State }; }
     }
@@ -90,9 +91,13 @@ public class PlayerClues : OnlineDatabaseNode
     /// <summary>
     /// An enumerable collection of database entries.
     /// </summary>
-    protected override OnlineDatabaseEntry[] Entries
+    public override OnlineDatabaseEntry[] Entries
     {
-        get { return new OnlineDatabaseEntry[] { }; }
+        get {
+            List<OnlineDatabaseEntry> list = new List<OnlineDatabaseEntry>();
+            foreach (var clue in Clues) list.AddRange(clue.Entries);
+            return list.ToArray();
+        }
     }
 }
 
@@ -114,7 +119,7 @@ public class PlayerClue : OnlineDatabaseNode
     /// <summary>
     /// An enumerable collection of database entries.
     /// </summary>
-    protected override OnlineDatabaseEntry[] Entries
+    public override OnlineDatabaseEntry[] Entries
     {
         get { return new OnlineDatabaseEntry[] { Name, Hint }; }
     }

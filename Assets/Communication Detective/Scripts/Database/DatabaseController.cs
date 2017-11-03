@@ -78,8 +78,10 @@ public class DatabaseController : MonoBehaviour
     {
         for (int i = 0; i < 4; i++)
         {
-            NetworkController.DownloadClues(m_lobby, i + 1, player => {
-                Debug.Log(string.Format("Got player {0} clues, count = {1}", i+1, player.Clues.Clues.Length));
+            int tmp = i;
+            NetworkController.DownloadClues(m_lobby, tmp, player => {
+                int tmp2 = tmp + 1;
+                Debug.Log(string.Format("Got player {0} clues, count = {1}", tmp2, player.Clues.Clues.Length));
             });
         }
     }

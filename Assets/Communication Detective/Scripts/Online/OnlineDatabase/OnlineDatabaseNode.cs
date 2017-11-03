@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 /// <summary>
 /// Represents a node in the database which contains a collection of database entries.
@@ -28,7 +27,7 @@ public abstract class OnlineDatabaseNode
     /// <summary>
     /// An enumerable collection of database entries.
     /// </summary>
-    protected abstract OnlineDatabaseEntry[] Entries { get; }
+    public abstract OnlineDatabaseEntry[] Entries { get; }
 
     /// <summary>
     /// Checks if the key exists in the database. This is an asynchronous operation which will call
@@ -56,9 +55,11 @@ public abstract class OnlineDatabaseNode
     {
         OnlineDatabase.ValidateAction(ref returnSuccess, string.Format("[{0}].PullEntries()", Key));
 
+        Action<bool> returnHandler = ReturnHandler(Entries.Length, returnSuccess);
+
         foreach (var entry in Entries)
         {
-            entry.Pull(ReturnHandler(Entries.Length, returnSuccess));
+            entry.Pull(returnHandler);
         }
     }
 
@@ -70,9 +71,11 @@ public abstract class OnlineDatabaseNode
     {
         OnlineDatabase.ValidateAction(ref returnSuccess, string.Format("[{0}].PushEntries()", Key));
 
+        Action<bool> returnHandler = ReturnHandler(Entries.Length, returnSuccess);
+
         foreach (var entry in Entries)
         {
-            entry.Push(ReturnHandler(Entries.Length, returnSuccess));
+            entry.Push(returnHandler);
         }
     }
 
@@ -84,9 +87,11 @@ public abstract class OnlineDatabaseNode
     {
         OnlineDatabase.ValidateAction(ref returnSuccess, string.Format("[{0}].DeleteEntries()", Key));
 
+        Action<bool> returnHandler = ReturnHandler(Entries.Length, returnSuccess);
+
         foreach (var entry in Entries)
         {
-            entry.Delete(ReturnHandler(Entries.Length, returnSuccess));
+            entry.Delete(returnHandler);
         }
     }
 
@@ -97,7 +102,7 @@ public abstract class OnlineDatabaseNode
         return success => {
             progress++;
             if (!success) total = false;
-            if (progress >= count) returnSuccess(total);
+            if (progress >= count-1) returnSuccess(total);
         };
     }
 }
