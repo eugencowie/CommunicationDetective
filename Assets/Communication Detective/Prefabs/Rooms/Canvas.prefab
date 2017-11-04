@@ -1091,7 +1091,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114886653235284760}
-        m_MethodName: LeaveButtonPressed
+        m_MethodName: DatabaseButtonPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

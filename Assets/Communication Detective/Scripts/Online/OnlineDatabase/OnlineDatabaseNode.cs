@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 /// <summary>
 /// Represents a node in the database which contains a collection of database entries.
@@ -28,7 +27,7 @@ public abstract class OnlineDatabaseNode
     /// <summary>
     /// An enumerable collection of database entries.
     /// </summary>
-    protected abstract IEnumerable<OnlineDatabaseEntry> Entries { get; }
+    public abstract OnlineDatabaseEntry[] Entries { get; }
 
     /// <summary>
     /// Checks if the key exists in the database. This is an asynchronous operation which will call
@@ -52,11 +51,15 @@ public abstract class OnlineDatabaseNode
     /// Pulls all entries from the database. This is an asynchronous operation which will call
     /// the specified action on completion.
     /// </summary>
-    public void PullEntries()
+    public void PullEntries(Action<bool> returnSuccess=null)
     {
+        OnlineDatabase.ValidateAction(ref returnSuccess);
+
+        Action<bool> returnHandler = ReturnHandler(Entries.Length, returnSuccess);
+
         foreach (var entry in Entries)
         {
-            entry.Pull();
+            entry.Pull(returnHandler);
         }
     }
 
@@ -64,11 +67,15 @@ public abstract class OnlineDatabaseNode
     /// Pushes all entries to the database. This is an asynchronous operation which will call
     /// the specified action on completion.
     /// </summary>
-    public void PushEntries()
+    public void PushEntries(Action<bool> returnSuccess=null)
     {
+        OnlineDatabase.ValidateAction(ref returnSuccess);
+
+        Action<bool> returnHandler = ReturnHandler(Entries.Length, returnSuccess);
+
         foreach (var entry in Entries)
         {
-            entry.Push();
+            entry.Push(returnHandler);
         }
     }
 
@@ -76,11 +83,26 @@ public abstract class OnlineDatabaseNode
     /// Deletes all entries from the database. This is an asynchronous operation which will call
     /// the specified action on completion.
     /// </summary>
-    public void DeleteEntries()
+    public void DeleteEntries(Action<bool> returnSuccess=null)
     {
+        OnlineDatabase.ValidateAction(ref returnSuccess);
+
+        Action<bool> returnHandler = ReturnHandler(Entries.Length, returnSuccess);
+
         foreach (var entry in Entries)
         {
-            entry.Delete();
+            entry.Delete(returnHandler);
         }
+    }
+
+    private Action<bool> ReturnHandler(int count, Action<bool> returnSuccess)
+    {
+        int progress = 0;
+        bool total = true;
+        return success => {
+            progress++;
+            if (!success) total = false;
+            if (progress >= count-1) returnSuccess(total);
+        };
     }
 }

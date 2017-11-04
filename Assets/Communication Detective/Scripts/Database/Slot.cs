@@ -18,19 +18,32 @@ public class Slot : MonoBehaviour, IDropHandler {
 
     public GameObject Text;
 
+    public DatabaseController DatabaseController;
+
+    [Range(1,6)]
+    public int SlotNumber;
+
 	#region IDropHandler implementation
 	public void OnDrop (PointerEventData eventData)
 	{
-		if(!item)
+		if (item == null)
         {
-            GameObject newObject = Instantiate(DragHandler.itemBeingDragged, DragHandler.itemBeingDragged.transform.parent);
-            newObject.name = DragHandler.itemBeingDragged.name;
-            newObject.transform.SetParent (transform);
-			ExecuteEvents.ExecuteHierarchy<IHasChanged>(gameObject,null,(x,y) => x.HasChanged ());
+            string newName = DragHandler.itemBeingDragged.name;
+            if (StaticInventory.Hints.Any(h => h.Name == newName))
+            {
+                ObjectHintData hint = StaticInventory.Hints.First(h => h.Name == newName);
 
-            newObject.GetComponent<DragHandler>().enabled = false;
+                GameObject newObject = Instantiate(DragHandler.itemBeingDragged, DragHandler.itemBeingDragged.transform.parent);
+                newObject.name = DragHandler.itemBeingDragged.name;
+                newObject.transform.SetParent(transform);
+                ExecuteEvents.ExecuteHierarchy<IHasChanged>(gameObject, null, (x, y) => x.HasChanged());
 
-            Text.GetComponent<Text>().text = StaticInventory.Hints.First(h => h.Name == newObject.name).Hint;
+                newObject.GetComponent<DragHandler>().enabled = false;
+
+                Text.GetComponent<Text>().text = hint.Hint;
+
+                DatabaseController.UploadItem(SlotNumber, hint);
+            }
         }
 	}
 	#endregion
