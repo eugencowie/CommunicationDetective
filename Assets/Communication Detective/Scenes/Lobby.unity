@@ -332,7 +332,7 @@ Prefab:
     - target: {fileID: 114127063109521598, guid: dbc1977526a9c1f47a67ade17df7eb62,
         type: 2}
       propertyPath: RequiredPlayers
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbc1977526a9c1f47a67ade17df7eb62, type: 2}
