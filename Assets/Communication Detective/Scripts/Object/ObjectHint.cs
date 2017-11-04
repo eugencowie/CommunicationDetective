@@ -16,4 +16,5 @@ public class ObjectHint : MonoBehaviour
 {
     public string Name = "";
     public string Hint = "";
+    public Texture2D Image = null;
 }
