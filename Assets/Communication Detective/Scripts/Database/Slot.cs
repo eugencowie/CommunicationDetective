@@ -16,6 +16,8 @@ public class Slot : MonoBehaviour, IDropHandler {
 		}
 	}
 
+    public bool CanDrop = false;
+
     public GameObject Text;
 
     public DatabaseController DatabaseController;
@@ -26,7 +28,7 @@ public class Slot : MonoBehaviour, IDropHandler {
 	#region IDropHandler implementation
 	public void OnDrop (PointerEventData eventData)
 	{
-		if (item == null)
+		if (item == null && CanDrop)
         {
             string newName = DragHandler.itemBeingDragged.name;
             if (StaticInventory.Hints.Any(h => h.Name == newName))
