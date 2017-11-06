@@ -197,6 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Coffee table
   Hint: Stained, old coffee table with bottles on it. Looks damaged.
+  Image: {fileID: 0}
 --- !u!4 &58994852 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: ec5ef463ac20ffb4e808be3a223a36a0, type: 3}
@@ -692,6 +693,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Smartphone
   Hint: 'Text message sent to Raymond: "Thanks for backing me in court."'
+  Image: {fileID: 0}
 --- !u!114 &247476649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -767,6 +769,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Alcohol Bottles
   Hint: The victim could be an alcoholic with so many empty bottles around.
+  Image: {fileID: 0}
 --- !u!1 &294997881
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,6 +930,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Toy
   Hint: The victim does not have any children. The toy looks worn and used.
+  Image: {fileID: 0}
 --- !u!65 &402552157
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1094,6 +1098,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Bin
   Hint: Dirty bin, looks like it was emptied recently
+  Image: {fileID: 0}
 --- !u!4 &467063411 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: ec5ef463ac20ffb4e808be3a223a36a0, type: 3}
@@ -1661,6 +1666,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Door
   Hint: The door looks damaged and dirty
+  Image: {fileID: 0}
 --- !u!1001 &703307492
 Prefab:
   m_ObjectHideFlags: 0
@@ -1754,6 +1760,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Wallet
   Hint: The victim`s name is Tim Warner
+  Image: {fileID: 21300000, guid: 694afc79076e0784580c3e61832611d2, type: 3}
 --- !u!65 &715193939
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2132,6 +2139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Couch
   Hint: Stained, dirty couch. Various traces of fluid found on it. Damaged.
+  Image: {fileID: 0}
 --- !u!1 &849839268
 GameObject:
   m_ObjectHideFlags: 0
@@ -2666,6 +2674,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Keys
   Hint: One for the door, but the other two does not fit anywhere...
+  Image: {fileID: 0}
 --- !u!114 &1098546879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3213,6 +3222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Cigarettes
   Hint: Unopened pack of cigarettes. Bought recently.
+  Image: {fileID: 21300000, guid: 9819e1cd74f7c6744ac8026f99ac3e4b, type: 3}
 --- !u!1 &1410652371
 GameObject:
   m_ObjectHideFlags: 0
@@ -4027,6 +4037,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: TV
   Hint: It`s turned off.
+  Image: {fileID: 0}
 --- !u!1 &1868196017
 GameObject:
   m_ObjectHideFlags: 0
@@ -4115,6 +4126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Bloody footprint
   Hint: Consistent circular marks next to the left foot`s mark.
+  Image: {fileID: 0}
 --- !u!65 &1868196022
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4249,6 +4261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Body
   Hint: Knife wound in the chest.
+  Image: {fileID: 0}
 --- !u!114 &2013817717
 MonoBehaviour:
   m_ObjectHideFlags: 0

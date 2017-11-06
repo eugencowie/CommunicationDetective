@@ -247,6 +247,7 @@ public class OnlineManager
     {
         m_player.Clues.Clues[slot-1].Name.Value = hint.Name;
         m_player.Clues.Clues[slot-1].Hint.Value = hint.Hint;
+        m_player.Clues.Clues[slot-1].Image.Value = hint.Image;
         m_player.Clues.Clues[slot-1].PushEntries();
     }
 

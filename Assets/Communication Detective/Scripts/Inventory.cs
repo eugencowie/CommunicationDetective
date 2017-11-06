@@ -71,7 +71,7 @@ public class Inventory : MonoBehaviour
             // Add item to static inventory
             if (!StaticInventory.Hints.Any(h => h.Name == item.Name))
             {
-                StaticInventory.Hints.Add(new ObjectHintData(item.Name, item.Hint));
+                StaticInventory.Hints.Add(new ObjectHintData(item.Name, item.Hint, item.Image)); // TODO
             }
 
             // Create new button
@@ -116,7 +116,7 @@ public class Inventory : MonoBehaviour
     {
         foreach (var item in items)
         {
-            AddItem(itemAction, new ObjectHintData(item.Name, item.Hint));
+            AddItem(itemAction, new ObjectHintData(item));
         }
     }
 
