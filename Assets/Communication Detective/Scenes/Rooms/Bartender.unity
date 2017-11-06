@@ -616,7 +616,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Broken Window
   Hint: The window is broken. It looks like it was done from the inside out.
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: cd310f4e62ddf3d438385e16d16e545a, type: 3}
 --- !u!1 &436930769 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: da5aba3f7778e9548b31c374eb7a3690, type: 3}
@@ -726,8 +726,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0a8ecbd9b98fe940ac61450a8fb6b1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InspectDistance: 0.1
-  InspectScale: 0.3
+  InspectDistance: 0.2
+  InspectScale: 0.1
 --- !u!65 &479090723
 BoxCollider:
   m_ObjectHideFlags: 0
