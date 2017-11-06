@@ -287,7 +287,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5bf158187f9a1cf4e9b03bae74c68790, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5bf158187f9a1cf4e9b03bae74c68790, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -572,7 +572,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: bb139be00c2c2f64b871bd56031c0e92, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: bb139be00c2c2f64b871bd56031c0e92, type: 3}
       propertyPath: m_LocalScale.y
@@ -581,6 +581,38 @@ Prefab:
     - target: {fileID: 400008, guid: bb139be00c2c2f64b871bd56031c0e92, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: bb139be00c2c2f64b871bd56031c0e92, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100014, guid: bb139be00c2c2f64b871bd56031c0e92, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: bb139be00c2c2f64b871bd56031c0e92, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100012, guid: bb139be00c2c2f64b871bd56031c0e92, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: bb139be00c2c2f64b871bd56031c0e92, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: bb139be00c2c2f64b871bd56031c0e92, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: bb139be00c2c2f64b871bd56031c0e92, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: bb139be00c2c2f64b871bd56031c0e92, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bb139be00c2c2f64b871bd56031c0e92, type: 3}
@@ -664,6 +696,7 @@ MonoBehaviour:
   Name: Secondary Table
   Hint: A smaller table with a reading lamp.
   Image: {fileID: 0}
+  ImagePath: 
 --- !u!114 &251604125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -678,6 +711,7 @@ MonoBehaviour:
   Name: Documents
   Hint: An impressive amount of legal documents.
   Image: {fileID: 0}
+  ImagePath: 
 --- !u!114 &251604126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -692,6 +726,7 @@ MonoBehaviour:
   Name: Wallet
   Hint: A wallet containing several credit cards and the victim's driving license.
   Image: {fileID: 0}
+  ImagePath: 
 --- !u!114 &251604127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,6 +741,7 @@ MonoBehaviour:
   Name: Polaroid Photo
   Hint: A photo of a car crash. It shows one body bag on the floor.
   Image: {fileID: 0}
+  ImagePath: 
 --- !u!114 &251604128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,6 +756,7 @@ MonoBehaviour:
   Name: An opened book
   Hint: A book opened to page 616.
   Image: {fileID: 0}
+  ImagePath: 
 --- !u!1 &261911358
 GameObject:
   m_ObjectHideFlags: 0
@@ -798,7 +835,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 765609966}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4770660436952536, guid: b4cf21df0c4bb50498a7194cec12805e, type: 2}
       propertyPath: m_LocalPosition.x
@@ -830,7 +867,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4770660436952536, guid: b4cf21df0c4bb50498a7194cec12805e, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1007810331738248, guid: b4cf21df0c4bb50498a7194cec12805e, type: 2}
       propertyPath: m_IsActive
@@ -1032,6 +1069,7 @@ MonoBehaviour:
   Name: Keys
   Hint: A chain of keys of all shapes and sizes. Some look very worn.
   Image: {fileID: 21300000, guid: 64928ae6e8a156e4b873a93139f5ea86, type: 3}
+  ImagePath: InventoryImages/Keys
 --- !u!114 &333346141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1217,6 +1255,7 @@ MonoBehaviour:
   Name: Documents
   Hint: An impressive amount of legal documents.
   Image: {fileID: 21300000, guid: e8691e7fe0f12994d931a00206c054bf, type: 3}
+  ImagePath: InventoryImages/Dossier
 --- !u!114 &417529116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1282,6 +1321,7 @@ Transform:
   - {fileID: 2009853630}
   - {fileID: 65127692}
   - {fileID: 417529118}
+  - {fileID: 1692661388}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1303,6 +1343,7 @@ MonoBehaviour:
   Name: Coffee Cup
   Hint: A paper cup with traces of unknown chemicals. Coffee is spilled on the floor.
   Image: {fileID: 21300000, guid: a392eadf4ae8aab46bb457b1d07c6ed4, type: 3}
+  ImagePath: InventoryImages/CoffeeCup
 --- !u!65 &470353576
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1346,6 +1387,7 @@ MonoBehaviour:
   Name: Notebook
   Hint: It contains notes on dates and phone numbers. A few pages are torn and coffee-stained.
   Image: {fileID: 21300000, guid: a6b90ab7af7fc2744a12bc3640896447, type: 3}
+  ImagePath: InventoryImages/Notebook
 --- !u!4 &483956933 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 57316ab0ac5d4dd4c8ab71bd5c5e8f65, type: 3}
@@ -1412,7 +1454,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 2d8c40902f8b9b84f8e879e842fa6d0c, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 2d8c40902f8b9b84f8e879e842fa6d0c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1443,6 +1485,7 @@ MonoBehaviour:
   Name: Book
   Hint: A book opened to page 616.
   Image: {fileID: 21300000, guid: a6b90ab7af7fc2744a12bc3640896447, type: 3}
+  ImagePath: InventoryImages/Notebook
 --- !u!114 &503100346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1520,11 +1563,6 @@ Transform:
   m_Father: {fileID: 513562064}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &538794768 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4770660436952536, guid: b4cf21df0c4bb50498a7194cec12805e,
-    type: 2}
-  m_PrefabInternal: {fileID: 301637512}
 --- !u!1 &634418187
 GameObject:
   m_ObjectHideFlags: 0
@@ -1635,7 +1673,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0e90006e6d084e944a8ac499acfec267, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0e90006e6d084e944a8ac499acfec267, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -1701,7 +1739,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400126, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400126, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
       propertyPath: m_LocalScale.x
@@ -1714,6 +1752,286 @@ Prefab:
     - target: {fileID: 400126, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.009475953
+      objectReference: {fileID: 0}
+    - target: {fileID: 100068, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100044, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100026, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100042, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100106, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100054, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100034, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100056, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100134, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100070, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100102, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100078, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100036, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100096, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100110, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100082, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100104, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100062, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100138, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100076, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100088, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100074, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100084, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100016, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100064, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100112, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100126, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100120, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100028, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100046, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100086, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100122, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100024, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100092, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100136, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100080, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100124, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100032, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100116, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100090, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100040, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100114, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100038, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100130, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100050, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100098, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100014, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100066, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100100, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100052, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100072, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100012, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100132, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100060, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100020, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100118, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100048, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100108, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100018, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100030, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100094, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100058, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100128, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100022, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 314252d6c03f84f40b4abd6277bc827e, type: 3}
@@ -1740,6 +2058,7 @@ MonoBehaviour:
   Name: Body
   Hint: The chair the body is sitting in is facing the only entrance.
   Image: {fileID: 21300000, guid: 1b65eea30ff9e1c47b46b86030bf0d96, type: 3}
+  ImagePath: InventoryImages/LawyerBody
 --- !u!114 &673376531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2013,7 +2332,6 @@ Transform:
   - {fileID: 1089599688}
   - {fileID: 1172943553}
   - {fileID: 1545500221}
-  - {fileID: 538794768}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2064,6 +2382,7 @@ MonoBehaviour:
   Name: Safe
   Hint: A locked safe. It has not been tampered with.
   Image: {fileID: 21300000, guid: ea956bf8d36fecf4daaf35cd1a4bc538, type: 3}
+  ImagePath: InventoryImages/Safe
 --- !u!1 &874327303
 GameObject:
   m_ObjectHideFlags: 0
@@ -2165,8 +2484,8 @@ Transform:
   - {fileID: 513562064}
   - {fileID: 1358125083}
   - {fileID: 673376528}
-  - {fileID: 1692661388}
   - {fileID: 832854593}
+  - {fileID: 1513895045}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2243,6 +2562,7 @@ MonoBehaviour:
   Name: Printer
   Hint: A printer with documents left in it.
   Image: {fileID: 21300000, guid: aa9356de17a026a4bb056de473303880, type: 3}
+  ImagePath: InventoryImages/JudgeDesk
 --- !u!1 &941439030
 GameObject:
   m_ObjectHideFlags: 0
@@ -2357,7 +2677,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ce0834989a460c74ca7324af2cc06943, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ce0834989a460c74ca7324af2cc06943, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2396,6 +2716,7 @@ MonoBehaviour:
   Name: Bin
   Hint: The bin has been emptied recently.
   Image: {fileID: 21300000, guid: 02509d8da19205749ac4c0cd40f11b02, type: 3}
+  ImagePath: InventoryImages/NiceBin
 --- !u!114 &995666031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2462,7 +2783,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 0df4073aa4a3329488694a88a449b14e, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 0df4073aa4a3329488694a88a449b14e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -2599,6 +2920,7 @@ MonoBehaviour:
   Name: Door
   Hint: The only entrance and exit to the office.
   Image: {fileID: 0}
+  ImagePath: 
 --- !u!1 &1047276664
 GameObject:
   m_ObjectHideFlags: 0
@@ -2886,7 +3208,7 @@ Prefab:
     - target: {fileID: 224382924449657762, guid: dc26f056f492a8b44b9525b72dda3044,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 211
+      value: 319.5
       objectReference: {fileID: 0}
     - target: {fileID: 224382924449657762, guid: dc26f056f492a8b44b9525b72dda3044,
         type: 2}
@@ -2916,7 +3238,7 @@ Prefab:
     - target: {fileID: 224382924449657762, guid: dc26f056f492a8b44b9525b72dda3044,
         type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224382924449657762, guid: dc26f056f492a8b44b9525b72dda3044,
         type: 2}
@@ -3238,7 +3560,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: e7949154a4b6028429ef804717c22b21, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: e7949154a4b6028429ef804717c22b21, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -3421,6 +3743,7 @@ MonoBehaviour:
   Name: Coffee Footprint
   Hint: A Footprint with a small circular mark next to it.
   Image: {fileID: 0}
+  ImagePath: 
 --- !u!65 &1273882763
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3451,6 +3774,7 @@ MonoBehaviour:
   Name: Footprint
   Hint: A Footprint with a small circular mark next to it.
   Image: {fileID: 21300000, guid: b1375a079996a8e42b2dd661ec1609b7, type: 3}
+  ImagePath: InventoryImages/CoffeePrint
 --- !u!65 &1313702483
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3513,11 +3837,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 88abc459300624940b3377b4485a6e7c, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 88abc459300624940b3377b4485a6e7c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 159.41801
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 88abc459300624940b3377b4485a6e7c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 88abc459300624940b3377b4485a6e7c, type: 3}
@@ -3563,7 +3891,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 57316ab0ac5d4dd4c8ab71bd5c5e8f65, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 57316ab0ac5d4dd4c8ab71bd5c5e8f65, type: 3}
       propertyPath: m_LocalScale.x
@@ -3667,19 +3995,19 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 874881463}
     m_Modifications:
     - target: {fileID: 400000, guid: 41a570e7bb2579f4bbea2be48c6ccede, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.13759
+      value: -111.72942
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 41a570e7bb2579f4bbea2be48c6ccede, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0000037248
+      value: -211.83072
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 41a570e7bb2579f4bbea2be48c6ccede, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.0276
+      value: -263.77722
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 41a570e7bb2579f4bbea2be48c6ccede, type: 3}
       propertyPath: m_LocalRotation.x
@@ -3687,7 +4015,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 41a570e7bb2579f4bbea2be48c6ccede, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 41a570e7bb2579f4bbea2be48c6ccede, type: 3}
       propertyPath: m_LocalRotation.z
@@ -3699,7 +4027,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 41a570e7bb2579f4bbea2be48c6ccede, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 41a570e7bb2579f4bbea2be48c6ccede, type: 3}
       propertyPath: m_LocalScale.x
@@ -3713,9 +4041,21 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 41a570e7bb2579f4bbea2be48c6ccede, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 41a570e7bb2579f4bbea2be48c6ccede, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 41a570e7bb2579f4bbea2be48c6ccede, type: 3}
   m_IsPrefabParent: 0
+--- !u!4 &1513895045 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 41a570e7bb2579f4bbea2be48c6ccede, type: 3}
+  m_PrefabInternal: {fileID: 1513895044}
 --- !u!1 &1545500220
 GameObject:
   m_ObjectHideFlags: 0
@@ -3900,6 +4240,7 @@ MonoBehaviour:
   Name: Wallet
   Hint: A wallet containing several credit cards and the victim's driving license.
   Image: {fileID: 21300000, guid: 2f5a3e1cbfd629f42a3a576aeb7be5d4, type: 3}
+  ImagePath: InventoryImages/Wallet
 --- !u!65 &1676030321
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3930,7 +4271,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 874881463}
+    m_TransformParent: {fileID: 459141297}
     m_Modifications:
     - target: {fileID: 400002, guid: 3b93aa2628fcb9840a37d09f7553a1e2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3962,11 +4303,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 3b93aa2628fcb9840a37d09f7553a1e2, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 3b93aa2628fcb9840a37d09f7553a1e2, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.31908208
+      value: 0.31908217
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 3b93aa2628fcb9840a37d09f7553a1e2, type: 3}
       propertyPath: m_LocalScale.z
@@ -3979,6 +4320,18 @@ Prefab:
     - target: {fileID: 400002, guid: 3b93aa2628fcb9840a37d09f7553a1e2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -139.494
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 3b93aa2628fcb9840a37d09f7553a1e2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 3b93aa2628fcb9840a37d09f7553a1e2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 3b93aa2628fcb9840a37d09f7553a1e2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3b93aa2628fcb9840a37d09f7553a1e2, type: 3}
@@ -4013,6 +4366,7 @@ MonoBehaviour:
   Name: Footage
   Hint: The security footage is showing somebody wearing glasses.
   Image: {fileID: 21300000, guid: 99eb3a05f6c90014f98d8af8256a5770, type: 3}
+  ImagePath: InventoryImages/CCTVFootage
 --- !u!4 &1692661388 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400002, guid: 3b93aa2628fcb9840a37d09f7553a1e2, type: 3}
@@ -4104,6 +4458,7 @@ MonoBehaviour:
   Name: Photo
   Hint: A photo of a car crash. It shows one body bag on the floor.
   Image: {fileID: 21300000, guid: c55046f17f1c76d49a3de757c6c73607, type: 3}
+  ImagePath: InventoryImages/CrashPhoto
 --- !u!1001 &1807771526
 Prefab:
   m_ObjectHideFlags: 0
@@ -4201,6 +4556,7 @@ MonoBehaviour:
   Name: Phone
   Hint: The display shows a large number of missed calls.
   Image: {fileID: 21300000, guid: 7b08255f5949dc64d98191f373e55ee6, type: 3}
+  ImagePath: InventoryImages/Smartphone
 --- !u!1 &1931978931
 GameObject:
   m_ObjectHideFlags: 0
@@ -4494,7 +4850,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b4bcc1a128984a64888fdd23f2148531, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b4bcc1a128984a64888fdd23f2148531, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -4521,6 +4877,7 @@ MonoBehaviour:
   Name: Laptop
   Hint: Requires password to log-in
   Image: {fileID: 21300000, guid: b4e16e098c39eaa48968730379c904cb, type: 3}
+  ImagePath: InventoryImages/Laptop
 --- !u!114 &2009853628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4564,6 +4921,7 @@ MonoBehaviour:
   Name: Desk
   Hint: Well organized desk. Looks like it was wiped clean recently.
   Image: {fileID: 21300000, guid: aa9356de17a026a4bb056de473303880, type: 3}
+  ImagePath: InventoryImages/JudgeDesk
 --- !u!1 &2045428450
 GameObject:
   m_ObjectHideFlags: 0

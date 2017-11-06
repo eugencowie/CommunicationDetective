@@ -202,6 +202,7 @@ MonoBehaviour:
   Name: Coffee table
   Hint: Stained, old coffee table with bottles on it. Looks damaged.
   Image: {fileID: 21300000, guid: 3d044113985dcf040bd2949815d2b7ec, type: 3}
+  ImagePath: InventoryImages/OldCoffeeTable
 --- !u!4 &58994852 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: ec5ef463ac20ffb4e808be3a223a36a0, type: 3}
@@ -710,6 +711,7 @@ MonoBehaviour:
   Name: Phone
   Hint: 'Text message sent to Raymond: "Thanks for backing me in court."'
   Image: {fileID: 21300000, guid: 7b08255f5949dc64d98191f373e55ee6, type: 3}
+  ImagePath: InventoryImages/Smartphone
 --- !u!114 &247476649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -786,6 +788,7 @@ MonoBehaviour:
   Name: Alcohol
   Hint: The victim could be an alcoholic with so many empty bottles around.
   Image: {fileID: 21300000, guid: 6dbced713b9eb154c9408351c8bbd8db, type: 3}
+  ImagePath: InventoryImages/BottleofAlcohol
 --- !u!1 &294997881
 GameObject:
   m_ObjectHideFlags: 0
@@ -946,6 +949,7 @@ MonoBehaviour:
   Name: Toy
   Hint: The victim does not have any children. The toy looks worn and used.
   Image: {fileID: 21300000, guid: 036155ce87b81bb41b0db56dccfde797, type: 3}
+  ImagePath: InventoryImages/Toy
 --- !u!65 &402552157
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1100,6 +1104,7 @@ MonoBehaviour:
   Name: Bin
   Hint: Dirty bin, looks like it was emptied recently
   Image: {fileID: 21300000, guid: d9586478768309e4fb937c9682e4a31b, type: 3}
+  ImagePath: InventoryImages/DirtyBin
 --- !u!4 &467063411 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: ec5ef463ac20ffb4e808be3a223a36a0, type: 3}
@@ -1170,6 +1175,10 @@ Prefab:
     - target: {fileID: 400000, guid: ec5ef463ac20ffb4e808be3a223a36a0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 13.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ec5ef463ac20ffb4e808be3a223a36a0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ec5ef463ac20ffb4e808be3a223a36a0, type: 3}
@@ -1466,6 +1475,10 @@ Prefab:
       propertyPath: m_Name
       value: Beer Bottle (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ec5ef463ac20ffb4e808be3a223a36a0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ec5ef463ac20ffb4e808be3a223a36a0, type: 3}
   m_IsPrefabParent: 0
@@ -1657,6 +1670,7 @@ MonoBehaviour:
   Name: Door
   Hint: The door looks damaged and dirty
   Image: {fileID: 21300000, guid: 3a4ccbeb046893543b0f6ca9101e710a, type: 3}
+  ImagePath: InventoryImages/DirtyDoor
 --- !u!1001 &703307492
 Prefab:
   m_ObjectHideFlags: 0
@@ -1751,6 +1765,7 @@ MonoBehaviour:
   Name: Wallet
   Hint: The victim`s name is Tim Warner
   Image: {fileID: 21300000, guid: 2f5a3e1cbfd629f42a3a576aeb7be5d4, type: 3}
+  ImagePath: InventoryImages/Wallet
 --- !u!65 &715193939
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1849,7 +1864,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &751689804
 Transform:
@@ -2023,6 +2038,10 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ec5ef463ac20ffb4e808be3a223a36a0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ec5ef463ac20ffb4e808be3a223a36a0, type: 3}
   m_IsPrefabParent: 0
@@ -2132,6 +2151,7 @@ MonoBehaviour:
   Name: Couch
   Hint: Stained, dirty couch. Various traces of fluid found on it. Damaged.
   Image: {fileID: 21300000, guid: 5296501a1439ff24e9cee7705d0a291d, type: 3}
+  ImagePath: InventoryImages/DirtyCouch
 --- !u!1 &849839268
 GameObject:
   m_ObjectHideFlags: 0
@@ -2544,6 +2564,234 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100038, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100030, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100052, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100098, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100024, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100042, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100072, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100080, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100082, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100016, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100018, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100044, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100070, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100076, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100056, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100090, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100050, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100028, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100068, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100012, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100106, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100020, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100026, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100014, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100040, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100078, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100112, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100054, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100104, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100060, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100074, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100048, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100022, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100100, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100102, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100034, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100036, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100084, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100064, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100092, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100108, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100094, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100088, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100066, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100032, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100096, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100110, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100046, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100086, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100058, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100062, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 48bb51f4d63f47c4fbb88b5ea4df0f6a, type: 3}
   m_IsPrefabParent: 0
@@ -2642,6 +2890,7 @@ MonoBehaviour:
   Name: Keys
   Hint: One for the door, but the other two does not fit anywhere...
   Image: {fileID: 21300000, guid: 64928ae6e8a156e4b873a93139f5ea86, type: 3}
+  ImagePath: InventoryImages/Keys
 --- !u!114 &1098546879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2946,6 +3195,10 @@ Prefab:
       propertyPath: m_Name
       value: Beer Bottle (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ec5ef463ac20ffb4e808be3a223a36a0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ec5ef463ac20ffb4e808be3a223a36a0, type: 3}
   m_IsPrefabParent: 0
@@ -3003,6 +3256,10 @@ Prefab:
     - target: {fileID: 100000, guid: ec5ef463ac20ffb4e808be3a223a36a0, type: 3}
       propertyPath: m_Name
       value: Beer Bottle (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ec5ef463ac20ffb4e808be3a223a36a0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ec5ef463ac20ffb4e808be3a223a36a0, type: 3}
@@ -3069,6 +3326,10 @@ Prefab:
     - target: {fileID: 400000, guid: ec5ef463ac20ffb4e808be3a223a36a0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ec5ef463ac20ffb4e808be3a223a36a0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ec5ef463ac20ffb4e808be3a223a36a0, type: 3}
@@ -3198,6 +3459,7 @@ MonoBehaviour:
   Name: Cigarettes
   Hint: Unopened pack of cigarettes. Bought recently.
   Image: {fileID: 21300000, guid: 67b906fab525b59438bfecc080ccd479, type: 3}
+  ImagePath: InventoryImages/Cigarettes
 --- !u!1 &1410652371
 GameObject:
   m_ObjectHideFlags: 0
@@ -3661,6 +3923,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 0.011631213
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ec5ef463ac20ffb4e808be3a223a36a0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ec5ef463ac20ffb4e808be3a223a36a0, type: 3}
   m_IsPrefabParent: 0
@@ -3718,6 +3984,10 @@ Prefab:
     - target: {fileID: 100000, guid: ec5ef463ac20ffb4e808be3a223a36a0, type: 3}
       propertyPath: m_Name
       value: Beer Bottle (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ec5ef463ac20ffb4e808be3a223a36a0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ec5ef463ac20ffb4e808be3a223a36a0, type: 3}
@@ -3904,6 +4174,7 @@ MonoBehaviour:
   Name: TV
   Hint: It`s turned off.
   Image: {fileID: 21300000, guid: 3ba737da4636e0b448288a46c15fd05b, type: 3}
+  ImagePath: InventoryImages/OldTV
 --- !u!1 &1868196017
 GameObject:
   m_ObjectHideFlags: 0
@@ -3995,6 +4266,7 @@ MonoBehaviour:
   Name: Footprint
   Hint: Consistent circular marks next to the left foot`s mark.
   Image: {fileID: 21300000, guid: 5307853dffc244c4dada64f5d0441370, type: 3}
+  ImagePath: InventoryImages/BloodPrints
 --- !u!65 &1868196022
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4040,7 +4312,7 @@ Prefab:
     - target: {fileID: 224382924449657762, guid: dc26f056f492a8b44b9525b72dda3044,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 211
+      value: 319.5
       objectReference: {fileID: 0}
     - target: {fileID: 224382924449657762, guid: dc26f056f492a8b44b9525b72dda3044,
         type: 2}
@@ -4266,6 +4538,7 @@ MonoBehaviour:
   Name: Body
   Hint: Knife wound in the chest.
   Image: {fileID: 21300000, guid: d72d1db33b3b3e34e93c288ab00f22a0, type: 3}
+  ImagePath: InventoryImages/FreeGuyBody
 --- !u!114 &2013817717
 MonoBehaviour:
   m_ObjectHideFlags: 0
