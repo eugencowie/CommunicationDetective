@@ -13,7 +13,7 @@ public class FancyInventory : MonoBehaviour
     private List<GameObject> m_buttons = new List<GameObject>();
 
     private Vector3 m_initialPosition;
-    private const int m_spacing = 225;
+    private const int m_spacing = 235;
     private const float m_scrollSpeed = 2000;
     private float m_scrollAmount = 0;
 

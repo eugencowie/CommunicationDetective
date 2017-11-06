@@ -18,10 +18,10 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     {
         if (enabled)
         {
-            itemBeingDragged = Instantiate(gameObject, gameObject.transform.parent);
+            itemBeingDragged = Instantiate(gameObject, gameObject.transform.parent.parent.parent.parent);
             itemBeingDragged.name = gameObject.name;
             startPosition = itemBeingDragged.transform.position;
-            startParent = itemBeingDragged.transform.parent;
+            startParent = gameObject.transform.parent;
             //itemBeingDragged.GetComponent<CanvasGroup>().blocksRaycasts = false;
         }
     }
