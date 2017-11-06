@@ -82,7 +82,7 @@ public class OnlineDatabaseEntry
 
     public void RegisterListener(Listener listener)
     {
-        m_listener = (_, args) => listener(this, args);
+        m_listener = (_, args) => { listener(this, args); };
         m_database.RegisterListener(Key, m_listener);
     }
 

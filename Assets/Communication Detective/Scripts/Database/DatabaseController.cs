@@ -31,7 +31,7 @@ public class DatabaseController : MonoBehaviour
         NetworkController.GetPlayerLobby(lobby => {
             if (!string.IsNullOrEmpty(lobby)) {
                 m_lobby = lobby;
-                DownloadItems();
+                //DownloadItems();
                 NetworkController.RegisterCluesChanged(m_lobby, OnSlotChanged);
             }
             else SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
@@ -116,7 +116,36 @@ public class DatabaseController : MonoBehaviour
     {
         if (args.Snapshot.Exists)
         {
-            Debug.Log(entry.Key + ": " + args.Snapshot.Value);
+            string[] key = entry.Key.Split('/');
+            if (key.Length >= 5) {
+                string player = key[1];
+                string field = key[4];
+                string value = args.Snapshot.Value.ToString();
+
+                int slotNb = -1;
+                if (int.TryParse(key[3].Replace("slot-", ""), out slotNb))
+                {
+                    NetworkController.GetPlayerNumber(m_lobby, player, playerNb => {
+                        var slot = Data[playerNb].Slots[slotNb-1];
+                        if (field == "name") {
+                            foreach (Transform t in slot.transform) if (t.gameObject.name == value) Destroy(t.gameObject);
+                            var newObj = Instantiate(ButtonTemplate, ButtonTemplate.transform.parent);
+                            newObj.SetActive(true);
+                            newObj.name = value;
+                            newObj.transform.SetParent(slot.transform);
+                            foreach (Transform t in newObj.transform) {
+                                if (t.gameObject.GetComponent<Text>() != null) {
+                                    t.gameObject.GetComponent<Text>().text = value;
+                                }
+                            }
+                            newObj.GetComponent<DragHandler>().enabled = false;
+                        }
+                        else if (field == "hint"){
+                            slot.GetComponent<Slot>().Text.GetComponent<Text>().text = value;
+                        }
+                    });
+                }
+            }
         }
     }
 }

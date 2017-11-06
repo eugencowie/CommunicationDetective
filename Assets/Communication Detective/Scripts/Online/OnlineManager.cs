@@ -285,6 +285,27 @@ public class OnlineManager
         });
     }
 
+    public void GetPlayerNumber(string code, string player, Action<int> returnPlayerNumber)
+    {
+        OnlineDatabase.ValidateAction(ref returnPlayerNumber);
+
+        //m_lobby = new Lobby(m_database, code); // TODO
+        m_lobby.Players.Pull(success => {
+            if (success) {
+                List<string> players = m_lobby.Players.Value.Split(',').ToList();
+                players.RemoveAll(s => string.IsNullOrEmpty(s));
+                players.Remove(m_player.Id);
+                players.Insert(0, m_player.Id);
+                int playerNb = players.IndexOf(player);
+                if (playerNb >= 0 && playerNb < players.Count) {
+                    returnPlayerNumber(playerNb);
+                }
+                else returnPlayerNumber(-1);
+            }
+            else returnPlayerNumber(-1);
+        });
+    }
+
     public void DownloadClues(string code, int playerNb, Action<Player> returnPlayer)
     {
         OnlineDatabase.ValidateAction(ref returnPlayer);
