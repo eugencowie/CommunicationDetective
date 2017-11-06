@@ -70,7 +70,7 @@ public class FancyInventory : MonoBehaviour
             // Add item to static inventory
             if (!StaticInventory.Hints.Any(h => h.Name == item.Name))
             {
-                StaticInventory.Hints.Add(new ObjectHintData(item.Name, item.Hint));
+                StaticInventory.Hints.Add(new ObjectHintData(item.Name, item.Hint, item.Image)); // TODO
             }
 
             // Create new button
@@ -101,9 +101,13 @@ public class FancyInventory : MonoBehaviour
             {
                 foreach (Transform t2 in t)
                 {
-                    if (t2.gameObject.GetComponents<Text>().Length > 0)
+                    if (t2.gameObject.GetComponent<Text>() != null)
                     {
                         t2.gameObject.GetComponent<Text>().text = item.Name;
+                    }
+                    else if (t2.gameObject.GetComponent<Image>() != null)
+                    {
+                        t2.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>(item.Image);
                     }
                 }
             }
@@ -122,7 +126,7 @@ public class FancyInventory : MonoBehaviour
     {
         foreach (var item in items)
         {
-            AddItem(itemAction, new ObjectHintData(item.Name, item.Hint));
+            AddItem(itemAction, new ObjectHintData(item));
         }
     }
 

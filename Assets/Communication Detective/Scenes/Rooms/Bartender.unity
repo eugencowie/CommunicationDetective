@@ -137,6 +137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Keys
   Hint: Several keys on a key chain. Some of them are labled.
+  Image: {fileID: 21300000, guid: 64928ae6e8a156e4b873a93139f5ea86, type: 3}
 --- !u!114 &11887015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,6 +454,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Bin
   Hint: The bin has been emptied recently. No bin bag.
+  Image: {fileID: 21300000, guid: 02509d8da19205749ac4c0cd40f11b02, type: 3}
 --- !u!114 &143820282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,7 +467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InspectDistance: 0.1
-  InspectScale: 0.3
+  InspectScale: 0.1
 --- !u!65 &143820283
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -511,6 +513,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Black Hair
   Hint: Black hair found in the hand of the victim.
+  Image: {fileID: 21300000, guid: 26a49ab5bded96f4b91cdcbf291943c9, type: 3}
 --- !u!114 &155115570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,8 +546,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f3d3f0475c0554ba134c76b6d91a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Smartphone
+  Name: Phone
   Hint: It is locked.
+  Image: {fileID: 21300000, guid: 7b08255f5949dc64d98191f373e55ee6, type: 3}
 --- !u!65 &189706197
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -612,6 +616,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Broken Window
   Hint: The window is broken. It looks like it was done from the inside out.
+  Image: {fileID: 0}
 --- !u!1 &436930769 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: da5aba3f7778e9548b31c374eb7a3690, type: 3}
@@ -645,6 +650,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetCamera: {fileID: 1714090740}
   Duration: 1
+--- !u!114 &436930774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 436930769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f3d3f0475c0554ba134c76b6d91a57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Body
+  Hint: Struck with a knife from a high angle
+  Image: {fileID: 21300000, guid: fff60f0819dff104ab250e191d295f4f, type: 3}
+--- !u!114 &436930775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 436930769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f3d3f0475c0554ba134c76b6d91a57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Knife
+  Hint: The murder weapon is left in the shoulder of the body. Struck from a high
+    angle.
+  Image: {fileID: 21300000, guid: 98ba5f07c5acb084f83ebd9145f52d6a, type: 3}
+--- !u!114 &436930776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 436930769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f3d3f0475c0554ba134c76b6d91a57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Hair
+  Hint: A bunch of black hair in the hand of the victim
+  Image: {fileID: 21300000, guid: 26a49ab5bded96f4b91cdcbf291943c9, type: 3}
 --- !u!1 &479090719 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: c4eb9c88f2e3c424eb25047217fe0542, type: 3}
@@ -666,6 +714,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Chair
   Hint: A chair made out of steel and various fabrics.
+  Image: {fileID: 21300000, guid: 48263510573362e49bc67d5dea37bb41, type: 3}
 --- !u!114 &479090722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1023,6 +1072,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Wallet
   Hint: The wallet identifies the victim as Raymond L. Kovacs.
+  Image: {fileID: 21300000, guid: 2f5a3e1cbfd629f42a3a576aeb7be5d4, type: 3}
 --- !u!114 &602409981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1291,6 +1341,7 @@ MonoBehaviour:
   Name: Knife
   Hint: A bloody knife found in the shoulder of the victim. The blow was struck from
     a high angle.
+  Image: {fileID: 21300000, guid: 98ba5f07c5acb084f83ebd9145f52d6a, type: 3}
 --- !u!114 &798231797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1625,6 +1676,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Broken Table
   Hint: The coffee table is broken into half.
+  Image: {fileID: 21300000, guid: a6c4a8f0e341a064dbf5dbfb1cb33732, type: 3}
 --- !u!1 &1052585882
 GameObject:
   m_ObjectHideFlags: 0
@@ -1862,8 +1914,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f3d3f0475c0554ba134c76b6d91a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Pack of cigarettes
-  Hint: An empty pack f cigarettes.
+  Name: Cigarettes
+  Hint: An empty pack of cigarettes.
+  Image: {fileID: 21300000, guid: 67b906fab525b59438bfecc080ccd479, type: 3}
 --- !u!4 &1402864602 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 5000cec0132fcac4abb1580df56b8ea6, type: 3}
@@ -1935,6 +1988,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Bookcase
   Hint: A bookcase with lots of books. Well organized, but a few books are missing
+  Image: {fileID: 21300000, guid: 45f2a17aba95a3d4d825691fb17d298b, type: 3}
 --- !u!1001 &1502166281
 Prefab:
   m_ObjectHideFlags: 0
@@ -2039,6 +2093,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Fridge
   Hint: The fridge`s doors are closed and it looks empty.
+  Image: {fileID: 21300000, guid: c728cfce85af57746900278e94ec6977, type: 3}
 --- !u!1001 &1615989047
 Prefab:
   m_ObjectHideFlags: 0
@@ -2618,6 +2673,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Summoning Letter
   Hint: A letter summoning the victim to testify in court as a witness.
+  Image: {fileID: 21300000, guid: e28f7b289aba7f84db98be7558c00a80, type: 3}
 --- !u!114 &1972560462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2891,6 +2947,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: TV
   Hint: A modern flatscreen TV. It is turend off.
+  Image: {fileID: 21300000, guid: 61a440d7a346b60488ce2f430274ca63, type: 3}
 --- !u!1001 &2008883342
 Prefab:
   m_ObjectHideFlags: 0

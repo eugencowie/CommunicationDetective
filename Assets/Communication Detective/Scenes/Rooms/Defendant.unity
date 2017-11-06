@@ -197,6 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Coffee table
   Hint: Stained, old coffee table with bottles on it. Looks damaged.
+  Image: {fileID: 21300000, guid: 3d044113985dcf040bd2949815d2b7ec, type: 3}
 --- !u!4 &58994852 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: ec5ef463ac20ffb4e808be3a223a36a0, type: 3}
@@ -690,8 +691,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f3d3f0475c0554ba134c76b6d91a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Smartphone
+  Name: Phone
   Hint: 'Text message sent to Raymond: "Thanks for backing me in court."'
+  Image: {fileID: 21300000, guid: 7b08255f5949dc64d98191f373e55ee6, type: 3}
 --- !u!114 &247476649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -765,8 +767,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f3d3f0475c0554ba134c76b6d91a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Alcohol Bottles
+  Name: Alcohol
   Hint: The victim could be an alcoholic with so many empty bottles around.
+  Image: {fileID: 21300000, guid: 6dbced713b9eb154c9408351c8bbd8db, type: 3}
 --- !u!1 &294997881
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,6 +930,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Toy
   Hint: The victim does not have any children. The toy looks worn and used.
+  Image: {fileID: 21300000, guid: 036155ce87b81bb41b0db56dccfde797, type: 3}
 --- !u!65 &402552157
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1094,6 +1098,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Bin
   Hint: Dirty bin, looks like it was emptied recently
+  Image: {fileID: 21300000, guid: d9586478768309e4fb937c9682e4a31b, type: 3}
 --- !u!4 &467063411 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: ec5ef463ac20ffb4e808be3a223a36a0, type: 3}
@@ -1661,6 +1666,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Door
   Hint: The door looks damaged and dirty
+  Image: {fileID: 21300000, guid: 3a4ccbeb046893543b0f6ca9101e710a, type: 3}
 --- !u!1001 &703307492
 Prefab:
   m_ObjectHideFlags: 0
@@ -1754,6 +1760,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Wallet
   Hint: The victim`s name is Tim Warner
+  Image: {fileID: 21300000, guid: 2f5a3e1cbfd629f42a3a576aeb7be5d4, type: 3}
 --- !u!65 &715193939
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2132,6 +2139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Couch
   Hint: Stained, dirty couch. Various traces of fluid found on it. Damaged.
+  Image: {fileID: 21300000, guid: 5296501a1439ff24e9cee7705d0a291d, type: 3}
 --- !u!1 &849839268
 GameObject:
   m_ObjectHideFlags: 0
@@ -2666,6 +2674,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Keys
   Hint: One for the door, but the other two does not fit anywhere...
+  Image: {fileID: 21300000, guid: 64928ae6e8a156e4b873a93139f5ea86, type: 3}
 --- !u!114 &1098546879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3213,6 +3222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Cigarettes
   Hint: Unopened pack of cigarettes. Bought recently.
+  Image: {fileID: 21300000, guid: 67b906fab525b59438bfecc080ccd479, type: 3}
 --- !u!1 &1410652371
 GameObject:
   m_ObjectHideFlags: 0
@@ -4027,6 +4037,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: TV
   Hint: It`s turned off.
+  Image: {fileID: 21300000, guid: 3ba737da4636e0b448288a46c15fd05b, type: 3}
 --- !u!1 &1868196017
 GameObject:
   m_ObjectHideFlags: 0
@@ -4113,8 +4124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f3d3f0475c0554ba134c76b6d91a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Bloody footprint
+  Name: Footprint
   Hint: Consistent circular marks next to the left foot`s mark.
+  Image: {fileID: 21300000, guid: 5307853dffc244c4dada64f5d0441370, type: 3}
 --- !u!65 &1868196022
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4249,6 +4261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Body
   Hint: Knife wound in the chest.
+  Image: {fileID: 21300000, guid: d72d1db33b3b3e34e93c288ab00f22a0, type: 3}
 --- !u!114 &2013817717
 MonoBehaviour:
   m_ObjectHideFlags: 0

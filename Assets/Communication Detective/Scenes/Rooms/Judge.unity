@@ -253,8 +253,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f3d3f0475c0554ba134c76b6d91a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Opened Book
+  Name: Book
   Hint: The book is opened on page 616
+  Image: {fileID: 21300000, guid: a6b90ab7af7fc2744a12bc3640896447, type: 3}
 --- !u!114 &61270618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,6 +384,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Gavel
   Hint: Used in courthouse. Crack on the bottom.
+  Image: {fileID: 21300000, guid: a29e1e797dc970e44924ad0ec7b411cc, type: 3}
 --- !u!114 &125359439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1049,6 +1051,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Documents
   Hint: Legal documents about a house fire
+  Image: {fileID: 21300000, guid: e8691e7fe0f12994d931a00206c054bf, type: 3}
 --- !u!114 &581363215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1095,6 +1098,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Bin
   Hint: Looks like somebody emptied it recently. No bin bag.
+  Image: {fileID: 21300000, guid: 02509d8da19205749ac4c0cd40f11b02, type: 3}
 --- !u!114 &594866108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1492,6 +1496,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Wardrobe
   Hint: Various green clothing inside
+  Image: {fileID: 21300000, guid: 104dd0ee790ef92408fa7f2e07789ac4, type: 3}
 --- !u!114 &1087430039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1598,6 +1603,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Laptop
   Hint: 'E-mail: "The tall, slender man is following you, your Honor."'
+  Image: {fileID: 21300000, guid: b4e16e098c39eaa48968730379c904cb, type: 3}
 --- !u!65 &1142571149
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1716,8 +1722,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f3d3f0475c0554ba134c76b6d91a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: Bed
+  Hint: The judge`s bed is surprisingly tidy.
+  Image: {fileID: 21300000, guid: 4f7f3b2ad14e96d49b9f721e09497db1, type: 3}
+--- !u!114 &1159925684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1159925679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f3d3f0475c0554ba134c76b6d91a57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   Name: Body
-  Hint: The blood shows traces of unknown chemicals. Knife wound in the chest.
+  Hint: 'Cause of death: struck with a sharp weapon.'
+  Image: {fileID: 21300000, guid: a95b155865a0bdf418d1bcbc16d8f1b4, type: 3}
 --- !u!1 &1211595642 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1444225595126394, guid: dc26f056f492a8b44b9525b72dda3044,
@@ -1898,6 +1919,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Notebook
   Hint: Contains 616 entries of various cases.
+  Image: {fileID: 21300000, guid: a6b90ab7af7fc2744a12bc3640896447, type: 3}
 --- !u!65 &1653045052
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2165,6 +2187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Wallet
   Hint: The victim`s name is James Hamilton.
+  Image: {fileID: 21300000, guid: 2f5a3e1cbfd629f42a3a576aeb7be5d4, type: 3}
 --- !u!65 &1821137191
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2323,6 +2346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Gun
   Hint: It has not been fired
+  Image: {fileID: 21300000, guid: 05c4e8208180aba4e94d171a1243c8c3, type: 3}
 --- !u!65 &2004239397
 BoxCollider:
   m_ObjectHideFlags: 0

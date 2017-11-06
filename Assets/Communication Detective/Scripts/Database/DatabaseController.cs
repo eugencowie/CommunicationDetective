@@ -31,7 +31,7 @@ public class DatabaseController : MonoBehaviour
         NetworkController.GetPlayerLobby(lobby => {
             if (!string.IsNullOrEmpty(lobby)) {
                 m_lobby = lobby;
-                //DownloadItems();
+                DownloadItems();
                 NetworkController.RegisterCluesChanged(m_lobby, OnSlotChanged);
             }
             else SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
@@ -82,9 +82,9 @@ public class DatabaseController : MonoBehaviour
 
     private void DownloadItems()
     {
-        for (int i = 0; i < 4; i++)
-        {
-            int tmp = i;
+        //for (int i = 0; i < 4; i++)
+        //{
+            int tmp = 0;
             NetworkController.DownloadClues(m_lobby, tmp, player => {
                 for (int j = 0; j < player.Clues.Clues.Length; j++) {
                     int tmp2 = j;
@@ -101,6 +101,9 @@ public class DatabaseController : MonoBehaviour
                             foreach (Transform t in newObj.transform) {
                                 if (t.gameObject.GetComponent<Text>() != null) {
                                     t.gameObject.GetComponent<Text>().text = clue.Name.Value;
+                                } else if (t.gameObject.GetComponent<Image>() != null) {
+                                    Debug.Log(clue.Image.Value);
+                                    t.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>(clue.Image.Value);
                                 }
                             }
                             newObj.GetComponent<DragHandler>().enabled = false;
@@ -109,7 +112,7 @@ public class DatabaseController : MonoBehaviour
                     });
                 }
             });
-        }
+        //}
     }
     
     private void OnSlotChanged(OnlineDatabaseEntry entry, ValueChangedEventArgs args)
@@ -121,6 +124,8 @@ public class DatabaseController : MonoBehaviour
                 string player = key[1];
                 string field = key[4];
                 string value = args.Snapshot.Value.ToString();
+
+                Debug.Log(value);
 
                 int slotNb = -1;
                 if (int.TryParse(key[3].Replace("slot-", ""), out slotNb))
@@ -140,8 +145,17 @@ public class DatabaseController : MonoBehaviour
                             }
                             newObj.GetComponent<DragHandler>().enabled = false;
                         }
-                        else if (field == "hint"){
+                        else if (field == "hint") {
                             slot.GetComponent<Slot>().Text.GetComponent<Text>().text = value;
+                        }
+                        else if (field == "image") {
+                            foreach (Transform t1 in slot.transform) {
+                                foreach (Transform t in t1) {
+                                    if (t.gameObject.GetComponent<Image>() != null) {
+                                        t.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>(value);
+                                    }
+                                }
+                            }
                         }
                     });
                 }

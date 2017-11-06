@@ -108,12 +108,14 @@ public class PlayerClue : OnlineDatabaseNode
 {
     public readonly OnlineDatabaseEntry Name;
     public readonly OnlineDatabaseEntry Hint;
+    public readonly OnlineDatabaseEntry Image;
 
     public PlayerClue(OnlineDatabase database, string key)
         : base(database, key)
     {
         Name = new OnlineDatabaseEntry(Database, Key + "/name");
         Hint = new OnlineDatabaseEntry(Database, Key + "/hint");
+        Image = new OnlineDatabaseEntry(Database, Key + "/image");
     }
 
     /// <summary>
@@ -121,6 +123,6 @@ public class PlayerClue : OnlineDatabaseNode
     /// </summary>
     public override OnlineDatabaseEntry[] Entries
     {
-        get { return new OnlineDatabaseEntry[] { Name, Hint }; }
+        get { return new OnlineDatabaseEntry[] { Name, Hint, Image }; }
     }
 }

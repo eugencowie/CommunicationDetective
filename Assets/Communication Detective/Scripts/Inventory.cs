@@ -71,7 +71,7 @@ public class Inventory : MonoBehaviour
             // Add item to static inventory
             if (!StaticInventory.Hints.Any(h => h.Name == item.Name))
             {
-                StaticInventory.Hints.Add(new ObjectHintData(item.Name, item.Hint));
+                StaticInventory.Hints.Add(new ObjectHintData(item.Name, item.Hint, item.Image)); // TODO
             }
 
             // Create new button
@@ -96,9 +96,13 @@ public class Inventory : MonoBehaviour
             // Set button text
             foreach (Transform t in newButton.transform)
             {
-                if (t.gameObject.GetComponents<Text>().Length > 0)
+                if (t.gameObject.GetComponent<Text>() != null)
                 {
                     t.gameObject.GetComponent<Text>().text = item.Name;
+                }
+                else if (t.gameObject.GetComponent<Image>() != null)
+                {
+                    t.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>(item.Image);
                 }
             }
 
@@ -116,7 +120,7 @@ public class Inventory : MonoBehaviour
     {
         foreach (var item in items)
         {
-            AddItem(itemAction, new ObjectHintData(item.Name, item.Hint));
+            AddItem(itemAction, new ObjectHintData(item));
         }
     }
 
