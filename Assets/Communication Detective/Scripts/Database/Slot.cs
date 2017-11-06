@@ -38,7 +38,6 @@ public class Slot : MonoBehaviour, IDropHandler {
                 GameObject newObject = Instantiate(DragHandler.itemBeingDragged, DragHandler.itemBeingDragged.transform.parent);
                 newObject.name = DragHandler.itemBeingDragged.name;
                 newObject.transform.SetParent(transform);
-                ExecuteEvents.ExecuteHierarchy<IHasChanged>(gameObject, null, (x, y) => x.HasChanged());
 
                 newObject.GetComponent<DragHandler>().enabled = false;
 

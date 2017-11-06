@@ -17,8 +17,8 @@ public class FancyInventory : MonoBehaviour
     private const float m_scrollSpeed = 2000;
     private float m_scrollAmount = 0;
 
-    private Vector3 m_touchOrigin;
-    private bool m_isSwiping;
+    //private Vector3 m_touchOrigin;
+    //private bool m_isSwiping;
 
     private void Start()
     {

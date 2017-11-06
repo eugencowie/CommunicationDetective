@@ -17,8 +17,8 @@ public class Data
 
 public class DatabaseController : MonoBehaviour
 {
-    [SerializeField] private Data[] Data;
-    [SerializeField] private GameObject ButtonTemplate;
+    [SerializeField] private Data[] Data = new Data[4];
+    [SerializeField] private GameObject ButtonTemplate = null;
 
     private OnlineManager NetworkController;
     private string m_lobby;
