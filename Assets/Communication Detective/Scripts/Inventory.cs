@@ -16,12 +16,12 @@ public class Inventory : MonoBehaviour
     [SerializeField] private GameObject Button = null;
 
     private List<GameObject> m_buttons = new List<GameObject>();
-    private const int m_spacing = 225;
+    private const int m_spacing = 235;
     private const float m_scrollSpeed = 2000;
     private float m_scrollAmount = 0;
 
-    private Vector3 m_touchOrigin;
-    private bool m_isSwiping;
+    //private Vector3 m_touchOrigin;
+    //private bool m_isSwiping;
 
     private void Start()
     {
@@ -40,7 +40,7 @@ public class Inventory : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && EventSystem.current.IsPointerOverGameObject())
+        /*if (Input.GetMouseButtonDown(0) && EventSystem.current.IsPointerOverGameObject())
         {
             m_touchOrigin = Input.mousePosition;
             m_isSwiping = true;
@@ -61,7 +61,7 @@ public class Inventory : MonoBehaviour
             {
                 Scroll(movement);
             }
-        }
+        }*/
     }
     
     public void AddItem(UnityAction itemAction, ObjectHintData item)
