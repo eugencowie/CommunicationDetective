@@ -1,14 +1,19 @@
-﻿using System;
+﻿using Firebase.Database;
+using System;
 
 /// <summary>
 /// Represents a key-value pair in the database.
 /// </summary>
 public class OnlineDatabaseEntry
 {
+    public delegate void Listener(OnlineDatabaseEntry entry, ValueChangedEventArgs args);
+
     /// <summary>
     /// Reference to the database.
     /// </summary>
     private readonly OnlineDatabase m_database;
+
+    private EventHandler<ValueChangedEventArgs> m_listener;
 
     /// <summary>
     /// The full path to the key in the database.
@@ -26,6 +31,7 @@ public class OnlineDatabaseEntry
     public OnlineDatabaseEntry(OnlineDatabase database, string key)
     {
         m_database = database;
+        m_listener = null;
         Key = key;
         Value = "";
     }
@@ -72,5 +78,16 @@ public class OnlineDatabaseEntry
     public void Delete(Action<bool> returnSuccess=null)
     {
         m_database.Delete(Key, returnSuccess);
+    }
+
+    public void RegisterListener(Listener listener)
+    {
+        m_listener = (_, args) => listener(this, args);
+        m_database.RegisterListener(Key, m_listener);
+    }
+
+    public void DeregisterListener()
+    {
+        m_database.DeregisterListener(Key, m_listener);
     }
 }

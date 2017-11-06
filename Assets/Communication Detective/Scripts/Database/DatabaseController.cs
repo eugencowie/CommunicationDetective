@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Firebase.Database;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,11 @@ public class DatabaseController : MonoBehaviour
         NetworkController = new OnlineManager();
 
         NetworkController.GetPlayerLobby(lobby => {
-            if (!string.IsNullOrEmpty(lobby)) { m_lobby = lobby; DownloadItems(); }
+            if (!string.IsNullOrEmpty(lobby)) {
+                m_lobby = lobby;
+                DownloadItems();
+                NetworkController.RegisterCluesChanged(m_lobby, OnSlotChanged);
+            }
             else SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
         });
 
@@ -86,7 +91,7 @@ public class DatabaseController : MonoBehaviour
                     var clue = player.Clues.Clues[tmp2];
                     clue.PullEntries(_ => {
                         if (!string.IsNullOrEmpty(clue.Name.Value)) {
-                            Debug.Log(string.Format("Player {0}, slot {1}: {2}", tmp, tmp2, clue.Name.Value));
+                            //Debug.Log(string.Format("Player {0}, slot {1}: {2}", tmp, tmp2, clue.Name.Value));
                             var slot = Data[tmp].Slots[tmp2];
                             foreach (Transform t in slot.transform) if (t.gameObject.name == clue.Name.Value) Destroy(t.gameObject);
                             var newObj = Instantiate(ButtonTemplate, ButtonTemplate.transform.parent);
@@ -104,6 +109,14 @@ public class DatabaseController : MonoBehaviour
                     });
                 }
             });
+        }
+    }
+    
+    private void OnSlotChanged(OnlineDatabaseEntry entry, ValueChangedEventArgs args)
+    {
+        if (args.Snapshot.Exists)
+        {
+            Debug.Log(entry.Key + ": " + args.Snapshot.Value);
         }
     }
 }

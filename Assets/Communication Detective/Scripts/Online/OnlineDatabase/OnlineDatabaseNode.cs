@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Firebase.Database;
+using System;
 
 /// <summary>
 /// Represents a node in the database which contains a collection of database entries.
@@ -92,6 +93,22 @@ public abstract class OnlineDatabaseNode
         foreach (var entry in Entries)
         {
             entry.Delete(returnHandler);
+        }
+    }
+
+    public void RegisterListeners(OnlineDatabaseEntry.Listener listener)
+    {
+        foreach (var entry in Entries)
+        {
+            entry.RegisterListener(listener);
+        }
+    }
+
+    public void DeregisterListeners()
+    {
+        foreach (var entry in Entries)
+        {
+            entry.DeregisterListener();
         }
     }
 
