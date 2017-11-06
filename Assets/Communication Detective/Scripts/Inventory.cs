@@ -96,9 +96,13 @@ public class Inventory : MonoBehaviour
             // Set button text
             foreach (Transform t in newButton.transform)
             {
-                if (t.gameObject.GetComponents<Text>().Length > 0)
+                if (t.gameObject.GetComponent<Text>() != null)
                 {
                     t.gameObject.GetComponent<Text>().text = item.Name;
+                }
+                else if (t.gameObject.GetComponent<Image>() != null)
+                {
+                    t.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>(item.Image);
                 }
             }
 
