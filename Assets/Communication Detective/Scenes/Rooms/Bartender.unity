@@ -1072,7 +1072,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Wallet
   Hint: The wallet identifies the victim as Raymond L. Kovacs.
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: 2f5a3e1cbfd629f42a3a576aeb7be5d4, type: 3}
 --- !u!114 &602409981
 MonoBehaviour:
   m_ObjectHideFlags: 0
