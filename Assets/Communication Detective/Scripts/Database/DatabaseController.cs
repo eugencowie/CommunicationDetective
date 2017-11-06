@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Firebase.Database;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,8 +17,8 @@ public class Data
 
 public class DatabaseController : MonoBehaviour
 {
-    [SerializeField] private Data[] Data;
-    [SerializeField] private GameObject ButtonTemplate;
+    [SerializeField] private Data[] Data = new Data[4];
+    [SerializeField] private GameObject ButtonTemplate = null;
 
     private OnlineManager NetworkController;
     private string m_lobby;
@@ -28,7 +29,11 @@ public class DatabaseController : MonoBehaviour
         NetworkController = new OnlineManager();
 
         NetworkController.GetPlayerLobby(lobby => {
-            if (!string.IsNullOrEmpty(lobby)) { m_lobby = lobby; DownloadItems(); }
+            if (!string.IsNullOrEmpty(lobby)) {
+                m_lobby = lobby;
+                //DownloadItems();
+                NetworkController.RegisterCluesChanged(m_lobby, OnSlotChanged);
+            }
             else SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
         });
 
@@ -86,7 +91,7 @@ public class DatabaseController : MonoBehaviour
                     var clue = player.Clues.Clues[tmp2];
                     clue.PullEntries(_ => {
                         if (!string.IsNullOrEmpty(clue.Name.Value)) {
-                            Debug.Log(string.Format("Player {0}, slot {1}: {2}", tmp, tmp2, clue.Name.Value));
+                            //Debug.Log(string.Format("Player {0}, slot {1}: {2}", tmp, tmp2, clue.Name.Value));
                             var slot = Data[tmp].Slots[tmp2];
                             foreach (Transform t in slot.transform) if (t.gameObject.name == clue.Name.Value) Destroy(t.gameObject);
                             var newObj = Instantiate(ButtonTemplate, ButtonTemplate.transform.parent);
@@ -104,6 +109,43 @@ public class DatabaseController : MonoBehaviour
                     });
                 }
             });
+        }
+    }
+    
+    private void OnSlotChanged(OnlineDatabaseEntry entry, ValueChangedEventArgs args)
+    {
+        if (args.Snapshot.Exists)
+        {
+            string[] key = entry.Key.Split('/');
+            if (key.Length >= 5) {
+                string player = key[1];
+                string field = key[4];
+                string value = args.Snapshot.Value.ToString();
+
+                int slotNb = -1;
+                if (int.TryParse(key[3].Replace("slot-", ""), out slotNb))
+                {
+                    NetworkController.GetPlayerNumber(m_lobby, player, playerNb => {
+                        var slot = Data[playerNb].Slots[slotNb-1];
+                        if (field == "name") {
+                            foreach (Transform t in slot.transform) if (t.gameObject.name == value) Destroy(t.gameObject);
+                            var newObj = Instantiate(ButtonTemplate, ButtonTemplate.transform.parent);
+                            newObj.SetActive(true);
+                            newObj.name = value;
+                            newObj.transform.SetParent(slot.transform);
+                            foreach (Transform t in newObj.transform) {
+                                if (t.gameObject.GetComponent<Text>() != null) {
+                                    t.gameObject.GetComponent<Text>().text = value;
+                                }
+                            }
+                            newObj.GetComponent<DragHandler>().enabled = false;
+                        }
+                        else if (field == "hint"){
+                            slot.GetComponent<Slot>().Text.GetComponent<Text>().text = value;
+                        }
+                    });
+                }
+            }
         }
     }
 }
