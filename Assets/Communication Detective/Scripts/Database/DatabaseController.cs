@@ -91,19 +91,39 @@ public class DatabaseController : MonoBehaviour
                     var clue = player.Clues.Clues[tmp2];
                     clue.PullEntries(_ => {
                         if (!string.IsNullOrEmpty(clue.Name.Value)) {
-                            //Debug.Log(string.Format("Player {0}, slot {1}: {2}", tmp, tmp2, clue.Name.Value));
                             var slot = Data[tmp].Slots[tmp2];
                             foreach (Transform t in slot.transform) if (t.gameObject.name == clue.Name.Value) Destroy(t.gameObject);
                             var newObj = Instantiate(ButtonTemplate, ButtonTemplate.transform.parent);
                             newObj.SetActive(true);
                             newObj.name = clue.Name.Value;
                             newObj.transform.SetParent(slot.transform);
-                            foreach (Transform t in newObj.transform) {
-                                if (t.gameObject.GetComponent<Text>() != null) {
-                                    t.gameObject.GetComponent<Text>().text = clue.Name.Value;
-                                } else if (t.gameObject.GetComponent<Image>() != null) {
-                                    Debug.Log(clue.Image.Value);
-                                    t.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>(clue.Image.Value);
+                            if (!string.IsNullOrEmpty(clue.Image.Value))
+                            {
+                                foreach (Transform t in newObj.transform)
+                                {
+                                    if (t.gameObject.GetComponent<Text>() != null)
+                                    {
+                                        t.gameObject.GetComponent<Text>().text = clue.Name.Value;
+                                    }
+                                    if (t.gameObject.GetComponent<Image>() != null)
+                                    {
+                                        t.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>(clue.Image.Value);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                foreach (Transform t in newObj.transform)
+                                {
+                                    if (t.gameObject.GetComponent<Text>() != null)
+                                    {
+                                        t.gameObject.GetComponent<Text>().text = clue.Name.Value;
+                                        t.gameObject.GetComponent<Text>().gameObject.SetActive(true);
+                                    }
+                                    if (t.gameObject.GetComponent<Image>() != null)
+                                    {
+                                        t.gameObject.GetComponent<Image>().gameObject.SetActive(false);
+                                    }
                                 }
                             }
                             newObj.GetComponent<DragHandler>().enabled = false;
@@ -124,8 +144,6 @@ public class DatabaseController : MonoBehaviour
                 string player = key[1];
                 string field = key[4];
                 string value = args.Snapshot.Value.ToString();
-
-                Debug.Log(value);
 
                 int slotNb = -1;
                 if (int.TryParse(key[3].Replace("slot-", ""), out slotNb))
@@ -149,10 +167,33 @@ public class DatabaseController : MonoBehaviour
                             slot.GetComponent<Slot>().Text.GetComponent<Text>().text = value;
                         }
                         else if (field == "image") {
-                            foreach (Transform t1 in slot.transform) {
-                                foreach (Transform t in t1) {
-                                    if (t.gameObject.GetComponent<Image>() != null) {
-                                        t.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>(value);
+                            if (!string.IsNullOrEmpty(value))
+                            {
+                                foreach (Transform t1 in slot.transform)
+                                {
+                                    foreach (Transform t in t1)
+                                    {
+                                        if (t.gameObject.GetComponent<Image>() != null)
+                                        {
+                                            t.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>(value);
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                foreach (Transform t1 in slot.transform)
+                                {
+                                    foreach (Transform t in t1)
+                                    {
+                                        if (t.gameObject.GetComponent<Image>() != null)
+                                        {
+                                            t.gameObject.GetComponent<Image>().gameObject.SetActive(false);
+                                        }
+                                        if (t.gameObject.GetComponent<Text>() != null)
+                                        {
+                                            t.gameObject.GetComponent<Text>().gameObject.SetActive(true); // TODO: REMOVE TEMP FIX
+                                        }
                                     }
                                 }
                             }

@@ -102,7 +102,21 @@ public class Inventory : MonoBehaviour
                 }
                 else if (t.gameObject.GetComponent<Image>() != null)
                 {
-                    t.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>(item.Image);
+                    if (!string.IsNullOrEmpty(item.Image))
+                    {
+                        t.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>(item.Image);
+                    }
+                    else
+                    {
+                        foreach (Transform t2 in newButton.transform)
+                        {
+                            if (t2.gameObject.GetComponent<Text>() != null)
+                            {
+                                t2.gameObject.GetComponent<Text>().gameObject.SetActive(true); // TODO: REMOVE TEMP FIX
+                                t.gameObject.GetComponent<Image>().gameObject.SetActive(false);
+                            }
+                        }  
+                    }
                 }
             }
 

@@ -107,11 +107,25 @@ public class FancyInventory : MonoBehaviour
                     }
                     else if (t2.gameObject.GetComponent<Image>() != null)
                     {
-                        t2.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>(item.Image);
+                        if (!string.IsNullOrEmpty(item.Image))
+                        {
+                            t2.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>(item.Image);
+                        }
+                        else
+                        {
+                            foreach (Transform t3 in t)
+                            {
+                                if (t3.gameObject.GetComponent<Text>() != null)
+                                {
+                                    t3.gameObject.GetComponent<Text>().gameObject.SetActive(true); // TODO: REMOVE TEMP FIX
+                                    t2.gameObject.GetComponent<Image>().gameObject.SetActive(false);
+                                }
+                            }
+                        }
                     }
                 }
             }
-
+            
             // Activate button
             newSlot.SetActive(true);
             m_buttons.Add(newSlot);
