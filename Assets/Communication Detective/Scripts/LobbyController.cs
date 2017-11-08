@@ -49,11 +49,14 @@ public class LobbyController : MonoBehaviour
 
         Network = new OnlineManager();
 
-        SwitchPanel(StartPanel);
+        SwitchPanel(WaitPanel);
 
         Network.GetPlayerLobby(room => {
-            if (!string.IsNullOrEmpty(room)) {
-                Network.LeaveLobby(room);
+            if (string.IsNullOrEmpty(room)) SwitchPanel(StartPanel);
+            else {
+                Network.LeaveLobby(room, _ => {
+                    SwitchPanel(StartPanel);
+                });
             }
         });
 
