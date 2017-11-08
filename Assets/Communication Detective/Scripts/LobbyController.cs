@@ -49,7 +49,15 @@ public class LobbyController : MonoBehaviour
 
         Network = new OnlineManager();
 
-        SwitchPanel(WaitPanel);
+        SwitchPanel(StartPanel);
+
+        Network.GetPlayerLobby(room => {
+            if (!string.IsNullOrEmpty(room)) {
+                Network.LeaveLobby(room);
+            }
+        });
+
+        /*SwitchPanel(WaitPanel);
 
         Network.GetPlayerLobby(room => {
             if (string.IsNullOrEmpty(room)) SwitchPanel(StartPanel);
@@ -59,7 +67,7 @@ public class LobbyController : MonoBehaviour
                 RegisterOnLobbyStateChanged(room);
                 SwitchPanel(LobbyPanel);
             }
-        });
+        });*/
     }
 
     /// <summary>

@@ -157,7 +157,7 @@ public class OnlineManager
 
         // Delete 'players/{0}', pull 'lobbies/{1}/players', remove the player from list and push
         // 'lobbies/{1}/players' back up (unless there are no players left, then delete the lobby).
-        m_player.Delete(success1 => {
+        /*m_player.Delete(success1 => {
             if (success1) {
                 //m_lobby = new Lobby(m_database, code); // TODO
                 m_lobby.Players.Pull(success2 => {
@@ -176,7 +176,9 @@ public class OnlineManager
                 });
             }
             else returnSuccess(false);
-        });
+        });*/
+
+        m_player.Delete(returnSuccess);
     }
 
     /// <summary>
