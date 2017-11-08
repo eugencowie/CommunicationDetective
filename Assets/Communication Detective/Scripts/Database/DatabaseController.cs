@@ -17,6 +17,7 @@ public class Data
 
 public class DatabaseController : MonoBehaviour
 {
+    [SerializeField] private GameObject ReturnButton = null;
     [SerializeField] private Data[] Data = new Data[4];
     [SerializeField] private GameObject ButtonTemplate = null;
 
@@ -28,17 +29,22 @@ public class DatabaseController : MonoBehaviour
     {
         NetworkController = new OnlineManager();
 
+        ReturnButton.SetActive(false);
+
         NetworkController.GetPlayerLobby(lobby => {
             if (!string.IsNullOrEmpty(lobby)) {
-                m_lobby = lobby;
-                DownloadItems();
-                NetworkController.RegisterCluesChanged(m_lobby, OnSlotChanged);
+                NetworkController.GetPlayerScene(scene => {
+                    if (scene > 0) {
+                        m_scene = scene;
+                        m_lobby = lobby;
+                        DownloadItems();
+                        NetworkController.RegisterCluesChanged(m_lobby, OnSlotChanged);
+                        ReturnButton.SetActive(true);
+                    }
+                    else SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
+                });
+                
             }
-            else SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
-        });
-
-        NetworkController.GetPlayerScene(scene => {
-            if (scene > 0) m_scene = scene;
             else SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
         });
 
@@ -53,7 +59,11 @@ public class DatabaseController : MonoBehaviour
 
     public void ReturnButtonPressed()
     {
-        SceneManager.LoadScene(m_scene);
+        if (ReturnButton.activeSelf)
+        {
+            ReturnButton.SetActive(false);
+            SceneManager.LoadScene(m_scene);
+        }
     }
 
     private void PlayerButtonPressed(Data data)

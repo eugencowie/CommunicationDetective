@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class RoomController : MonoBehaviour
 {
+    [SerializeField] private GameObject DatabaseButton = null;
+
     private OnlineManager NetworkController;
 
     private string m_roomCode;
@@ -24,13 +26,17 @@ public class RoomController : MonoBehaviour
     /// </summary>
     public void LeaveButtonPressed()
     {
-        NetworkController.LeaveLobby(m_roomCode, success => {
-            if (success) SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
-        });
+        //NetworkController.LeaveLobby(m_roomCode, success => {
+        //    if (success) SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
+        //});
     }
 
     public void DatabaseButtonPressed()
     {
-        SceneManager.LoadScene("Communication Detective/Scenes/Database");
+        if (DatabaseButton.activeSelf)
+        {
+            DatabaseButton.SetActive(false);
+            SceneManager.LoadScene("Communication Detective/Scenes/Database");
+        }
     }
 }
