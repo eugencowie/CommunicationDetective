@@ -132,6 +132,11 @@ public class DatabaseController : MonoBehaviour
                                 }
                             }
                             newObj.GetComponent<DragHandler>().enabled = false;
+                            newObj.GetComponent<Button>().onClick.AddListener(() => {
+                                slot.GetComponent<Slot>().Text.GetComponent<Text>().text = "";
+                                RemoveItem(slot.GetComponent<Slot>().SlotNumber);
+                                Destroy(newObj);
+                            });
                             slot.GetComponent<Slot>().Text.GetComponent<Text>().text = clue.Hint.Value;
                         }
                     });
