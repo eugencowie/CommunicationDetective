@@ -251,6 +251,11 @@ public class OnlineManager
         m_player.Clues.Clues[slot-1].PushEntries();
     }
 
+    public void RemoveDatabaseItem(int slot)
+    {
+        m_player.Clues.Clues[slot - 1].Delete();
+    }
+
     public void RegisterCluesChanged(string code, OnlineDatabaseEntry.Listener listener)
     {
         m_lobby = new Lobby(m_database, code); // TODO

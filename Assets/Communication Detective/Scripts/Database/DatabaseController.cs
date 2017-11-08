@@ -80,6 +80,11 @@ public class DatabaseController : MonoBehaviour
         NetworkController.UploadDatabaseItem(slot, hint);
     }
 
+    public void RemoveItem(int slot)
+    {
+        NetworkController.RemoveDatabaseItem(slot);
+    }
+
     private void DownloadItems()
     {
         //for (int i = 0; i < 4; i++)

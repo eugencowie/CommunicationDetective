@@ -45,7 +45,13 @@ public abstract class OnlineDatabaseNode
     /// </summary>
     public void Delete(Action<bool> returnSuccess=null)
     {
-        Database.Delete(Key, returnSuccess);
+        Database.Delete(Key, success => {
+            if (success) {
+                foreach (var entry in Entries)
+                    entry.Value = "";
+            }
+            returnSuccess(success);
+        });
     }
 
     /// <summary>
