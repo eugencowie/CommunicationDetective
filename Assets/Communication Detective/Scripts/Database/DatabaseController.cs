@@ -147,36 +147,44 @@ public class DatabaseController : MonoBehaviour
     
     private void OnSlotChanged(OnlineDatabaseEntry entry, ValueChangedEventArgs args)
     {
-        if (args.Snapshot.Exists)
+        string[] key = entry.Key.Split('/');
+        if (key.Length >= 5)
         {
-            string[] key = entry.Key.Split('/');
-            if (key.Length >= 5) {
-                string player = key[1];
-                string field = key[4];
+            string player = key[1];
+            string field = key[4];
+
+            if (args.Snapshot.Exists)
+            {
                 string value = args.Snapshot.Value.ToString();
 
                 int slotNb = -1;
                 if (int.TryParse(key[3].Replace("slot-", ""), out slotNb))
                 {
-                    NetworkController.GetPlayerNumber(m_lobby, player, playerNb => {
-                        var slot = Data[playerNb].Slots[slotNb-1];
-                        if (field == "name") {
+                    NetworkController.GetPlayerNumber(m_lobby, player, playerNb =>
+                    {
+                        var slot = Data[playerNb].Slots[slotNb - 1];
+                        if (field == "name")
+                        {
                             foreach (Transform t in slot.transform) if (t.gameObject.name == value) Destroy(t.gameObject);
                             var newObj = Instantiate(ButtonTemplate, ButtonTemplate.transform.parent);
                             newObj.SetActive(true);
                             newObj.name = value;
                             newObj.transform.SetParent(slot.transform);
-                            foreach (Transform t in newObj.transform) {
-                                if (t.gameObject.GetComponent<Text>() != null) {
+                            foreach (Transform t in newObj.transform)
+                            {
+                                if (t.gameObject.GetComponent<Text>() != null)
+                                {
                                     t.gameObject.GetComponent<Text>().text = value;
                                 }
                             }
                             newObj.GetComponent<DragHandler>().enabled = false;
                         }
-                        else if (field == "hint") {
+                        else if (field == "hint")
+                        {
                             slot.GetComponent<Slot>().Text.GetComponent<Text>().text = value;
                         }
-                        else if (field == "image") {
+                        else if (field == "image")
+                        {
                             if (!string.IsNullOrEmpty(value))
                             {
                                 foreach (Transform t1 in slot.transform)
@@ -207,6 +215,24 @@ public class DatabaseController : MonoBehaviour
                                     }
                                 }
                             }
+                        }
+                    });
+                }
+            }
+            else
+            {
+                int slotNb = -1;
+                if (int.TryParse(key[3].Replace("slot-", ""), out slotNb))
+                {
+                    NetworkController.GetPlayerNumber(m_lobby, player, playerNb =>
+                    {
+                        var slot = Data[playerNb].Slots[slotNb - 1];
+
+                        slot.GetComponent<Slot>().Text.GetComponent<Text>().text = "";
+
+                        foreach (Transform t1 in slot.transform)
+                        {
+                            Destroy(t1.gameObject);
                         }
                     });
                 }
