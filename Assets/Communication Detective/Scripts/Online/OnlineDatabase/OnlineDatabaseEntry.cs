@@ -77,7 +77,10 @@ public class OnlineDatabaseEntry
     /// </summary>
     public void Delete(Action<bool> returnSuccess=null)
     {
-        m_database.Delete(Key, returnSuccess);
+        m_database.Delete(Key, success => {
+            if (success) Value = "";
+            returnSuccess(success);
+        });
     }
 
     public void RegisterListener(Listener listener)

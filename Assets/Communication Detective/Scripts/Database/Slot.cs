@@ -39,6 +39,12 @@ public class Slot : MonoBehaviour, IDropHandler {
                 newObject.name = DragHandler.itemBeingDragged.name;
                 newObject.transform.SetParent(transform);
 
+                newObject.GetComponent<Button>().onClick.AddListener(() => {
+                    Text.GetComponent<Text>().text = "";
+                    DatabaseController.RemoveItem(SlotNumber);
+                    Destroy(newObject);
+                });
+
                 newObject.GetComponent<DragHandler>().enabled = false;
 
                 Text.GetComponent<Text>().text = hint.Hint;

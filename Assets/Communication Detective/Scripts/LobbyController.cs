@@ -54,12 +54,23 @@ public class LobbyController : MonoBehaviour
         Network.GetPlayerLobby(room => {
             if (string.IsNullOrEmpty(room)) SwitchPanel(StartPanel);
             else {
+                Network.LeaveLobby(room, _ => {
+                    SwitchPanel(StartPanel);
+                });
+            }
+        });
+
+        /*SwitchPanel(WaitPanel);
+
+        Network.GetPlayerLobby(room => {
+            if (string.IsNullOrEmpty(room)) SwitchPanel(StartPanel);
+            else {
                 CodeLabel.text = room;
                 RegisterOnPlayersChanged(room);
                 RegisterOnLobbyStateChanged(room);
                 SwitchPanel(LobbyPanel);
             }
-        });
+        });*/
     }
 
     /// <summary>

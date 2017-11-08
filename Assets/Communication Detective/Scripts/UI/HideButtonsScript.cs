@@ -5,7 +5,7 @@ using UnityEngine;
 public class HideButtonsScript : MonoBehaviour {
 
     public GameObject hintUI;
-    public GameObject leaveButton;
+    //public GameObject leaveButton;
     public GameObject databaseButton;
 
 	// Use this for initialization
@@ -18,12 +18,12 @@ public class HideButtonsScript : MonoBehaviour {
     {
 		if (hintUI.activeSelf == true)
         {
-            leaveButton.SetActive(false);
+            //leaveButton.SetActive(false);
             databaseButton.SetActive(false);
         }
         else 
         {
-            leaveButton.SetActive(true);
+            //leaveButton.SetActive(true);
             databaseButton.SetActive(true);
         }
 	}
