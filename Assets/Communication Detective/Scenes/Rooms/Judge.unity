@@ -42,7 +42,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 11
+  serializedVersion: 9
   m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -54,7 +54,7 @@ LightmapSettings:
     m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
-    serializedVersion: 9
+    serializedVersion: 8
     m_Resolution: 2
     m_BakeResolution: 40
     m_TextureWidth: 1024
@@ -88,7 +88,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigma: 1
   m_LightingDataAsset: {fileID: 112000002, guid: c3cdcde9346f0e645bc308727f565610,
     type: 2}
-  m_UseShadowmask: 1
+  m_ShadowMaskMode: 2
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -408,7 +408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Gavel
-  Hint: Used in courthouse. Crack on the bottom.
+  Hint: A gavel used in courthouse. Crack on the bottom.
   Image: {fileID: 21300000, guid: a29e1e797dc970e44924ad0ec7b411cc, type: 3}
   ImagePath: InventoryImages/Gavel
 --- !u!114 &125359439
@@ -1849,7 +1849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Wardrobe
-  Hint: Various green clothing inside
+  Hint: Various green clothing inside.
   Image: {fileID: 21300000, guid: 104dd0ee790ef92408fa7f2e07789ac4, type: 3}
   ImagePath: InventoryImages/Wardrobe
 --- !u!114 &1087430039
@@ -1957,7 +1957,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Laptop
-  Hint: 'E-mail: "The tall, slender man is following you, your Honor."'
+  Hint: 'E-mail from a bailiff: "A tall, slender man has been seen stalking you, your
+    Honor."'
   Image: {fileID: 21300000, guid: b4e16e098c39eaa48968730379c904cb, type: 3}
   ImagePath: InventoryImages/Laptop
 --- !u!65 &1142571149
@@ -2110,7 +2111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Body
-  Hint: 'Cause of death: struck with a sharp weapon.'
+  Hint: 'Cause of death: impaled by a sharp weapon.'
   Image: {fileID: 21300000, guid: a95b155865a0bdf418d1bcbc16d8f1b4, type: 3}
   ImagePath: InventoryImages/JudgeBody
 --- !u!1 &1211595642 stripped
@@ -2292,7 +2293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Notebook
-  Hint: Contains 616 entries of various cases.
+  Hint: Contains notes on various cases.
   Image: {fileID: 21300000, guid: a6b90ab7af7fc2744a12bc3640896447, type: 3}
   ImagePath: InventoryImages/Notebook
 --- !u!65 &1653045052
@@ -2801,7 +2802,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Gun
-  Hint: It has not been fired
+  Hint: It has not been fired recently.
   Image: {fileID: 21300000, guid: 05c4e8208180aba4e94d171a1243c8c3, type: 3}
   ImagePath: InventoryImages/Gun
 --- !u!65 &2004239397
