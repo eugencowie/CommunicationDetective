@@ -34,8 +34,6 @@ public class VotingSlot : MonoBehaviour, IDropHandler
         {
             var suspect = VotingDragHandler.itemBeingDragged.GetComponent<VotingDragHandler>().Suspect;
 
-            Debug.Log("Delete " + suspect.Name.text);
-
             suspect.No.gameObject.SetActive(true);
 
             /*string newName = DragHandler.itemBeingDragged.name;
