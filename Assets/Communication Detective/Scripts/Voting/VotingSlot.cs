@@ -36,6 +36,8 @@ public class VotingSlot : MonoBehaviour, IDropHandler
 
             Debug.Log("Delete " + suspect.Name.text);
 
+            suspect.No.gameObject.SetActive(true);
+
             /*string newName = DragHandler.itemBeingDragged.name;
             if (StaticInventory.Hints.Any(h => h.Name == newName))
             {
