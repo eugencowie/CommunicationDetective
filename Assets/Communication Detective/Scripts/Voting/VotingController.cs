@@ -6,6 +6,7 @@ public class VotingController : MonoBehaviour
     [SerializeField] private GameObject ResetButton = null;
     [SerializeField] private GameObject ReturnButton = null;
     [SerializeField] private GameObject[] Backgrounds = new GameObject[4];
+    [SerializeField] private VotingSuspect[] Suspects = new VotingSuspect[8];
 
     private OnlineManager NetworkController;
     private string m_lobby;
@@ -54,7 +55,10 @@ public class VotingController : MonoBehaviour
         {
             ResetButton.SetActive(false);
 
-            Debug.Log("RESET");
+            foreach (var suspect in Suspects)
+            {
+                suspect.No.gameObject.SetActive(false);
+            }
 
             ResetButton.SetActive(true);
         }

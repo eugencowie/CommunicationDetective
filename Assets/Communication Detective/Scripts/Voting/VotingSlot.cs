@@ -18,7 +18,7 @@ public class VotingSlot : MonoBehaviour, IDropHandler
         }
     }
 
-    public bool CanDrop;
+    public bool CanDrop = false;
 
     //public GameObject Text;
 
