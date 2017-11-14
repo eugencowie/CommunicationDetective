@@ -23,10 +23,13 @@ public class CameraTap : MonoBehaviour
     private Camera m_camera;
     private CameraSwipe m_cameraSwipe;
 
+
+
     private void Start()
     {
         m_camera = GetComponent<Camera>();
         m_cameraSwipe = GetComponent<CameraSwipe>();
+
     }
 
     private void Update()
@@ -114,6 +117,8 @@ public class CameraTap : MonoBehaviour
         if (inspectable != null)
         {
             GameObject newObject = Instantiate(inspectable.gameObject);
+
+            inspectable.audioSource.PlayOneShot(inspectable.audioClip, 1f);
 
             newObject.transform.parent = m_camera.transform;
             newObject.transform.localPosition = new Vector3(0, 0, inspectable.InspectDistance);
