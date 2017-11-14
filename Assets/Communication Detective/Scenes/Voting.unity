@@ -163,7 +163,7 @@ Prefab:
     - target: {fileID: 224245036665185616, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224245036665185616, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
@@ -253,12 +253,12 @@ Prefab:
         type: 2}
       propertyPath: PanelLeft
       value: 
-      objectReference: {fileID: 1322951742}
+      objectReference: {fileID: 512192754}
     - target: {fileID: 114718829361876064, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: PanelRight
       value: 
-      objectReference: {fileID: 852021047}
+      objectReference: {fileID: 1322951742}
     - target: {fileID: 114569896306991082, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_Text
@@ -541,7 +541,7 @@ Prefab:
     - target: {fileID: 224245036665185616, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 224245036665185616, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
@@ -631,12 +631,12 @@ Prefab:
         type: 2}
       propertyPath: PanelLeft
       value: 
-      objectReference: {fileID: 400970764}
+      objectReference: {fileID: 1991361508}
     - target: {fileID: 114718829361876064, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: PanelRight
       value: 
-      objectReference: {fileID: 1991361508}
+      objectReference: {fileID: 2068830951}
     - target: {fileID: 114569896306991082, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_Text
@@ -691,7 +691,7 @@ RectTransform:
   m_LocalScale: {x: 1.0000104, y: 1.0000104, z: 1.0000104}
   m_Children: []
   m_Father: {fileID: 1268032000}
-  m_RootOrder: 2
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -882,7 +882,7 @@ Prefab:
     - target: {fileID: 224245036665185616, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 224245036665185616, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
@@ -972,12 +972,12 @@ Prefab:
         type: 2}
       propertyPath: PanelLeft
       value: 
-      objectReference: {fileID: 1991361508}
+      objectReference: {fileID: 2068830951}
     - target: {fileID: 114718829361876064, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: PanelRight
       value: 
-      objectReference: {fileID: 2068830951}
+      objectReference: {fileID: 1321127340}
     - target: {fileID: 114569896306991082, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_Text
@@ -1116,7 +1116,7 @@ Prefab:
     - target: {fileID: 224245036665185616, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 224245036665185616, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
@@ -1176,7 +1176,7 @@ Prefab:
         type: 2}
       propertyPath: PanelRight
       value: 
-      objectReference: {fileID: 1321127340}
+      objectReference: {fileID: 400970764}
     - target: {fileID: 224114875063803598, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_AnchorMin.y
@@ -1211,7 +1211,7 @@ Prefab:
         type: 2}
       propertyPath: PanelLeft
       value: 
-      objectReference: {fileID: 2068830951}
+      objectReference: {fileID: 1321127340}
     - target: {fileID: 114569896306991082, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_Text
@@ -1408,7 +1408,6 @@ RectTransform:
   m_Children:
   - {fileID: 1659385359}
   - {fileID: 558849288}
-  - {fileID: 873706632}
   - {fileID: 1991361513}
   - {fileID: 1322951747}
   - {fileID: 2068830952}
@@ -1417,6 +1416,7 @@ RectTransform:
   - {fileID: 119267294}
   - {fileID: 400970769}
   - {fileID: 512192759}
+  - {fileID: 873706632}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1558,7 +1558,7 @@ Prefab:
     - target: {fileID: 224245036665185616, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 224245036665185616, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
@@ -1618,12 +1618,12 @@ Prefab:
         type: 2}
       propertyPath: PanelLeft
       value: 
-      objectReference: {fileID: 119267289}
+      objectReference: {fileID: 852021047}
     - target: {fileID: 114718829361876064, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: PanelRight
       value: 
-      objectReference: {fileID: 512192754}
+      objectReference: {fileID: 119267289}
     - target: {fileID: 224114875063803598, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_AnchorMin.y
@@ -1711,7 +1711,7 @@ Prefab:
     - target: {fileID: 224245036665185616, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 224245036665185616, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
@@ -1801,12 +1801,12 @@ Prefab:
         type: 2}
       propertyPath: PanelLeft
       value: 
-      objectReference: {fileID: 852021047}
+      objectReference: {fileID: 1322951742}
     - target: {fileID: 114718829361876064, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: PanelRight
       value: 
-      objectReference: {fileID: 119267289}
+      objectReference: {fileID: 852021047}
     - target: {fileID: 114569896306991082, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_Text
@@ -1969,7 +1969,7 @@ Prefab:
     - target: {fileID: 224245036665185616, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 224245036665185616, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
@@ -2029,7 +2029,7 @@ Prefab:
         type: 2}
       propertyPath: PanelLeft
       value: 
-      objectReference: {fileID: 1321127340}
+      objectReference: {fileID: 400970764}
     - target: {fileID: 224114875063803598, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_AnchorMin.y
@@ -2064,7 +2064,7 @@ Prefab:
         type: 2}
       propertyPath: PanelRight
       value: 
-      objectReference: {fileID: 400970764}
+      objectReference: {fileID: 1991361508}
     - target: {fileID: 114569896306991082, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_Text
@@ -2132,7 +2132,7 @@ Prefab:
     - target: {fileID: 224245036665185616, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 224245036665185616, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
@@ -2222,12 +2222,12 @@ Prefab:
         type: 2}
       propertyPath: PanelLeft
       value: 
-      objectReference: {fileID: 512192754}
+      objectReference: {fileID: 119267289}
     - target: {fileID: 114718829361876064, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: PanelRight
       value: 
-      objectReference: {fileID: 1322951742}
+      objectReference: {fileID: 512192754}
     - target: {fileID: 114569896306991082, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_Text
