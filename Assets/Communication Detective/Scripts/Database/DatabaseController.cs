@@ -66,9 +66,7 @@ public class DatabaseController : MonoBehaviour
 
         PlayerButtonPressed(Data[0]);
     }
-
-
-
+    
     private void SetBackground()
     {
         if (m_scene <= Backgrounds.Length)
@@ -82,15 +80,20 @@ public class DatabaseController : MonoBehaviour
 
     public void ReadyButtonPressed()
     {
-        NetworkController.ReadyUp(success => {
-            if (success) {
-                ReadyButton.GetComponent<Image>().color = Color.yellow;
-                foreach (Transform t in ReadyButton.gameObject.transform) {
-                    var text = t.GetComponent<Text>();
-                    if (text != null) text.text = "Waiting...";
+        if (ReadyButton.activeSelf)
+        {
+            ReadyButton.SetActive(false);
+            NetworkController.ReadyUp(success => {
+                ReadyButton.SetActive(true);
+                if (success) {
+                    ReadyButton.GetComponent<Image>().color = Color.yellow;
+                    foreach (Transform t in ReadyButton.gameObject.transform) {
+                        var text = t.GetComponent<Text>();
+                        if (text != null) text.text = "Waiting...";
+                    }
                 }
-            }
-        });
+            });
+        }
     }
     
     public void ReturnButtonPressed()
@@ -317,8 +320,7 @@ public class DatabaseController : MonoBehaviour
                 {
                     ReadyButtonPressed();
                 }
-
-
+                
                 if (!m_readyPlayers.Any(p => p.Value == false))
                 {
                     VotingButtonPressed();
