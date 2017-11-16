@@ -431,7 +431,7 @@ MonoBehaviour:
   Image: {fileID: 114293165632170572}
   Name: {fileID: 114569896306991082}
   Description: {fileID: 114725772865384308}
-  No: {fileID: 114114505631879100}
+  Slot: {fileID: 1633951605508714}
 --- !u!114 &114453572614978256
 MonoBehaviour:
   m_ObjectHideFlags: 1

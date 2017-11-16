@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class VotingController : MonoBehaviour
 {
@@ -55,9 +56,34 @@ public class VotingController : MonoBehaviour
         {
             ResetButton.SetActive(false);
 
-            foreach (var suspect in Suspects)
+            for (int i = 0; i < Suspects.Length; i++)
             {
-                suspect.No.gameObject.SetActive(false);
+                int prevIdx = i - 1;
+                int nextIdx = i + 1;
+
+                if (prevIdx < 0)
+                    prevIdx = Suspects.Length - 1;
+
+                if (nextIdx >= Suspects.Length)
+                    nextIdx = 0;
+
+                var current = Suspects[i];
+
+                var prev = Suspects[prevIdx];
+                var next = Suspects[nextIdx];
+
+                var page = current.gameObject.GetComponent<VotingPageController>();
+
+                page.PanelLeft = prev.gameObject;
+                page.PanelRight = next.gameObject;
+
+                // reset opacity
+                if (current.Slot != null)
+                {
+                    var color = current.Slot.GetComponent<Image>().color;
+                    color.a = 1.0f;
+                    current.Slot.GetComponent<Image>().color = color;
+                }
             }
 
             ResetButton.SetActive(true);

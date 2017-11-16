@@ -8,5 +8,5 @@ public class VotingSuspect : MonoBehaviour
     public Image Image;
     public Text Name;
     public Text Description;
-    public Image No;
+    public GameObject Slot;
 }

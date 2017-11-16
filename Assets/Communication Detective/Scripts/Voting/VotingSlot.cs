@@ -33,30 +33,21 @@ public class VotingSlot : MonoBehaviour, IDropHandler
         if (item == null && CanDrop)
         {
             var suspect = VotingDragHandler.itemBeingDragged.GetComponent<VotingDragHandler>().Suspect;
+            var page = suspect.GetComponent<VotingPageController>();
 
-            suspect.No.gameObject.SetActive(true);
+            var prevPage = page.PanelLeft;
+            var nextPage = page.PanelRight;
 
-            /*string newName = DragHandler.itemBeingDragged.name;
-            if (StaticInventory.Hints.Any(h => h.Name == newName))
-            {
-                ObjectHintData hint = StaticInventory.Hints.First(h => h.Name == newName);
+            prevPage.GetComponent<VotingPageController>().PanelRight = nextPage;
+            nextPage.GetComponent<VotingPageController>().PanelLeft = prevPage;
 
-                GameObject newObject = Instantiate(DragHandler.itemBeingDragged, DragHandler.itemBeingDragged.transform.parent);
-                newObject.name = DragHandler.itemBeingDragged.name;
-                newObject.transform.SetParent(transform);
+            // TODO: don't remove last item
 
-                newObject.GetComponent<Button>().onClick.AddListener(() => {
-                    Text.GetComponent<Text>().text = "";
-                    DatabaseController.RemoveItem(SlotNumber);
-                    Destroy(newObject);
-                });
+            page.Right();
+            suspect.gameObject.SetActive(false);
 
-                newObject.GetComponent<DragHandler>().enabled = false;
+            Destroy(VotingDragHandler.itemBeingDragged);
 
-                Text.GetComponent<Text>().text = hint.Hint;
-
-                DatabaseController.UploadItem(SlotNumber, hint);
-            }*/
         }
     }
     #endregion

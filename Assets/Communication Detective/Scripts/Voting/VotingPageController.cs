@@ -9,8 +9,8 @@ public class VotingPageController : MonoBehaviour
     {
         if (PanelLeft != null)
         {
-            PanelLeft.SetActive(true);
             gameObject.SetActive(false);
+            PanelLeft.SetActive(true);
         }
     }
 
@@ -18,8 +18,8 @@ public class VotingPageController : MonoBehaviour
     {
         if (PanelRight != null)
         {
-            PanelRight.SetActive(true);
             gameObject.SetActive(false);
+            PanelRight.SetActive(true);
         }
     }
 }
