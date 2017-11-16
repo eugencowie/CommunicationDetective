@@ -17,6 +17,8 @@ public class Slot : MonoBehaviour, IDropHandler {
 	}
 
     public bool CanDrop = false;
+    private AudioSource m_audioSource;
+    public AudioClip emailAudioClip;
 
     public GameObject Text;
 
@@ -25,14 +27,20 @@ public class Slot : MonoBehaviour, IDropHandler {
     [Range(1,6)]
     public int SlotNumber;
 
-	#region IDropHandler implementation
-	public void OnDrop (PointerEventData eventData)
+    private void Start()
+    {
+        m_audioSource = GetComponent<AudioSource>();
+    }
+
+    #region IDropHandler implementation
+    public void OnDrop (PointerEventData eventData)
 	{
 		if (item == null && CanDrop)
         {
             string newName = DragHandler.itemBeingDragged.name;
             if (StaticInventory.Hints.Any(h => h.Name == newName))
             {
+                m_audioSource.PlayOneShot(emailAudioClip, 1f);
                 ObjectHintData hint = StaticInventory.Hints.First(h => h.Name == newName);
 
                 GameObject newObject = Instantiate(DragHandler.itemBeingDragged, DragHandler.itemBeingDragged.transform.parent);

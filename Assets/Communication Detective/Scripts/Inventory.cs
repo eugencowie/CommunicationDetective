@@ -5,8 +5,10 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public static class StaticInventory
-{
+
+public static class StaticInventory{
+    
+    [SerializeField]
     public static List<ObjectHintData> Hints = new List<ObjectHintData>();
 }
 
