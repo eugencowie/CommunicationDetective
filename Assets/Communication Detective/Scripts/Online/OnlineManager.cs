@@ -340,6 +340,18 @@ public class OnlineManager
 
     #endregion
 
+    #region Async voting methods
+
+    public void ReadyUp(Action<bool> returnSuccess=null)
+    {
+        OnlineDatabase.ValidateAction(ref returnSuccess, "ReadyUp");
+
+        m_player.Ready.Value = "true";
+        m_player.Ready.Push(returnSuccess);
+    }
+
+    #endregion
+
     #region Listeners
 
     public void RegisterListener(string path, EventHandler<ValueChangedEventArgs> listener)

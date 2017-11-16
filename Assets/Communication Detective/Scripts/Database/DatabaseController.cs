@@ -72,18 +72,17 @@ public class DatabaseController : MonoBehaviour
 
     public void ReadyButtonPressed()
     {
-        ReadyButton.color = Color.yellow;
-
-        foreach (Transform t in ReadyButton.gameObject.transform)
-        {
-            var text = t.GetComponent<Text>();
-            if (text != null)
-            {
-                text.text = "Waiting...";
+        NetworkController.ReadyUp(success => {
+            if (success) {
+                ReadyButton.color = Color.yellow;
+                foreach (Transform t in ReadyButton.gameObject.transform) {
+                    var text = t.GetComponent<Text>();
+                    if (text != null) text.text = "Waiting...";
+                }
             }
-        }
+        });
     }
-
+    
     public void ReturnButtonPressed()
     {
         if (ReturnButton.activeSelf)
