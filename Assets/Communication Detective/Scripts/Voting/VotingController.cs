@@ -31,7 +31,6 @@ public class VotingController : MonoBehaviour
                 NetworkController.GetPlayerLobby(lobby => {
                     if (!string.IsNullOrEmpty(lobby)) {
                         m_lobby = lobby;
-                        //NetworkController.RegisterCluesChanged(m_lobby, OnSlotChanged);
                         ResetButton.SetActive(true);
                         ReturnButton.SetActive(true);
                         VoteButton.SetActive(true);
@@ -59,7 +58,7 @@ public class VotingController : MonoBehaviour
         if (ReturnButton.activeSelf)
         {
             ReturnButton.SetActive(false);
-            SceneManager.LoadScene("Communication Detective/Scenes/Database");
+            SceneManager.LoadScene("Communication Detective/Scenes/VotingDatabase");
         }
     }
 
