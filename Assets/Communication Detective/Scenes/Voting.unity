@@ -299,6 +299,16 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114718829361876064, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
+        type: 2}
+      propertyPath: PanelLeft
+      value: 
+      objectReference: {fileID: 512192754}
+    - target: {fileID: 114718829361876064, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
+        type: 2}
+      propertyPath: PanelRight
+      value: 
+      objectReference: {fileID: 1322951742}
     - target: {fileID: 1156473526795230, guid: 40fc956ba7a47604aaa5bfdbce17ace6, type: 2}
       propertyPath: m_Name
       value: Suspect (1)
@@ -333,30 +343,11 @@ Prefab:
       propertyPath: m_SizeDelta.y
       value: 300
       objectReference: {fileID: 0}
-    - target: {fileID: 114718829361876064, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
-        type: 2}
-      propertyPath: PanelLeft
-      value: 
-      objectReference: {fileID: 512192754}
-    - target: {fileID: 114718829361876064, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
-        type: 2}
-      propertyPath: PanelRight
-      value: 
-      objectReference: {fileID: 1322951742}
     - target: {fileID: 114569896306991082, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_Text
       value: Suspect 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1156473526795230, guid: 40fc956ba7a47604aaa5bfdbce17ace6, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114439975272826338, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
-        type: 2}
-      propertyPath: Slot
-      value: 
-      objectReference: {fileID: 1157640036}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 40fc956ba7a47604aaa5bfdbce17ace6, type: 2}
   m_IsPrefabParent: 0
@@ -747,6 +738,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114439975272826338, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
+        type: 2}
+      propertyPath: Slot
+      value: 
+      objectReference: {fileID: 1646878634}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 40fc956ba7a47604aaa5bfdbce17ace6, type: 2}
   m_IsPrefabParent: 0
@@ -1178,11 +1174,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1157640036 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1633951605508714, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
-    type: 2}
-  m_PrefabInternal: {fileID: 385129413}
 --- !u!1 &1223986237
 GameObject:
   m_ObjectHideFlags: 0
@@ -2111,6 +2102,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1644049724}
+--- !u!1 &1646878634 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1633951605508714, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
+    type: 2}
+  m_PrefabInternal: {fileID: 726085683}
 --- !u!1 &1659385358
 GameObject:
   m_ObjectHideFlags: 0
