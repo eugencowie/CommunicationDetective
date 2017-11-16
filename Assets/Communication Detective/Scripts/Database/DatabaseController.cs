@@ -42,6 +42,7 @@ public class DatabaseController : MonoBehaviour
                         m_lobby = lobby;
                         DownloadItems();
                         NetworkController.RegisterCluesChanged(m_lobby, OnSlotChanged);
+                        NetworkController.RegisterReadyChanged(m_lobby, OnReadyChanged);
                         ReturnButton.SetActive(true);
                     }
                     else SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
@@ -273,6 +274,19 @@ public class DatabaseController : MonoBehaviour
                     });
                 }
             }
+        }
+    }
+
+    private void OnReadyChanged(OnlineDatabaseEntry entry, ValueChangedEventArgs args)
+    {
+        if (args.Snapshot.Exists)
+        {
+            string value = args.Snapshot.Value.ToString();
+            Debug.Log(entry.Key + " = " + value);
+        }
+        else
+        {
+            Debug.Log(entry.Key + " is not ready");
         }
     }
 }

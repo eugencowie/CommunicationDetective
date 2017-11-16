@@ -350,6 +350,38 @@ public class OnlineManager
         m_player.Ready.Push(returnSuccess);
     }
 
+    public void RegisterReadyChanged(string code, OnlineDatabaseEntry.Listener listener)
+    {
+        m_lobby = new Lobby(m_database, code); // TODO
+        m_lobby.Players.Pull(success => {
+            if (success) {
+                List<string> players = m_lobby.Players.Value.Split(',').ToList();
+                players.RemoveAll(s => string.IsNullOrEmpty(s));
+                players.Remove(m_player.Id);
+                foreach (string playerId in players) {
+                    Player player = new Player(m_database, playerId);
+                    player.Ready.RegisterListener(listener);
+                }
+            }
+        });
+    }
+
+    public void DeregisterReadyChanged(string code) // TODO: make all these functions static
+    {
+        m_lobby = new Lobby(m_database, code); // TODO
+        m_lobby.Players.Pull(success => {
+            if (success) {
+                List<string> players = m_lobby.Players.Value.Split(',').ToList();
+                players.RemoveAll(s => string.IsNullOrEmpty(s));
+                players.Remove(m_player.Id);
+                foreach (string playerId in players) {
+                    Player player = new Player(m_database, playerId);
+                    player.Ready.DeregisterListener();
+                }
+            }
+        });
+    }
+
     #endregion
 
     #region Listeners
