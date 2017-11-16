@@ -17,6 +17,7 @@ public class Data
 
 public class DatabaseController : MonoBehaviour
 {
+    [SerializeField] private Image ReadyButton = null;
     [SerializeField] private GameObject ReturnButton = null;
     [SerializeField] private GameObject ButtonTemplate = null;
     [SerializeField] private GameObject[] Backgrounds = new GameObject[4];
@@ -66,6 +67,20 @@ public class DatabaseController : MonoBehaviour
                 bg.SetActive(false);
 
             Backgrounds[m_scene - 1].SetActive(true);
+        }
+    }
+
+    public void ReadyButtonPressed()
+    {
+        ReadyButton.color = Color.yellow;
+
+        foreach (Transform t in ReadyButton.gameObject.transform)
+        {
+            var text = t.GetComponent<Text>();
+            if (text != null)
+            {
+                text.text = "Waiting...";
+            }
         }
     }
 
