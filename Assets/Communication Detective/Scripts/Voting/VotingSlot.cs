@@ -48,6 +48,10 @@ public class VotingSlot : MonoBehaviour, IDropHandler
 
             Destroy(VotingDragHandler.itemBeingDragged);
 
+            if (!StaticSuspects.DiscardedSuspects.Any(s => s.Name == suspect.Name.text))
+            {
+                StaticSuspects.DiscardedSuspects.Add(new VotingSuspectData(suspect));
+            }
         }
     }
     #endregion

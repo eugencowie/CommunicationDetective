@@ -1,7 +1,13 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
+public static class StaticSuspects
+{
+    public static List<VotingSuspectData> DiscardedSuspects = new List<VotingSuspectData>();
+}
 
 public class VotingController : MonoBehaviour
 {
@@ -34,12 +40,38 @@ public class VotingController : MonoBehaviour
                         ResetButton.SetActive(true);
                         ReturnButton.SetActive(true);
                         VoteButton.SetActive(true);
+                        DiscardSuspects();
                     }
                     else SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
                 });
             }
             else SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
         });
+    }
+
+    private void DiscardSuspects()
+    {
+        foreach (var discarded in StaticSuspects.DiscardedSuspects)
+        {
+            foreach (var suspect in Suspects)
+            {
+                if (suspect.Name.text == discarded.Name)
+                {
+                    var page = suspect.GetComponent<VotingPageController>();
+
+                    var prevPage = page.PanelLeft;
+                    var nextPage = page.PanelRight;
+
+                    prevPage.GetComponent<VotingPageController>().PanelRight = nextPage;
+                    nextPage.GetComponent<VotingPageController>().PanelLeft = prevPage;
+
+                    // TODO: don't remove last item
+
+                    page.Right();
+                    suspect.gameObject.SetActive(false);
+                }
+            }
+        }
     }
 
     private void SetBackground()

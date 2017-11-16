@@ -21,14 +21,20 @@ public class ObjectHintEditor : Editor
         base.OnInspectorGUI();
 
         ObjectHint hint = (ObjectHint)target;
-
         ImagePath.stringValue = AssetDatabase.GetAssetPath(hint.Image).Replace("Assets/Resources/", "").Replace(".png", "");
-
         serializedObject.ApplyModifiedProperties();
     }
 }
 
 #endif
+
+public class ObjectHint : MonoBehaviour
+{
+    public string Name = "";
+    public string Hint = "";
+    public Sprite Image = null;
+    public string ImagePath = "";
+}
 
 public class ObjectHintData
 {
@@ -46,22 +52,5 @@ public class ObjectHintData
     public ObjectHintData(ObjectHint hint)
         : this(hint.Name, hint.Hint, hint.ImagePath)
     {
-    }
-}
-
-public class ObjectHint : MonoBehaviour
-{
-    public string Name = "";
-    public string Hint = "";
-    public Sprite Image = null;
-    public string ImagePath = "";
-
-    public ObjectHint() { }
-
-    public ObjectHint(ObjectHintData data)
-    {
-        Name = data.Name;
-        Hint = data.Hint;
-        Image = Resources.Load<Sprite>(data.Image);
     }
 }
