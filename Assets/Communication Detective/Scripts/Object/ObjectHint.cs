@@ -59,21 +59,3 @@ public class ObjectHintData
     {
     }
 }
-
-public class ObjectHint : MonoBehaviour
-{
-    
-    public string Name = "";
-    public string Hint = "";
-    public Sprite Image = null;
-    public string ImagePath = "";
-
-    public ObjectHint() { }
-
-    public ObjectHint(ObjectHintData data)
-    {
-        Name = data.Name;
-        Hint = data.Hint;
-        Image = Resources.Load<Sprite>(data.Image);
-    }
-}
