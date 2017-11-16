@@ -1616,6 +1616,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ResetButton: {fileID: 1223986237}
   ReturnButton: {fileID: 558849287}
+  VoteButton: {fileID: 1127112748}
   Backgrounds:
   - {fileID: 1294405908}
   - {fileID: 1032104099}

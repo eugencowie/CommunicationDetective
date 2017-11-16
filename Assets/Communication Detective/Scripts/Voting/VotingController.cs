@@ -7,6 +7,7 @@ public class VotingController : MonoBehaviour
 {
     [SerializeField] private GameObject ResetButton = null;
     [SerializeField] private GameObject ReturnButton = null;
+    [SerializeField] private GameObject VoteButton = null;
     [SerializeField] private GameObject[] Backgrounds = new GameObject[4];
     [SerializeField] private VotingSuspect[] Suspects = new VotingSuspect[8];
 
@@ -20,6 +21,7 @@ public class VotingController : MonoBehaviour
 
         ResetButton.SetActive(false);
         ReturnButton.SetActive(false);
+        VoteButton.SetActive(false);
 
         NetworkController.GetPlayerScene(scene => {
             if (scene > 0)
@@ -32,6 +34,7 @@ public class VotingController : MonoBehaviour
                         //NetworkController.RegisterCluesChanged(m_lobby, OnSlotChanged);
                         ResetButton.SetActive(true);
                         ReturnButton.SetActive(true);
+                        VoteButton.SetActive(true);
                     }
                     else SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
                 });

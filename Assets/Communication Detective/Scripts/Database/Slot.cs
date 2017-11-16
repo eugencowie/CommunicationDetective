@@ -40,9 +40,11 @@ public class Slot : MonoBehaviour, IDropHandler {
                 newObject.transform.SetParent(transform);
 
                 newObject.GetComponent<Button>().onClick.AddListener(() => {
-                    Text.GetComponent<Text>().text = "";
-                    DatabaseController.RemoveItem(SlotNumber);
-                    Destroy(newObject);
+                    if (CanDrop) {
+                        Text.GetComponent<Text>().text = "";
+                        DatabaseController.RemoveItem(SlotNumber);
+                        Destroy(newObject);
+                    }
                 });
 
                 newObject.GetComponent<DragHandler>().enabled = false;

@@ -17,8 +17,10 @@ public class Data
 
 public class DatabaseController : MonoBehaviour
 {
-    [SerializeField] private Image ReadyButton = null;
+    [SerializeField] private GameObject ReadyButton = null;
     [SerializeField] private GameObject ReturnButton = null;
+    [SerializeField] private GameObject VotingButton = null;
+    [SerializeField] private GameObject Inventory = null;
     [SerializeField] private GameObject ButtonTemplate = null;
     [SerializeField] private GameObject[] Backgrounds = new GameObject[4];
     [SerializeField] private Data[] Data = new Data[4];
@@ -33,7 +35,9 @@ public class DatabaseController : MonoBehaviour
     {
         NetworkController = new OnlineManager();
 
+        ReadyButton.SetActive(false);
         ReturnButton.SetActive(false);
+        VotingButton.SetActive(false);
 
         NetworkController.GetPlayerScene(scene => {
             if (scene > 0) {
@@ -47,6 +51,7 @@ public class DatabaseController : MonoBehaviour
                             DownloadItems();
                             NetworkController.RegisterCluesChanged(m_lobby, OnSlotChanged);
                             NetworkController.RegisterReadyChanged(m_lobby, OnReadyChanged);
+                            ReadyButton.SetActive(true);
                             ReturnButton.SetActive(true);
                         });
                     }
@@ -65,6 +70,8 @@ public class DatabaseController : MonoBehaviour
         PlayerButtonPressed(Data[0]);
     }
 
+
+
     private void SetBackground()
     {
         if (m_scene <= Backgrounds.Length)
@@ -80,7 +87,7 @@ public class DatabaseController : MonoBehaviour
     {
         NetworkController.ReadyUp(success => {
             if (success) {
-                ReadyButton.color = Color.yellow;
+                ReadyButton.GetComponent<Image>().color = Color.yellow;
                 foreach (Transform t in ReadyButton.gameObject.transform) {
                     var text = t.GetComponent<Text>();
                     if (text != null) text.text = "Waiting...";
@@ -94,7 +101,19 @@ public class DatabaseController : MonoBehaviour
         if (ReturnButton.activeSelf)
         {
             ReturnButton.SetActive(false);
+            NetworkController.DeregisterCluesChanged();
+            NetworkController.DeregisterReadyChanged(m_lobby);
             SceneManager.LoadScene(m_scene);
+        }
+    }
+
+    public void VotingButtonPressed()
+    {
+        if (!m_readyPlayers.Any(p => p.Value == false))
+        {
+            NetworkController.DeregisterCluesChanged();
+            NetworkController.DeregisterReadyChanged(m_lobby);
+            SceneManager.LoadScene("Communication Detective/Scenes/Voting");
         }
     }
 
@@ -124,7 +143,10 @@ public class DatabaseController : MonoBehaviour
 
     public void RemoveItem(int slot)
     {
-        NetworkController.RemoveDatabaseItem(slot);
+        if (!m_readyPlayers.Any(p => p.Value == false))
+        {
+            NetworkController.RemoveDatabaseItem(slot);
+        }
     }
 
     private void DownloadItems()
@@ -284,6 +306,9 @@ public class DatabaseController : MonoBehaviour
 
     private void OnReadyChanged(OnlineDatabaseEntry entry, ValueChangedEventArgs args)
     {
+        if (ReadyButton == null)
+            return;
+
         if (args.Snapshot.Exists)
         {
             string value = args.Snapshot.Value.ToString();
@@ -299,16 +324,26 @@ public class DatabaseController : MonoBehaviour
                     ReadyButtonPressed();
                 }
 
-                CheckEveryoneReady();
-            }
-        }
-    }
+                if (!m_readyPlayers.Any(p => p.Value == false))
+                {
+                    ReadyButton.SetActive(false);
+                    ReturnButton.SetActive(false);
+                    VotingButton.SetActive(true);
 
-    private void CheckEveryoneReady()
-    {
-        if (!m_readyPlayers.Any(p => p.Value == false))
-        {
-            SceneManager.LoadScene("Communication Detective/Scenes/Voting");
+                    Inventory.SetActive(false);
+                    foreach (var data in Data)
+                    {
+                        foreach (var slot in data.Slots)
+                        {
+                            var component = slot.GetComponent<Slot>();
+                            if (component != null)
+                            {
+                                component.CanDrop = false;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
