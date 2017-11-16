@@ -27,6 +27,8 @@ public class DatabaseController : MonoBehaviour
     private string m_lobby;
     private int m_scene;
 
+    private Dictionary<string, bool> m_readyPlayers = new Dictionary<string, bool>();
+
     private void Start()
     {
         NetworkController = new OnlineManager();
@@ -39,11 +41,14 @@ public class DatabaseController : MonoBehaviour
                 SetBackground();
                 NetworkController.GetPlayerLobby(lobby => {
                     if (!string.IsNullOrEmpty(lobby)) {
-                        m_lobby = lobby;
-                        DownloadItems();
-                        NetworkController.RegisterCluesChanged(m_lobby, OnSlotChanged);
-                        NetworkController.RegisterReadyChanged(m_lobby, OnReadyChanged);
-                        ReturnButton.SetActive(true);
+                        NetworkController.GetPlayers(lobby, players => {
+                            m_lobby = lobby;
+                            foreach (var player in players) m_readyPlayers[player] = false;
+                            DownloadItems();
+                            NetworkController.RegisterCluesChanged(m_lobby, OnSlotChanged);
+                            NetworkController.RegisterReadyChanged(m_lobby, OnReadyChanged);
+                            ReturnButton.SetActive(true);
+                        });
                     }
                     else SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
                 });
@@ -282,11 +287,28 @@ public class DatabaseController : MonoBehaviour
         if (args.Snapshot.Exists)
         {
             string value = args.Snapshot.Value.ToString();
-            Debug.Log(entry.Key + " = " + value);
+
+            if (value == "true")
+            {
+                string[] key = entry.Key.Split('/');
+                string player = key[1];
+                m_readyPlayers[player] = true;
+
+                if (player == OnlineManager.GetPlayerId())
+                {
+                    ReadyButtonPressed();
+                }
+
+                CheckEveryoneReady();
+            }
         }
-        else
+    }
+
+    private void CheckEveryoneReady()
+    {
+        if (!m_readyPlayers.Any(p => p.Value == false))
         {
-            Debug.Log(entry.Key + " is not ready");
+            SceneManager.LoadScene("Communication Detective/Scenes/Voting");
         }
     }
 }

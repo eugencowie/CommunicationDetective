@@ -350,6 +350,19 @@ public class OnlineManager
         m_player.Ready.Push(returnSuccess);
     }
 
+    public void GetPlayers(string code, Action<string[]> returnPlayers)
+    {
+        m_lobby = new Lobby(m_database, code); // TODO
+        m_lobby.Players.Pull(success => {
+            if (success) {
+                List<string> players = m_lobby.Players.Value.Split(',').ToList();
+                players.RemoveAll(s => string.IsNullOrEmpty(s));
+                returnPlayers(players.ToArray());
+            }
+            else returnPlayers(null);
+        });
+    }
+
     public void RegisterReadyChanged(string code, OnlineDatabaseEntry.Listener listener)
     {
         m_lobby = new Lobby(m_database, code); // TODO
@@ -357,7 +370,7 @@ public class OnlineManager
             if (success) {
                 List<string> players = m_lobby.Players.Value.Split(',').ToList();
                 players.RemoveAll(s => string.IsNullOrEmpty(s));
-                players.Remove(m_player.Id);
+                //players.Remove(m_player.Id);
                 foreach (string playerId in players) {
                     Player player = new Player(m_database, playerId);
                     player.Ready.RegisterListener(listener);
@@ -373,7 +386,7 @@ public class OnlineManager
             if (success) {
                 List<string> players = m_lobby.Players.Value.Split(',').ToList();
                 players.RemoveAll(s => string.IsNullOrEmpty(s));
-                players.Remove(m_player.Id);
+                //players.Remove(m_player.Id);
                 foreach (string playerId in players) {
                     Player player = new Player(m_database, playerId);
                     player.Ready.DeregisterListener();
@@ -403,7 +416,7 @@ public class OnlineManager
     /// <summary>
     /// Returns a unique player id.
     /// </summary>
-    private static string GetPlayerId()
+    public static string GetPlayerId()
     {
         const string key = "UniquePlayerId";
 
