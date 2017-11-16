@@ -56,7 +56,7 @@ public class VotingController : MonoBehaviour
         if (ReturnButton.activeSelf)
         {
             ReturnButton.SetActive(false);
-            SceneManager.LoadScene(m_scene);
+            SceneManager.LoadScene("Communication Detective/Scenes/Database");
         }
     }
 
