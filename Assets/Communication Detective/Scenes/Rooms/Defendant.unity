@@ -4975,26 +4975,26 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114009091682485718, guid: b4cf21df0c4bb50498a7194cec12805e,
-        type: 2}
+    - target: {fileID: 114009091682485718, guid: b4cf21df0c4bb50498a7194cec12805e, type: 2}
       propertyPath: InventoryController
       value: 
       objectReference: {fileID: 1163426528}
-    - target: {fileID: 114009091682485718, guid: b4cf21df0c4bb50498a7194cec12805e,
-        type: 2}
+    - target: {fileID: 114009091682485718, guid: b4cf21df0c4bb50498a7194cec12805e, type: 2}
       propertyPath: HintPanel
       value: 
       objectReference: {fileID: 416131039}
-    - target: {fileID: 114009091682485718, guid: b4cf21df0c4bb50498a7194cec12805e,
-        type: 2}
+    - target: {fileID: 114009091682485718, guid: b4cf21df0c4bb50498a7194cec12805e, type: 2}
       propertyPath: HintText
       value: 
       objectReference: {fileID: 1229297564}
-    - target: {fileID: 114009091682485718, guid: b4cf21df0c4bb50498a7194cec12805e,
-        type: 2}
+    - target: {fileID: 114009091682485718, guid: b4cf21df0c4bb50498a7194cec12805e, type: 2}
       propertyPath: Spotlight
       value: 
       objectReference: {fileID: 1911309821}
+    - target: {fileID: 108838946847967778, guid: b4cf21df0c4bb50498a7194cec12805e, type: 2}
+      propertyPath: m_Intensity
+      value: 0.53
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b4cf21df0c4bb50498a7194cec12805e, type: 2}
   m_IsPrefabParent: 0

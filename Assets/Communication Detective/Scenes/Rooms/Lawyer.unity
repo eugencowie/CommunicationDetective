@@ -1811,7 +1811,7 @@ MonoBehaviour:
   InspectDistance: 0.155
   InspectScale: 0.3
   audioSource: {fileID: 0}
-  audioClip: {fileID: 8300000, guid: 2f7145665bd581747af98d510140c193, type: 3}
+  audioClip: {fileID: 8300000, guid: 098f23cce2cf5ab42b71f693c4ba752a, type: 3}
 --- !u!65 &417529117
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2203,7 +2203,7 @@ MonoBehaviour:
   InspectDistance: 0.1
   InspectScale: 0.3
   audioSource: {fileID: 0}
-  audioClip: {fileID: 8300000, guid: 2f7145665bd581747af98d510140c193, type: 3}
+  audioClip: {fileID: 8300000, guid: b45f8975336da7b45857b2c1c64c8d2e, type: 3}
 --- !u!1001 &489457412
 Prefab:
   m_ObjectHideFlags: 0
@@ -2369,7 +2369,7 @@ MonoBehaviour:
   InspectDistance: 0.1
   InspectScale: 0.3
   audioSource: {fileID: 0}
-  audioClip: {fileID: 8300000, guid: 2f7145665bd581747af98d510140c193, type: 3}
+  audioClip: {fileID: 8300000, guid: b45f8975336da7b45857b2c1c64c8d2e, type: 3}
 --- !u!65 &503100347
 BoxCollider:
   m_ObjectHideFlags: 0
