@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -50,6 +51,15 @@ public class VotingController : MonoBehaviour
         }
     }
 
+    public void ReturnButtonPressed()
+    {
+        if (ReturnButton.activeSelf)
+        {
+            ReturnButton.SetActive(false);
+            SceneManager.LoadScene(m_scene);
+        }
+    }
+
     public void ResetButtonPressed()
     {
         if (ResetButton.activeSelf)
@@ -90,12 +100,12 @@ public class VotingController : MonoBehaviour
         }
     }
 
-    public void ReturnButtonPressed()
+    public void VoteButtonPressed()
     {
-        if (ReturnButton.activeSelf)
+        var current = Suspects.First(s => s.gameObject.activeSelf);
+        if (current != null)
         {
-            ReturnButton.SetActive(false);
-            SceneManager.LoadScene(m_scene);
+            Debug.Log(current.Name.text);
         }
     }
 }
