@@ -7,18 +7,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-[Serializable]
-public class Data
+public class VotingDatabaseController : MonoBehaviour
 {
-    [SerializeField] public GameObject PlayerButton;
-    [SerializeField] public GameObject CluePanel;
-    [SerializeField] public List<GameObject> Slots;
-}
-
-public class DatabaseController : MonoBehaviour
-{
-    [SerializeField] private GameObject ReadyButton = null;
-    [SerializeField] private GameObject ReturnButton = null;
+    [SerializeField] private GameObject VotingButton = null;
     [SerializeField] private GameObject ButtonTemplate = null;
     [SerializeField] private GameObject[] Backgrounds = new GameObject[4];
     [SerializeField] private Data[] Data = new Data[4];
@@ -27,14 +18,11 @@ public class DatabaseController : MonoBehaviour
     private string m_lobby;
     private int m_scene;
 
-    private Dictionary<string, bool> m_readyPlayers = new Dictionary<string, bool>();
-
     private void Start()
     {
         NetworkController = new OnlineManager();
-
-        ReadyButton.SetActive(false);
-        ReturnButton.SetActive(false);
+        
+        VotingButton.SetActive(false);
 
         NetworkController.GetPlayerScene(scene => {
             if (scene > 0) {
@@ -44,12 +32,9 @@ public class DatabaseController : MonoBehaviour
                     if (!string.IsNullOrEmpty(lobby)) {
                         NetworkController.GetPlayers(lobby, players => {
                             m_lobby = lobby;
-                            foreach (var player in players) m_readyPlayers[player] = false;
                             DownloadItems();
                             NetworkController.RegisterCluesChanged(m_lobby, OnSlotChanged);
-                            NetworkController.RegisterReadyChanged(m_lobby, OnReadyChanged);
-                            ReadyButton.SetActive(true);
-                            ReturnButton.SetActive(true);
+                            VotingButton.SetActive(true);
                         });
                     }
                     else SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
@@ -78,43 +63,9 @@ public class DatabaseController : MonoBehaviour
         }
     }
 
-    public void ReadyButtonPressed()
-    {
-        if (ReadyButton.activeSelf)
-        {
-            ReadyButton.SetActive(false);
-            NetworkController.ReadyUp(success => {
-                ReadyButton.SetActive(true);
-                if (success) {
-                    ReadyButton.GetComponent<Image>().color = Color.yellow;
-                    foreach (Transform t in ReadyButton.gameObject.transform) {
-                        var text = t.GetComponent<Text>();
-                        if (text != null) text.text = "Waiting...";
-                    }
-                }
-            });
-        }
-    }
-    
-    public void ReturnButtonPressed()
-    {
-        if (ReturnButton.activeSelf)
-        {
-            ReturnButton.SetActive(false);
-            NetworkController.DeregisterCluesChanged();
-            NetworkController.DeregisterReadyChanged(m_lobby);
-            SceneManager.LoadScene(m_scene);
-        }
-    }
-
     public void VotingButtonPressed()
     {
-        if (!m_readyPlayers.Any(p => p.Value == false))
-        {
-            NetworkController.DeregisterCluesChanged();
-            NetworkController.DeregisterReadyChanged(m_lobby);
-            SceneManager.LoadScene("Communication Detective/Scenes/Voting");
-        }
+        SceneManager.LoadScene("Communication Detective/Scenes/Voting");
     }
 
     private void PlayerButtonPressed(Data data)
@@ -134,19 +85,6 @@ public class DatabaseController : MonoBehaviour
             cluePanel.SetActive(false);
         }
         data.CluePanel.SetActive(true);
-    }
-
-    public void UploadItem(int slot, ObjectHintData hint)
-    {
-        NetworkController.UploadDatabaseItem(slot, hint);
-    }
-
-    public void RemoveItem(int slot)
-    {
-        if (!m_readyPlayers.Any(p => p.Value == false))
-        {
-            NetworkController.RemoveDatabaseItem(slot);
-        }
     }
 
     private void DownloadItems()
@@ -194,11 +132,6 @@ public class DatabaseController : MonoBehaviour
                             }
                         }
                         newObj.GetComponent<DragHandler>().enabled = false;
-                        newObj.GetComponent<Button>().onClick.AddListener(() => {
-                            slot.GetComponent<Slot>().Text.GetComponent<Text>().text = "";
-                            RemoveItem(slot.GetComponent<Slot>().SlotNumber);
-                            Destroy(newObj);
-                        });
                         slot.GetComponent<Slot>().Text.GetComponent<Text>().text = clue.Hint.Value;
                     }
                 });
@@ -217,6 +150,7 @@ public class DatabaseController : MonoBehaviour
             if (args.Snapshot.Exists)
             {
                 string value = args.Snapshot.Value.ToString();
+                Debug.Log(entry.Key + " = " + value);
 
                 int slotNb = -1;
                 if (int.TryParse(key[3].Replace("slot-", ""), out slotNb))
@@ -282,6 +216,8 @@ public class DatabaseController : MonoBehaviour
             }
             else
             {
+                Debug.Log(entry.Key + " removed");
+
                 int slotNb = -1;
                 if (int.TryParse(key[3].Replace("slot-", ""), out slotNb))
                 {
@@ -296,34 +232,6 @@ public class DatabaseController : MonoBehaviour
                             Destroy(t1.gameObject);
                         }
                     });
-                }
-            }
-        }
-    }
-
-    private void OnReadyChanged(OnlineDatabaseEntry entry, ValueChangedEventArgs args)
-    {
-        if (ReadyButton == null)
-            return;
-
-        if (args.Snapshot.Exists)
-        {
-            string value = args.Snapshot.Value.ToString();
-
-            if (value == "true")
-            {
-                string[] key = entry.Key.Split('/');
-                string player = key[1];
-                m_readyPlayers[player] = true;
-
-                if (player == OnlineManager.GetPlayerId())
-                {
-                    ReadyButtonPressed();
-                }
-                
-                if (!m_readyPlayers.Any(p => p.Value == false))
-                {
-                    VotingButtonPressed();
                 }
             }
         }

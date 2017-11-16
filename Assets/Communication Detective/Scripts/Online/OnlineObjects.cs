@@ -10,6 +10,7 @@ public class Player : OnlineDatabaseNode
 
     public readonly OnlineDatabaseEntry Lobby;
     public readonly OnlineDatabaseEntry Scene;
+    public readonly OnlineDatabaseEntry Ready;
     public readonly PlayerClues Clues;
 
     /// <summary>
@@ -21,6 +22,7 @@ public class Player : OnlineDatabaseNode
         Id = id;
         Lobby = new OnlineDatabaseEntry(Database, Key + "/lobby");
         Scene = new OnlineDatabaseEntry(Database, Key + "/scene");
+        Ready = new OnlineDatabaseEntry(Database, Key + "/ready");
         Clues = new PlayerClues(Database, Key + "/clues");
     }
 

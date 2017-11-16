@@ -340,6 +340,63 @@ public class OnlineManager
 
     #endregion
 
+    #region Async voting methods
+
+    public void ReadyUp(Action<bool> returnSuccess=null)
+    {
+        OnlineDatabase.ValidateAction(ref returnSuccess, "ReadyUp");
+
+        m_player.Ready.Value = "true";
+        m_player.Ready.Push(returnSuccess);
+    }
+
+    public void GetPlayers(string code, Action<string[]> returnPlayers)
+    {
+        m_lobby = new Lobby(m_database, code); // TODO
+        m_lobby.Players.Pull(success => {
+            if (success) {
+                List<string> players = m_lobby.Players.Value.Split(',').ToList();
+                players.RemoveAll(s => string.IsNullOrEmpty(s));
+                returnPlayers(players.ToArray());
+            }
+            else returnPlayers(null);
+        });
+    }
+
+    public void RegisterReadyChanged(string code, OnlineDatabaseEntry.Listener listener)
+    {
+        m_lobby = new Lobby(m_database, code); // TODO
+        m_lobby.Players.Pull(success => {
+            if (success) {
+                List<string> players = m_lobby.Players.Value.Split(',').ToList();
+                players.RemoveAll(s => string.IsNullOrEmpty(s));
+                //players.Remove(m_player.Id);
+                foreach (string playerId in players) {
+                    Player player = new Player(m_database, playerId);
+                    player.Ready.RegisterListener(listener);
+                }
+            }
+        });
+    }
+
+    public void DeregisterReadyChanged(string code) // TODO: make all these functions static
+    {
+        m_lobby = new Lobby(m_database, code); // TODO
+        m_lobby.Players.Pull(success => {
+            if (success) {
+                List<string> players = m_lobby.Players.Value.Split(',').ToList();
+                players.RemoveAll(s => string.IsNullOrEmpty(s));
+                //players.Remove(m_player.Id);
+                foreach (string playerId in players) {
+                    Player player = new Player(m_database, playerId);
+                    player.Ready.DeregisterListener();
+                }
+            }
+        });
+    }
+
+    #endregion
+
     #region Listeners
 
     public void RegisterListener(string path, EventHandler<ValueChangedEventArgs> listener)
@@ -359,7 +416,7 @@ public class OnlineManager
     /// <summary>
     /// Returns a unique player id.
     /// </summary>
-    private static string GetPlayerId()
+    public static string GetPlayerId()
     {
         const string key = "UniquePlayerId";
 

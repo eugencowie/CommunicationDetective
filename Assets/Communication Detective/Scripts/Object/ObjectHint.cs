@@ -21,14 +21,21 @@ public class ObjectHintEditor : Editor
         base.OnInspectorGUI();
 
         ObjectHint hint = (ObjectHint)target;
-
         ImagePath.stringValue = AssetDatabase.GetAssetPath(hint.Image).Replace("Assets/Resources/", "").Replace(".png", "");
-
         serializedObject.ApplyModifiedProperties();
     }
 }
 
 #endif
+
+public class ObjectHint : MonoBehaviour
+{
+    public string Name = "";
+    public string Hint = "";
+    public Sprite Image = null;
+    public string ImagePath = "";
+}
+
 [System.Serializable]
 public class ObjectHintData
 {
