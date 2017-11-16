@@ -31,6 +31,11 @@ public class FancyInventory : MonoBehaviour
 
         m_buttons.Clear();
 
+        LoadFromStaticInv();
+    }
+
+    public void LoadFromStaticInv()
+    {
         foreach (var item in StaticInventory.Hints)
         {
             AddItem(null, item);

@@ -29,9 +29,13 @@ public class ObjectHintEditor : Editor
 }
 
 #endif
-
+[System.Serializable]
 public class ObjectHintData
 {
+    //Saving
+    
+    public static ObjectHintData current;
+
     public string Name = "";
     public string Hint = "";
     public string Image = "";
@@ -51,6 +55,7 @@ public class ObjectHintData
 
 public class ObjectHint : MonoBehaviour
 {
+    
     public string Name = "";
     public string Hint = "";
     public Sprite Image = null;
