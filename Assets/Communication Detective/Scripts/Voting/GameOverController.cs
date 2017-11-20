@@ -57,9 +57,9 @@ public class GameOverController : MonoBehaviour
                     {
                         Text.text = "You Win!\n";
 
-                        foreach (var p in m_votedPlayers)
+                        for (int i=0; i<m_votedPlayers.Count; i++)
                         {
-                            Text.text += "\n" + p.Key + " voted for " + p.Value;
+                            Text.text += "\nPlayer " + (i+1) + " voted for " + m_votedPlayers[i].Value;
 
                             ResetButton.SetActive(true);
                         }
