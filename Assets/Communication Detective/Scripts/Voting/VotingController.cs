@@ -139,7 +139,9 @@ public class VotingController : MonoBehaviour
         var current = Suspects.First(s => s.gameObject.activeSelf);
         if (current != null)
         {
-            Debug.Log(current.Name.text);
+            NetworkController.SubmitVote(current.Name.text, success => {
+                SceneManager.LoadScene("Communication Detective/Scenes/VotingWaiting");
+            });
         }
     }
 }

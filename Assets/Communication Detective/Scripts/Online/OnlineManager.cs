@@ -342,25 +342,30 @@ public class OnlineManager
 
     #region Async voting methods
 
-    public void ReadyUp(Action<bool> returnSuccess=null)
-    {
-        OnlineDatabase.ValidateAction(ref returnSuccess, "ReadyUp");
-
-        m_player.Ready.Value = "true";
-        m_player.Ready.Push(returnSuccess);
-    }
-
     public void GetPlayers(string code, Action<string[]> returnPlayers)
     {
         m_lobby = new Lobby(m_database, code); // TODO
         m_lobby.Players.Pull(success => {
-            if (success) {
+            if (success)
+            {
                 List<string> players = m_lobby.Players.Value.Split(',').ToList();
                 players.RemoveAll(s => string.IsNullOrEmpty(s));
                 returnPlayers(players.ToArray());
             }
             else returnPlayers(null);
         });
+    }
+
+    public void ReadyUp(Action<bool> returnSuccess=null)
+    {
+        m_player.Ready.Value = "true";
+        m_player.Ready.Push(returnSuccess);
+    }
+
+    public void SubmitVote(string suspect, Action<bool> returnSuccess=null)
+    {
+        m_player.Vote.Value = suspect;
+        m_player.Vote.Push(returnSuccess);
     }
 
     public void RegisterReadyChanged(string code, OnlineDatabaseEntry.Listener listener)

@@ -453,7 +453,7 @@ Prefab:
     - target: {fileID: 114127063109521598, guid: dbc1977526a9c1f47a67ade17df7eb62,
         type: 2}
       propertyPath: RequiredPlayers
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114056895267787030, guid: dbc1977526a9c1f47a67ade17df7eb62,
         type: 2}
