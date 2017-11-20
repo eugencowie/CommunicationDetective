@@ -140,7 +140,7 @@ public class VotingController : MonoBehaviour
         if (current != null)
         {
             NetworkController.SubmitVote(current.Name.text, success => {
-                SceneManager.LoadScene("Communication Detective/Scenes/VotingWaiting");
+                SceneManager.LoadScene("Communication Detective/Scenes/VotingWait");
             });
         }
     }
