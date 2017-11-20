@@ -38,6 +38,8 @@ public class Slot : MonoBehaviour, IDropHandler {
                 GameObject newObject = Instantiate(DragHandler.itemBeingDragged, DragHandler.itemBeingDragged.transform.parent);
                 newObject.name = DragHandler.itemBeingDragged.name;
                 newObject.transform.SetParent(transform);
+                
+                newObject.GetComponent<Image>().raycastTarget = true;
 
                 newObject.GetComponent<Button>().onClick.AddListener(() => {
                     Text.GetComponent<Text>().text = "";
