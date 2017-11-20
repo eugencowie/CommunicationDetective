@@ -5001,6 +5001,12 @@ Prefab:
       propertyPath: m_Intensity
       value: 0.53
       objectReference: {fileID: 0}
+    - target: {fileID: 212905046291002850, guid: b4cf21df0c4bb50498a7194cec12805e,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d28f6f7b61dc2ed4299c201627e568b5,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b4cf21df0c4bb50498a7194cec12805e, type: 2}
   m_IsPrefabParent: 0

@@ -22,7 +22,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             itemBeingDragged.name = gameObject.name;
             startPosition = itemBeingDragged.transform.position;
             startParent = gameObject.transform.parent;
-            //itemBeingDragged.GetComponent<CanvasGroup>().blocksRaycasts = false;
+            itemBeingDragged.GetComponent<Image>().raycastTarget = false;
         }
     }
     
@@ -38,12 +38,12 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     {
         if (enabled)
         {
-            Destroy(itemBeingDragged);
-            //itemBeingDragged.GetComponent<CanvasGroup>().blocksRaycasts = true;
+            itemBeingDragged.GetComponent<Image>().raycastTarget = true;
             if (itemBeingDragged.transform.parent == startParent)
             {
                 itemBeingDragged.transform.position = startPosition;
             }
+            Destroy(itemBeingDragged);
             itemBeingDragged = null;
         }
     }
