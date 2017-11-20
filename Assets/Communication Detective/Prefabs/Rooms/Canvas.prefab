@@ -622,6 +622,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hintUI: {fileID: 1084357157529844}
   databaseButton: {fileID: 1638302396083194}
+  readyButton: {fileID: 1500024669501314}
 --- !u!114 &114321816682737282
 MonoBehaviour:
   m_ObjectHideFlags: 1
