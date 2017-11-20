@@ -346,8 +346,31 @@ Prefab:
     - target: {fileID: 114569896306991082, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_Text
-      value: Suspect 1
+      value: Simon McGregor
       objectReference: {fileID: 0}
+    - target: {fileID: 114725772865384308, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Height: 1,87m
+
+        Weight: 82kg
+
+        Motivation: Childhood trauma
+
+        Occupation: Dentist
+
+        Additional Information: Recently lost his house in a fire'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156473526795230, guid: 40fc956ba7a47604aaa5bfdbce17ace6, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114293165632170572, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 16488a6f3f4d3ae488ab2bdb0d03333b,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 40fc956ba7a47604aaa5bfdbce17ace6, type: 2}
   m_IsPrefabParent: 0
@@ -732,7 +755,7 @@ Prefab:
     - target: {fileID: 114569896306991082, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_Text
-      value: Suspect 2
+      value: James Swan
       objectReference: {fileID: 0}
     - target: {fileID: 1156473526795230, guid: 40fc956ba7a47604aaa5bfdbce17ace6, type: 2}
       propertyPath: m_IsActive
@@ -743,6 +766,25 @@ Prefab:
       propertyPath: Slot
       value: 
       objectReference: {fileID: 1646878634}
+    - target: {fileID: 114725772865384308, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Height: 1,88m
+
+        Weight: 97kg
+
+        Motivation: Revenge
+
+        Occupation: High School Teacher
+
+        Additional Information: Alcoholic, Drunk driver'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114293165632170572, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 584e13b2a61d1804995f51d3c2f15bb4,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 40fc956ba7a47604aaa5bfdbce17ace6, type: 2}
   m_IsPrefabParent: 0
@@ -1084,12 +1126,31 @@ Prefab:
     - target: {fileID: 114569896306991082, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_Text
-      value: Suspect 4
+      value: Caleb Holden
       objectReference: {fileID: 0}
     - target: {fileID: 1156473526795230, guid: 40fc956ba7a47604aaa5bfdbce17ace6, type: 2}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114725772865384308, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Height: 1,89m
+
+        Weight: 78kg
+
+        Motivation: Revenge
+
+        Occupation: Pharmacist
+
+        Additional Information: Physically impaired after accident'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114293165632170572, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1ca55f8f706fae84b975b6a08428520f,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 40fc956ba7a47604aaa5bfdbce17ace6, type: 2}
   m_IsPrefabParent: 0
@@ -1572,12 +1633,31 @@ Prefab:
     - target: {fileID: 114569896306991082, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_Text
-      value: Suspect 6
+      value: Dear Stanton
       objectReference: {fileID: 0}
     - target: {fileID: 1156473526795230, guid: 40fc956ba7a47604aaa5bfdbce17ace6, type: 2}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114725772865384308, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Height: 1,59m
+
+        Weight: 99kg
+
+        Motivation: Revenge
+
+        Occupation: Ex-con, works in a chemical factory
+
+        Additional Information: Injured his left leg in a prison fight'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114293165632170572, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c3e787a6d0b45b94794dd1ab31a6a589,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 40fc956ba7a47604aaa5bfdbce17ace6, type: 2}
   m_IsPrefabParent: 0
@@ -2002,12 +2082,31 @@ Prefab:
     - target: {fileID: 114569896306991082, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_Text
-      value: Suspect 5
+      value: Simon Black
       objectReference: {fileID: 0}
     - target: {fileID: 1156473526795230, guid: 40fc956ba7a47604aaa5bfdbce17ace6, type: 2}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114725772865384308, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Height: 1,81m
+
+        Weight: 81kg
+
+        Motivation: Greed
+
+        Occupation: Nurse
+
+        Additional Information: Caused a car crash'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114293165632170572, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 185232fac54c7b0478145701ac3411f6,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 40fc956ba7a47604aaa5bfdbce17ace6, type: 2}
   m_IsPrefabParent: 0
@@ -2155,12 +2254,31 @@ Prefab:
     - target: {fileID: 114569896306991082, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_Text
-      value: Suspect 3
+      value: John Smith
       objectReference: {fileID: 0}
     - target: {fileID: 1156473526795230, guid: 40fc956ba7a47604aaa5bfdbce17ace6, type: 2}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114725772865384308, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Height: 1,68m
+
+        Weight: 87kg
+
+        Motivation: Childhood trauma
+
+        Occupation: Veteran Medic
+
+        Additional Information: Injured in combat'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114293165632170572, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d2438328854d82e4c8dab5b7b70cefbc,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 40fc956ba7a47604aaa5bfdbce17ace6, type: 2}
   m_IsPrefabParent: 0
@@ -2496,12 +2614,31 @@ Prefab:
     - target: {fileID: 114569896306991082, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_Text
-      value: Suspect 8
+      value: Ethan Carston
       objectReference: {fileID: 0}
     - target: {fileID: 1156473526795230, guid: 40fc956ba7a47604aaa5bfdbce17ace6, type: 2}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114725772865384308, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Height: 1,85m
+
+        Weight: 74kg
+
+        Motivation: Greed
+
+        Occupation: Lawyer
+
+        Additional Information: Friend of the judge and the lawyer victims'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114293165632170572, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 97c46c487381db840b136de7610be083,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 40fc956ba7a47604aaa5bfdbce17ace6, type: 2}
   m_IsPrefabParent: 0
@@ -2737,12 +2874,35 @@ Prefab:
     - target: {fileID: 114569896306991082, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_Text
-      value: Suspect 7
+      value: Fisher Mill
       objectReference: {fileID: 0}
     - target: {fileID: 1156473526795230, guid: 40fc956ba7a47604aaa5bfdbce17ace6, type: 2}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114725772865384308, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Height: 1,90m
+
+        Weight: 113kg
+
+        Motivation: Greed
+
+        Occupation: Dentist
+
+        Additional Information: MMA Fighter'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1670743388782110, guid: 40fc956ba7a47604aaa5bfdbce17ace6, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114293165632170572, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1644d0c28457a8743b7bbc773b622c78,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 40fc956ba7a47604aaa5bfdbce17ace6, type: 2}
   m_IsPrefabParent: 0
