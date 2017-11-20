@@ -260,10 +260,11 @@ public class OnlineManager
 
     public void RegisterCluesChanged(string code, OnlineDatabaseEntry.Listener listener)
     {
-        m_lobby = new Lobby(m_database, code); // TODO
-        m_lobby.Players.Pull(success => {
+        Lobby lobby = new Lobby(m_database, code); // TODO
+        lobby.Players.Pull(success => {
             if (success) {
-                List<string> players = m_lobby.Players.Value.Split(',').ToList();
+                string val = lobby.Players.Value;
+                List<string> players = lobby.Players.Value.Split(',').ToList();
                 players.RemoveAll(s => string.IsNullOrEmpty(s));
                 players.Remove(m_player.Id);
                 foreach (string playerId in players) {

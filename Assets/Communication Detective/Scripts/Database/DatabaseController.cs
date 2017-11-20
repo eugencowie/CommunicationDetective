@@ -208,6 +208,11 @@ public class DatabaseController : MonoBehaviour
     
     private void OnSlotChanged(OnlineDatabaseEntry entry, ValueChangedEventArgs args)
     {
+        if (ReadyButton == null)
+            return;
+
+        Debug.Log(entry.Key + " | " + (args.Snapshot.Exists ? args.Snapshot.Value.ToString() : ""));
+
         string[] key = entry.Key.Split('/');
         if (key.Length >= 5)
         {
