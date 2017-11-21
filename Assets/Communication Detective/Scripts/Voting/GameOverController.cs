@@ -59,7 +59,7 @@ public class GameOverController : MonoBehaviour
 
                         for (int i=0; i<m_votedPlayers.Count; i++)
                         {
-                            Text.text += "\nPlayer " + (i+1) + " voted for " + m_votedPlayers[i].Value;
+                            Text.text += "\nPlayer " + (i+1) + " voted for " + m_votedPlayers.ElementAt(i).Value;
 
                             ResetButton.SetActive(true);
                         }
