@@ -9,6 +9,9 @@ using UnityEngine.UI;
 public class FancyInventory : MonoBehaviour
 {
     [SerializeField] private GameObject SlotTemplate = null;
+    [SerializeField] private GameObject MainScreen = null;
+    [SerializeField] private GameObject InspectScreen = null;
+    [SerializeField] private Text HintText = null;
 
     private List<GameObject> m_buttons = new List<GameObject>();
 
@@ -45,12 +48,14 @@ public class FancyInventory : MonoBehaviour
 
     private void ItemButtonPressed(ObjectHintData hint)
     {
-        Debug.Log(hint.Name + " has been pressed");
+        HintText.text = hint.Hint;
+        MainScreen.SetActive(false);
+        InspectScreen.SetActive(true);
     }
 
-    private void Update()
+    /*private void Update()
     {
-        /*if (Input.GetMouseButtonDown(0) && EventSystem.current.IsPointerOverGameObject())
+        if (Input.GetMouseButtonDown(0) && EventSystem.current.IsPointerOverGameObject())
         {
             m_touchOrigin = Input.mousePosition;
             m_isSwiping = true;
@@ -71,8 +76,8 @@ public class FancyInventory : MonoBehaviour
             {
                 Scroll(movement);
             }
-        }*/
-    }
+        }
+    }*/
 
     public void AddItem(UnityAction itemAction, ObjectHintData item)
     {
