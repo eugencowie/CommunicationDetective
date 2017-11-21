@@ -1952,7 +1952,7 @@ Transform:
   - {fileID: 417529118}
   - {fileID: 253868693}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &470353574 stripped
 GameObject:
@@ -3806,7 +3806,7 @@ Transform:
   - {fileID: 914346427}
   - {fileID: 1692661388}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &877735292
 GameObject:
@@ -6799,15 +6799,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 42e4a4cbb4e91254aad4c55a60955a4f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.044
+      value: -0.018
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 42e4a4cbb4e91254aad4c55a60955a4f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.008
+      value: 0.011
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 42e4a4cbb4e91254aad4c55a60955a4f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.862
+      value: -0.262
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 42e4a4cbb4e91254aad4c55a60955a4f, type: 3}
       propertyPath: m_LocalRotation.x
@@ -6828,6 +6828,18 @@ Prefab:
     - target: {fileID: 400000, guid: 42e4a4cbb4e91254aad4c55a60955a4f, type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 42e4a4cbb4e91254aad4c55a60955a4f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.44340822
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 42e4a4cbb4e91254aad4c55a60955a4f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.4434082
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 42e4a4cbb4e91254aad4c55a60955a4f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.4434082
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 42e4a4cbb4e91254aad4c55a60955a4f, type: 3}
@@ -7303,7 +7315,7 @@ Transform:
   - {fileID: 40109180}
   - {fileID: 1628011167}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2009853625
 Prefab:
