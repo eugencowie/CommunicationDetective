@@ -9,6 +9,7 @@ public class GameOverController : MonoBehaviour
 {
     public GameObject ResetButton;
     public Text Text;
+    public int RequiredCorrectVotes = 3;
 
     private OnlineManager NetworkController;
     private string m_roomCode;
@@ -53,16 +54,22 @@ public class GameOverController : MonoBehaviour
                 {
                     int correctAnswers = m_votedPlayers.Count(p => p.Value == "Caleb Holden");
 
-                    if (correctAnswers > 2)
+                    if (correctAnswers >= RequiredCorrectVotes)
                     {
-                        Text.text = "You Win!\n";
+                        Text.text = "You Win! The killer was Caleb Holden!\n";
 
+                        string yourVote = m_votedPlayers[OnlineManager.GetPlayerId()];
+                        m_votedPlayers.Remove(OnlineManager.GetPlayerId());
+
+                        Text.text += "\nYou voted for " + yourVote;
                         for (int i=0; i<m_votedPlayers.Count; i++)
                         {
-                            Text.text += "\nPlayer " + (i+1) + " voted for " + m_votedPlayers.ElementAt(i).Value;
+                            Text.text += "\nPlayer " + (i+2) + " voted for " + m_votedPlayers.ElementAt(i).Value;
 
                             ResetButton.SetActive(true);
                         }
+
+                        m_votedPlayers[OnlineManager.GetPlayerId()] = yourVote;
                     }
                     else
                     {
