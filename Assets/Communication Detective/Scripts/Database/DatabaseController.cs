@@ -143,10 +143,10 @@ public class DatabaseController : MonoBehaviour
 
     public void RemoveItem(int slot)
     {
-        if (!m_readyPlayers.Any(p => p.Value == false))
-        {
+        //if (!m_readyPlayers.Any(p => p.Value == false))
+        //{
             NetworkController.RemoveDatabaseItem(slot);
-        }
+        //}
     }
 
     private void DownloadItems()
