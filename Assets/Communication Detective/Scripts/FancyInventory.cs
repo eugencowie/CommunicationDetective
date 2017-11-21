@@ -38,8 +38,14 @@ public class FancyInventory : MonoBehaviour
     {
         foreach (var item in StaticInventory.Hints)
         {
-            AddItem(null, item);
+            ObjectHintData data = item;
+            AddItem(() => ItemButtonPressed(data), data);
         }
+    }
+
+    private void ItemButtonPressed(ObjectHintData hint)
+    {
+        Debug.Log(hint.Name + " has been pressed");
     }
 
     private void Update()
