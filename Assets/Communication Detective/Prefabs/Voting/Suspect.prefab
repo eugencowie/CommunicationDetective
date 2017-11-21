@@ -409,7 +409,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 18c561bd151664c81a5e610d4fcfef57, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 16488a6f3f4d3ae488ab2bdb0d03333b, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -428,17 +428,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6435d9494e2f14f439825aa09638260d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Image: {fileID: 114293165632170572}
+  Slot: {fileID: 1633951605508714}
   Name: {fileID: 114569896306991082}
   Description: {fileID: 114725772865384308}
-  Slot: {fileID: 1633951605508714}
+  Image: {fileID: 114293165632170572}
+  ImagePath: 
 --- !u!114 &114453572614978256
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1270265238465190}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -518,7 +519,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: John Doe
+  m_Text: Simon McGregor
 --- !u!114 &114577444046316050
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -626,10 +627,15 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: dhdfgh dfghbdvlua lisf uohfs nh;ovc lufd fd; v.nidzfv io;bfx o ;bhboihbs;oib
-    g jlo;ifc v;x hb;igfjhb 8ojri'xfdbji'fdjg idf j#opxfgj 'poj ipfdb jfdp'j pif g
-    f/d j;n bizdh' oiz hf;oSHNFGVAJEK,RFUVG,KASE RUHGFB. SEKUHV.KBSJDHVB.K JSDTHB.VKTJHBGK,DJHTBV.KJDHTB.VR
-    LTK/VS;TLBKM'Y[PBION/8P9HO'ET09YIH-P09876T5R4E3W
+  m_Text: 'Height: 1,87m
+
+    Weight: 82kg
+
+    Motivation: Childhood trauma
+
+    Occupation: Dentist
+
+    Additional Information: Recently lost his house in a fire'
 --- !u!114 &114920714580562206
 MonoBehaviour:
   m_ObjectHideFlags: 1
