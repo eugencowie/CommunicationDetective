@@ -17,6 +17,7 @@ public class Data
 
 public class DatabaseController : MonoBehaviour
 {
+    [SerializeField] private GameObject ReadyButton = null;
     [SerializeField] private GameObject ReturnButton = null;
     [SerializeField] private GameObject ButtonTemplate = null;
     [SerializeField] private GameObject[] Backgrounds = new GameObject[4];
@@ -26,10 +27,13 @@ public class DatabaseController : MonoBehaviour
     private string m_lobby;
     private int m_scene;
 
+    private Dictionary<string, bool> m_readyPlayers = new Dictionary<string, bool>();
+
     private void Start()
     {
         NetworkController = new OnlineManager();
 
+        ReadyButton.SetActive(false);
         ReturnButton.SetActive(false);
 
         NetworkController.GetPlayerScene(scene => {
@@ -38,10 +42,15 @@ public class DatabaseController : MonoBehaviour
                 SetBackground();
                 NetworkController.GetPlayerLobby(lobby => {
                     if (!string.IsNullOrEmpty(lobby)) {
-                        m_lobby = lobby;
-                        DownloadItems();
-                        NetworkController.RegisterCluesChanged(m_lobby, OnSlotChanged);
-                        ReturnButton.SetActive(true);
+                        NetworkController.GetPlayers(lobby, players => {
+                            m_lobby = lobby;
+                            foreach (var player in players) m_readyPlayers[player] = false;
+                            DownloadItems();
+                            NetworkController.RegisterCluesChanged(m_lobby, OnSlotChanged);
+                            NetworkController.RegisterReadyChanged(m_lobby, OnReadyChanged);
+                            ReadyButton.SetActive(true);
+                            ReturnButton.SetActive(true);
+                        });
                     }
                     else SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
                 });
@@ -57,7 +66,7 @@ public class DatabaseController : MonoBehaviour
 
         PlayerButtonPressed(Data[0]);
     }
-
+    
     private void SetBackground()
     {
         if (m_scene <= Backgrounds.Length)
@@ -69,12 +78,42 @@ public class DatabaseController : MonoBehaviour
         }
     }
 
+    public void ReadyButtonPressed()
+    {
+        if (ReadyButton.activeSelf)
+        {
+            ReadyButton.SetActive(false);
+            NetworkController.ReadyUp(success => {
+                ReadyButton.SetActive(true);
+                if (success) {
+                    ReadyButton.GetComponent<Image>().color = Color.yellow;
+                    foreach (Transform t in ReadyButton.gameObject.transform) {
+                        var text = t.GetComponent<Text>();
+                        if (text != null) text.text = "Waiting...";
+                    }
+                }
+            });
+        }
+    }
+    
     public void ReturnButtonPressed()
     {
         if (ReturnButton.activeSelf)
         {
             ReturnButton.SetActive(false);
+            NetworkController.DeregisterCluesChanged();
+            NetworkController.DeregisterReadyChanged(m_lobby);
             SceneManager.LoadScene(m_scene);
+        }
+    }
+
+    public void VotingButtonPressed()
+    {
+        if (!m_readyPlayers.Any(p => p.Value == false))
+        {
+            NetworkController.DeregisterCluesChanged();
+            NetworkController.DeregisterReadyChanged(m_lobby);
+            SceneManager.LoadScene("Communication Detective/Scenes/Voting");
         }
     }
 
@@ -104,71 +143,76 @@ public class DatabaseController : MonoBehaviour
 
     public void RemoveItem(int slot)
     {
-        NetworkController.RemoveDatabaseItem(slot);
+        //if (!m_readyPlayers.Any(p => p.Value == false))
+        //{
+            NetworkController.RemoveDatabaseItem(slot);
+        //}
     }
 
     private void DownloadItems()
     {
-        //for (int i = 0; i < 4; i++)
-        //{
-            int tmp = 0;
-            NetworkController.DownloadClues(m_lobby, tmp, player => {
-                for (int j = 0; j < player.Clues.Clues.Length; j++) {
-                    int tmp2 = j;
-                    var clue = player.Clues.Clues[tmp2];
-                    clue.PullEntries(_ => {
-                        if (!string.IsNullOrEmpty(clue.Name.Value)) {
-                            var slot = Data[tmp].Slots[tmp2];
-                            foreach (Transform t in slot.transform) if (t.gameObject.name == clue.Name.Value) Destroy(t.gameObject);
-                            var newObj = Instantiate(ButtonTemplate, ButtonTemplate.transform.parent);
-                            newObj.SetActive(true);
-                            newObj.name = clue.Name.Value;
-                            newObj.transform.SetParent(slot.transform);
-                            if (!string.IsNullOrEmpty(clue.Image.Value))
+        int tmp = 0;
+        NetworkController.DownloadClues(m_lobby, tmp, player => {
+            for (int j = 0; j < player.Clues.Clues.Length; j++) {
+                int tmp2 = j;
+                var clue = player.Clues.Clues[tmp2];
+                clue.PullEntries(_ => {
+                    if (!string.IsNullOrEmpty(clue.Name.Value)) {
+                        var slot = Data[tmp].Slots[tmp2];
+                        foreach (Transform t in slot.transform) if (t.gameObject.name == clue.Name.Value) Destroy(t.gameObject);
+                        var newObj = Instantiate(ButtonTemplate, ButtonTemplate.transform.parent);
+                        newObj.SetActive(true);
+                        newObj.name = clue.Name.Value;
+                        newObj.transform.SetParent(slot.transform);
+                        if (!string.IsNullOrEmpty(clue.Image.Value))
+                        {
+                            foreach (Transform t in newObj.transform)
                             {
-                                foreach (Transform t in newObj.transform)
+                                if (t.gameObject.GetComponent<Text>() != null)
                                 {
-                                    if (t.gameObject.GetComponent<Text>() != null)
-                                    {
-                                        t.gameObject.GetComponent<Text>().text = clue.Name.Value;
-                                    }
-                                    if (t.gameObject.GetComponent<Image>() != null)
-                                    {
-                                        t.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>(clue.Image.Value);
-                                    }
+                                    t.gameObject.GetComponent<Text>().text = clue.Name.Value;
+                                }
+                                if (t.gameObject.GetComponent<Image>() != null)
+                                {
+                                    t.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>(clue.Image.Value);
                                 }
                             }
-                            else
-                            {
-                                foreach (Transform t in newObj.transform)
-                                {
-                                    if (t.gameObject.GetComponent<Text>() != null)
-                                    {
-                                        t.gameObject.GetComponent<Text>().text = clue.Name.Value;
-                                        t.gameObject.GetComponent<Text>().gameObject.SetActive(true);
-                                    }
-                                    if (t.gameObject.GetComponent<Image>() != null)
-                                    {
-                                        t.gameObject.GetComponent<Image>().gameObject.SetActive(false);
-                                    }
-                                }
-                            }
-                            newObj.GetComponent<DragHandler>().enabled = false;
-                            newObj.GetComponent<Button>().onClick.AddListener(() => {
-                                slot.GetComponent<Slot>().Text.GetComponent<Text>().text = "";
-                                RemoveItem(slot.GetComponent<Slot>().SlotNumber);
-                                Destroy(newObj);
-                            });
-                            slot.GetComponent<Slot>().Text.GetComponent<Text>().text = clue.Hint.Value;
                         }
-                    });
-                }
-            });
-        //}
+                        else
+                        {
+                            foreach (Transform t in newObj.transform)
+                            {
+                                if (t.gameObject.GetComponent<Text>() != null)
+                                {
+                                    t.gameObject.GetComponent<Text>().text = clue.Name.Value;
+                                    t.gameObject.GetComponent<Text>().gameObject.SetActive(true);
+                                }
+                                if (t.gameObject.GetComponent<Image>() != null)
+                                {
+                                    t.gameObject.GetComponent<Image>().gameObject.SetActive(false);
+                                }
+                            }
+                        }
+                        newObj.GetComponent<DragHandler>().enabled = false;
+                        newObj.GetComponent<Button>().onClick.AddListener(() => {
+                            slot.GetComponent<Slot>().Text.GetComponent<Text>().text = "";
+                            RemoveItem(slot.GetComponent<Slot>().SlotNumber);
+                            Destroy(newObj);
+                        });
+                        slot.GetComponent<Slot>().Text.GetComponent<Text>().text = clue.Hint.Value;
+                    }
+                });
+            }
+        });
     }
     
     private void OnSlotChanged(OnlineDatabaseEntry entry, ValueChangedEventArgs args)
     {
+        if (ReadyButton == null)
+            return;
+
+        Debug.Log(entry.Key + " | " + (args.Snapshot.Exists ? args.Snapshot.Value.ToString() : ""));
+
         string[] key = entry.Key.Split('/');
         if (key.Length >= 5)
         {
@@ -257,6 +301,34 @@ public class DatabaseController : MonoBehaviour
                             Destroy(t1.gameObject);
                         }
                     });
+                }
+            }
+        }
+    }
+
+    private void OnReadyChanged(OnlineDatabaseEntry entry, ValueChangedEventArgs args)
+    {
+        if (ReadyButton == null)
+            return;
+
+        if (args.Snapshot.Exists)
+        {
+            string value = args.Snapshot.Value.ToString();
+
+            if (value == "true")
+            {
+                string[] key = entry.Key.Split('/');
+                string player = key[1];
+                m_readyPlayers[player] = true;
+
+                if (player == OnlineManager.GetPlayerId())
+                {
+                    ReadyButtonPressed();
+                }
+                
+                if (!m_readyPlayers.Any(p => p.Value == false))
+                {
+                    VotingButtonPressed();
                 }
             }
         }

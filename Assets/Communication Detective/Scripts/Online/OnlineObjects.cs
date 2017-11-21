@@ -10,6 +10,8 @@ public class Player : OnlineDatabaseNode
 
     public readonly OnlineDatabaseEntry Lobby;
     public readonly OnlineDatabaseEntry Scene;
+    public readonly OnlineDatabaseEntry Ready;
+    public readonly OnlineDatabaseEntry Vote;
     public readonly PlayerClues Clues;
 
     /// <summary>
@@ -21,6 +23,8 @@ public class Player : OnlineDatabaseNode
         Id = id;
         Lobby = new OnlineDatabaseEntry(Database, Key + "/lobby");
         Scene = new OnlineDatabaseEntry(Database, Key + "/scene");
+        Ready = new OnlineDatabaseEntry(Database, Key + "/ready");
+        Vote = new OnlineDatabaseEntry(Database, Key + "/vote");
         Clues = new PlayerClues(Database, Key + "/clues");
     }
 
@@ -29,7 +33,7 @@ public class Player : OnlineDatabaseNode
     /// </summary>
     public override OnlineDatabaseEntry[] Entries
     {
-        get { return new OnlineDatabaseEntry[] { Lobby, Scene }; }
+        get { return new OnlineDatabaseEntry[] { Lobby, Scene, Ready, Vote }; }
     }
 }
 

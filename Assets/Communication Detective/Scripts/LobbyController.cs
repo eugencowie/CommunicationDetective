@@ -46,6 +46,7 @@ public class LobbyController : MonoBehaviour
     private void Start()
     {
         StaticInventory.Hints.Clear();
+        StaticSuspects.DiscardedSuspects.Clear();
 
         Network = new OnlineManager();
 

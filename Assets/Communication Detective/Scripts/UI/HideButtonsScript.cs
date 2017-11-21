@@ -7,6 +7,7 @@ public class HideButtonsScript : MonoBehaviour {
     public GameObject hintUI;
     //public GameObject leaveButton;
     public GameObject databaseButton;
+    public GameObject readyButton;
 
 	// Use this for initialization
 	void Start () {
@@ -20,11 +21,13 @@ public class HideButtonsScript : MonoBehaviour {
         {
             //leaveButton.SetActive(false);
             databaseButton.SetActive(false);
+            readyButton.SetActive(false);
         }
         else 
         {
             //leaveButton.SetActive(true);
             databaseButton.SetActive(true);
+            readyButton.SetActive(true);
         }
 	}
 }
