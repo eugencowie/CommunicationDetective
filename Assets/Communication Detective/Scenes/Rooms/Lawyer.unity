@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0a8ecbd9b98fe940ac61450a8fb6b1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InspectDistance: 0.1
+  InspectDistance: 0.2
   InspectScale: 0.3
   audioSource: {fileID: 0}
   audioClip: {fileID: 0}
@@ -4024,8 +4024,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.9270929, y: 0.9900315, z: 1}
-  m_Center: {x: -0.2128014, y: 0.5953406, z: 5.286231e-16}
+  m_Size: {x: 0.8556928, y: 0.9900315, z: 1}
+  m_Center: {x: -0.24850146, y: 0.5953406, z: 2.129462e-17}
 --- !u!4 &918035310
 Transform:
   m_ObjectHideFlags: 0
