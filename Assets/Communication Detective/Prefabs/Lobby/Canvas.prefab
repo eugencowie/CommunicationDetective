@@ -62,7 +62,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1190427221343352
 GameObject:
   m_ObjectHideFlags: 1
@@ -544,6 +544,7 @@ MonoBehaviour:
   JoinPanel: {fileID: 1240997915698482}
   LobbyPanel: {fileID: 1905877158955814}
   WaitPanel: {fileID: 1384532237354004}
+  StartButton: {fileID: 1106743841472276}
   MaxPlayers: 4
 --- !u!114 &114148256416310502
 MonoBehaviour:

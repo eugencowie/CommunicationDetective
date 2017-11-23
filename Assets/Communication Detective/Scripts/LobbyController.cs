@@ -37,6 +37,7 @@ public class LobbyController : MonoBehaviour
     public GameObject JoinPanel;
     public GameObject LobbyPanel;
     public GameObject WaitPanel;
+    public GameObject StartButton;
 
     [Range(1,4)]
     public int MaxPlayers = 4;
@@ -99,6 +100,7 @@ public class LobbyController : MonoBehaviour
                     CodeLabel.text = CodeField.text.ToUpper();
                     RegisterOnPlayersChanged(CodeLabel.text);
                     RegisterOnLobbyStateChanged(CodeLabel.text);
+                    StartButton.SetActive(false);
                     SwitchPanel(LobbyPanel);
                 }
             });
@@ -132,6 +134,7 @@ public class LobbyController : MonoBehaviour
                                 CodeLabel.text = code;
                                 RegisterOnPlayersChanged(code);
                                 RegisterOnLobbyStateChanged(code);
+                                StartButton.SetActive(true);
                                 SwitchPanel(LobbyPanel);
                             }
                         });
