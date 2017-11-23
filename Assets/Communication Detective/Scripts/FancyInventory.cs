@@ -49,15 +49,19 @@ public class FancyInventory : MonoBehaviour
 
     private void ItemButtonPressed(ObjectHintData hint)
     {
-        if (!string.IsNullOrEmpty(hint.Image))
+        if (DragHandler.itemBeingDragged == null)
         {
-            HintImage.sprite = Resources.Load<Sprite>(hint.Image);
-            HintImage.gameObject.SetActive(true);
+            if (!string.IsNullOrEmpty(hint.Image))
+            {
+                HintImage.sprite = Resources.Load<Sprite>(hint.Image);
+                HintImage.gameObject.SetActive(true);
+            }
+            else HintImage.gameObject.SetActive(false);
+
+            HintText.text = hint.Hint;
+            MainScreen.SetActive(false);
+            InspectScreen.SetActive(true);
         }
-        else HintImage.gameObject.SetActive(false);
-        HintText.text = hint.Hint;
-        MainScreen.SetActive(false);
-        InspectScreen.SetActive(true);
     }
 
     /*private void Update()
