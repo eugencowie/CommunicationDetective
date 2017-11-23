@@ -4,6 +4,15 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Linq;
 
+
+public static class StaticSlot
+{
+    // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+    public static int MaxRemovals = 5; // BEN CHANGE THIS NUBMER <<<<<<<<<
+    // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+    public static int TimesRemoved;
+}
+
 public class Slot : MonoBehaviour, IDropHandler {
 	public GameObject item
     {
@@ -17,8 +26,8 @@ public class Slot : MonoBehaviour, IDropHandler {
 	}
 
     public bool CanDrop = false;
-    private int TimesRemoved;
-    public int MaxRemovals = 2;
+
+    
     private AudioSource m_audioSource;
     public AudioClip emailAudioClip;
 
@@ -52,11 +61,11 @@ public class Slot : MonoBehaviour, IDropHandler {
                 newObject.GetComponent<Image>().raycastTarget = true;
 
                 newObject.GetComponent<Button>().onClick.AddListener(() => {
-                    if (CanDrop && TimesRemoved < MaxRemovals) {
+                    if (CanDrop && StaticSlot.TimesRemoved < StaticSlot.MaxRemovals) {
                         Text.GetComponent<Text>().text = "";
                         DatabaseController.RemoveItem(SlotNumber);
                         Destroy(newObject);
-                        TimesRemoved++;
+                        StaticSlot.TimesRemoved++;
                     }
                     else Debug.Log("YOU CANT GO THERE (EG. you have removed your maximum amount of times)");
                 });

@@ -194,10 +194,16 @@ public class DatabaseController : MonoBehaviour
                             }
                         }
                         newObj.GetComponent<DragHandler>().enabled = false;
-                        newObj.GetComponent<Button>().onClick.AddListener(() => {
-                            slot.GetComponent<Slot>().Text.GetComponent<Text>().text = "";
-                            RemoveItem(slot.GetComponent<Slot>().SlotNumber);
-                            Destroy(newObj);
+                        newObj.GetComponent<Button>().onClick.AddListener(() =>
+                        {
+                            if (StaticSlot.TimesRemoved < StaticSlot.MaxRemovals)
+                            {
+                                slot.GetComponent<Slot>().Text.GetComponent<Text>().text = "";
+                                RemoveItem(slot.GetComponent<Slot>().SlotNumber);
+                                Destroy(newObj);
+                                StaticSlot.TimesRemoved++;
+                            }
+                            else Debug.Log("YOU CANT GO THERE (EG. you have removed your maximum amount of times)");
                         });
                         slot.GetComponent<Slot>().Text.GetComponent<Text>().text = clue.Hint.Value;
                     }
