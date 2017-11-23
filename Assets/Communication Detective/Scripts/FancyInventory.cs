@@ -12,6 +12,7 @@ public class FancyInventory : MonoBehaviour
     [SerializeField] private GameObject MainScreen = null;
     [SerializeField] private GameObject InspectScreen = null;
     [SerializeField] private Text HintText = null;
+    [SerializeField] private Image HintImage = null;
 
     private List<GameObject> m_buttons = new List<GameObject>();
 
@@ -48,6 +49,12 @@ public class FancyInventory : MonoBehaviour
 
     private void ItemButtonPressed(ObjectHintData hint)
     {
+        if (!string.IsNullOrEmpty(hint.Image))
+        {
+            HintImage.sprite = Resources.Load<Sprite>(hint.Image);
+            HintImage.gameObject.SetActive(true);
+        }
+        else HintImage.gameObject.SetActive(false);
         HintText.text = hint.Hint;
         MainScreen.SetActive(false);
         InspectScreen.SetActive(true);
