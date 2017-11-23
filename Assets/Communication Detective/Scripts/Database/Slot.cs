@@ -7,9 +7,9 @@ using System.Linq;
 
 public static class StaticSlot
 {
-    // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-    public static int MaxRemovals = 5; // BEN CHANGE THIS NUBMER <<<<<<<<<
-    // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+    // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ ↙ ↙ ↙ 
+    public static int MaxRemovals = 5; // ← ← 
+    // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ ↖ ↖ ↖
     public static int TimesRemoved;
 }
 
@@ -27,7 +27,6 @@ public class Slot : MonoBehaviour, IDropHandler {
 
     public bool CanDrop = false;
 
-    
     private AudioSource m_audioSource;
     public AudioClip emailAudioClip;
 
