@@ -187,6 +187,10 @@ public class OnlineManager
     /// </summary>
     public void CanStartGame(string code, int requiredPlayers, Action<LobbyError> returnError)
     {
+        // TODO: remove this in final build
+        returnError(LobbyError.None);
+        return;
+
         OnlineDatabase.ValidateAction(ref returnError, string.Format("CanStartGame({0}, {1})", code, requiredPlayers));
 
         //m_lobby = new Lobby(m_database, code); // TODO
