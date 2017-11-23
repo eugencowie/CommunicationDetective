@@ -17,6 +17,8 @@ public class Slot : MonoBehaviour, IDropHandler {
 	}
 
     public bool CanDrop = false;
+    private int TimesRemoved;
+    public int MaxRemovals = 2;
     private AudioSource m_audioSource;
     public AudioClip emailAudioClip;
 
@@ -35,7 +37,7 @@ public class Slot : MonoBehaviour, IDropHandler {
     #region IDropHandler implementation
     public void OnDrop (PointerEventData eventData)
 	{
-		if (item == null && CanDrop)
+        if (item == null && CanDrop)
         {
             string newName = DragHandler.itemBeingDragged.name;
             if (StaticInventory.Hints.Any(h => h.Name == newName))
@@ -50,11 +52,13 @@ public class Slot : MonoBehaviour, IDropHandler {
                 newObject.GetComponent<Image>().raycastTarget = true;
 
                 newObject.GetComponent<Button>().onClick.AddListener(() => {
-                    if (CanDrop) {
+                    if (CanDrop && TimesRemoved < MaxRemovals) {
                         Text.GetComponent<Text>().text = "";
                         DatabaseController.RemoveItem(SlotNumber);
                         Destroy(newObject);
+                        TimesRemoved++;
                     }
+                    else Debug.Log("YOU CANT GO THERE (EG. you have removed your maximum amount of times)");
                 });
 
                 newObject.GetComponent<DragHandler>().enabled = false;
