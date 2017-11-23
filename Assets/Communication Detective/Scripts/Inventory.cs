@@ -159,8 +159,8 @@ public class Inventory : MonoBehaviour
     {
         m_scrollAmount = position;
 
-        float maxScrollAMount = Mathf.Max(0, (m_buttons.Count * m_spacing) - (m_spacing * 5));
-        m_scrollAmount = Mathf.Clamp(m_scrollAmount, 0, maxScrollAMount);
+        float maxScrollAmount = Mathf.Max(0, (m_buttons.Count * m_spacing) - (m_spacing * 5));
+        m_scrollAmount = Mathf.Clamp(m_scrollAmount, 0, maxScrollAmount);
 
         ButtonContainer.transform.localPosition = new Vector3(0, m_scrollAmount, 0);
     }

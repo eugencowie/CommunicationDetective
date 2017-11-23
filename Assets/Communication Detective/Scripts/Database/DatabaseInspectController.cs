@@ -6,7 +6,7 @@ public class DatabaseInspectController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonUp(0))
         {
             MainScreen.SetActive(true);
             gameObject.SetActive(false);
