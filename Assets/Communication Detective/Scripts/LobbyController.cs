@@ -39,7 +39,7 @@ public class LobbyController : MonoBehaviour
     public GameObject WaitPanel;
 
     [Range(1,4)]
-    public int RequiredPlayers = 4;
+    public int MaxPlayers = 4;
 
     private OnlineManager Network;
 
@@ -91,7 +91,7 @@ public class LobbyController : MonoBehaviour
         {
             SwitchPanel(WaitPanel);
 
-            Network.JoinLobby(CodeField.text.ToUpper(), success => {
+            Network.JoinLobby(CodeField.text.ToUpper(), MaxPlayers, success => {
                 if (!success) {
                     CodeField.text = "";
                     SwitchPanel(JoinPanel);
@@ -126,7 +126,7 @@ public class LobbyController : MonoBehaviour
                 Network.CreateLobby(code, createSuccess => {
                     if (!createSuccess) SwitchPanel(StartPanel);
                     else {
-                        Network.JoinLobby(code, joinSuccess => {
+                        Network.JoinLobby(code, MaxPlayers, joinSuccess => {
                             if (!joinSuccess) SwitchPanel(StartPanel);
                             else {
                                 CodeLabel.text = code;
@@ -148,10 +148,10 @@ public class LobbyController : MonoBehaviour
     {
         SwitchPanel(WaitPanel);
 
-        Network.CanStartGame(CodeLabel.text, RequiredPlayers, error => {
+        Network.CanStartGame(CodeLabel.text, MaxPlayers, error => {
             if (error != LobbyError.None) {
-                if (error == LobbyError.TooFewPlayers) StatusLabel.text = "too few players, requires " + RequiredPlayers;
-                else if (error == LobbyError.TooManyPlayers) StatusLabel.text = "too many players, requires " + RequiredPlayers;
+                if (error == LobbyError.TooFewPlayers) StatusLabel.text = "too few players, requires " + MaxPlayers;
+                else if (error == LobbyError.TooManyPlayers) StatusLabel.text = "too many players, requires " + MaxPlayers;
                 else StatusLabel.text = "unknown error";
                 SwitchPanel(LobbyPanel);
             }

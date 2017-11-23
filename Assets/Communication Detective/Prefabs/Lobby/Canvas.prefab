@@ -544,7 +544,7 @@ MonoBehaviour:
   JoinPanel: {fileID: 1240997915698482}
   LobbyPanel: {fileID: 1905877158955814}
   WaitPanel: {fileID: 1384532237354004}
-  RequiredPlayers: 4
+  MaxPlayers: 4
 --- !u!114 &114148256416310502
 MonoBehaviour:
   m_ObjectHideFlags: 1
