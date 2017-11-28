@@ -11,6 +11,8 @@ public static class StaticSuspects
 
 public class VotingController : MonoBehaviour
 {
+    [SerializeField] private GameObject MainScreen = null;
+    [SerializeField] private GameObject ConfirmScreen = null;
     [SerializeField] private GameObject ResetButton = null;
     [SerializeField] private GameObject ReturnButton = null;
     [SerializeField] private GameObject VoteButton = null;
@@ -136,6 +138,12 @@ public class VotingController : MonoBehaviour
 
     public void VoteButtonPressed()
     {
+        MainScreen.SetActive(false);
+        ConfirmScreen.SetActive(true);
+    }
+
+    public void Confirm_ContinueButtonPressed()
+    {
         var current = Suspects.First(s => s.gameObject.activeSelf);
         if (current != null)
         {
@@ -143,5 +151,11 @@ public class VotingController : MonoBehaviour
                 SceneManager.LoadScene("Communication Detective/Scenes/VotingWait");
             });
         }
+    }
+
+    public void Confirm_CancelButtonPressed()
+    {
+        ConfirmScreen.SetActive(false);
+        MainScreen.SetActive(true);
     }
 }
