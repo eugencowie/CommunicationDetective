@@ -147,6 +147,9 @@ public class CameraTap : MonoBehaviour
             GameObject StartCamera = Instantiate(gameObject);
             StartCamera.SetActive(false);
 
+            //Play audio
+            zoomable.audioSource.PlayOneShot(zoomable.audioClip, 1f);
+
             // Add a camera movement component
             CameraMovement movement = gameObject.AddComponent<CameraMovement>();
 

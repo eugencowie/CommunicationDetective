@@ -313,6 +313,21 @@ Prefab:
       propertyPath: m_Name
       value: Suspect (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 114725772865384308, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Appearance: Black hair, glasses
+
+        Height: 1,87m
+
+        Weight: 82kg
+
+        Motivation: Childhood trauma
+
+        Occupation: Dentist
+
+        Additional Information: Recently lost his house in a fire'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 40fc956ba7a47604aaa5bfdbce17ace6, type: 2}
   m_IsPrefabParent: 0
@@ -385,7 +400,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 80, y: 80}
-  m_SizeDelta: {x: 320, y: 120}
+  m_SizeDelta: {x: 275, y: 219}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &558849289
 MonoBehaviour:
@@ -453,14 +468,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 623e4708ac8bdf94b8077c6090364d5c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 922edb3ad7732a345bc275a54106091f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -492,7 +507,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &616160366
 RectTransform:
   m_ObjectHideFlags: 0
@@ -711,7 +726,9 @@ Prefab:
     - target: {fileID: 114725772865384308, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_Text
-      value: 'Height: 1,88m
+      value: 'Appearance: Dark hair, beard
+
+        Height: 1,88m
 
         Weight: 97kg
 
@@ -1077,7 +1094,9 @@ Prefab:
     - target: {fileID: 114725772865384308, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_Text
-      value: 'Height: 1,89m
+      value: 'Appearance: Black hair, glasses
+
+        Height: 1,89m
 
         Weight: 78kg
 
@@ -1201,14 +1220,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.90344834, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 623e4708ac8bdf94b8077c6090364d5c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1bad81281f9bf574384505888f080969, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1584,7 +1603,9 @@ Prefab:
     - target: {fileID: 114725772865384308, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_Text
-      value: 'Height: 1,59m
+      value: 'Appearance: Bald head, black beard
+
+        Height: 1,59m
 
         Weight: 99kg
 
@@ -1598,7 +1619,7 @@ Prefab:
         type: 2}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: c3e787a6d0b45b94794dd1ab31a6a589,
+      objectReference: {fileID: 21300000, guid: 185232fac54c7b0478145701ac3411f6,
         type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 40fc956ba7a47604aaa5bfdbce17ace6, type: 2}
@@ -2024,7 +2045,7 @@ Prefab:
     - target: {fileID: 114569896306991082, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_Text
-      value: Simon Black
+      value: Simone Black
       objectReference: {fileID: 0}
     - target: {fileID: 1156473526795230, guid: 40fc956ba7a47604aaa5bfdbce17ace6, type: 2}
       propertyPath: m_IsActive
@@ -2033,7 +2054,9 @@ Prefab:
     - target: {fileID: 114725772865384308, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_Text
-      value: 'Height: 1,81m
+      value: 'Appearance: Blonde hair, glasses
+
+        Height: 1,81m
 
         Weight: 81kg
 
@@ -2047,7 +2070,7 @@ Prefab:
         type: 2}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 185232fac54c7b0478145701ac3411f6,
+      objectReference: {fileID: 21300000, guid: c3e787a6d0b45b94794dd1ab31a6a589,
         type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 40fc956ba7a47604aaa5bfdbce17ace6, type: 2}
@@ -2205,7 +2228,9 @@ Prefab:
     - target: {fileID: 114725772865384308, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_Text
-      value: 'Height: 1,68m
+      value: 'Appearance: Blonde hair, glasses
+
+        Height: 1,68m
 
         Weight: 87kg
 
@@ -2565,7 +2590,9 @@ Prefab:
     - target: {fileID: 114725772865384308, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_Text
-      value: 'Height: 1,85m
+      value: 'Appearance: Grey hair, glasses
+
+        Height: 1,85m
 
         Weight: 74kg
 
@@ -2825,7 +2852,9 @@ Prefab:
     - target: {fileID: 114725772865384308, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: m_Text
-      value: 'Height: 1,90m
+      value: 'Appearance: Black hair, glasses
+
+        Height: 1,90m
 
         Weight: 113kg
 
