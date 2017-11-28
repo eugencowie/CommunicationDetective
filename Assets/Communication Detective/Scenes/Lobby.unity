@@ -208,6 +208,46 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400002, guid: f335180a95126ac4eae60f62c8c1fd47, type: 3}
   m_PrefabInternal: {fileID: 129005495}
+--- !u!1 &345368400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 345368402}
+  - component: {fileID: 345368401}
+  m_Layer: 0
+  m_Name: Inventory save/load
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &345368401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 345368400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d71cec85ee7c2a34383fb1cf0e9271ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &345368402
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 345368400}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &447192634
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,7 +259,7 @@ GameObject:
   - component: {fileID: 447192635}
   - component: {fileID: 447192637}
   m_Layer: 0
-  m_Name: SoundManager
+  m_Name: Sound manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
