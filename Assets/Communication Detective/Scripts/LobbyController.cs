@@ -46,7 +46,7 @@ public class LobbyController : MonoBehaviour
 
     private void Start()
     {
-        StaticInventory.Hints.Clear();
+        //StaticInventory.Hints.Clear();
         StaticSuspects.DiscardedSuspects.Clear();
 
         Network = new OnlineManager();
@@ -159,6 +159,7 @@ public class LobbyController : MonoBehaviour
                 SwitchPanel(LobbyPanel);
             }
             else Network.AssignPlayerScenes(CodeLabel.text, _ => {
+                StaticInventory.Hints.Clear();
                 Network.SetLobbyState(CodeLabel.text, LobbyState.InGame);
             }); 
         });
