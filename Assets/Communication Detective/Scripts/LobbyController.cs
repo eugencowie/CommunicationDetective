@@ -37,9 +37,10 @@ public class LobbyController : MonoBehaviour
     public GameObject JoinPanel;
     public GameObject LobbyPanel;
     public GameObject WaitPanel;
+    public GameObject StartButton;
 
     [Range(1,4)]
-    public int RequiredPlayers = 4;
+    public int MaxPlayers = 4;
 
     private OnlineManager Network;
 
@@ -50,7 +51,7 @@ public class LobbyController : MonoBehaviour
 
         Network = new OnlineManager();
 
-        SwitchPanel(WaitPanel);
+        /*SwitchPanel(WaitPanel);
 
         Network.GetPlayerLobby(room => {
             if (string.IsNullOrEmpty(room)) SwitchPanel(StartPanel);
@@ -59,9 +60,9 @@ public class LobbyController : MonoBehaviour
                     SwitchPanel(StartPanel);
                 });
             }
-        });
+        });*/
 
-        /*SwitchPanel(WaitPanel);
+        SwitchPanel(WaitPanel);
 
         Network.GetPlayerLobby(room => {
             if (string.IsNullOrEmpty(room)) SwitchPanel(StartPanel);
@@ -71,7 +72,7 @@ public class LobbyController : MonoBehaviour
                 RegisterOnLobbyStateChanged(room);
                 SwitchPanel(LobbyPanel);
             }
-        });*/
+        });
     }
 
     /// <summary>
@@ -91,7 +92,7 @@ public class LobbyController : MonoBehaviour
         {
             SwitchPanel(WaitPanel);
 
-            Network.JoinLobby(CodeField.text.ToUpper(), success => {
+            Network.JoinLobby(CodeField.text.ToUpper(), MaxPlayers, success => {
                 if (!success) {
                     CodeField.text = "";
                     SwitchPanel(JoinPanel);
@@ -99,6 +100,7 @@ public class LobbyController : MonoBehaviour
                     CodeLabel.text = CodeField.text.ToUpper();
                     RegisterOnPlayersChanged(CodeLabel.text);
                     RegisterOnLobbyStateChanged(CodeLabel.text);
+                    StartButton.SetActive(false);
                     SwitchPanel(LobbyPanel);
                 }
             });
@@ -126,12 +128,13 @@ public class LobbyController : MonoBehaviour
                 Network.CreateLobby(code, createSuccess => {
                     if (!createSuccess) SwitchPanel(StartPanel);
                     else {
-                        Network.JoinLobby(code, joinSuccess => {
+                        Network.JoinLobby(code, MaxPlayers, joinSuccess => {
                             if (!joinSuccess) SwitchPanel(StartPanel);
                             else {
                                 CodeLabel.text = code;
                                 RegisterOnPlayersChanged(code);
                                 RegisterOnLobbyStateChanged(code);
+                                StartButton.SetActive(true);
                                 SwitchPanel(LobbyPanel);
                             }
                         });
@@ -148,10 +151,10 @@ public class LobbyController : MonoBehaviour
     {
         SwitchPanel(WaitPanel);
 
-        Network.CanStartGame(CodeLabel.text, RequiredPlayers, error => {
+        Network.CanStartGame(CodeLabel.text, MaxPlayers, error => {
             if (error != LobbyError.None) {
-                if (error == LobbyError.TooFewPlayers) StatusLabel.text = "too few players, requires " + RequiredPlayers;
-                else if (error == LobbyError.TooManyPlayers) StatusLabel.text = "too many players, requires " + RequiredPlayers;
+                if (error == LobbyError.TooFewPlayers) StatusLabel.text = "too few players, requires " + MaxPlayers;
+                else if (error == LobbyError.TooManyPlayers) StatusLabel.text = "too many players, requires " + MaxPlayers;
                 else StatusLabel.text = "unknown error";
                 SwitchPanel(LobbyPanel);
             }

@@ -8,6 +8,9 @@ using UnityEngine.UI;
 
 public class RoomController : MonoBehaviour
 {
+    [SerializeField] private GameObject MainScreen = null;
+    [SerializeField] private GameObject ConfirmLeaveScreen = null;
+    [SerializeField] private GameObject ConfirmReadyScreen = null;
     [SerializeField] private GameObject ReadyButton = null;
     [SerializeField] private GameObject DatabaseButton = null;
 
@@ -43,11 +46,10 @@ public class RoomController : MonoBehaviour
     /// </summary>
     public void LeaveButtonPressed()
     {
-        //NetworkController.LeaveLobby(m_roomCode, success => {
-        //    if (success) SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
-        //});
+        ConfirmLeaveScreen.SetActive(true);
+        MainScreen.SetActive(false);
     }
-
+    
     public void DatabaseButtonPressed()
     {
         if (DatabaseButton.activeSelf)
@@ -59,20 +61,8 @@ public class RoomController : MonoBehaviour
 
     public void ReadyButtonPressed()
     {
-        if (ReadyButton.activeSelf)
-        {
-            ReadyButton.SetActive(false);
-            NetworkController.ReadyUp(success => {
-                ReadyButton.SetActive(true);
-                if (success) {
-                    ReadyButton.GetComponent<Image>().color = Color.yellow;
-                    foreach (Transform t in ReadyButton.gameObject.transform) {
-                        var text = t.GetComponent<Text>();
-                        if (text != null) text.text = "Waiting...";
-                    }
-                }
-            });
-        }
+        MainScreen.SetActive(false);
+        ConfirmReadyScreen.SetActive(true);
     }
 
     private void OnReadyChanged(OnlineDatabaseEntry entry, ValueChangedEventArgs args)
@@ -102,5 +92,48 @@ public class RoomController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void ConfirmLeave_ContinueButtonPressed()
+    {
+        NetworkController.LeaveLobby(m_roomCode, _ => {
+            SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
+        });
+
+        //NetworkController.LeaveLobby(m_roomCode, success => {
+        //    if (success) SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
+        //});
+    }
+
+    public void ConfirmLeave_CancelButtonPressed()
+    {
+        ConfirmLeaveScreen.SetActive(false);
+        MainScreen.SetActive(true);
+    }
+
+    public void ConfirmReady_ContinueButtonPressed()
+    {
+        if (ReadyButton.activeSelf)
+        {
+            ReadyButton.SetActive(false);
+            NetworkController.ReadyUp(success => {
+                ReadyButton.SetActive(true);
+                if (success)
+                {
+                    ReadyButton.GetComponent<Image>().color = Color.yellow;
+                    foreach (Transform t in ReadyButton.gameObject.transform)
+                    {
+                        var text = t.GetComponent<Text>();
+                        if (text != null) text.text = "Waiting...";
+                    }
+                }
+            });
+        }
+    }
+
+    public void ConfirmReady_CancelButtonPressed()
+    {
+        ConfirmReadyScreen.SetActive(false);
+        MainScreen.SetActive(true);
     }
 }

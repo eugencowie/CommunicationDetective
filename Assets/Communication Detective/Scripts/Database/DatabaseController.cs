@@ -17,6 +17,9 @@ public class Data
 
 public class DatabaseController : MonoBehaviour
 {
+    public GameObject MainScreen = null;
+    public GameObject ConfirmScreen = null;
+
     [SerializeField] private GameObject ReadyButton = null;
     [SerializeField] private GameObject ReturnButton = null;
     [SerializeField] private GameObject ButtonTemplate = null;
@@ -78,22 +81,36 @@ public class DatabaseController : MonoBehaviour
         }
     }
 
-    public void ReadyButtonPressed()
+    public void ConfirmReady_CancelButtonPressed()
+    {
+        ConfirmScreen.SetActive(false);
+        MainScreen.SetActive(true);
+    }
+
+    public void ConfirmReady_ContinueButtonPressed()
     {
         if (ReadyButton.activeSelf)
         {
             ReadyButton.SetActive(false);
             NetworkController.ReadyUp(success => {
                 ReadyButton.SetActive(true);
-                if (success) {
+                if (success)
+                {
                     ReadyButton.GetComponent<Image>().color = Color.yellow;
-                    foreach (Transform t in ReadyButton.gameObject.transform) {
+                    foreach (Transform t in ReadyButton.gameObject.transform)
+                    {
                         var text = t.GetComponent<Text>();
                         if (text != null) text.text = "Waiting...";
                     }
                 }
             });
         }
+    }
+
+    public void ReadyButtonPressed()
+    {
+        MainScreen.SetActive(false);
+        ConfirmScreen.SetActive(true);
     }
     
     public void ReturnButtonPressed()
@@ -194,10 +211,16 @@ public class DatabaseController : MonoBehaviour
                             }
                         }
                         newObj.GetComponent<DragHandler>().enabled = false;
-                        newObj.GetComponent<Button>().onClick.AddListener(() => {
-                            slot.GetComponent<Slot>().Text.GetComponent<Text>().text = "";
-                            RemoveItem(slot.GetComponent<Slot>().SlotNumber);
-                            Destroy(newObj);
+                        newObj.GetComponent<Button>().onClick.AddListener(() =>
+                        {
+                            if (StaticSlot.TimesRemoved < StaticSlot.MaxRemovals)
+                            {
+                                slot.GetComponent<Slot>().Text.GetComponent<Text>().text = "";
+                                RemoveItem(slot.GetComponent<Slot>().SlotNumber);
+                                Destroy(newObj);
+                                StaticSlot.TimesRemoved++;
+                            }
+                            else Debug.Log("YOU CANT GO THERE (EG. you have removed your maximum amount of times)");
                         });
                         slot.GetComponent<Slot>().Text.GetComponent<Text>().text = clue.Hint.Value;
                     }
