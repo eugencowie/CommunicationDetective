@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class RoomController : MonoBehaviour
 {
+    [SerializeField] private GameObject MainScreen = null;
+    [SerializeField] private GameObject ConfirmScreen = null;
     [SerializeField] private GameObject ReadyButton = null;
     [SerializeField] private GameObject DatabaseButton = null;
 
@@ -43,11 +45,10 @@ public class RoomController : MonoBehaviour
     /// </summary>
     public void LeaveButtonPressed()
     {
-        //NetworkController.LeaveLobby(m_roomCode, success => {
-        //    if (success) SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
-        //});
+        ConfirmScreen.SetActive(true);
+        MainScreen.SetActive(false);
     }
-
+    
     public void DatabaseButtonPressed()
     {
         if (DatabaseButton.activeSelf)
@@ -102,5 +103,22 @@ public class RoomController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void Confirm_ContinueButtonPressed()
+    {
+        NetworkController.LeaveLobby(m_roomCode, _ => {
+            SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
+        });
+
+        //NetworkController.LeaveLobby(m_roomCode, success => {
+        //    if (success) SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
+        //});
+    }
+
+    public void Confirm_CancelButtonPressed()
+    {
+        ConfirmScreen.SetActive(false);
+        MainScreen.SetActive(true);
     }
 }
