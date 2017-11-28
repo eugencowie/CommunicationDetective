@@ -17,9 +17,6 @@ public class Data
 
 public class DatabaseController : MonoBehaviour
 {
-    public GameObject MainScreen = null;
-    public GameObject ConfirmScreen = null;
-
     [SerializeField] private GameObject ReadyButton = null;
     [SerializeField] private GameObject ReturnButton = null;
     [SerializeField] private GameObject ButtonTemplate = null;
@@ -81,36 +78,22 @@ public class DatabaseController : MonoBehaviour
         }
     }
 
-    public void ConfirmReady_CancelButtonPressed()
-    {
-        ConfirmScreen.SetActive(false);
-        MainScreen.SetActive(true);
-    }
-
-    public void ConfirmReady_ContinueButtonPressed()
+    public void ReadyButtonPressed()
     {
         if (ReadyButton.activeSelf)
         {
             ReadyButton.SetActive(false);
             NetworkController.ReadyUp(success => {
                 ReadyButton.SetActive(true);
-                if (success)
-                {
+                if (success) {
                     ReadyButton.GetComponent<Image>().color = Color.yellow;
-                    foreach (Transform t in ReadyButton.gameObject.transform)
-                    {
+                    foreach (Transform t in ReadyButton.gameObject.transform) {
                         var text = t.GetComponent<Text>();
                         if (text != null) text.text = "Waiting...";
                     }
                 }
             });
         }
-    }
-
-    public void ReadyButtonPressed()
-    {
-        MainScreen.SetActive(false);
-        ConfirmScreen.SetActive(true);
     }
     
     public void ReturnButtonPressed()

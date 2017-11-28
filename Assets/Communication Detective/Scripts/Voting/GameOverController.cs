@@ -37,9 +37,7 @@ public class GameOverController : MonoBehaviour
 
     public void ResetButtonPressed()
     {
-        NetworkController.LeaveLobby(m_roomCode, _ => {
-            SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
-        });
+        SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
     }
 
     private void OnVoteChanged(OnlineDatabaseEntry entry, ValueChangedEventArgs args)
