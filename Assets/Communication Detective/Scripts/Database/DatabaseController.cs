@@ -77,17 +77,19 @@ public class DatabaseController : MonoBehaviour
             Backgrounds[m_scene - 1].SetActive(true);
         }
     }
-
-    public void ReadyButtonPressed()
+    
+    public void ConfirmReady()
     {
         if (ReadyButton.activeSelf)
         {
             ReadyButton.SetActive(false);
             NetworkController.ReadyUp(success => {
                 ReadyButton.SetActive(true);
-                if (success) {
+                if (success)
+                {
                     ReadyButton.GetComponent<Image>().color = Color.yellow;
-                    foreach (Transform t in ReadyButton.gameObject.transform) {
+                    foreach (Transform t in ReadyButton.gameObject.transform)
+                    {
                         var text = t.GetComponent<Text>();
                         if (text != null) text.text = "Waiting...";
                     }
@@ -194,10 +196,16 @@ public class DatabaseController : MonoBehaviour
                             }
                         }
                         newObj.GetComponent<DragHandler>().enabled = false;
-                        newObj.GetComponent<Button>().onClick.AddListener(() => {
-                            slot.GetComponent<Slot>().Text.GetComponent<Text>().text = "";
-                            RemoveItem(slot.GetComponent<Slot>().SlotNumber);
-                            Destroy(newObj);
+                        newObj.GetComponent<Button>().onClick.AddListener(() =>
+                        {
+                            if (StaticSlot.TimesRemoved < StaticSlot.MaxRemovals)
+                            {
+                                slot.GetComponent<Slot>().Text.GetComponent<Text>().text = "";
+                                RemoveItem(slot.GetComponent<Slot>().SlotNumber);
+                                Destroy(newObj);
+                                StaticSlot.TimesRemoved++;
+                            }
+                            else Debug.Log("YOU CANT GO THERE (EG. you have removed your maximum amount of times)");
                         });
                         slot.GetComponent<Slot>().Text.GetComponent<Text>().text = clue.Hint.Value;
                     }
@@ -323,7 +331,7 @@ public class DatabaseController : MonoBehaviour
 
                 if (player == OnlineManager.GetPlayerId())
                 {
-                    ReadyButtonPressed();
+                    ConfirmReady();
                 }
                 
                 if (!m_readyPlayers.Any(p => p.Value == false))

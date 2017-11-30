@@ -66,7 +66,7 @@ public class OnlineManager
     /// <summary>
     /// If lobby exists, updates player entry to new lobby and adds player to lobby.
     /// </summary>
-    public void JoinLobby(string code, Action<bool> returnSuccess=null)
+    public void JoinLobby(string code, int maxPlayers, Action<bool> returnSuccess=null)
     {
         OnlineDatabase.ValidateAction(ref returnSuccess, string.Format("JoinLobby({0})", code));
 
@@ -75,13 +75,13 @@ public class OnlineManager
         m_lobby = new Lobby(m_database, code);
         m_lobby.Exists(exists => {
             if (exists) {
-                m_player.Lobby.Value = code;
-                m_player.Lobby.Push(playerSuccess => {
-                    if (playerSuccess) {
-                        m_lobby.Players.Pull(lobbySuccess => {
-                            if (lobbySuccess) {
-                                List<string> players = m_lobby.Players.Value.Split(',').ToList();
-                                if (!players.Contains(m_player.Id)) {
+                m_lobby.Players.Pull(lobbySuccess => {
+                    if (lobbySuccess) {
+                        List<string> players = m_lobby.Players.Value.Split(',').ToList();
+                        if (players.Count < maxPlayers && !players.Contains(m_player.Id)) {
+                            m_player.Lobby.Value = code;
+                            m_player.Lobby.Push(playerSuccess => {
+                                if (playerSuccess) {
                                     players.Add(m_player.Id);
                                     players.RemoveAll(s => string.IsNullOrEmpty(s));
                                     m_lobby.Players.Value = string.Join(",", players.ToArray());
@@ -90,9 +90,10 @@ public class OnlineManager
                                         else returnSuccess(false);
                                     });
                                 }
-                            }
-                            else returnSuccess(false);
-                        });
+                                else returnSuccess(false);
+                            });
+                        }
+                        else returnSuccess(false);
                     }
                     else returnSuccess(false);
                 });
@@ -186,6 +187,10 @@ public class OnlineManager
     /// </summary>
     public void CanStartGame(string code, int requiredPlayers, Action<LobbyError> returnError)
     {
+        // TODO: remove this in final build
+        returnError(LobbyError.None);
+        return;
+
         OnlineDatabase.ValidateAction(ref returnError, string.Format("CanStartGame({0}, {1})", code, requiredPlayers));
 
         //m_lobby = new Lobby(m_database, code); // TODO

@@ -37,17 +37,7 @@ public class RoomController : MonoBehaviour
             else SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
         });
     }
-
-    /// <summary>
-    /// Called when the leave button in the lobby panel is pressed.
-    /// </summary>
-    public void LeaveButtonPressed()
-    {
-        //NetworkController.LeaveLobby(m_roomCode, success => {
-        //    if (success) SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
-        //});
-    }
-
+    
     public void DatabaseButtonPressed()
     {
         if (DatabaseButton.activeSelf)
@@ -56,25 +46,7 @@ public class RoomController : MonoBehaviour
             SceneManager.LoadScene("Communication Detective/Scenes/Database");
         }
     }
-
-    public void ReadyButtonPressed()
-    {
-        if (ReadyButton.activeSelf)
-        {
-            ReadyButton.SetActive(false);
-            NetworkController.ReadyUp(success => {
-                ReadyButton.SetActive(true);
-                if (success) {
-                    ReadyButton.GetComponent<Image>().color = Color.yellow;
-                    foreach (Transform t in ReadyButton.gameObject.transform) {
-                        var text = t.GetComponent<Text>();
-                        if (text != null) text.text = "Waiting...";
-                    }
-                }
-            });
-        }
-    }
-
+    
     private void OnReadyChanged(OnlineDatabaseEntry entry, ValueChangedEventArgs args)
     {
         if (ReadyButton == null)
@@ -92,7 +64,7 @@ public class RoomController : MonoBehaviour
 
                 if (player == OnlineManager.GetPlayerId())
                 {
-                    ReadyButtonPressed();
+                    ConfirmReady();
                 }
 
                 if (!m_readyPlayers.Any(p => p.Value == false))
@@ -101,6 +73,37 @@ public class RoomController : MonoBehaviour
                     SceneManager.LoadScene("Communication Detective/Scenes/Voting");
                 }
             }
+        }
+    }
+
+    public void ConfirmLeave()
+    {
+        NetworkController.LeaveLobby(m_roomCode, _ => {
+            SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
+        });
+
+        //NetworkController.LeaveLobby(m_roomCode, success => {
+        //    if (success) SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
+        //});
+    }
+    
+    public void ConfirmReady()
+    {
+        if (ReadyButton.activeSelf)
+        {
+            ReadyButton.SetActive(false);
+            NetworkController.ReadyUp(success => {
+                ReadyButton.SetActive(true);
+                if (success)
+                {
+                    ReadyButton.GetComponent<Image>().color = Color.yellow;
+                    foreach (Transform t in ReadyButton.gameObject.transform)
+                    {
+                        var text = t.GetComponent<Text>();
+                        if (text != null) text.text = "Waiting...";
+                    }
+                }
+            });
         }
     }
 }

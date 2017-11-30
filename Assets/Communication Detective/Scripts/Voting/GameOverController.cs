@@ -9,7 +9,9 @@ public class GameOverController : MonoBehaviour
 {
     public GameObject ResetButton;
     public Text Text;
-    public int RequiredCorrectVotes = 3;
+
+    [Range(0, 100)]
+    public int RequiredVotePercentage = 51;
 
     private OnlineManager NetworkController;
     private string m_roomCode;
@@ -35,7 +37,9 @@ public class GameOverController : MonoBehaviour
 
     public void ResetButtonPressed()
     {
-        SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
+        NetworkController.LeaveLobby(m_roomCode, _ => {
+            SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
+        });
     }
 
     private void OnVoteChanged(OnlineDatabaseEntry entry, ValueChangedEventArgs args)
@@ -52,9 +56,13 @@ public class GameOverController : MonoBehaviour
 
                 if (!m_votedPlayers.Any(p => string.IsNullOrEmpty(p.Value)))
                 {
-                    int correctAnswers = m_votedPlayers.Count(p => p.Value == "Caleb Holden");
+                    float correctAnswers = m_votedPlayers.Count(p => p.Value == "Caleb Holden");
+                    float totalAnswers = m_votedPlayers.Count;
 
-                    if (correctAnswers >= RequiredCorrectVotes)
+                    float percentage = correctAnswers / totalAnswers;
+                    float requiredPercentage = RequiredVotePercentage / 100.0f;
+
+                    if (percentage >= requiredPercentage)
                     {
                         Text.text = "You Win! The killer was Caleb Holden!\n";
 
