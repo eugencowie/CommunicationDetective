@@ -10,7 +10,29 @@ public static class StaticSlot
     // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ ↙ ↙ ↙ 
     public static int MaxRemovals = 5; // ← ← 
     // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ ↖ ↖ ↖
-    public static int TimesRemoved;
+    private static int m_TimesRemoved;
+    public static int TimesRemoved
+    {
+        get
+        {
+            return m_TimesRemoved;
+        }
+        set
+        {
+            m_TimesRemoved = value;
+            UpdateText();
+        }
+    }
+
+    public static void UpdateText()
+    {
+        if (ChangeText != null)
+        {
+            ChangeText.text = "Changes Remaining : " + (5 - m_TimesRemoved);
+        }
+    }
+
+    public static Text ChangeText;
 }
 
 public class Slot : MonoBehaviour, IDropHandler {
