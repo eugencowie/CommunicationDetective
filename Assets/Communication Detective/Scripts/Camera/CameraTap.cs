@@ -23,13 +23,13 @@ public class CameraTap : MonoBehaviour
     private Camera m_camera;
     private CameraSwipe m_cameraSwipe;
 
-
+    bool isInpected = false;
+    bool isZoomed = false;
 
     private void Start()
     {
         m_camera = GetComponent<Camera>();
         m_cameraSwipe = GetComponent<CameraSwipe>();
-
     }
 
     private void Update()
@@ -100,7 +100,7 @@ public class CameraTap : MonoBehaviour
 
             // If hit object has the zoomable component, we can zoom in on it
             ObjectZoomable zoomable = tappedObject.GetComponent<ObjectZoomable>();
-            if (zoomable != null)
+            if (zoomable != null && !isZoomed)
             {
                 ZoomToObject(zoomable, hints);
             }
@@ -129,6 +129,7 @@ public class CameraTap : MonoBehaviour
                 BlurPlane.SetActive(false);
                 if (Spotlight != null) Spotlight.SetActive(false);
                 enabled = m_cameraSwipe.enabled = true;
+                isInpected = false;
                 Destroy(newObject);
             };
 
@@ -136,6 +137,7 @@ public class CameraTap : MonoBehaviour
             if (Spotlight != null) Spotlight.SetActive(true);
             BlurPlane.SetActive(true);
             enabled = m_cameraSwipe.enabled = false;
+            isInpected = true;
         }
     }
 
@@ -161,7 +163,8 @@ public class CameraTap : MonoBehaviour
             movement.OnMoveEnded = () => CameraMovementEnded(zoomable, hints, StartCamera, movement);
 
             // Disable this component and disable the camera swipe component
-            enabled = m_cameraSwipe.enabled = false;
+            /*enabled = */m_cameraSwipe.enabled = false;
+            isZoomed = true;
         }
     }
 
@@ -182,6 +185,8 @@ public class CameraTap : MonoBehaviour
 
     private void ObjectZoomEnded(GameObject StartCamera, CameraMovement movement, ObjectZooming zooming)
     {
+        if (isInpected) return;
+
         // Hide the hint panel
         HintPanel.SetActive(false);
 
@@ -191,7 +196,8 @@ public class CameraTap : MonoBehaviour
         // Set what happens when the camera movement ends
         movement.OnMoveEnded = () => {
             // Re-enable this component and the camera swipe component
-            enabled = m_cameraSwipe.enabled = true;
+            /*enabled = */m_cameraSwipe.enabled = true;
+            isZoomed = false;
             // Destroy the clone and the camera movement component
             Destroy(StartCamera);
             Destroy(movement);

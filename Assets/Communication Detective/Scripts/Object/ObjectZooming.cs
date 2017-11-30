@@ -30,7 +30,24 @@ public class ObjectZooming : MonoBehaviour
         // If swipe has small distance it is probably a tap.
         if (touchDistance.magnitude < 20)
         {
-            if (OnZoomEnded != null) OnZoomEnded();
+            // Get the average of the touch start and end position.
+            Vector2 tapPosition = m_touchStartPos + (touchDistance / 2);
+
+            HandleTap(tapPosition);
+        }
+    }
+
+    private void HandleTap(Vector2 tapPosition)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(tapPosition);
+
+        RaycastHit hit = new RaycastHit();
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (OnZoomEnded != null && hit.collider.gameObject == gameObject)
+            {
+                OnZoomEnded();
+            }
         }
     }
 }
