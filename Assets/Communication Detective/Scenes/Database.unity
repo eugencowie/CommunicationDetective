@@ -4094,7 +4094,7 @@ MonoBehaviour:
   OnConfirm:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1268031994}
         m_MethodName: ConfirmReady
         m_Mode: 1
         m_Arguments:
