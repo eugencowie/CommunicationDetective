@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Linq;
 
-public class VotingSlot : MonoBehaviour, IDropHandler
+public class VotingDiscardSlot : MonoBehaviour, IDropHandler
 {
     public GameObject item
     {
