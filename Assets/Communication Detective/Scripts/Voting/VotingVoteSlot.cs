@@ -35,10 +35,14 @@ public class VotingVoteSlot : MonoBehaviour, IDropHandler
         if (item == null && CanDrop)
         {
             var suspect = VotingDragHandler.itemBeingDragged.GetComponent<VotingDragHandler>().Suspect;
+            var page = suspect.GetComponent<VotingPageController>();
+
+            var color = gameObject.GetComponent<Image>().color;
+            color.a = 1.0f;
+            gameObject.GetComponent<Image>().color = color;
 
             OnDropped.Invoke();
 
-            //var page = suspect.GetComponent<VotingPageController>();
 
             //var prevPage = page.PanelLeft;
             //var nextPage = page.PanelRight;

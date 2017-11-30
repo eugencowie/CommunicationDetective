@@ -582,6 +582,10 @@ Prefab:
       propertyPath: m_SizeDelta.y
       value: 300
       objectReference: {fileID: 0}
+    - target: {fileID: 1156473526795230, guid: 40fc956ba7a47604aaa5bfdbce17ace6, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 40fc956ba7a47604aaa5bfdbce17ace6, type: 2}
   m_IsPrefabParent: 0
@@ -1046,40 +1050,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 1156473526795230, guid: 40fc956ba7a47604aaa5bfdbce17ace6, type: 2}
-      propertyPath: m_Name
-      value: Suspect (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 224114875063803598, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
-        type: 2}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224114875063803598, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224114875063803598, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 225
-      objectReference: {fileID: 0}
-    - target: {fileID: 224114875063803598, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: -225
-      objectReference: {fileID: 0}
-    - target: {fileID: 224114875063803598, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
-        type: 2}
-      propertyPath: m_SizeDelta.x
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 224114875063803598, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
-        type: 2}
-      propertyPath: m_SizeDelta.y
-      value: 300
-      objectReference: {fileID: 0}
     - target: {fileID: 114718829361876064, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
         type: 2}
       propertyPath: PanelLeft
@@ -1090,41 +1060,10 @@ Prefab:
       propertyPath: PanelRight
       value: 
       objectReference: {fileID: 2068830951}
-    - target: {fileID: 114569896306991082, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
-        type: 2}
-      propertyPath: m_Text
-      value: James Swan
-      objectReference: {fileID: 0}
     - target: {fileID: 1156473526795230, guid: 40fc956ba7a47604aaa5bfdbce17ace6, type: 2}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: m_Name
+      value: Suspect (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 114439975272826338, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
-        type: 2}
-      propertyPath: Slot
-      value: 
-      objectReference: {fileID: 1646878634}
-    - target: {fileID: 114725772865384308, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
-        type: 2}
-      propertyPath: m_Text
-      value: 'Appearance: Dark hair, beard
-
-        Height: 1,88m
-
-        Weight: 97kg
-
-        Motivation: Revenge
-
-        Occupation: High School Teacher
-
-        Additional Information: Alcoholic, Drunk driver'
-      objectReference: {fileID: 0}
-    - target: {fileID: 114293165632170572, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 584e13b2a61d1804995f51d3c2f15bb4,
-        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 40fc956ba7a47604aaa5bfdbce17ace6, type: 2}
   m_IsPrefabParent: 0
@@ -3183,11 +3122,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1644049724}
---- !u!1 &1646878634 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1633951605508714, guid: 40fc956ba7a47604aaa5bfdbce17ace6,
-    type: 2}
-  m_PrefabInternal: {fileID: 726085683}
 --- !u!1 &1657491217
 GameObject:
   m_ObjectHideFlags: 0
