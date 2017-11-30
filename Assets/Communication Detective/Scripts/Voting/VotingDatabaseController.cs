@@ -9,6 +9,8 @@ using UnityEngine.UI;
 
 public class VotingDatabaseController : MonoBehaviour
 {
+    public GameObject MainScreen, WaitScreen;
+
     [SerializeField] private GameObject VotingButton = null;
     [SerializeField] private GameObject ButtonTemplate = null;
     [SerializeField] private GameObject[] Backgrounds = new GameObject[4];
@@ -18,11 +20,14 @@ public class VotingDatabaseController : MonoBehaviour
     private string m_lobby;
     private int m_scene;
 
+    int playerItemsLoaded = 0;
+
     private void Start()
     {
         NetworkController = new OnlineManager();
         
-        VotingButton.SetActive(false);
+        MainScreen.SetActive(false);
+        WaitScreen.SetActive(true);
 
         NetworkController.GetPlayerScene(scene => {
             if (scene > 0) {
@@ -34,7 +39,6 @@ public class VotingDatabaseController : MonoBehaviour
                             m_lobby = lobby;
                             DownloadItems();
                             NetworkController.RegisterCluesChanged(m_lobby, OnSlotChanged);
-                            VotingButton.SetActive(true);
                         });
                     }
                     else SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
@@ -86,7 +90,19 @@ public class VotingDatabaseController : MonoBehaviour
         }
         data.CluePanel.SetActive(true);
     }
+    
+    private void CheckPlayerItemsLoaded()
+    {
+        playerItemsLoaded++;
+        Debug.Log(playerItemsLoaded);
 
+        if (playerItemsLoaded >= 24)
+        {
+            WaitScreen.SetActive(false);
+            MainScreen.SetActive(true);
+        }
+    }
+    
     private void DownloadItems()
     {
         int tmp = 0;
@@ -95,6 +111,7 @@ public class VotingDatabaseController : MonoBehaviour
                 int tmp2 = j;
                 var clue = player.Clues.Clues[tmp2];
                 clue.PullEntries(_ => {
+                    CheckPlayerItemsLoaded();
                     if (!string.IsNullOrEmpty(clue.Name.Value)) {
                         var slot = Data[tmp].Slots[tmp2];
                         foreach (Transform t in slot.transform) if (t.gameObject.name == clue.Name.Value) Destroy(t.gameObject);
