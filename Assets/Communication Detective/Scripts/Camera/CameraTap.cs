@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -25,6 +26,8 @@ public class CameraTap : MonoBehaviour
 
     bool isInpected = false;
     bool isZoomed = false;
+
+    Stack<GameObject> hints = new Stack<GameObject>();
 
     private void Start()
     {
@@ -138,8 +141,9 @@ public class CameraTap : MonoBehaviour
             newObject.transform.localPosition = new Vector3(0, 0, inspectable.InspectDistance);
             newObject.transform.localScale *= inspectable.InspectScale;
 
-            newObject.AddComponent<ObjectInspecting>().OnInspectEnded = () => {
-                HintPanel.SetActive(false);
+            newObject.AddComponent<ObjectInspecting>().OnInspectEnded = () =>
+            {
+                HideHintPanel();
                 BlurPlane.SetActive(false);
                 if (Spotlight != null) Spotlight.SetActive(false);
                 enabled = m_cameraSwipe.enabled = true;
@@ -147,12 +151,44 @@ public class CameraTap : MonoBehaviour
                 Destroy(newObject);
             };
 
-            if (hints.Length > 0) HintPanel.SetActive(true);
+            if (hints.Length > 0) ShowHintPanel();
             if (Spotlight != null) Spotlight.SetActive(true);
             BlurPlane.SetActive(true);
             enabled = m_cameraSwipe.enabled = false;
             isInpected = true;
         }
+    }
+
+    private void HideHintPanel()
+    {
+        var go = hints.Pop();
+        go.SetActive(false);
+        Destroy(go);
+
+        if (hints.Count > 0)
+        {
+            hints.Peek().SetActive(true);
+            HintPanel.transform.parent.gameObject.SetActive(true);
+        }
+        else
+        {
+
+            HintPanel.transform.parent.gameObject.SetActive(false);
+        }
+    }
+
+    private void ShowHintPanel()
+    {
+        HintPanel.transform.parent.gameObject.SetActive(true);
+
+        if (hints.Count > 0)
+        {
+            hints.Peek().SetActive(false);
+        }
+        
+        var go = Instantiate(HintPanel, HintPanel.transform.parent);
+        go.SetActive(true);
+        hints.Push(go);
     }
 
     private void ZoomToObject(ObjectZoomable zoomable, ObjectHint[] hints)
@@ -185,7 +221,7 @@ public class CameraTap : MonoBehaviour
     private void CameraMovementEnded(ObjectZoomable zoomable, ObjectHint[] hints, GameObject StartCamera, CameraMovement movement)
     {
         // Show hint panel if there are hints
-        if (hints.Length > 0) HintPanel.SetActive(true);
+        if (hints.Length > 0) ShowHintPanel();
 
         // Add a object zooming component to the target game object
         ObjectZooming zooming = zoomable.gameObject.AddComponent<ObjectZooming>();
@@ -202,7 +238,7 @@ public class CameraTap : MonoBehaviour
         if (isInpected) return;
 
         // Hide the hint panel
-        HintPanel.SetActive(false);
+        HideHintPanel();
 
         // Set the camera movement target to the original position
         movement.Target = StartCamera;
