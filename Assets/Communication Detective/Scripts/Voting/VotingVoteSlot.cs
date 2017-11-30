@@ -37,9 +37,9 @@ public class VotingVoteSlot : MonoBehaviour, IDropHandler
             var suspect = VotingDragHandler.itemBeingDragged.GetComponent<VotingDragHandler>().Suspect;
             var page = suspect.GetComponent<VotingPageController>();
 
-            var color = gameObject.GetComponent<Image>().color;
+            var color = page.Image.color;
             color.a = 1.0f;
-            gameObject.GetComponent<Image>().color = color;
+            page.Image.color = color;
 
             OnDropped.Invoke();
 
