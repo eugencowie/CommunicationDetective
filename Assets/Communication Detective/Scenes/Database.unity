@@ -2570,7 +2570,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &551907966
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5355,7 +5355,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1161238959
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5795,6 +5795,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 122bc78e712ceb840b29a547d8c980ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MainScreen: {fileID: 551907965}
+  WaitScreen: {fileID: 1161238958}
   ReadyButton: {fileID: 1536132847}
   ReturnButton: {fileID: 558849287}
   ButtonTemplate: {fileID: 2144606993}

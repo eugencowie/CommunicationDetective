@@ -17,6 +17,8 @@ public class Data
 
 public class DatabaseController : MonoBehaviour
 {
+    public GameObject MainScreen, WaitScreen;
+
     [SerializeField] private GameObject ReadyButton = null;
     [SerializeField] private GameObject ReturnButton = null;
     [SerializeField] private GameObject ButtonTemplate = null;
@@ -33,8 +35,8 @@ public class DatabaseController : MonoBehaviour
     {
         NetworkController = new OnlineManager();
 
-        ReadyButton.SetActive(false);
-        ReturnButton.SetActive(false);
+        MainScreen.SetActive(false);
+        WaitScreen.SetActive(true);
 
         NetworkController.GetPlayerScene(scene => {
             if (scene > 0) {
@@ -48,8 +50,8 @@ public class DatabaseController : MonoBehaviour
                             DownloadItems();
                             NetworkController.RegisterCluesChanged(m_lobby, OnSlotChanged);
                             NetworkController.RegisterReadyChanged(m_lobby, OnReadyChanged);
-                            ReadyButton.SetActive(true);
-                            ReturnButton.SetActive(true);
+                            WaitScreen.SetActive(false);
+                            MainScreen.SetActive(true);
                         });
                     }
                     else SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
