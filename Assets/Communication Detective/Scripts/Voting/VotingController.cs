@@ -29,7 +29,7 @@ public class VotingController : MonoBehaviour
 
         ResetButton.SetActive(false);
         ReturnButton.SetActive(false);
-        VoteButton.SetActive(false);
+        //VoteButton.SetActive(false);
 
         NetworkController.GetPlayerScene(scene => {
             if (scene > 0)
@@ -41,7 +41,7 @@ public class VotingController : MonoBehaviour
                         m_lobby = lobby;
                         ResetButton.SetActive(true);
                         ReturnButton.SetActive(true);
-                        VoteButton.SetActive(true);
+                        //VoteButton.SetActive(true);
                         DiscardSuspects();
                     }
                     else SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
