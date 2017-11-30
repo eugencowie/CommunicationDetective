@@ -74,9 +74,9 @@ public class GameOverController : MonoBehaviour
                         {
                             Text.text += "\nPlayer " + (i+2) + " voted for " + m_votedPlayers.ElementAt(i).Value;
 
-                            ResetButton.SetActive(true);
+                            
                         }
-
+                        ResetButton.SetActive(true);
                         m_votedPlayers[OnlineManager.GetPlayerId()] = yourVote;
                     }
                     else
