@@ -77,24 +77,24 @@ public class CameraTap : MonoBehaviour
     {
         if (isActiveAndEnabled)
         {
-            // If hit object has hints, we can add them to the inventory
-            ObjectHint[] hints = tappedObject.GetComponents<ObjectHint>();
-            if (hints.Length > 0)
-            {
-                AddHints(tappedObject, hints);
-            }
-
-            Text text = HintText.GetComponent<Text>();
-            text.text = "";
-            foreach (var hint in hints)
-            {
-                text.text += string.Format("{0}: {1}\n", hint.Name, hint.Hint);
-            }
-
             // If hit object has the inspectable component, we can inspect it
             ObjectInspectable inspectable = tappedObject.GetComponent<ObjectInspectable>();
             if (inspectable != null)
             {
+                // If hit object has hints, we can add them to the inventory
+                ObjectHint[] hints = tappedObject.GetComponents<ObjectHint>();
+                if (hints.Length > 0)
+                {
+                    AddHints(tappedObject, hints);
+                }
+
+                Text text = HintText.GetComponent<Text>();
+                text.text = "";
+                foreach (var hint in hints)
+                {
+                    text.text += string.Format("{0}: {1}\n", hint.Name, hint.Hint);
+                }
+
                 InspectObject(inspectable, hints);
             }
 
@@ -102,6 +102,20 @@ public class CameraTap : MonoBehaviour
             ObjectZoomable zoomable = tappedObject.GetComponent<ObjectZoomable>();
             if (zoomable != null && !isZoomed)
             {
+                // If hit object has hints, we can add them to the inventory
+                ObjectHint[] hints = tappedObject.GetComponents<ObjectHint>();
+                if (hints.Length > 0)
+                {
+                    AddHints(tappedObject, hints);
+                }
+
+                Text text = HintText.GetComponent<Text>();
+                text.text = "";
+                foreach (var hint in hints)
+                {
+                    text.text += string.Format("{0}: {1}\n", hint.Name, hint.Hint);
+                }
+
                 ZoomToObject(zoomable, hints);
             }
         }
@@ -143,7 +157,7 @@ public class CameraTap : MonoBehaviour
 
     private void ZoomToObject(ObjectZoomable zoomable, ObjectHint[] hints)
     {
-        if (zoomable != null)
+        if (zoomable != null && !isZoomed)
         {
             // Create an inactive clone of this camera in its current location
             GameObject StartCamera = Instantiate(gameObject);
