@@ -86,7 +86,9 @@ public class OnlineManager
                                     players.RemoveAll(s => string.IsNullOrEmpty(s));
                                     m_lobby.Players.Value = string.Join(",", players.ToArray());
                                     m_lobby.Players.Push(roomPlayersSuccess => {
-                                        if (roomPlayersSuccess) returnSuccess(true);
+                                        if (roomPlayersSuccess) {
+                                            m_player.Clues.PushEntries(returnSuccess);
+                                        }
                                         else returnSuccess(false);
                                     });
                                 }

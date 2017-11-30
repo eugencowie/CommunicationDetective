@@ -31,6 +31,8 @@ public class DatabaseController : MonoBehaviour
 
     private Dictionary<string, bool> m_readyPlayers = new Dictionary<string, bool>();
 
+    int playerItemsLoaded = 0;
+
     private void Start()
     {
         NetworkController = new OnlineManager();
@@ -50,8 +52,6 @@ public class DatabaseController : MonoBehaviour
                             DownloadItems();
                             NetworkController.RegisterCluesChanged(m_lobby, OnSlotChanged);
                             NetworkController.RegisterReadyChanged(m_lobby, OnReadyChanged);
-                            WaitScreen.SetActive(false);
-                            MainScreen.SetActive(true);
                         });
                     }
                     else SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
@@ -161,6 +161,7 @@ public class DatabaseController : MonoBehaviour
                 int tmp2 = j;
                 var clue = player.Clues.Clues[tmp2];
                 clue.PullEntries(_ => {
+                    CheckPlayerItemsLoaded();
                     if (!string.IsNullOrEmpty(clue.Name.Value)) {
                         var slot = Data[tmp].Slots[tmp2];
                         foreach (Transform t in slot.transform) if (t.gameObject.name == clue.Name.Value) Destroy(t.gameObject);
@@ -254,6 +255,7 @@ public class DatabaseController : MonoBehaviour
                                 }
                             }
                             newObj.GetComponent<DragHandler>().enabled = false;
+                            //CheckItemsLoaded();
                         }
                         else if (field == "hint")
                         {
@@ -313,6 +315,18 @@ public class DatabaseController : MonoBehaviour
                     });
                 }
             }
+        }
+    }
+
+    private void CheckPlayerItemsLoaded()
+    {
+        playerItemsLoaded++;
+        Debug.Log(playerItemsLoaded);
+
+        if (playerItemsLoaded >= 24)
+        {
+            WaitScreen.SetActive(false);
+            MainScreen.SetActive(true);
         }
     }
 
