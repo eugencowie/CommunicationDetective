@@ -1592,7 +1592,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4725e7eddbb5ad44dbfa87d7e193d252, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4725e7eddbb5ad44dbfa87d7e193d252, type: 3}
       propertyPath: m_LocalScale.x
@@ -5714,11 +5714,9 @@ Transform:
   - {fileID: 445664567}
   - {fileID: 479090720}
   - {fileID: 1097019302}
-  - {fileID: 1725879520}
-  - {fileID: 1019364816}
   - {fileID: 1019364816}
   - {fileID: 1965829501}
-  - {fileID: 1513504766}
+  - {fileID: 1524322823}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5872,6 +5870,8 @@ Transform:
   - {fileID: 2131809095}
   - {fileID: 796767761}
   - {fileID: 413124482}
+  - {fileID: 1489822013}
+  - {fileID: 239401873}
   m_Father: {fileID: 1052585883}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6540,7 +6540,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 905673681}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 49.656002, y: -12.532001, z: -10.267}
 --- !u!23 &1019364817
 MeshRenderer:
@@ -9865,7 +9865,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 001d803c041706440bf483e3f297dcb0, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 001d803c041706440bf483e3f297dcb0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -9952,6 +9952,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 031589a4627aa7d469d408b4fc72a09d, type: 3}
   m_IsPrefabParent: 0
+--- !u!4 &1489822013 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: f6782f229898d694eb3f1661eb8a9353, type: 3}
+  m_PrefabInternal: {fileID: 1524322822}
 --- !u!1001 &1502166281
 Prefab:
   m_ObjectHideFlags: 0
@@ -12810,8 +12814,8 @@ Transform:
   - {fileID: 710565269}
   - {fileID: 47002234}
   - {fileID: 228723677}
-  - {fileID: 873337095}
   - {fileID: 1934587545}
+  - {fileID: 873337095}
   - {fileID: 891709552}
   - {fileID: 486129315}
   - {fileID: 1645479713}

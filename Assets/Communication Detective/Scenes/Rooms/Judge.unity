@@ -6445,22 +6445,22 @@ Prefab:
     - target: {fileID: 224669404259822882, guid: dc26f056f492a8b44b9525b72dda3044,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -1500.8099
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224633525046985538, guid: dc26f056f492a8b44b9525b72dda3044,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 614.0685
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224558196363272510, guid: dc26f056f492a8b44b9525b72dda3044,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: -569.0685
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224558196363272510, guid: dc26f056f492a8b44b9525b72dda3044,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -1420.8099
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224677748618271998, guid: dc26f056f492a8b44b9525b72dda3044,
         type: 2}
