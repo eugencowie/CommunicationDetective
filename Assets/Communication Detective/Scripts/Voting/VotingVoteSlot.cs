@@ -20,7 +20,7 @@ public class VotingVoteSlot : MonoBehaviour, IDropHandler
 
     public bool CanDrop = false;
 
-    public VotingController votingController;
+    public Button.ButtonClickedEvent OnDropped;
 
     //public GameObject Text;
 
@@ -35,10 +35,14 @@ public class VotingVoteSlot : MonoBehaviour, IDropHandler
         if (item == null && CanDrop)
         {
             var suspect = VotingDragHandler.itemBeingDragged.GetComponent<VotingDragHandler>().Suspect;
+            var page = suspect.GetComponent<VotingPageController>();
 
-            votingController.VoteButtonPressed();
+            var color = page.Image.color;
+            color.a = 1.0f;
+            page.Image.color = color;
 
-            //var page = suspect.GetComponent<VotingPageController>();
+            OnDropped.Invoke();
+
 
             //var prevPage = page.PanelLeft;
             //var nextPage = page.PanelRight;

@@ -568,6 +568,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PanelLeft: {fileID: 0}
   PanelRight: {fileID: 0}
+  Image: {fileID: 114293165632170572}
 --- !u!114 &114725063798556194
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -627,7 +628,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Height: 1,87m
+  m_Text: 'Appearance: Black hair, glasses
+
+    Height: 1,87m
 
     Weight: 82kg
 

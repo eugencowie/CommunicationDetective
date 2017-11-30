@@ -17,9 +17,6 @@ public class Data
 
 public class DatabaseController : MonoBehaviour
 {
-    public GameObject MainScreen = null;
-    public GameObject ConfirmScreen = null;
-
     [SerializeField] private GameObject ReadyButton = null;
     [SerializeField] private GameObject ReturnButton = null;
     [SerializeField] private GameObject ButtonTemplate = null;
@@ -80,14 +77,8 @@ public class DatabaseController : MonoBehaviour
             Backgrounds[m_scene - 1].SetActive(true);
         }
     }
-
-    public void ConfirmReady_CancelButtonPressed()
-    {
-        ConfirmScreen.SetActive(false);
-        MainScreen.SetActive(true);
-    }
-
-    public void ConfirmReady_ContinueButtonPressed()
+    
+    public void ConfirmReady()
     {
         if (ReadyButton.activeSelf)
         {
@@ -105,12 +96,6 @@ public class DatabaseController : MonoBehaviour
                 }
             });
         }
-    }
-
-    public void ReadyButtonPressed()
-    {
-        MainScreen.SetActive(false);
-        ConfirmScreen.SetActive(true);
     }
     
     public void ReturnButtonPressed()
@@ -346,7 +331,7 @@ public class DatabaseController : MonoBehaviour
 
                 if (player == OnlineManager.GetPlayerId())
                 {
-                    ReadyButtonPressed();
+                    ConfirmReady();
                 }
                 
                 if (!m_readyPlayers.Any(p => p.Value == false))

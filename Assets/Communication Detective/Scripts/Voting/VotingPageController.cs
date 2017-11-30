@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class VotingPageController : MonoBehaviour
 {
     public GameObject PanelLeft;
     public GameObject PanelRight;
+    public Image Image;
 
     public void Left()
     {

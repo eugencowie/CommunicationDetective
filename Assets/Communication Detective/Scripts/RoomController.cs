@@ -8,9 +8,6 @@ using UnityEngine.UI;
 
 public class RoomController : MonoBehaviour
 {
-    [SerializeField] private GameObject MainScreen = null;
-    [SerializeField] private GameObject ConfirmLeaveScreen = null;
-    [SerializeField] private GameObject ConfirmReadyScreen = null;
     [SerializeField] private GameObject ReadyButton = null;
     [SerializeField] private GameObject DatabaseButton = null;
 
@@ -40,15 +37,6 @@ public class RoomController : MonoBehaviour
             else SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
         });
     }
-
-    /// <summary>
-    /// Called when the leave button in the lobby panel is pressed.
-    /// </summary>
-    public void LeaveButtonPressed()
-    {
-        ConfirmLeaveScreen.SetActive(true);
-        MainScreen.SetActive(false);
-    }
     
     public void DatabaseButtonPressed()
     {
@@ -58,13 +46,7 @@ public class RoomController : MonoBehaviour
             SceneManager.LoadScene("Communication Detective/Scenes/Database");
         }
     }
-
-    public void ReadyButtonPressed()
-    {
-        MainScreen.SetActive(false);
-        ConfirmReadyScreen.SetActive(true);
-    }
-
+    
     private void OnReadyChanged(OnlineDatabaseEntry entry, ValueChangedEventArgs args)
     {
         if (ReadyButton == null)
@@ -82,7 +64,7 @@ public class RoomController : MonoBehaviour
 
                 if (player == OnlineManager.GetPlayerId())
                 {
-                    ReadyButtonPressed();
+                    ConfirmReady();
                 }
 
                 if (!m_readyPlayers.Any(p => p.Value == false))
@@ -94,7 +76,7 @@ public class RoomController : MonoBehaviour
         }
     }
 
-    public void ConfirmLeave_ContinueButtonPressed()
+    public void ConfirmLeave()
     {
         NetworkController.LeaveLobby(m_roomCode, _ => {
             SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
@@ -104,14 +86,8 @@ public class RoomController : MonoBehaviour
         //    if (success) SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
         //});
     }
-
-    public void ConfirmLeave_CancelButtonPressed()
-    {
-        ConfirmLeaveScreen.SetActive(false);
-        MainScreen.SetActive(true);
-    }
-
-    public void ConfirmReady_ContinueButtonPressed()
+    
+    public void ConfirmReady()
     {
         if (ReadyButton.activeSelf)
         {
@@ -129,11 +105,5 @@ public class RoomController : MonoBehaviour
                 }
             });
         }
-    }
-
-    public void ConfirmReady_CancelButtonPressed()
-    {
-        ConfirmReadyScreen.SetActive(false);
-        MainScreen.SetActive(true);
     }
 }
