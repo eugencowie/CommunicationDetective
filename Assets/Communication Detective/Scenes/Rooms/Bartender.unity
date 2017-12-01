@@ -3816,6 +3816,16 @@ Prefab:
       propertyPath: HintText
       value: 
       objectReference: {fileID: 1615989048}
+    - target: {fileID: 114197312471321236, guid: b4cf21df0c4bb50498a7194cec12805e,
+        type: 2}
+      propertyPath: LeftConstraint
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114197312471321236, guid: b4cf21df0c4bb50498a7194cec12805e,
+        type: 2}
+      propertyPath: RightConstraint
+      value: 255
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b4cf21df0c4bb50498a7194cec12805e, type: 2}
   m_IsPrefabParent: 0

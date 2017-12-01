@@ -593,6 +593,16 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: c32efaa7707fe5f4ab6d3792226652e7,
         type: 3}
+    - target: {fileID: 114197312471321236, guid: b4cf21df0c4bb50498a7194cec12805e,
+        type: 2}
+      propertyPath: LeftConstraint
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 114197312471321236, guid: b4cf21df0c4bb50498a7194cec12805e,
+        type: 2}
+      propertyPath: RightConstraint
+      value: 280
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b4cf21df0c4bb50498a7194cec12805e, type: 2}
   m_IsPrefabParent: 0
