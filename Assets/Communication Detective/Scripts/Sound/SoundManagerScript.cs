@@ -1,17 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class SoundManagerScript : MonoBehaviour {
+public class SoundManagerScript : MonoBehaviour
+{
+    private static bool started;
 
-	// Use this for initialization
-	void Awake ()
+    private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        if (!started)
+        {
+            DontDestroyOnLoad(gameObject);
+            started = true;
+        }
+        else
+        {
+            DestroyImmediate(gameObject);
+        }
+    }
 }
