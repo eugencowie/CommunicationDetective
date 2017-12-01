@@ -19,12 +19,12 @@ public class CameraTap : MonoBehaviour
 
     private Vector2 m_touchStartPos;
     private Vector2 m_touchEndPos;
-    private bool m_isTapping;
+    private bool m_isTouching;
 
     private Camera m_camera;
     private CameraSwipe m_cameraSwipe;
 
-    bool isInpected = false;
+    bool isInpecting = false;
     bool isZoomed = false;
 
     Stack<GameObject> hints = new Stack<GameObject>();
@@ -40,12 +40,12 @@ public class CameraTap : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             m_touchStartPos = Input.mousePosition;
-            m_isTapping = true;
+            m_isTouching = true;
         }
 
-        if (!Input.GetMouseButton(0) && m_isTapping)
+        if (!Input.GetMouseButton(0) && m_isTouching)
         {
-            m_isTapping = false;
+            m_isTouching = false;
             m_touchEndPos = Input.mousePosition;
             TouchEnded();
         }
@@ -78,84 +78,128 @@ public class CameraTap : MonoBehaviour
 
     private void TapObject(GameObject tappedObject)
     {
-        if (isActiveAndEnabled)
+        // If hit object has the inspectable component, we can inspect it
+        ObjectInspectable inspectable = tappedObject.GetComponent<ObjectInspectable>();
+        if (inspectable != null)
         {
-            // If hit object has the inspectable component, we can inspect it
-            ObjectInspectable inspectable = tappedObject.GetComponent<ObjectInspectable>();
-            if (inspectable != null)
-            {
-                // If hit object has hints, we can add them to the inventory
-                ObjectHint[] hints = tappedObject.GetComponents<ObjectHint>();
-                if (hints.Length > 0)
-                {
-                    AddHints(tappedObject, hints);
-                }
+            InspectObject(inspectable);
+        }
 
-                Text text = HintText.GetComponent<Text>();
-                text.text = "";
-                foreach (var hint in hints)
-                {
-                    text.text += string.Format("{0}: {1}\n", hint.Name, hint.Hint);
-                }
-
-                InspectObject(inspectable, hints);
-            }
-
-            // If hit object has the zoomable component, we can zoom in on it
-            ObjectZoomable zoomable = tappedObject.GetComponent<ObjectZoomable>();
-            if (zoomable != null && !isZoomed)
-            {
-                // If hit object has hints, we can add them to the inventory
-                ObjectHint[] hints = tappedObject.GetComponents<ObjectHint>();
-                if (hints.Length > 0)
-                {
-                    AddHints(tappedObject, hints);
-                }
-
-                Text text = HintText.GetComponent<Text>();
-                text.text = "";
-                foreach (var hint in hints)
-                {
-                    text.text += string.Format("{0}: {1}\n", hint.Name, hint.Hint);
-                }
-
-                ZoomToObject(zoomable, hints);
-            }
+        // If hit object has the zoomable component, we can zoom in on it
+        ObjectZoomable zoomable = tappedObject.GetComponent<ObjectZoomable>();
+        if (zoomable != null && !isZoomed)
+        {
+            ZoomToObject(zoomable);
         }
     }
 
-    private void AddHints(GameObject tappedObject, ObjectHint[] hints)
+    private void InspectObject(ObjectInspectable inspectable)
     {
-        Inventory.AddItems(() => TapObject(tappedObject), hints);
-    }
-
-    private void InspectObject(ObjectInspectable inspectable, ObjectHint[] hints)
-    {
-        if (inspectable != null)
+        if (inspectable != null && !isInpecting)
         {
+            // If hit object has hints, we can add them to the inventory
+            ObjectHint[] hints = inspectable.gameObject.GetComponents<ObjectHint>();
+            if (hints.Length > 0) {
+                Inventory.AddItems(() => TapObject(inspectable.gameObject), hints);
+            }
+
+            Text text = HintText.GetComponent<Text>();
+            text.text = "";
+            foreach (var hint in hints) {
+                text.text += string.Format("{0}: {1}\n", hint.Name, hint.Hint);
+            }
+
             GameObject newObject = Instantiate(inspectable.gameObject);
 
-            inspectable.audioSource.PlayOneShot(inspectable.audioClip, 1f);
+            if (inspectable.audioSource != null && inspectable.audioClip != null)
+            {
+                inspectable.audioSource.PlayOneShot(inspectable.audioClip, 1f);
+            }
 
             newObject.transform.parent = m_camera.transform;
             newObject.transform.localPosition = new Vector3(0, 0, inspectable.InspectDistance);
             newObject.transform.localScale *= inspectable.InspectScale;
 
-            newObject.AddComponent<ObjectInspecting>().OnInspectEnded = () =>
-            {
+            newObject.AddComponent<ObjectInspecting>().OnInspectEnded = () => {
                 HideHintPanel();
                 BlurPlane.SetActive(false);
                 if (Spotlight != null) Spotlight.SetActive(false);
-                enabled = m_cameraSwipe.enabled = true;
-                isInpected = false;
+                /*enabled = */m_cameraSwipe.enabled = true;
+                isInpecting = false;
                 Destroy(newObject);
             };
 
             if (hints.Length > 0) ShowHintPanel();
             if (Spotlight != null) Spotlight.SetActive(true);
             BlurPlane.SetActive(true);
-            enabled = m_cameraSwipe.enabled = false;
-            isInpected = true;
+            /*enabled = */m_cameraSwipe.enabled = false;
+            isInpecting = true;
+        }
+    }
+
+    private void ZoomToObject(ObjectZoomable zoomable)
+    {
+        if (zoomable != null && !isInpecting && !isZoomed)
+        {
+            // If hit object has hints, we can add them to the inventory
+            ObjectHint[] hints = zoomable.gameObject.GetComponents<ObjectHint>();
+            if (hints.Length > 0) {
+                Inventory.AddItems(() => TapObject(zoomable.gameObject), hints);
+            }
+
+            Text text = HintText.GetComponent<Text>();
+            text.text = "";
+            foreach (var hint in hints) {
+                text.text += string.Format("{0}: {1}\n", hint.Name, hint.Hint);
+            }
+
+            // Create an inactive clone of this camera in its current location
+            GameObject StartCamera = Instantiate(gameObject);
+            StartCamera.SetActive(false);
+
+            //Play audio
+            if (zoomable.audioSource != null && zoomable.audioClip != null)
+            {
+                zoomable.audioSource.PlayOneShot(zoomable.audioClip, 1f);
+            }
+
+            // Add a camera movement component
+            CameraMovement movement = gameObject.AddComponent<CameraMovement>();
+
+            // Set camera movement parameters
+            movement.Target = zoomable.TargetCamera;
+            movement.Duration = zoomable.Duration;
+
+            // Set what happens when the camera movement ends
+            movement.OnMoveEnded = () => {
+                if (hints.Length > 0) ShowHintPanel();
+                ObjectZooming zooming = zoomable.gameObject.AddComponent<ObjectZooming>();
+                zooming.OnZoomEnded = () => {
+                    //if (isInpecting) return;
+                    HideHintPanel();
+                    movement.Target = StartCamera;
+                    movement.OnMoveEnded = () => {
+                        /*enabled = */m_cameraSwipe.enabled = true;
+                        isZoomed = false;
+                        Destroy(StartCamera);
+                        Destroy(movement);
+                    };
+
+                    // Re-enable and restart the camera movement controller to take us home
+                    movement.enabled = true;
+                    movement.Reset();
+
+                    // Our job here is done, delete the zooming component
+                    Destroy(zooming);
+                };
+
+                // Disable the movement component
+                movement.enabled = false;
+            };
+
+            // Disable this component and disable the camera swipe component
+            /*enabled = */m_cameraSwipe.enabled = false;
+            isZoomed = true;
         }
     }
 
@@ -189,75 +233,5 @@ public class CameraTap : MonoBehaviour
         var go = Instantiate(HintPanel, HintPanel.transform.parent);
         go.SetActive(true);
         hints.Push(go);
-    }
-
-    private void ZoomToObject(ObjectZoomable zoomable, ObjectHint[] hints)
-    {
-        if (zoomable != null && !isZoomed)
-        {
-            // Create an inactive clone of this camera in its current location
-            GameObject StartCamera = Instantiate(gameObject);
-            StartCamera.SetActive(false);
-            
-            //Play audio
-            zoomable.audioSource.PlayOneShot(zoomable.audioClip, 1f);
-
-            // Add a camera movement component
-            CameraMovement movement = gameObject.AddComponent<CameraMovement>();
-
-            // Set camera movement parameters
-            movement.Target = zoomable.TargetCamera;
-            movement.Duration = zoomable.Duration;
-
-            // Set what happens when the camera movement ends
-            movement.OnMoveEnded = () => CameraMovementEnded(zoomable, hints, StartCamera, movement);
-
-            // Disable this component and disable the camera swipe component
-            /*enabled = */m_cameraSwipe.enabled = false;
-            isZoomed = true;
-        }
-    }
-
-    private void CameraMovementEnded(ObjectZoomable zoomable, ObjectHint[] hints, GameObject StartCamera, CameraMovement movement)
-    {
-        // Show hint panel if there are hints
-        if (hints.Length > 0) ShowHintPanel();
-
-        // Add a object zooming component to the target game object
-        ObjectZooming zooming = zoomable.gameObject.AddComponent<ObjectZooming>();
-
-        // Set what happens when the zoom is ended by the player
-        zooming.OnZoomEnded = () => ObjectZoomEnded(StartCamera, movement, zooming);
-
-        // Disable the movement component
-        movement.enabled = false;
-    }
-
-    private void ObjectZoomEnded(GameObject StartCamera, CameraMovement movement, ObjectZooming zooming)
-    {
-        if (isInpected) return;
-
-        // Hide the hint panel
-        HideHintPanel();
-
-        // Set the camera movement target to the original position
-        movement.Target = StartCamera;
-
-        // Set what happens when the camera movement ends
-        movement.OnMoveEnded = () => {
-            // Re-enable this component and the camera swipe component
-            /*enabled = */m_cameraSwipe.enabled = true;
-            isZoomed = false;
-            // Destroy the clone and the camera movement component
-            Destroy(StartCamera);
-            Destroy(movement);
-        };
-
-        // Re-enable and restart the camera movement controller to take us home
-        movement.enabled = true;
-        movement.Reset();
-
-        // Our job here is done, delete the zooming component
-        Destroy(zooming);
     }
 }
