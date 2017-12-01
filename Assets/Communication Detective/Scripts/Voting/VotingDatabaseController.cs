@@ -11,7 +11,7 @@ public class VotingDatabaseController : MonoBehaviour
 {
     public GameObject MainScreen, WaitScreen;
 
-    [SerializeField] private GameObject VotingButton = null;
+    //[SerializeField] private GameObject VotingButton = null;
     [SerializeField] private GameObject ButtonTemplate = null;
     [SerializeField] private GameObject[] Backgrounds = new GameObject[4];
     [SerializeField] private Data[] Data = new Data[4];

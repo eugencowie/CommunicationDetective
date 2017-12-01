@@ -108,17 +108,16 @@ public class CameraTap : MonoBehaviour
             foreach (var hint in hints) {
                 text.text += string.Format("{0}: {1}\n", hint.Name, hint.Hint);
             }
-
-            GameObject newObject = Instantiate(inspectable.gameObject);
-
+            
             if (inspectable.audioSource != null && inspectable.audioClip != null)
             {
                 inspectable.audioSource.PlayOneShot(inspectable.audioClip, 1f);
             }
 
+            GameObject newObject = Instantiate(inspectable.gameObject);
             newObject.transform.parent = m_camera.transform;
-            newObject.transform.localPosition = new Vector3(0, 0, inspectable.InspectDistance);
-            newObject.transform.localScale *= inspectable.InspectScale;
+            newObject.transform.localPosition = new Vector3(0, 0, 0.1f);
+            newObject.transform.localScale *= inspectable.InspectScale * 0.1f;
 
             newObject.AddComponent<ObjectInspecting>().OnInspectEnded = () => {
                 HideHintPanel();
