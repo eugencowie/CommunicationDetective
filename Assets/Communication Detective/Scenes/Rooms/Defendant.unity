@@ -1428,6 +1428,7 @@ Transform:
   - {fileID: 571368713}
   - {fileID: 294997882}
   - {fileID: 851725656}
+  - {fileID: 1794159117}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7105,6 +7106,95 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: abf84a803928eb84f87c571957ce8cce, type: 3}
   m_IsPrefabParent: 0
+--- !u!1 &1794159116
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1794159117}
+  - component: {fileID: 1794159121}
+  - component: {fileID: 1794159120}
+  - component: {fileID: 1794159119}
+  - component: {fileID: 1794159118}
+  m_Layer: 0
+  m_Name: WindowCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1794159117
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1794159116}
+  m_LocalRotation: {x: -0, y: 0.9990374, z: -0, w: 0.043866444}
+  m_LocalPosition: {x: 0.893, y: 1.085, z: -0.123}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 309206352}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 174.97202, z: 0}
+--- !u!81 &1794159118
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1794159116}
+  m_Enabled: 1
+--- !u!92 &1794159119
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1794159116}
+  m_Enabled: 1
+--- !u!124 &1794159120
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1794159116}
+  m_Enabled: 1
+--- !u!20 &1794159121
+Camera:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1794159116}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+  m_StereoMirrorMode: 0
 --- !u!1 &1800408534
 GameObject:
   m_ObjectHideFlags: 0
@@ -8102,6 +8192,52 @@ Transform:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: ec5ef463ac20ffb4e808be3a223a36a0, type: 3}
   m_PrefabInternal: {fileID: 1173867329}
+--- !u!1 &2094223086 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100052, guid: 0aaf96e6654ccdb4e93acf945a6fd944, type: 3}
+  m_PrefabInternal: {fileID: 1544120800}
+--- !u!114 &2094223087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2094223086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f4eebfafefce1e47829fbae1d8fe1a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetCamera: {fileID: 1794159116}
+  Duration: 1
+  audioSource: {fileID: 0}
+  audioClip: {fileID: 0}
+--- !u!65 &2094223088
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2094223086}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.56, y: 0.34, z: 1.99}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2094223089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2094223086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f3d3f0475c0554ba134c76b6d91a57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Boarded up windows
+  Hint: Wow, what a dump.
+  Image: {fileID: 0}
+  ImagePath: 
 --- !u!1 &2116379411
 GameObject:
   m_ObjectHideFlags: 0
