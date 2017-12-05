@@ -207,8 +207,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.1307194, y: 0.027117807, z: 0.15}
-  m_Center: {x: 0.033966698, y: 0.0024065035, z: -0.07300024}
+  m_Size: {x: 0.28129175, y: 0.10439618, z: 0.19848947}
+  m_Center: {x: 0.021031126, y: 0.041045696, z: -0.09724497}
 --- !u!114 &12716540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,8 +220,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f3d3f0475c0554ba134c76b6d91a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
-  Hint: 
+  Name: Glasses
+  Hint: Reading glasses. They have been wiped clean recently.
   Image: {fileID: 0}
   ImagePath: 
 --- !u!114 &12716541
@@ -237,7 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InspectScale: 3
   audioSource: {fileID: 0}
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: b0b6a429ed07e8c46a05732737878967, type: 3}
 --- !u!1 &39992528
 GameObject:
   m_ObjectHideFlags: 0
@@ -807,7 +807,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 935bd303fd03062449974d01bae1fe5c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.1529565
+      value: -1.146
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 935bd303fd03062449974d01bae1fe5c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6635,8 +6635,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.8686185, y: 1.291413, z: 4.5126033}
-  m_Center: {x: -0.023716895, y: 0.14570647, z: -0.7178351}
+  m_Size: {x: 3.8686185, y: 1.291413, z: 1.8376938}
+  m_Center: {x: -0.023716895, y: 0.14570639, z: 0.6196171}
 --- !u!114 &1159925683
 MonoBehaviour:
   m_ObjectHideFlags: 0
