@@ -78,12 +78,16 @@ public class GameOverController : MonoBehaviour
                         }
                         ResetButton.SetActive(true);
                         m_votedPlayers[OnlineManager.GetPlayerId()] = yourVote;
+
+                        SceneManager.LoadScene("Communication Detective/Scenes/WinScene");
                     }
                     else
                     {
                         Text.text = "Not enough correct answers, try again?";
 
                         ResetButton.SetActive(true);
+
+                        SceneManager.LoadScene("Communication Detective/Scenes/LoseScene");
                     }
                 }
             }
