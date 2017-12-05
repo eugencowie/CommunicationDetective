@@ -4,9 +4,12 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class GameOverController : MonoBehaviour
 {
+    public VideoPlayer WinVideo;
+    public VideoPlayer LoseVideo;
     public GameObject ResetButton;
     public Text Text;
 
@@ -23,6 +26,9 @@ public class GameOverController : MonoBehaviour
 
         ResetButton.SetActive(false);
 
+        WinVideo.loopPointReached += VideoLoopPointReached;
+        LoseVideo.loopPointReached += VideoLoopPointReached;
+
         NetworkController.GetPlayerLobby(room => {
             if (!string.IsNullOrEmpty(room)) {
                 NetworkController.GetPlayers(room, players => {
@@ -33,6 +39,13 @@ public class GameOverController : MonoBehaviour
             }
             else SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
         });
+    }
+
+    private void VideoLoopPointReached(VideoPlayer source)
+    {
+        source.gameObject.SetActive(false);
+        Text.gameObject.SetActive(true);
+        ResetButton.SetActive(true);
     }
 
     public void ResetButtonPressed()
@@ -73,21 +86,18 @@ public class GameOverController : MonoBehaviour
                         for (int i=0; i<m_votedPlayers.Count; i++)
                         {
                             Text.text += "\nPlayer " + (i+2) + " voted for " + m_votedPlayers.ElementAt(i).Value;
-
-                            
                         }
-                        ResetButton.SetActive(true);
-                        m_votedPlayers[OnlineManager.GetPlayerId()] = yourVote;
+                        WinVideo.gameObject.SetActive(true);
+                        Text.gameObject.SetActive(false);
 
-                        SceneManager.LoadScene("Communication Detective/Scenes/WinScene");
+                        m_votedPlayers[OnlineManager.GetPlayerId()] = yourVote;
                     }
                     else
                     {
                         Text.text = "Not enough correct answers, try again?";
 
-                        ResetButton.SetActive(true);
-
-                        SceneManager.LoadScene("Communication Detective/Scenes/LoseScene");
+                        LoseVideo.gameObject.SetActive(true);
+                        Text.gameObject.SetActive(false);
                     }
                 }
             }
