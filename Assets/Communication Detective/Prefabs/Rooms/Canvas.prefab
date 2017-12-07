@@ -919,7 +919,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1639375967287994
 GameObject:
   m_ObjectHideFlags: 1
@@ -2686,7 +2686,7 @@ MonoBehaviour:
   OnConfirm:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114774551039824432}
         m_MethodName: ConfirmLeave
         m_Mode: 1
         m_Arguments:
@@ -4173,7 +4173,7 @@ MonoBehaviour:
   OnConfirm:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114774551039824432}
         m_MethodName: ConfirmReady
         m_Mode: 1
         m_Arguments:
