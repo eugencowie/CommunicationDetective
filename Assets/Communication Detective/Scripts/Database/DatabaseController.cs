@@ -180,6 +180,12 @@ public class DatabaseController : MonoBehaviour
                     }
                 }
             }
+
+            foreach (Transform t2 in m_current.PlayerButton.transform)
+            {
+                if (t2.gameObject.name == "Alert")
+                    t2.gameObject.SetActive(false);
+            }
         }
 
         for (int slot = 0; slot < data.Slots.Count; ++slot)
@@ -343,6 +349,11 @@ public class DatabaseController : MonoBehaviour
                                 if (t.gameObject.name == "Alert" && !StaticClues.SeenSlots.Any(s => s.Equals(new SlotData(playerNb.ToString(), slotNb.ToString(), value))))
                                 {
                                     t.gameObject.SetActive(true);
+                                    foreach (Transform t2 in Data[playerNb].PlayerButton.transform)
+                                    {
+                                        if (t2.gameObject.name == "Alert")
+                                            t2.gameObject.SetActive(true);
+                                    }
                                 }
                             }
                             newObj.GetComponent<DragHandler>().enabled = false;
