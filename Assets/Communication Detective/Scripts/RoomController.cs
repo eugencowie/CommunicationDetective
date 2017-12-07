@@ -123,8 +123,12 @@ public class RoomController : MonoBehaviour
                 if (!string.IsNullOrEmpty(value) && int.TryParse(keys[3].Replace("slot-", ""), out slot))
                 {
                     NetworkController.GetPlayerNumber(m_roomCode, keys[1], player => {
-                        if (!StaticClues.SeenSlots.Any(s => s.Equals(new SlotData(player.ToString(), slot.ToString(), value)))) {
-                            Debug.Log("NEW ITEM!");
+                        if (DatabaseButton != null && !StaticClues.SeenSlots.Any(s => s.Equals(new SlotData(player.ToString(), slot.ToString(), value)))) {
+                            foreach (Transform t in DatabaseButton.transform) {
+                                if (t.gameObject.name == "Alert") {
+                                    t.gameObject.SetActive(true);
+                                }
+                            }
                         }
                     });
                 }
