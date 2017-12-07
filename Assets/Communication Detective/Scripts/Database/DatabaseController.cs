@@ -15,6 +15,14 @@ public class Data
     [SerializeField] public List<GameObject> Slots;
 }
 
+public struct SlotData
+{
+    public GameObject Object;
+    public int Player;
+    public int Slot;
+    public string Name;
+}
+
 public class DatabaseController : MonoBehaviour
 {
     public GameObject MainScreen, WaitScreen;
@@ -32,6 +40,8 @@ public class DatabaseController : MonoBehaviour
     private Dictionary<string, bool> m_readyPlayers = new Dictionary<string, bool>();
 
     int playerItemsLoaded = 0;
+
+    private List<SlotData> m_seenSlots = new List<SlotData>();
 
     private void Start()
     {
@@ -253,6 +263,10 @@ public class DatabaseController : MonoBehaviour
                                 {
                                     t.gameObject.GetComponent<Text>().text = value;
                                 }
+                                if (t.gameObject.name == "Alert" && !m_seenSlots.Any(s => s.Name == value))
+                                {
+                                    t.gameObject.SetActive(true);
+                                }
                             }
                             newObj.GetComponent<DragHandler>().enabled = false;
                             //CheckItemsLoaded();
@@ -269,7 +283,7 @@ public class DatabaseController : MonoBehaviour
                                 {
                                     foreach (Transform t in t1)
                                     {
-                                        if (t.gameObject.GetComponent<Image>() != null)
+                                        if (t.gameObject.name == "Image" && t.gameObject.GetComponent<Image>() != null)
                                         {
                                             t.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>(value);
                                         }
@@ -282,7 +296,7 @@ public class DatabaseController : MonoBehaviour
                                 {
                                     foreach (Transform t in t1)
                                     {
-                                        if (t.gameObject.GetComponent<Image>() != null)
+                                        if (t.gameObject.name == "Image" && t.gameObject.GetComponent<Image>() != null)
                                         {
                                             t.gameObject.GetComponent<Image>().gameObject.SetActive(false);
                                         }
@@ -321,7 +335,6 @@ public class DatabaseController : MonoBehaviour
     private void CheckPlayerItemsLoaded()
     {
         playerItemsLoaded++;
-        Debug.Log(playerItemsLoaded);
 
         if (playerItemsLoaded >= 24)
         {
