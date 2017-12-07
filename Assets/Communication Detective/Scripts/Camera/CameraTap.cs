@@ -138,7 +138,7 @@ public class CameraTap : MonoBehaviour
 
     private void ZoomToObject(ObjectZoomable zoomable)
     {
-        if (zoomable != null && !isInpecting && !isZoomed)
+        if (zoomable != null && !isInpecting && !isZoomed && zoomable.TargetCamera != null)
         {
             // If hit object has hints, we can add them to the inventory
             ObjectHint[] hints = zoomable.gameObject.GetComponents<ObjectHint>();

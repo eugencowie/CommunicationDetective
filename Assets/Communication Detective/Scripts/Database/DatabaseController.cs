@@ -15,6 +15,32 @@ public class Data
     [SerializeField] public List<GameObject> Slots;
 }
 
+public struct SlotData : IEquatable<SlotData>
+{
+    public string Player;
+    public string Slot;
+    public string Name;
+    public GameObject Object;
+
+    public SlotData(string player, string slot, string name, GameObject obj=null)
+    {
+        Player = player;
+        Slot = slot;
+        Name = name;
+        Object = obj;
+    }
+
+    public bool Equals(SlotData other)
+    {
+        return Player == other.Player && Slot == other.Slot && Name == other.Name;
+    }
+}
+
+public static class StaticClues
+{
+    public static List<SlotData> SeenSlots = new List<SlotData>();
+}
+
 public class DatabaseController : MonoBehaviour
 {
     public GameObject MainScreen, WaitScreen;
@@ -23,8 +49,8 @@ public class DatabaseController : MonoBehaviour
     [SerializeField] private GameObject ReturnButton = null;
     [SerializeField] private GameObject ButtonTemplate = null;
     [SerializeField] private GameObject[] Backgrounds = new GameObject[4];
-    [SerializeField] private Data[] Data = new Data[4];
-
+    [SerializeField] private List<Data> Data = new List<Data>();
+    
     private OnlineManager NetworkController;
     private string m_lobby;
     private int m_scene;
@@ -32,7 +58,7 @@ public class DatabaseController : MonoBehaviour
     private Dictionary<string, bool> m_readyPlayers = new Dictionary<string, bool>();
 
     int playerItemsLoaded = 0;
-
+    
     private void Start()
     {
         NetworkController = new OnlineManager();
@@ -60,7 +86,7 @@ public class DatabaseController : MonoBehaviour
             else SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
         });
 
-        for (int i = 0; i < Data.Length; i++)
+        for (int i = 0; i < Data.Count; i++)
         {
             Data data = Data[i];
             data.PlayerButton.GetComponent<Button>().onClick.AddListener(() => PlayerButtonPressed(data));
@@ -121,6 +147,8 @@ public class DatabaseController : MonoBehaviour
         }
     }
 
+    Data m_current = null;
+
     private void PlayerButtonPressed(Data data)
     {
         foreach (var button in Data.Select(d => d.PlayerButton))
@@ -138,6 +166,70 @@ public class DatabaseController : MonoBehaviour
             cluePanel.SetActive(false);
         }
         data.CluePanel.SetActive(true);
+
+        if (m_current != null)
+        {
+            for (int slot = 0; slot < m_current.Slots.Count; ++slot)
+            {
+                foreach (Transform t in m_current.Slots[slot].transform)
+                {
+                    foreach (Transform t2 in t)
+                    {
+                        if (t2.gameObject.name == "Alert")
+                            t2.gameObject.SetActive(false);
+                    }
+                }
+            }
+
+            foreach (Transform t2 in m_current.PlayerButton.transform)
+            {
+                if (t2.gameObject.name == "Alert")
+                    t2.gameObject.SetActive(false);
+            }
+        }
+
+        for (int slot = 0; slot < data.Slots.Count; ++slot)
+        {
+            foreach (Transform t in data.Slots[slot].transform)
+            {
+                //Debug.Log("BTNPRS = player-" + Data.FindIndex(d => d == data) + "/slot-" + (slot + 1) + " = " + t.gameObject.name);
+                StaticClues.SeenSlots.Add(new SlotData(Data.FindIndex(d => d == data).ToString(), (slot+1).ToString(), t.gameObject.name, data.Slots[slot]));
+            }
+        }
+
+        m_current = data;
+    }
+
+    public void PageChanged(GameObject oldPage, GameObject newPage)
+    {
+        /*Data oldData = Data.First(d => d.CluePanel == oldPage.transform.parent.gameObject);
+        if (oldData != null)
+        {
+            for (int slot = 0; slot < oldData.Slots.Count; ++slot)
+            {
+                foreach (Transform t in oldData.Slots[slot].transform)
+                {
+                    foreach (Transform t2 in t)
+                    {
+                        if (t2.gameObject.name == "Alert")
+                            t2.gameObject.SetActive(false);
+                    }
+                }
+            }
+        }*/
+
+        Data newData = Data.First(d => d.CluePanel == newPage.transform.parent.gameObject);
+        if (newData != null)
+        {
+            for (int slot = 0; slot < newData.Slots.Count; ++slot)
+            {
+                foreach (Transform t in newData.Slots[slot].transform)
+                {
+                    //Debug.Log("BTNPRS = player-" + Data.FindIndex(d => d == data) + "/slot-" + (slot + 1) + " = " + t.gameObject.name);
+                    StaticClues.SeenSlots.Add(new SlotData(Data.FindIndex(d => d == newData).ToString(), (slot + 1).ToString(), t.gameObject.name, newData.Slots[slot]));
+                }
+            }
+        }
     }
 
     public void UploadItem(int slot, ObjectHintData hint)
@@ -222,7 +314,7 @@ public class DatabaseController : MonoBehaviour
         if (ReadyButton == null)
             return;
 
-        Debug.Log(entry.Key + " | " + (args.Snapshot.Exists ? args.Snapshot.Value.ToString() : ""));
+        //Debug.Log(entry.Key + " | " + (args.Snapshot.Exists ? args.Snapshot.Value.ToString() : ""));
 
         string[] key = entry.Key.Split('/');
         if (key.Length >= 5)
@@ -235,7 +327,7 @@ public class DatabaseController : MonoBehaviour
                 string value = args.Snapshot.Value.ToString();
 
                 int slotNb = -1;
-                if (int.TryParse(key[3].Replace("slot-", ""), out slotNb))
+                if (!string.IsNullOrEmpty(value) && int.TryParse(key[3].Replace("slot-", ""), out slotNb))
                 {
                     NetworkController.GetPlayerNumber(m_lobby, player, playerNb =>
                     {
@@ -253,6 +345,16 @@ public class DatabaseController : MonoBehaviour
                                 {
                                     t.gameObject.GetComponent<Text>().text = value;
                                 }
+                                //Debug.Log(string.Format("LOAD = player-{0}/slot-{1} = {2}", playerNb.ToString(), slotNb.ToString(), value));
+                                if (t.gameObject.name == "Alert" && !StaticClues.SeenSlots.Any(s => s.Equals(new SlotData(playerNb.ToString(), slotNb.ToString(), value))))
+                                {
+                                    t.gameObject.SetActive(true);
+                                    foreach (Transform t2 in Data[playerNb].PlayerButton.transform)
+                                    {
+                                        if (t2.gameObject.name == "Alert")
+                                            t2.gameObject.SetActive(true);
+                                    }
+                                }
                             }
                             newObj.GetComponent<DragHandler>().enabled = false;
                             //CheckItemsLoaded();
@@ -269,7 +371,7 @@ public class DatabaseController : MonoBehaviour
                                 {
                                     foreach (Transform t in t1)
                                     {
-                                        if (t.gameObject.GetComponent<Image>() != null)
+                                        if (t.gameObject.name == "Image" && t.gameObject.GetComponent<Image>() != null)
                                         {
                                             t.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>(value);
                                         }
@@ -282,13 +384,13 @@ public class DatabaseController : MonoBehaviour
                                 {
                                     foreach (Transform t in t1)
                                     {
-                                        if (t.gameObject.GetComponent<Image>() != null)
+                                        if (t.gameObject.name == "Image" && t.gameObject.GetComponent<Image>() != null)
                                         {
-                                            t.gameObject.GetComponent<Image>().gameObject.SetActive(false);
+                                            t.gameObject.SetActive(false);
                                         }
                                         if (t.gameObject.GetComponent<Text>() != null)
                                         {
-                                            t.gameObject.GetComponent<Text>().gameObject.SetActive(true); // TODO: REMOVE TEMP FIX
+                                            t.gameObject.SetActive(true); // TODO: REMOVE TEMP FIX
                                         }
                                     }
                                 }
@@ -321,7 +423,6 @@ public class DatabaseController : MonoBehaviour
     private void CheckPlayerItemsLoaded()
     {
         playerItemsLoaded++;
-        Debug.Log(playerItemsLoaded);
 
         if (playerItemsLoaded >= 24)
         {

@@ -2,6 +2,7 @@
 
 public class DatabasePageController : MonoBehaviour
 {
+    public DatabaseController Database;
     public GameObject PanelAbove;
     public GameObject PanelBelow;
 
@@ -9,8 +10,13 @@ public class DatabasePageController : MonoBehaviour
     {
         if (PanelAbove != null)
         {
-            PanelAbove.SetActive(true);
             gameObject.SetActive(false);
+            PanelAbove.SetActive(true);
+
+            if (Database != null)
+            {
+                Database.PageChanged(gameObject, PanelAbove);
+            }
         }
     }
 
@@ -18,8 +24,13 @@ public class DatabasePageController : MonoBehaviour
     {
         if (PanelBelow != null)
         {
-            PanelBelow.SetActive(true);
             gameObject.SetActive(false);
+            PanelBelow.SetActive(true);
+
+            if (Database != null)
+            {
+                Database.PageChanged(gameObject, PanelBelow);
+            }
         }
     }
 }
