@@ -24,7 +24,7 @@ public class DatabaseController : MonoBehaviour
     [SerializeField] private GameObject ButtonTemplate = null;
     [SerializeField] private GameObject[] Backgrounds = new GameObject[4];
     [SerializeField] private Data[] Data = new Data[4];
-
+    
     private OnlineManager NetworkController;
     private string m_lobby;
     private int m_scene;
@@ -222,7 +222,7 @@ public class DatabaseController : MonoBehaviour
         if (ReadyButton == null)
             return;
 
-        Debug.Log(entry.Key + " | " + (args.Snapshot.Exists ? args.Snapshot.Value.ToString() : ""));
+        //Debug.Log(entry.Key + " | " + (args.Snapshot.Exists ? args.Snapshot.Value.ToString() : ""));
 
         string[] key = entry.Key.Split('/');
         if (key.Length >= 5)
