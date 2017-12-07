@@ -148,6 +148,14 @@ public class DatabaseController : MonoBehaviour
             cluePanel.SetActive(false);
         }
         data.CluePanel.SetActive(true);
+
+        foreach (GameObject slot in data.Slots)
+        {
+            foreach (Transform t in slot.transform)
+            {
+
+            }
+        }
     }
 
     public void UploadItem(int slot, ObjectHintData hint)
@@ -245,7 +253,7 @@ public class DatabaseController : MonoBehaviour
                 string value = args.Snapshot.Value.ToString();
 
                 int slotNb = -1;
-                if (int.TryParse(key[3].Replace("slot-", ""), out slotNb))
+                if (!string.IsNullOrEmpty(value) && int.TryParse(key[3].Replace("slot-", ""), out slotNb))
                 {
                     NetworkController.GetPlayerNumber(m_lobby, player, playerNb =>
                     {
@@ -266,6 +274,7 @@ public class DatabaseController : MonoBehaviour
                                 if (t.gameObject.name == "Alert" && !m_seenSlots.Any(s => s.Name == value))
                                 {
                                     t.gameObject.SetActive(true);
+                                    Debug.Log("VALUE = " + value);
                                 }
                             }
                             newObj.GetComponent<DragHandler>().enabled = false;
@@ -298,11 +307,11 @@ public class DatabaseController : MonoBehaviour
                                     {
                                         if (t.gameObject.name == "Image" && t.gameObject.GetComponent<Image>() != null)
                                         {
-                                            t.gameObject.GetComponent<Image>().gameObject.SetActive(false);
+                                            t.gameObject.SetActive(false);
                                         }
                                         if (t.gameObject.GetComponent<Text>() != null)
                                         {
-                                            t.gameObject.GetComponent<Text>().gameObject.SetActive(true); // TODO: REMOVE TEMP FIX
+                                            t.gameObject.SetActive(true); // TODO: REMOVE TEMP FIX
                                         }
                                     }
                                 }
