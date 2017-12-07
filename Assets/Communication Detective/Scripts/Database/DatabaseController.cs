@@ -147,6 +147,8 @@ public class DatabaseController : MonoBehaviour
         }
     }
 
+    Data m_current = null;
+
     private void PlayerButtonPressed(Data data)
     {
         foreach (var button in Data.Select(d => d.PlayerButton))
@@ -165,12 +167,61 @@ public class DatabaseController : MonoBehaviour
         }
         data.CluePanel.SetActive(true);
 
+        if (m_current != null)
+        {
+            for (int slot = 0; slot < m_current.Slots.Count; ++slot)
+            {
+                foreach (Transform t in m_current.Slots[slot].transform)
+                {
+                    foreach (Transform t2 in t)
+                    {
+                        if (t2.gameObject.name == "Alert")
+                            t2.gameObject.SetActive(false);
+                    }
+                }
+            }
+        }
+
         for (int slot = 0; slot < data.Slots.Count; ++slot)
         {
             foreach (Transform t in data.Slots[slot].transform)
             {
                 //Debug.Log("BTNPRS = player-" + Data.FindIndex(d => d == data) + "/slot-" + (slot + 1) + " = " + t.gameObject.name);
                 StaticClues.SeenSlots.Add(new SlotData(Data.FindIndex(d => d == data).ToString(), (slot+1).ToString(), t.gameObject.name, data.Slots[slot]));
+            }
+        }
+
+        m_current = data;
+    }
+
+    public void PageChanged(GameObject oldPage, GameObject newPage)
+    {
+        /*Data oldData = Data.First(d => d.CluePanel == oldPage.transform.parent.gameObject);
+        if (oldData != null)
+        {
+            for (int slot = 0; slot < oldData.Slots.Count; ++slot)
+            {
+                foreach (Transform t in oldData.Slots[slot].transform)
+                {
+                    foreach (Transform t2 in t)
+                    {
+                        if (t2.gameObject.name == "Alert")
+                            t2.gameObject.SetActive(false);
+                    }
+                }
+            }
+        }*/
+
+        Data newData = Data.First(d => d.CluePanel == newPage.transform.parent.gameObject);
+        if (newData != null)
+        {
+            for (int slot = 0; slot < newData.Slots.Count; ++slot)
+            {
+                foreach (Transform t in newData.Slots[slot].transform)
+                {
+                    //Debug.Log("BTNPRS = player-" + Data.FindIndex(d => d == data) + "/slot-" + (slot + 1) + " = " + t.gameObject.name);
+                    StaticClues.SeenSlots.Add(new SlotData(Data.FindIndex(d => d == newData).ToString(), (slot + 1).ToString(), t.gameObject.name, newData.Slots[slot]));
+                }
             }
         }
     }
