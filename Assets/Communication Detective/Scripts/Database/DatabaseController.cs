@@ -15,12 +15,30 @@ public class Data
     [SerializeField] public List<GameObject> Slots;
 }
 
-public struct SlotData
+public struct SlotData : IEquatable<SlotData>
 {
-    public GameObject Object;
-    public int Player;
-    public int Slot;
+    public string Player;
+    public string Slot;
     public string Name;
+    public GameObject Object;
+
+    public SlotData(string player, string slot, string name, GameObject obj=null)
+    {
+        Player = player;
+        Slot = slot;
+        Name = name;
+        Object = obj;
+    }
+
+    public bool Equals(SlotData other)
+    {
+        return Player == other.Player && Slot == other.Slot && Name == other.Name;
+    }
+}
+
+public static class StaticClues
+{
+    public static List<SlotData> SeenSlots = new List<SlotData>();
 }
 
 public class DatabaseController : MonoBehaviour
@@ -31,7 +49,7 @@ public class DatabaseController : MonoBehaviour
     [SerializeField] private GameObject ReturnButton = null;
     [SerializeField] private GameObject ButtonTemplate = null;
     [SerializeField] private GameObject[] Backgrounds = new GameObject[4];
-    [SerializeField] private Data[] Data = new Data[4];
+    [SerializeField] private List<Data> Data = new List<Data>();
     
     private OnlineManager NetworkController;
     private string m_lobby;
@@ -40,9 +58,7 @@ public class DatabaseController : MonoBehaviour
     private Dictionary<string, bool> m_readyPlayers = new Dictionary<string, bool>();
 
     int playerItemsLoaded = 0;
-
-    private List<SlotData> m_seenSlots = new List<SlotData>();
-
+    
     private void Start()
     {
         NetworkController = new OnlineManager();
@@ -70,7 +86,7 @@ public class DatabaseController : MonoBehaviour
             else SceneManager.LoadScene("Communication Detective/Scenes/Lobby");
         });
 
-        for (int i = 0; i < Data.Length; i++)
+        for (int i = 0; i < Data.Count; i++)
         {
             Data data = Data[i];
             data.PlayerButton.GetComponent<Button>().onClick.AddListener(() => PlayerButtonPressed(data));
@@ -149,11 +165,12 @@ public class DatabaseController : MonoBehaviour
         }
         data.CluePanel.SetActive(true);
 
-        foreach (GameObject slot in data.Slots)
+        for (int slot = 0; slot < data.Slots.Count; ++slot)
         {
-            foreach (Transform t in slot.transform)
+            foreach (Transform t in data.Slots[slot].transform)
             {
-
+                Debug.Log("player-" + (Data.FindIndex(d => d == data)+1) + "/slot-" + slot + " = " + t.gameObject.name);
+                StaticClues.SeenSlots.Add(new SlotData((Data.FindIndex(d => d == data) + 1).ToString(), slot.ToString(), t.gameObject.name, data.Slots[slot]));
             }
         }
     }
@@ -240,7 +257,7 @@ public class DatabaseController : MonoBehaviour
         if (ReadyButton == null)
             return;
 
-        //Debug.Log(entry.Key + " | " + (args.Snapshot.Exists ? args.Snapshot.Value.ToString() : ""));
+        Debug.Log(entry.Key + " | " + (args.Snapshot.Exists ? args.Snapshot.Value.ToString() : ""));
 
         string[] key = entry.Key.Split('/');
         if (key.Length >= 5)
@@ -271,10 +288,10 @@ public class DatabaseController : MonoBehaviour
                                 {
                                     t.gameObject.GetComponent<Text>().text = value;
                                 }
-                                if (t.gameObject.name == "Alert" && !m_seenSlots.Any(s => s.Name == value))
+                                Debug.Log(string.Format("player-{0}/slot-{1} = {2}", player, key[3], value));
+                                if (t.gameObject.name == "Alert" && !StaticClues.SeenSlots.Any(s => s.Equals(new SlotData(player, key[3], value))))
                                 {
                                     t.gameObject.SetActive(true);
-                                    Debug.Log("VALUE = " + value);
                                 }
                             }
                             newObj.GetComponent<DragHandler>().enabled = false;

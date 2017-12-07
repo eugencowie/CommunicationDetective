@@ -14,10 +14,10 @@ using UnityEngine;
         
 }*/
 
-public static class StaticClues
+/*public static class StaticClues
 {
     
-}
+}*/
 
 public class DatabaseAlerts : MonoBehaviour
 {
