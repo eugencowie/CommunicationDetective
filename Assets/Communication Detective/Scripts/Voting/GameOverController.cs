@@ -11,7 +11,10 @@ public class GameOverController : MonoBehaviour
     public VideoPlayer WinVideo;
     public VideoPlayer LoseVideo;
     public GameObject ResetButton;
-    public Text Text;
+
+    public Text WaitText;
+    public Text WinText;
+    public Text LoseText;
 
     [Range(0, 100)]
     public int RequiredVotePercentage = 51;
@@ -19,6 +22,8 @@ public class GameOverController : MonoBehaviour
     private OnlineManager NetworkController;
     private string m_roomCode;
     private Dictionary<string, string> m_votedPlayers = new Dictionary<string, string>();
+
+    private Text m_winOrLoseText;
 
     private void Start()
     {
@@ -43,8 +48,8 @@ public class GameOverController : MonoBehaviour
 
     private void VideoLoopPointReached(VideoPlayer source)
     {
-        source.gameObject.SetActive(false);
-        Text.gameObject.SetActive(true);
+        //source.gameObject.SetActive(false);
+        m_winOrLoseText.gameObject.SetActive(true);
         ResetButton.SetActive(true);
     }
 
@@ -77,27 +82,27 @@ public class GameOverController : MonoBehaviour
 
                     if (percentage >= requiredPercentage)
                     {
-                        Text.text = "You Win! The killer was Caleb Holden!\n";
-
                         string yourVote = m_votedPlayers[OnlineManager.GetPlayerId()];
                         m_votedPlayers.Remove(OnlineManager.GetPlayerId());
 
-                        Text.text += "\nYou voted for " + yourVote;
+                        WinText.text += "\n\nYou voted for " + yourVote;
                         for (int i=0; i<m_votedPlayers.Count; i++)
                         {
-                            Text.text += "\nPlayer " + (i+2) + " voted for " + m_votedPlayers.ElementAt(i).Value;
+                            WinText.text += "\nPlayer " + (i+2) + " voted for " + m_votedPlayers.ElementAt(i).Value;
                         }
+                        WaitText.gameObject.SetActive(false);
                         WinVideo.gameObject.SetActive(true);
-                        Text.gameObject.SetActive(false);
+
+                        m_winOrLoseText = WinText;
 
                         m_votedPlayers[OnlineManager.GetPlayerId()] = yourVote;
                     }
                     else
                     {
-                        Text.text = "Not enough correct answers, try again?";
-
+                        WaitText.gameObject.SetActive(false);
                         LoseVideo.gameObject.SetActive(true);
-                        Text.gameObject.SetActive(false);
+
+                        m_winOrLoseText = LoseText;
                     }
                 }
             }
