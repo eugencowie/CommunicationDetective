@@ -6,6 +6,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+public static class StaticRoom
+{
+    public static bool seenWelcome = false;
+}
+
 public class RoomController : MonoBehaviour
 {
     [SerializeField] private GameObject ReadyButton = null;
@@ -17,8 +22,19 @@ public class RoomController : MonoBehaviour
 
     private Dictionary<string, bool> m_readyPlayers = new Dictionary<string, bool>();
 
+    public GameObject mainScreen;
+    public GameObject welcomeScreen;
+
     private void Start()
     {
+        Debug.Log("Seen welcome? " + StaticRoom.seenWelcome);
+        if (StaticRoom.seenWelcome)
+        {
+            mainScreen.SetActive(true);
+            welcomeScreen.SetActive(false);
+        }
+        StaticRoom.seenWelcome = true;
+
         NetworkController = new OnlineManager();
 
         ReadyButton.SetActive(false);

@@ -919,7 +919,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1639375967287994
 GameObject:
   m_ObjectHideFlags: 1
@@ -1264,7 +1264,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224734781955320410}
-  - component: {fileID: 114249709657799218}
   - component: {fileID: 114021306573925176}
   m_Layer: 5
   m_Name: Main screen
@@ -1354,6 +1353,7 @@ GameObject:
   - component: {fileID: 114828746955754250}
   - component: {fileID: 114321816682737282}
   - component: {fileID: 114812443614665316}
+  - component: {fileID: 114774551039824432}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2070,7 +2070,7 @@ MonoBehaviour:
   OnConfirm:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114249709657799218}
+      - m_Target: {fileID: 0}
         m_MethodName: ConfirmReady
         m_Mode: 1
         m_Arguments:
@@ -2395,19 +2395,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114249709657799218
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1820183108813484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fb277d9c408b4946b1fefaa649acd05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ReadyButton: {fileID: 1500024669501314}
-  DatabaseButton: {fileID: 1638302396083194}
 --- !u!114 &114259554708684638
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2699,7 +2686,7 @@ MonoBehaviour:
   OnConfirm:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114249709657799218}
+      - m_Target: {fileID: 0}
         m_MethodName: ConfirmLeave
         m_Mode: 1
         m_Arguments:
@@ -2787,7 +2774,7 @@ MonoBehaviour:
   OnConfirm:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114249709657799218}
+      - m_Target: {fileID: 0}
         m_MethodName: ConfirmReady
         m_Mode: 1
         m_Arguments:
@@ -3604,7 +3591,7 @@ MonoBehaviour:
   OnConfirm:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114249709657799218}
+      - m_Target: {fileID: 0}
         m_MethodName: ConfirmReady
         m_Mode: 1
         m_Arguments:
@@ -4186,7 +4173,7 @@ MonoBehaviour:
   OnConfirm:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114249709657799218}
+      - m_Target: {fileID: 0}
         m_MethodName: ConfirmReady
         m_Mode: 1
         m_Arguments:
@@ -4297,7 +4284,7 @@ MonoBehaviour:
   OnConfirm:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114249709657799218}
+      - m_Target: {fileID: 0}
         m_MethodName: ConfirmReady
         m_Mode: 1
         m_Arguments:
@@ -4310,6 +4297,21 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114774551039824432
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1856969743927884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fb277d9c408b4946b1fefaa649acd05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ReadyButton: {fileID: 1500024669501314}
+  DatabaseButton: {fileID: 1638302396083194}
+  mainScreen: {fileID: 1820183108813484}
+  welcomeScreen: {fileID: 1886734614711416}
 --- !u!114 &114775757663607376
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4944,7 +4946,7 @@ MonoBehaviour:
   OnConfirm:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114249709657799218}
+      - m_Target: {fileID: 0}
         m_MethodName: ConfirmReady
         m_Mode: 1
         m_Arguments:
@@ -5228,7 +5230,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114249709657799218}
+      - m_Target: {fileID: 114774551039824432}
         m_MethodName: DatabaseButtonPressed
         m_Mode: 1
         m_Arguments:
