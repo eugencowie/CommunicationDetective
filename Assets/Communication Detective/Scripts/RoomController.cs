@@ -30,6 +30,7 @@ public class RoomController : MonoBehaviour
                     m_roomCode = room;
                     foreach (var player in players) m_readyPlayers[player] = false;
                     NetworkController.RegisterReadyChanged(room, OnReadyChanged);
+                    NetworkController.RegisterCluesChanged(room, OnSlotChanged);
                     ReadyButton.SetActive(true);
                     DatabaseButton.SetActive(true);
                 });
@@ -104,6 +105,30 @@ public class RoomController : MonoBehaviour
                     }
                 }
             });
+        }
+    }
+
+    private void OnSlotChanged(OnlineDatabaseEntry entry, ValueChangedEventArgs args)
+    {
+        string[] keys = entry.Key.Split('/');
+        if (keys.Length >= 5)
+        {
+            string field = keys[4];
+
+            if (args.Snapshot.Exists && field == "name")
+            {
+                string value = args.Snapshot.Value.ToString();
+
+                int slot;
+                if (!string.IsNullOrEmpty(value) && int.TryParse(keys[3].Replace("slot-", ""), out slot))
+                {
+                    NetworkController.GetPlayerNumber(m_roomCode, keys[1], player => {
+                        if (!StaticClues.SeenSlots.Any(s => s.Equals(new SlotData(player.ToString(), slot.ToString(), value)))) {
+                            Debug.Log("NEW ITEM!");
+                        }
+                    });
+                }
+            }
         }
     }
 }
