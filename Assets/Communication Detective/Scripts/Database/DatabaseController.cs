@@ -169,8 +169,8 @@ public class DatabaseController : MonoBehaviour
         {
             foreach (Transform t in data.Slots[slot].transform)
             {
-                Debug.Log("player-" + (Data.FindIndex(d => d == data)+1) + "/slot-" + slot + " = " + t.gameObject.name);
-                StaticClues.SeenSlots.Add(new SlotData((Data.FindIndex(d => d == data) + 1).ToString(), slot.ToString(), t.gameObject.name, data.Slots[slot]));
+                //Debug.Log("BTNPRS = player-" + Data.FindIndex(d => d == data) + "/slot-" + (slot + 1) + " = " + t.gameObject.name);
+                StaticClues.SeenSlots.Add(new SlotData(Data.FindIndex(d => d == data).ToString(), (slot+1).ToString(), t.gameObject.name, data.Slots[slot]));
             }
         }
     }
@@ -257,7 +257,7 @@ public class DatabaseController : MonoBehaviour
         if (ReadyButton == null)
             return;
 
-        Debug.Log(entry.Key + " | " + (args.Snapshot.Exists ? args.Snapshot.Value.ToString() : ""));
+        //Debug.Log(entry.Key + " | " + (args.Snapshot.Exists ? args.Snapshot.Value.ToString() : ""));
 
         string[] key = entry.Key.Split('/');
         if (key.Length >= 5)
@@ -288,8 +288,8 @@ public class DatabaseController : MonoBehaviour
                                 {
                                     t.gameObject.GetComponent<Text>().text = value;
                                 }
-                                Debug.Log(string.Format("player-{0}/slot-{1} = {2}", player, key[3], value));
-                                if (t.gameObject.name == "Alert" && !StaticClues.SeenSlots.Any(s => s.Equals(new SlotData(player, key[3], value))))
+                                //Debug.Log(string.Format("LOAD = player-{0}/slot-{1} = {2}", playerNb.ToString(), slotNb.ToString(), value));
+                                if (t.gameObject.name == "Alert" && !StaticClues.SeenSlots.Any(s => s.Equals(new SlotData(playerNb.ToString(), slotNb.ToString(), value))))
                                 {
                                     t.gameObject.SetActive(true);
                                 }
