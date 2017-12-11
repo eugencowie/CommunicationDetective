@@ -861,8 +861,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Dirty Plate
   Hint: The plates has not been cleaned for weeks.
-  Image: {fileID: 0}
-  ImagePath: 
+  Image: {fileID: 21300000, guid: 86a81a42e28ff7c4586704ac3742f9ff, type: 3}
+  ImagePath: InventoryImages/MankyPlate
 --- !u!114 &175951189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3944,8 +3944,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Pizza magazine
   Hint: Complete guide to make the best pizza. A few pages are ripped out and missing.
-  Image: {fileID: 0}
-  ImagePath: 
+  Image: {fileID: 21300000, guid: 70fe36c2313c58242a366ffa24d6a563, type: 3}
+  ImagePath: InventoryImages/Magazine
 --- !u!65 &807051193
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5000,8 +5000,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Tech magazine
   Hint: The brand new Phone was just released last week
-  Image: {fileID: 0}
-  ImagePath: 
+  Image: {fileID: 21300000, guid: 70fe36c2313c58242a366ffa24d6a563, type: 3}
+  ImagePath: InventoryImages/Magazine
 --- !u!65 &1096296752
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7258,8 +7258,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Dirty Plate
   Hint: The plates has not been cleaned for weeks.
-  Image: {fileID: 0}
-  ImagePath: 
+  Image: {fileID: 21300000, guid: 86a81a42e28ff7c4586704ac3742f9ff, type: 3}
+  ImagePath: InventoryImages/MankyPlate
 --- !u!82 &1596738318
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7796,8 +7796,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Pizza box
   Hint: The cooking did not go well last night...
-  Image: {fileID: 0}
-  ImagePath: 
+  Image: {fileID: 21300000, guid: a763eb7a23bf00048a3fef3336218315, type: 3}
+  ImagePath: InventoryImages/Pizza Box
 --- !u!65 &1726090833
 BoxCollider:
   m_ObjectHideFlags: 0

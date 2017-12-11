@@ -222,8 +222,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Glasses
   Hint: Reading glasses. They have been wiped clean recently.
-  Image: {fileID: 0}
-  ImagePath: 
+  Image: {fileID: 21300000, guid: 83fccb4c94706534fb6f669e4b991430, type: 3}
+  ImagePath: InventoryImages/Glasses
 --- !u!114 &12716541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3316,8 +3316,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Box of files
   Hint: The box is full with court documents
-  Image: {fileID: 0}
-  ImagePath: 
+  Image: {fileID: 21300000, guid: 7be2554800a4d124f8220e1196b87bc3, type: 3}
+  ImagePath: InventoryImages/File Storage Box
 --- !u!114 &569460292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6026,8 +6026,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Criminal Law Book
   Hint: Book written by E. Cowie. The book looks worn
-  Image: {fileID: 0}
-  ImagePath: 
+  Image: {fileID: 21300000, guid: 2d04f812fd340fa47a7aac1e60b0f62b, type: 3}
+  ImagePath: InventoryImages/Books
 --- !u!1 &1062715135 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100008, guid: 2d77649007d1a3e4c85c095a0238a43f, type: 3}
@@ -8843,8 +8843,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: File Cabinet
   Hint: The cabinet is full of legal cases, mostly about homicides.
-  Image: {fileID: 0}
-  ImagePath: 
+  Image: {fileID: 21300000, guid: 83beb2d07811d504ea4ada4ca9cea2b0, type: 3}
+  ImagePath: InventoryImages/FilingCabinet
 --- !u!82 &1985846521
 AudioSource:
   m_ObjectHideFlags: 0
