@@ -8,7 +8,12 @@ using UnityEngine.UI;
 
 public static class StaticRoom
 {
-    public static bool seenWelcome = false;
+    public static bool SeenWelcome = false;
+
+    public static void Reset()
+    {
+        SeenWelcome = false;
+    }
 }
 
 public class RoomController : MonoBehaviour
@@ -27,13 +32,13 @@ public class RoomController : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("Seen welcome? " + StaticRoom.seenWelcome);
-        if (StaticRoom.seenWelcome)
+        Debug.Log("Seen welcome? " + StaticRoom.SeenWelcome);
+        if (StaticRoom.SeenWelcome)
         {
             mainScreen.SetActive(true);
             welcomeScreen.SetActive(false);
         }
-        StaticRoom.seenWelcome = true;
+        StaticRoom.SeenWelcome = true;
 
         NetworkController = new OnlineManager();
 

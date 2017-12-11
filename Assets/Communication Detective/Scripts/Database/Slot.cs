@@ -33,6 +33,12 @@ public static class StaticSlot
     }
 
     public static Text ChangeText;
+
+    public static void Reset()
+    {
+        MaxRemovals = 5;
+        m_TimesRemoved = 0;
+    }
 }
 
 public class Slot : MonoBehaviour, IDropHandler {

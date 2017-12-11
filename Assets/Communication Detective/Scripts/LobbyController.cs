@@ -47,8 +47,8 @@ public class LobbyController : MonoBehaviour
     private void Start()
     {
         //StaticInventory.Hints.Clear();
-        StaticSuspects.DiscardedSuspects.Clear();
-        StaticClues.SeenSlots.Clear();
+        //StaticSuspects.DiscardedSuspects.Clear();
+        //StaticClues.SeenSlots.Clear();
 
         Network = new OnlineManager();
 
@@ -66,8 +66,14 @@ public class LobbyController : MonoBehaviour
         SwitchPanel(WaitPanel);
 
         Network.GetPlayerLobby(room => {
-            if (string.IsNullOrEmpty(room)) SwitchPanel(StartPanel);
-            else {
+            if (string.IsNullOrEmpty(room)) {
+                StaticClues.Reset();
+                StaticInventory.Reset();
+                StaticRoom.Reset();
+                StaticSlot.Reset();
+                StaticSuspects.Reset();
+                SwitchPanel(StartPanel);
+            } else {
                 CodeLabel.text = room;
                 RegisterOnPlayersChanged(room);
                 RegisterOnLobbyStateChanged(room);

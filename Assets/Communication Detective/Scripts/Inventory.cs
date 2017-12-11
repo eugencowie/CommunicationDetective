@@ -10,6 +10,11 @@ public static class StaticInventory{
     
     [SerializeField]
     public static List<ObjectHintData> Hints = new List<ObjectHintData>();
+
+    public static void Reset()
+    {
+        Hints.Clear();
+    }
 }
 
 public class Inventory : MonoBehaviour

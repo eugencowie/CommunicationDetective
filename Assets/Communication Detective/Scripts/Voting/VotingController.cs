@@ -7,6 +7,11 @@ using UnityEngine.UI;
 public static class StaticSuspects
 {
     public static List<VotingSuspectData> DiscardedSuspects = new List<VotingSuspectData>();
+
+    public static void Reset()
+    {
+        DiscardedSuspects.Clear();
+    }
 }
 
 public class VotingController : MonoBehaviour

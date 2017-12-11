@@ -39,6 +39,11 @@ public struct SlotData : IEquatable<SlotData>
 public static class StaticClues
 {
     public static List<SlotData> SeenSlots = new List<SlotData>();
+
+    public static void Reset()
+    {
+        SeenSlots.Clear();
+    }
 }
 
 public class DatabaseController : MonoBehaviour
