@@ -1518,6 +1518,27 @@ Prefab:
       propertyPath: RightConstraint
       value: 155
       objectReference: {fileID: 0}
+    - target: {fileID: 212905046291002850, guid: b4cf21df0c4bb50498a7194cec12805e,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2d86d3220adaa364c9112cd19e263048,
+        type: 3}
+    - target: {fileID: 212905046291002850, guid: b4cf21df0c4bb50498a7194cec12805e,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 14.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 212905046291002850, guid: b4cf21df0c4bb50498a7194cec12805e,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 7.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 212905046291002850, guid: b4cf21df0c4bb50498a7194cec12805e,
+        type: 2}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b4cf21df0c4bb50498a7194cec12805e, type: 2}
   m_IsPrefabParent: 0
